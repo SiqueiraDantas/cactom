@@ -1,0 +1,51 @@
+[
+  {
+    "arquivo": "tom-oficial.png",
+    "origem": "referencias/CACTOM_Plano_Mestre.pdf",
+    "pagina": 48,
+    "imagem_pdf": "FormXob.f9eede6cbd1ec07505cdb18b423cb86f.png",
+    "dimensoes": [
+      1254,
+      1254
+    ],
+    "modo": "RGBA",
+    "sha256": "d7e92d56af485e67c05ee6605345ef59c9273167eff04651d3717d825d3cacb7",
+    "operacao": "extracao da imagem incorporada; sem redesenho"
+  },
+  {
+    "arquivo": "icone-estudo.png",
+    "origem": "referencias/CACTOM_Plano_Mestre.pdf",
+    "pagina": 48,
+    "imagem_pdf": "FormXob.548b20919638f44d2e8211fe74f024f4.png",
+    "dimensoes": [
+      1254,
+      1254
+    ],
+    "modo": "RGB",
+    "sha256": "fae5872d7b8e637c20dc22e8edf99d2b3416f48f74c634a12cdf13e5cfbf3994",
+    "operacao": "extracao da imagem incorporada; sem redesenho"
+  },
+  {
+    "arquivo": "identidade-oficial.png",
+    "origem": "referencias\\CACTOM_Tom_Referencia_Oficial.png",
+    "sha256": "76de7e80f8b30dcefbf1af662a5b52a089d5f2a8f25a0aa26aa651545e412d45",
+    "operacao": "copia integral inalterada; logo enquadrado apenas na interface"
+  },
+  {
+    "arquivo": "tom-privacidade-v1.png",
+    "origem": "pose derivada de public/branding/cactom/tom-oficial.png",
+    "classificacao": "variante experimental em validacao; original oficial preservado",
+    "ferramenta": "image_gen.imagegen built-in",
+    "prompt": "docs/cactom/evidencias/etapa-02/PROMPT-POSE-PRIVACIDADE.txt",
+    "dimensoes": [
+      1254,
+      1254
+    ],
+    "modo": "RGBA",
+    "alpha_min_max": [
+      0,
+      255
+    ],
+    "sha256": "657dc60288e58f24670c519e405694791e976c19c4a726f7059a188e37b00100"
+  }
+]

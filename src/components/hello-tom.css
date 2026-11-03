@@ -1,0 +1,16 @@
+/* “Oi! Eu sou o Tom!”: apresentação do mascote entre a escolha da oficina e o cadastro. */
+.hello-tom{display:flex;flex-direction:column;min-height:100svh;background:#fff}
+.hello-tom-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:40px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+.hello-tom-bubble{position:relative;margin:0;padding:14px 22px;border:2px solid #e5e5e5;border-radius:16px;background:#fff;color:#3d4a46;font:800 clamp(19px,2.2vw,23px)/1.25 Nunito,'Segoe UI',system-ui,sans-serif;text-align:center;transform-origin:50% 120%;animation:hello-tom-bubble .45s cubic-bezier(.175,.885,.32,1.275) .35s both}
+.hello-tom-bubble:focus{outline:none}
+.hello-tom-bubble::before,.hello-tom-bubble::after{content:'';position:absolute;left:50%;width:0;height:0;border-style:solid;transform:translateX(-50%)}
+.hello-tom-bubble::before{bottom:-14px;border-width:14px 12px 0;border-color:#e5e5e5 transparent transparent}
+.hello-tom-bubble::after{bottom:-10px;border-width:11px 9px 0;border-color:#fff transparent transparent}
+.hello-tom-art{display:block;width:min(190px,48vw);height:auto;animation:hello-tom-pop .55s cubic-bezier(.175,.885,.32,1.275) both}
+.hello-tom-footer{border-top:2px solid #e5e5e5;background:#fff}
+.hello-tom-footer-inner{display:flex;justify-content:flex-end;max-width:1000px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.hello-tom-footer .access-button.hello-tom-continue{width:auto;min-width:200px;flex:0 0 auto;margin:0}
+@keyframes hello-tom-pop{from{opacity:0;transform:translateY(18px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes hello-tom-bubble{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@media(max-width:600px){.hello-tom-footer-inner{padding-top:16px}.hello-tom-footer .access-button.hello-tom-continue{width:100%}}
+@media(prefers-reduced-motion:reduce){.hello-tom-bubble,.hello-tom-art{animation:none}}

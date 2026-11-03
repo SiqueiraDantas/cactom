@@ -1,0 +1,40 @@
+/* Trilha Cactom: única jornada visual, sem cartões explicativos nem abas. */
+.learning-app--path .learning-grid{display:block;width:100%;max-width:790px;margin:0 auto;padding:0 36px}
+.learning-app--path .learning-main{width:100%;min-width:0}
+.learning-app--path .course-path-continuous{margin:0;overflow:visible}
+.journey-all-units{display:flex;flex-direction:column;gap:0}
+.journey-unit{position:relative;min-width:0;scroll-margin-top:0}
+.journey-unit .unit-banner{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:14px;min-height:84px;margin-top:24px;padding:14px 74px 14px 20px;box-shadow:0 5px 15px rgba(31,72,67,.08)}
+.journey-unit:first-child .unit-banner{margin-top:18px}
+.journey-unit .unit-banner-copy{min-width:0;flex:1}
+.journey-unit .unit-banner-copy small{font-weight:900;letter-spacing:1px;font-size:9px;opacity:.9}
+.journey-unit .unit-banner-copy h3{font-size:clamp(16px,2vw,21px);line-height:1.3;margin:3px 0 0}
+.journey-unit .unit-banner-icon{position:absolute;right:22px;top:50%;transform:translateY(-50%);display:grid;place-items:center;opacity:.9}
+.journey-unit-0 .unit-banner{background:linear-gradient(110deg,#2c5163,#32758a);border-color:#264f62}
+.journey-unit-0 .unit-number{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.25);color:white}
+.journey-unit-1 .unit-banner{background:linear-gradient(110deg,#177c49,#239143);border-color:#166b42;border-bottom-color:#115b39}
+.journey-unit-1 .unit-number{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.25);color:white}
+.journey-unit-2 .unit-banner{background:linear-gradient(110deg,#a66017,#c37e20);border-color:#9a651c;border-bottom-color:#835218}
+.journey-unit-2 .unit-number{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.22);color:white}
+.journey-unit .path-nodes{min-height:0;padding-top:65px}
+.journey-unit .path-item{scroll-margin-top:110px;min-height:124px}
+.journey-unit .lesson-node{margin-bottom:0}
+.journey-unit .unit-finish{height:82px;padding:0;margin:0 auto 6px;display:flex;justify-content:flex-start;align-items:center}
+.journey-unit .unit-finish>span{margin:0}
+.journey-unit .unit-finish.is-complete>span{background:#e0f3db;color:#239143;border-color:#badbac}
+.journey-unit .start-bubble{z-index:3}
+@media(max-width:980px){.learning-app--path .learning-grid{max-width:740px;padding:0 25px}}
+@media(max-width:650px){
+ .learning-app--path .learning-grid{padding:0 18px}
+ .journey-unit .unit-banner{min-height:73px;margin-top:26px;padding:11px 56px 11px 11px;gap:10px;border-radius:15px}
+ .journey-unit:first-child .unit-banner{margin-top:12px}
+ .journey-unit .unit-number{width:37px;height:40px;font-size:19px;flex-shrink:0}
+ .journey-unit .unit-banner-copy small{font-size:8px;letter-spacing:.5px}
+ .journey-unit .unit-banner-copy h3{font-size:16px;margin:2px 0 0}
+ .journey-unit .unit-banner-icon{right:14px}
+ .journey-unit .unit-banner-icon svg{width:21px;height:21px}
+ .journey-unit .path-nodes{padding-top:61px}
+ .journey-unit .path-item{scroll-margin-top:95px;min-height:120px}
+ .journey-unit .unit-finish{height:68px}
+}
+@media(max-width:360px){.learning-app--path .learning-grid{padding:0 14px}}

@@ -1,0 +1,90 @@
+/* Abertura “pequeno concerto”. Camadas HTML independentes; só transform/opacity animam.
+   Estado final = estilos estáticos (pular, movimento reduzido e voltar do login mostram o mesmo quadro). */
+.wcc-stage{position:relative;width:100%;aspect-ratio:3/2;contain:layout paint;isolation:isolate;overflow:hidden}
+.wcc-stage svg{display:block;width:100%;height:auto;overflow:visible}
+.wcc-actor,.wcc-book,.wcc-logo,.wcc-ripple,.wcc-fly,.wcc-wave,.wcc-pulses{position:absolute}
+.wcc-book{left:25%;bottom:1%;width:50%;z-index:3}
+.wcc-tom{left:38.5%;bottom:16%;width:23%;z-index:2}
+.wcc-drummer{left:0;bottom:2%;width:26%;z-index:4}
+.wcc-flutist{left:22%;bottom:22%;width:20%;z-index:1}
+.wcc-guitarist{left:71%;bottom:2%;width:27%;z-index:4}
+.wcc-logo{left:50%;top:1%;width:40%;transform:translateX(-50%);z-index:5}
+.wcc-logo img{display:block;width:100%;height:auto}
+.wcc-hop,.wcc-tom-rise{transform-origin:50% 100%}
+.wcc-mallet{transform-box:fill-box;transform-origin:85% 90%}
+.wcc-flute{transform-box:view-box;transform-origin:70px 120px}
+.wcc-strum{transform-box:fill-box;transform-origin:50% 10%}
+.wcc-drum{transform-box:fill-box;transform-origin:50% 100%}
+.wcc-tom .ct-arm--right{transform-box:view-box;transform-origin:154px 136px}
+.wcc-page-notes{opacity:1}
+.wcc-ripple{left:4%;bottom:26%;width:18%;aspect-ratio:1;border-radius:50%;border:4px solid #f5a528;opacity:0;pointer-events:none;z-index:5}
+.wcc-pulses{left:6%;top:30%;display:flex;gap:8%;width:10%;z-index:5}
+.wcc-pulses i{flex:1;aspect-ratio:1;border-radius:50%;background:#e8463d;opacity:0}
+.wcc-fly{left:35%;bottom:40%;width:6%;z-index:6;opacity:0}
+.wcc-wave{right:3%;bottom:30%;width:16%;aspect-ratio:1;border-radius:50%;border:3px solid #a96ddb;border-left-color:transparent;border-bottom-color:transparent;opacity:0;z-index:5;transform:rotate(-45deg)}
+
+/* Esperando: só o palco vazio (primeira pintura antes de saber se haverá movimento). */
+.wcc-stage[data-phase=waiting] :is(.wcc-actor,.wcc-logo){opacity:0}
+.wcc-stage[data-phase=waiting] .wcc-book{opacity:1}
+.wcc-stage[data-phase=waiting] .wcc-page-notes{opacity:0}
+
+/* ——— Cena ——— */
+.wcc-stage[data-phase=playing] .wcc-book{animation:wcc-book .5s cubic-bezier(.2,.8,.3,1) both}
+.wcc-stage[data-phase=playing] :is(.wcc-drummer,.wcc-flutist,.wcc-guitarist) .wcc-hop{animation:wcc-in .45s cubic-bezier(.34,1.56,.64,1) both,wcc-final .5s cubic-bezier(.3,.7,.4,1) 4.45s}
+.wcc-stage[data-phase=playing] .wcc-drummer .wcc-hop{animation-delay:.1s,4.45s}
+.wcc-stage[data-phase=playing] .wcc-flutist .wcc-hop{animation-delay:.22s,4.5s}
+.wcc-stage[data-phase=playing] .wcc-guitarist .wcc-hop{animation-delay:.34s,4.55s}
+/* Dois pulsos: baqueta sobe e desce, a pele amassa, anel e ponto de pulso aparecem. */
+.wcc-stage[data-phase=playing] .wcc-mallet{animation:wcc-hit .5s ease-in-out .3s 2}
+.wcc-stage[data-phase=playing] .wcc-drum{animation:wcc-squash .5s ease-out .3s 2}
+.wcc-stage[data-phase=playing] .wcc-ripple{animation:wcc-ripple .6s ease-out var(--d) both}
+.wcc-stage[data-phase=playing] .wcc-pulses i{animation:wcc-dot .25s cubic-bezier(.34,1.56,.64,1) var(--d) both,wcc-out .4s ease-in 2.4s forwards}
+.wcc-stage:not([data-phase=playing]) :is(.wcc-pulses i,.wcc-ripple,.wcc-fly,.wcc-wave){opacity:0!important}
+/* Flauta: prepara (sobe à boca) e responde; três notas voam e pousam no livro. */
+.wcc-stage[data-phase=playing] .wcc-flute{animation:wcc-flute-prep .45s cubic-bezier(.3,.7,.4,1) 1s both}
+.wcc-stage[data-phase=playing] .wcc-flutist .wcc-eyes{animation:wcc-focus 1.4s ease-in-out 1.5s}
+.wcc-stage[data-phase=playing] .wcc-fly{animation:wcc-fly .7s cubic-bezier(.3,.6,.4,1) var(--d) both}
+.wcc-stage[data-phase=playing] .wcc-page-notes{animation:wcc-appear .25s ease-out 3.2s both}
+/* Violão: três batidas; as cordas vibram e a onda sai do instrumento. */
+.wcc-stage[data-phase=playing] .wcc-strum{animation:wcc-strum .3s ease-in-out 3s 3}
+.wcc-stage[data-phase=playing] .wcc-strings{animation:wcc-vibrate .06s linear 3s 15}
+.wcc-stage[data-phase=playing] .wcc-wave{animation:wcc-wave .6s ease-out var(--d) both}
+/* Tom sai do livro, rege e a logo aparece junto dele. */
+.wcc-stage[data-phase=playing] .wcc-tom-rise{animation:wcc-rise .7s cubic-bezier(.2,.8,.3,1) 3.7s both}
+.wcc-stage[data-phase=playing] .wcc-tom .ct-arm--right{animation:wcc-conduct .7s ease-in-out 4.05s 1}
+.wcc-stage[data-phase=playing] .wcc-logo{animation:wcc-logo .55s cubic-bezier(.34,1.56,.64,1) 4.3s both}
+.wcc-stage[data-paused=true] *{animation-play-state:paused!important}
+
+@keyframes wcc-book{from{opacity:0;transform:translateY(18%) scale(.85)}}
+@keyframes wcc-in{from{opacity:0;transform:translateY(16%) scale(.8,.9)}}
+@keyframes wcc-final{40%{transform:translateY(-7%) scale(.97,1.04)}75%{transform:translateY(1%) scale(1.03,.97)}}
+@keyframes wcc-hit{0%,100%{transform:rotate(0)}45%{transform:rotate(-38deg)}80%{transform:rotate(8deg)}}
+@keyframes wcc-squash{0%,70%,100%{transform:none}82%{transform:scale(1.04,.9)}}
+@keyframes wcc-ripple{0%{opacity:.9;transform:scale(.35)}100%{opacity:0;transform:scale(1.7)}}
+@keyframes wcc-dot{from{opacity:0;transform:scale(0)}to{opacity:1;transform:none}}
+@keyframes wcc-flute-prep{from{transform:rotate(38deg) translate(-6px,22px)}}
+@keyframes wcc-focus{0%,100%{transform:none}20%,80%{transform:scaleY(.45)}}
+.wcc-flutist .wcc-eyes{transform-box:fill-box;transform-origin:50% 50%}
+@keyframes wcc-fly{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1;transform:translate(calc(var(--i)*40% + 30%),-120%) scale(1)}100%{opacity:0;transform:translate(calc(var(--i)*120% + 400%),190%) scale(.6)}}
+@keyframes wcc-appear{from{opacity:0}}
+@keyframes wcc-out{to{opacity:0}}
+@keyframes wcc-strum{50%{transform:rotate(-16deg)}}
+@keyframes wcc-vibrate{50%{transform:translateY(.6px)}}
+@keyframes wcc-wave{0%{opacity:.9;transform:rotate(-45deg) scale(.4)}100%{opacity:0;transform:rotate(-45deg) scale(1.5)}}
+@keyframes wcc-rise{0%{opacity:0;transform:translateY(55%) scale(.6,.7)}55%{opacity:1;transform:translateY(-10%) scale(.95,1.08)}80%{transform:translateY(2%) scale(1.04,.96)}100%{transform:none}}
+@keyframes wcc-conduct{0%,100%{transform:none}35%{transform:rotate(-22deg)}70%{transform:rotate(14deg)}}
+@keyframes wcc-logo{from{opacity:0;transform:translateX(-50%) translateY(20%) scale(.7)}}
+
+/* Repouso leve depois da cena: só piscar, sem saltos. */
+.wcc-stage[data-phase=settled] .wcc-eyes{transform-box:fill-box;transform-origin:50% 50%;animation:wcc-blink 5s ease-in-out infinite}
+.wcc-stage[data-phase=settled] .wcc-flutist .wcc-eyes{animation-delay:1.7s}
+.wcc-stage[data-phase=settled] .wcc-guitarist .wcc-eyes{animation-delay:3.1s}
+@keyframes wcc-blink{0%,95%,100%{transform:none}97%{transform:scaleY(.1)}}
+.wcc-stage[data-reduced=true] *{animation:none!important}
+
+/* Controles da abertura */
+.wcc-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:4px;min-height:40px}
+.wcc-controls button{appearance:none;border:2px solid var(--ct-line,#e5e9e7);background:#fff;color:var(--ct-teal,#1f8a8c);border-radius:999px;padding:7px 14px;font:800 14px Nunito,system-ui,sans-serif;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.wcc-controls button[aria-pressed=true]{background:#e9f6fe;border-color:#9fd2f5;color:#13628f}
+.wcc-controls button:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}
+.wcc-controls svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}

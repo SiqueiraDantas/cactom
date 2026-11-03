@@ -1,0 +1,148 @@
+/* The same composition and shared feature styles as Praticar. */
+.cactom-dashboard.learning-app--streak .learning-grid{display:block;max-width:1000px;padding:32px 38px 0}
+.cactom-dashboard .rojao-hub .rojao-feature{background:radial-gradient(ellipse at 95% 10%,#fff3ce 0,transparent 52%),#edf7ed}
+.rojao-hub .rojao-count{display:flex;align-items:center;gap:13px;margin:18px 0 3px;min-width:0}
+.rojao-hub .rojao-count>strong{color:#1c624b;font-size:78px;font-weight:1000;line-height:1;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.rojao-hub .rojao-count[data-digits="4"]>strong{font-size:64px}
+.rojao-hub .rojao-count[data-digits="5"]>strong{font-size:50px}
+.rojao-hub .rojao-count>svg{flex:none;width:42px;height:50px}
+.cactom-dashboard .rojao-hub .rojao-feature h2{font-size:25px;letter-spacing:-.03em}
+.streak-screen.rojao-hub .streak-calendar{min-width:0;margin:0;border:1px solid #dce7dd;border-bottom:3px solid #d1e0d2;border-radius:25px;padding:23px 26px 19px;background:#fff;box-shadow:0 5px 18px #194c3805}
+.rojao-hub .rojao-section-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;min-width:0}
+.rojao-hub .rojao-section-heading>div{min-width:0}
+.streak-screen.rojao-hub .rojao-section-heading h2{margin:0!important;color:#164b43;font-size:20px;font-weight:1000;line-height:1.25;letter-spacing:-.035em}
+.streak-screen.rojao-hub .rojao-section-heading p{margin:6px 0 0;font-size:12px;line-height:1.65;color:#607768}
+.rojao-hub .rojao-today{display:flex;align-items:center;gap:7px;flex:none;padding:8px 10px;border:1px solid #eaddbf;border-radius:11px;background:#fff8e9;color:#896a30;font-size:10px;white-space:nowrap}
+.rojao-hub .rojao-today.done{border-color:#cfe7d4;background:#eaf7ec;color:#337d53}
+.rojao-hub .rojao-today>svg{width:15px;height:15px;flex:none}
+.rojao-hub .rojao-today b{font-weight:1000;margin-left:3px}
+.rojao-hub .rojao-today-dot{width:7px;height:7px;border:1.5px solid #b69553;border-radius:50%;flex:none}
+.streak-screen.rojao-hub .streak-week{grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;margin:24px 0 19px}
+.streak-screen.rojao-hub .streak-day{gap:9px;min-width:0}
+.streak-screen.rojao-hub .streak-day>span{font-size:10px;color:#65796b;letter-spacing:.025em}
+.streak-screen.rojao-hub .streak-day>b{width:100%;max-width:64px;min-width:0;height:59px;border:1px solid #e2eae0;border-radius:18px;background:#f4f8f1;color:#a2b09d;font-size:22px}
+.streak-screen.rojao-hub .streak-day.practiced>b{background:#fff3d6;border-color:#edcf88;box-shadow:0 3px 0 #f2e0af}
+.streak-screen.rojao-hub .streak-day.today>b{outline:2px solid #42996a;outline-offset:3px}
+.streak-screen.rojao-hub .streak-day>b>svg{width:27px;height:32px}
+.streak-screen.rojao-hub .streak-day>b>i{width:8px;height:8px;border-color:#86a782}
+.streak-screen.rojao-hub .streak-day>small{font-size:9px;font-weight:900;color:#697e6b}
+.streak-screen.rojao-hub .streak-day.today>small{color:#3b8056}
+.streak-screen.rojao-hub .rojao-week-note{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;padding:12px 0 0;border-top:1px solid #edf1e8;font-size:10px;color:#6b7e69}
+.rojao-hub .rojao-practiced-dot{width:8px;height:8px;border-radius:3px;background:#f6c668;flex:none}
+.rojao-hub .rojao-today-outline{width:8px;height:8px;border:1.5px solid #42996a;border-radius:3px;flex:none;margin-left:12px}
+.rojao-hub .rojao-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rojao-hub .rojao-stat{position:relative;min-width:0;border:1px solid var(--stat-border);border-bottom-width:3px;border-radius:23px;background:var(--stat-paper);padding:23px}
+.rojao-hub .rojao-stat--record{--stat-paper:#fffbf0;--stat-border:#eddfbb;--stat-color:#946d2d}
+.rojao-hub .rojao-stat--total{--stat-paper:#f1f7fc;--stat-border:#d4e2ed;--stat-color:#39728b}
+.rojao-hub .rojao-stat-icon{display:grid;place-items:center;position:absolute;right:20px;top:19px;width:33px;height:33px;border:1px solid var(--stat-border);border-radius:11px;background:#ffffffad;color:var(--stat-color)}
+.rojao-hub .rojao-stat-icon>svg{width:20px;height:20px}
+.rojao-hub .rojao-stat-label{display:block;max-width:calc(100% - 36px);min-height:33px;align-content:center;color:var(--stat-color);font-size:9px;font-weight:1000;letter-spacing:.06em}
+.rojao-hub .rojao-stat>b{display:block;color:#164b43;font-size:35px;font-weight:1000;line-height:1.2;letter-spacing:-.04em;margin:10px 0 7px;font-variant-numeric:tabular-nums}
+.rojao-hub .rojao-stat small{font-size:14px;font-weight:800;letter-spacing:0;color:var(--stat-color)}
+.rojao-hub .rojao-stat p{font-size:11px;line-height:1.65;color:#5a736a}
+.rojao-hub .rojao-milestones{min-width:0;padding:0}
+.rojao-hub .rojao-next-milestone{font-size:10px;color:#61796a;white-space:nowrap}
+.rojao-hub .rojao-next-milestone b{font-weight:900;color:#3e7857}
+.rojao-hub .rojao-milestone-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;margin-top:17px}
+.rojao-hub .rojao-milestone-grid>article{min-width:0;padding:20px 10px 17px;text-align:center;border:1px solid #e0e8dd;border-bottom:3px solid #d8e2d3;border-radius:22px;background:#f6f9f3}
+.rojao-hub .rojao-milestone-grid>article.earned{background:#fff9e8;border-color:#e8d49e}
+.rojao-hub .streak-medallion{display:grid;place-items:center;position:relative;width:100%;max-width:136px;height:170px;border:0;border-radius:0;background:transparent;margin:0 auto 15px}
+.rojao-hub .earned .streak-medallion{background:transparent;border:0;box-shadow:none}
+.rojao-hub .streak-medallion>i{position:absolute;right:2px;bottom:2px;display:grid;place-items:center;border:2px solid #fff9e8;background:#368c57;width:22px;height:22px;border-radius:50%;color:white}
+.rojao-hub .streak-medallion>i>svg{width:12px;height:12px}
+.rojao-hub .rojao-milestone-grid article>b{display:block;color:#5f785d;font-size:16px;font-weight:1000}
+.rojao-hub .rojao-milestone-grid article.earned>b{color:#946a2a}
+.rojao-hub .rojao-milestone-grid article>small{display:block;margin-top:7px;color:#697d64;font-size:8px;line-height:1.5;font-weight:900;letter-spacing:.03em}
+.rojao-hub .rojao-milestone-grid article.earned>small{color:#906a2e}
+.rojao-hub .rojao-how{border:1px solid #dce7dd;border-radius:18px;background:#fff;color:#164b43;min-width:0}
+.rojao-hub .rojao-how>summary{display:flex;align-items:center;gap:12px;padding:15px 17px;min-height:70px;list-style:none;border-radius:18px;cursor:pointer;font-size:13px;font-weight:900}
+.rojao-hub .rojao-how>summary::-webkit-details-marker{display:none}
+.rojao-hub .rojao-how-icon{width:36px;height:36px;display:grid;place-items:center;background:#eff5ed;border-radius:12px;color:#678365;flex:none}
+.rojao-hub .rojao-how-icon>svg{width:21px;height:21px}
+.rojao-hub .rojao-how>summary>svg{width:19px;height:19px;margin-left:auto;flex:none;color:#6e896f;transition:rotate .18s}
+.rojao-hub .rojao-how[open]>summary>svg{rotate:180deg}
+.rojao-hub .rojao-how>div{border-top:1px solid #e6eee3;margin:0 17px;padding:16px 0 18px}
+.rojao-hub .rojao-how p{font-size:12px;line-height:1.75;color:#5d7464;margin:0}
+.rojao-hub .rojao-how p+p{margin-top:9px}
+.rojao-hub .rojao-save-notice{border:1px solid #e6d5b4;border-radius:14px;background:#fff9ec;color:#806630;font-size:12px;line-height:1.7;padding:14px 17px;margin:0}
+.rojao-hub :is(button,summary):focus-visible{outline:3px solid #4a84c3;outline-offset:5px}
+@media(hover:hover){.rojao-hub .rojao-how>summary:hover{background:#f7fbf5}}
+@media(max-width:850px){
+ .cactom-dashboard.learning-app--streak .learning-grid{padding:23px 17px 0}
+ .rojao-hub .rojao-count{gap:8px;margin:15px 0 4px}
+ .rojao-hub .rojao-count>strong{font-size:64px}
+ .rojao-hub .rojao-count>svg{width:30px;height:38px}
+ .rojao-hub .rojao-count[data-digits="4"]>strong{font-size:42px}
+ .rojao-hub .rojao-count[data-digits="5"]>strong{font-size:34px}
+ .cactom-dashboard .rojao-hub .rojao-feature h2{font-size:23px}
+ .streak-screen.rojao-hub .streak-calendar{padding:20px 16px 16px;border-radius:23px}
+ .rojao-hub .rojao-section-heading{gap:10px}
+ .streak-screen.rojao-hub .rojao-section-heading h2{font-size:18px}
+ .streak-screen.rojao-hub .rojao-section-heading p{font-size:11px;max-width:220px}
+ .rojao-hub .rojao-today{font-size:9px;padding:7px 8px;gap:5px}
+ .streak-screen.rojao-hub .streak-week{gap:6px;margin-top:21px}
+ .streak-screen.rojao-hub .streak-day{gap:9px}
+ .streak-screen.rojao-hub .streak-day>b{max-width:46px;height:44px;border-radius:13px}
+ .streak-screen.rojao-hub .streak-day>b>svg{width:22px;height:27px}
+ .streak-screen.rojao-hub .streak-day>span{font-size:8px}
+ .streak-screen.rojao-hub .streak-day>small{font-size:8px}
+ .rojao-hub .rojao-stats{gap:12px}
+ .rojao-hub .rojao-stat{padding:17px 15px;border-radius:21px}
+ .rojao-hub .rojao-stat-icon{width:29px;height:29px;top:15px;right:13px;border-radius:10px}
+ .rojao-hub .rojao-stat-icon>svg{width:18px;height:18px}
+ .rojao-hub .rojao-stat-label{font-size:8px;letter-spacing:.025em;max-width:calc(100% - 32px);min-height:29px}
+ .rojao-hub .rojao-stat>b{font-size:30px;margin:10px 0 7px}
+ .rojao-hub .rojao-stat small{font-size:12px}
+ .rojao-hub .rojao-stat p{font-size:10px;line-height:1.65}
+ .rojao-hub .rojao-milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .rojao-hub .rojao-milestone-grid>article{padding:19px 10px 17px;border-radius:21px}
+ .rojao-hub .rojao-next-milestone{font-size:9px;white-space:normal;text-align:right;max-width:75px;flex:none}
+ .rojao-hub .rojao-how>summary{padding:13px 14px;font-size:12px;gap:10px}
+ .rojao-hub .rojao-how p{font-size:11px}
+}
+@media(max-width:360px){
+ .rojao-hub .rojao-count>strong{font-size:56px}
+ .rojao-hub .rojao-count>svg{width:24px;height:32px}
+ .rojao-hub .rojao-count[data-digits="4"]>strong{font-size:35px}
+ .rojao-hub .rojao-count[data-digits="5"]>strong{font-size:29px}
+ .cactom-dashboard .rojao-hub .rojao-feature h2{font-size:21px}
+ .streak-screen.rojao-hub .streak-calendar{padding-left:13px;padding-right:13px}
+ .streak-screen.rojao-hub .streak-week{gap:5px}
+ .rojao-hub .rojao-stat-icon{position:static;margin-bottom:9px}
+ .rojao-hub .rojao-stat-label{max-width:none;min-height:0}
+ .rojao-hub .rojao-stat>b{font-size:27px}
+ .rojao-hub .rojao-stat small{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.rojao-hub *{animation:none!important;transition:none!important}}
+
+/* The sequence name is Seu Rojão; Estirão is exclusively the 30+ day insignia. */
+.cactom-dashboard .rojao-current-insignia{display:inline-grid;grid-template-columns:31px minmax(0,1fr);align-items:center;gap:1px 7px;max-width:100%;margin-top:12px;padding:7px 10px;border:1px solid #cce1cf;border-radius:11px;background:#fafff4;color:#41744f;vertical-align:middle}
+.cactom-dashboard .rojao-current-insignia>.rojao-insignia-art{width:31px;height:39px;grid-row:1/3;flex:none}
+.cactom-dashboard .rojao-current-insignia>small{font-size:9px;line-height:1.5;color:#60785e;grid-column:2}
+.cactom-dashboard .rojao-current-insignia>b{font-size:13px;line-height:1.4;font-weight:1000;grid-column:2}
+.cactom-dashboard .rojao-current-insignia.compact{display:inline-flex;gap:6px;padding:5px 8px;margin:0 0 8px}
+.cactom-dashboard .rojao-current-insignia.compact>b{font-size:11px}
+.cactom-dashboard .rojao-current-insignia[data-insignia="estirao"]{background:#fff4d8;border-color:#e6ce8f;color:#956a27}
+.cactom-dashboard .rojao-current-insignia[data-insignia="estirao"]>small{color:#876d3e}
+.rojao-hub .rojao-next-milestone b,.rojao-hub .rojao-next-milestone small{display:block;margin-top:2px}
+.rojao-hub .rojao-next-milestone small{font-size:9px;color:#627a65}
+.rojao-hub .rojao-milestone-grid article>b{font-size:15px;line-height:1.3;min-height:20px;text-wrap:balance}
+.rojao-hub .rojao-insignia-days{display:block;font-size:10px;color:#65785e;line-height:1.5;margin-top:5px}
+.rojao-hub .rojao-milestone-grid article[data-insignia="estirao"]{border-color:#e7d4a8;background:#fffcf3}
+.rojao-hub .rojao-milestone-grid article.earned[data-insignia="estirao"]{background:#fff2ce;border-color:#dfbc68}
+@media(max-width:850px){
+ .rojao-hub .rojao-milestone-grid>article:last-child{grid-column:1/-1;display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:17px;text-align:left;align-items:center;padding:19px 22px}
+ .rojao-hub .rojao-milestone-grid>article:last-child>.streak-medallion{grid-row:1/4;margin:0;width:104px;height:130px}
+ .rojao-hub .rojao-milestone-grid>article:last-child>b{font-size:18px}
+ .rojao-hub .rojao-milestone-grid>article:last-child>small{margin-top:4px}
+}
+
+/* User-supplied badge artwork, refined with imagegen; full silhouettes stay visible. */
+.cactom-dashboard .rojao-insignia-art{display:block;width:100%;height:100%;max-width:100%;object-fit:contain;object-position:center;user-select:none}
+.cactom-dashboard .rojao-badge-scene>.rojao-feature-badge{width:100%;height:100%;transform:none;filter:drop-shadow(0 5px 5px #31503915)}
+.rojao-hub .rojao-milestone-grid article:not(.earned) .rojao-insignia-art{filter:grayscale(.8);opacity:.62}
+.rojao-hub .rojao-milestone-grid article.earned .rojao-insignia-art{filter:drop-shadow(0 5px 4px #31503918)}
+.cactom-dashboard .rojao-current-insignia.compact>.rojao-insignia-art{width:24px;height:30px}
+@media(max-width:850px){
+ .rojao-hub .streak-medallion{max-width:126px;height:158px}
+}

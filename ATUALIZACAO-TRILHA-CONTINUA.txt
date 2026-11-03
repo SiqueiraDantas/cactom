@@ -1,0 +1,32 @@
+CACTOM | TRILHA CONTÍNUA | 24/10/2026
+
+O QUE MUDOU
+- A página Aprender exibe as unidades uma abaixo da outra, em rolagem vertical.
+- A antiga barra de abas Unidade 1 / Unidade 2 / Unidade 3 foi removida.
+- Cada unidade tem cabeçalho próprio com número, nome e progresso.
+- Os cabeçalhos acompanham a rolagem dentro de sua unidade.
+- Existe um atalho "Ir para a minha próxima aula".
+- Todos os nós continuam apontando para as mesmas aulas.
+- Histórico de progresso, login, Tom e demais seções foram preservados.
+- A mudança vale para os cursos de trompete e flauta doce.
+
+COMO ABRIR
+1. Extraia esta pasta em um local novo no Windows.
+2. Abra CACTOM/ABRIR-CACTOM.bat.
+3. Entre em "Explorar primeiro" e selecione um instrumento.
+4. Na aba "Aprender", role a página para conferir todas as unidades.
+5. Para comparar, teste também em 320 e 390 pixels no modo responsivo.
+
+VALIDAÇÕES
+- TypeScript --noEmit: passou.
+- Testes Node executáveis neste ambiente: 156 passaram / 156 executados.
+- Build e teste de renderização não foram executados integralmente por ausência da dependência Linux do Rollup neste ambiente offline.
+- Revisão visual e testes de toque no dispositivo: pendentes.
+
+ARQUIVOS ALTERADOS
+src/components/LearningHome.tsx
+src/components/continuous-path.css (novo)
+tests/course-units.test.mjs (novo)
+CHANGELOG.md
+
+IMPORTANTE: A alteração não modifica os dados de alunos e nem o mecanismo de aprovação de aulas.

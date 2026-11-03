@@ -1,0 +1,10 @@
+CACTOM — ABA APRENDER / TRILHA LIMPA — 24/10/2026
+
+- Removidas as informações introdutórias da aba Aprender (saudação, cartão de boas-vindas, atalhos e explicações da trilha).
+- Exibidas somente as unidades em sequência vertical, com cabeçalhos compactos e os nós das aulas.
+- Removidos textos dos nós (mantidos nomes completos de cada aula para leitores de tela e identificação acessível).
+- Removidos rodapé e painel lateral de resumos somente na aba Aprender; outras abas preservadas.
+- Movidas configurações da flauta doce para a aba Praticar (continuam funcionais).
+- Mantidos os estados de progresso, as aulas e suas ações existentes.
+
+Para conferir no Windows: extraia a pasta e execute ABRIR-CACTOM.bat.

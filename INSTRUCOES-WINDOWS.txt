@@ -1,0 +1,22 @@
+CACTOM - PACOTE LEVE PARA WINDOWS
+
+1. BAIXE o arquivo CACTOM_Leve_Windows.zip.
+2. No Explorador do Windows, clique com o botao direito no ZIP e selecione Extrair Tudo.
+3. Entre na pasta CACTOM (a que possui package.json).
+4. De dois cliques em ABRIR-CACTOM.bat.
+5. Se pedir instalacao do Node.js, instale a versao LTS pelo site https://nodejs.org e reinicie o terminal.
+6. Na primeira vez, o app precisa de INTERNET para baixar bibliotecas npm.
+7. O navegador deve abrir em http://127.0.0.1:5174/
+
+IMPORTANTE: NAO execute dentro do ZIP. Extraia tudo primeiro.
+
+Se Windows impedir o script, abra o Prompt de Comando (cmd) dentro da pasta e rode:
+    npm.cmd ci --no-audit --no-fund
+    npm.cmd run dev -- --port 5174 --open
+
+Se nao funcionar, envie uma foto ou copie o ERRO COMPLETO.
+
+Este pacote e o codigo-fonte para rodar localmente. NAO e um instalador .exe.
+A pasta .git contem um novo snapshot leve. O historico de dois commits anterior
+esta preservado no ZIP antigo CACTOM_Login_2_0_Atualizado.zip.
+O login permanece em modo de testes, sem autenticacao real pela internet.

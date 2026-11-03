@@ -1,0 +1,33 @@
+BANCO DE SONS DA FLAUTA DOCE (CACTOM)
+
+Enquanto esta pasta não tiver gravações, o app usa um som de flauta sintetizado.
+Quando você colocar as gravações aqui, o app passa a usar o som real automaticamente.
+
+O QUE GRAVAR (flauta doce soprano, dedilhado barroco ou germânico, tanto faz):
+  Uma nota por arquivo, sopro leve e estável, 2 a 3 segundos cada, sem vibrato,
+  começando com "tu" suave. Silêncio curto (até 0,1 s) antes e depois.
+
+  Nome do arquivo   Nota (escrita)   MIDI
+  do.mp3            Dó               60
+  re.mp3            Ré               62
+  mi.mp3            Mi               64
+  fa.mp3            Fá               65
+  sol.mp3           Sol              67
+  la.mp3            Lá               69
+  si-bemol.mp3      Si bemol         70
+  si.mp3            Si               71
+  do-agudo.mp3      Dó agudo         72
+  re-agudo.mp3      Ré agudo         74
+
+  Formato: MP3 ou WAV, mono, 44,1 kHz. Mesmo volume em todas.
+
+DEPOIS DE GRAVAR, crie nesta pasta o arquivo manifesto.json assim:
+{
+  "60": "do.mp3", "62": "re.mp3", "64": "mi.mp3", "65": "fa.mp3", "67": "sol.mp3",
+  "69": "la.mp3", "70": "si-bemol.mp3", "71": "si.mp3", "72": "do-agudo.mp3", "74": "re-agudo.mp3"
+}
+Pode começar só com algumas notas (ex.: só "71": "si.mp3"): as que faltam usam a gravação mais próxima.
+
+Se usar sons baixados da internet, use só os com licença livre (ex.: CC0 no freesound.org)
+e anote a fonte aqui embaixo.
+Fontes:

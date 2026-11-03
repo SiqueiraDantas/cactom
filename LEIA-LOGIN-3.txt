@@ -1,0 +1,28 @@
+CACTOM - LOGIN 3.0 (22/10/2026)
+================================
+
+Esta versao e uma nova pasta do Cactom com a entrada redesenhada.
+Nao substitua a pasta antiga antes de conferir o visual e os cliques.
+
+WINDOWS
+1. Clique com o botao direito no ZIP e escolha Extrair Tudo.
+2. Entre na pasta CACTOM.
+3. Execute ABRIR-CACTOM.bat.
+4. Na primeira abertura, permita que o npm instale as dependencias.
+5. Confira a URL apresentada no terminal. Padrao: http://127.0.0.1:5174/
+6. Se aparecer o login antigo, aperte Ctrl+F5 no navegador.
+
+Nesta etapa mudamos a interface do login, preservando as funcoes atuais.
+O cadastro ainda e LOCAL, no navegador, e nao sincroniza contas.
+Nao use dados reais de alunos menores de idade nesta fase.
+
+Detalhes e verificacoes:
+docs/cactom/LOGIN-3-IMPLEMENTACAO.md
+
+O pacote completo inclui o repositorio Git na pasta .git.
+Para consultar: git log --oneline -3
+Nao ha remote configurado. Isso nao publica o codigo no GitHub.
+
+Observacao: requisitos de Linux impediram um dos 155 testes de executar
+neste ambiente, mas o TypeScript passou. Ainda e necessario conferir
+login, layout e animacoes no Windows, no celular e no navegador.

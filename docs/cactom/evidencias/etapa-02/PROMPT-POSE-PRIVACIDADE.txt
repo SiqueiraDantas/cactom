@@ -1,0 +1,9 @@
+Ferramenta: image_gen.imagegen, modo built-in.
+Intencao: edit / identity-preserve.
+Referencia: public/branding/cactom/tom-oficial.png (original preservado).
+Saida aplicada: public/branding/cactom/tom-privacidade-v1.png.
+transparent_background: true.
+Nao foi usada CLI/API externa nem tratamento posterior de pixels.
+
+Prompt exato:
+Use case: identity-preserve / precise-object-edit. Edit target: the attached official Tom mascot transparent PNG. Create ONE production PNG pose variant for a login privacy animation. Preserve Tom's exact identity and style: green round tall cactus body, original green ribs and small dark green spines, the same three-petal orange flower, same small green feet, same happy open mouth, same colors, proportions, frontal view and shading. CHANGE ONLY the pose of the two existing green cactus arms: bend and bring both arms naturally inward and upward so that the rounded ends completely cover BOTH EYES, with absolutely no pupils visible, in a playful 'I will not peek at your password' pose. Arms must connect naturally at their original shoulder region, have smooth rounded surfaces and look like Tom's original cactus arms, no human hands or fingers, no detached pieces, no extra arms. No cut edges or geometric clipping. No new accessories. Keep head, flower, mouth, feet and body silhouette and proportions unchanged as much as possible. Match the original square canvas framing and scale: top of flower near 8% down, bottom of feet near 90%, body centered horizontally. Full character visible with comfortable transparent padding. Real transparent alpha background, no background color, no checkerboard, no shadow plane, no text, no logos. This is a derived pose, do not redesign the character.

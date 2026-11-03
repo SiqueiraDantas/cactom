@@ -1,0 +1,19 @@
+/* Tom on the login/sign-up form: the vector mascot changes face with the real form state
+   (happy, focused while typing, covering his eyes on the password, thinking while waiting,
+   celebrating on success, sad on error). Reactions are one-shot transforms. */
+.tom-interactive{position:relative;width:100%;aspect-ratio:1/1;z-index:1;pointer-events:none;contain:layout style}
+.tom-rig{position:relative;display:block;width:100%;height:100%}
+.tom-react,.tom-lean{position:absolute;inset:0;transform-origin:50% 92%}
+.tom-lean{transition:transform .5s cubic-bezier(.34,1.25,.64,1)}
+.tom-rig[data-mood=listening] .tom-lean{transform:translate3d(0,1%,0) rotate(-3deg)}
+.tom-face{position:absolute;inset:0;transform-origin:50% 92%;animation:tom-face-pop .42s cubic-bezier(.34,1.56,.64,1) both}
+.tom-face .ct-tom{width:100%;height:100%;transform-origin:50% 92%;animation:tom-breathe 2.8s ease-in-out infinite}
+.tom-rig[data-mood=waiting] .tom-face .ct-tom{animation-duration:1.3s}
+.tom-interactive .access-tom-greeting{max-width:90%;min-width:150px;white-space:normal;text-align:center;line-height:1.5}
+.tom-accessible-name{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.tom-interactive[data-paused=true] *{animation-play-state:paused!important}
+.tom-interactive[data-reduced=true] *{animation:none!important;transition:none!important}
+@keyframes tom-face-pop{0%{transform:scale(.88,1.08)}60%{transform:scale(1.04,.96)}100%{transform:none}}
+@keyframes tom-breathe{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-2.5%) scale(.985,1.02)}}
+@media(max-width:740px){.tom-interactive .access-tom-greeting{min-width:100px;max-width:110%;font-size:9px;padding:7px 9px}}
+@media(prefers-reduced-motion:reduce){.tom-interactive *{animation:none!important;transition:none!important}}

@@ -1,0 +1,43 @@
+CACTOM - CURSO DE REGENCIA COM CAMERA
+=====================================
+Base: Login 3.1 com Trilha Limpa (mantidos os demais cursos).
+
+COMO ABRIR NO WINDOWS
+1. Extraia o ZIP para uma pasta nova.
+2. Abra a pasta CACTOM e execute ABRIR-CACTOM.bat.
+3. Na primeira abertura, o npm instala os pacotes (internet necessaria).
+4. No navegador acesse http://127.0.0.1:5174/ (ou a URL exibida no terminal).
+5. Entre ou escolha Experimentar; selecione REGENCIA - MAESTRO.
+6. Escolha um dos 9 exercicios da trilha. Em seguida:
+   a. Ativar camera (permitir acesso no navegador).
+   b. Posicionar a palma da mao, em cima, no ponto inicial do desenho.
+   c. Clicar em CALIBRAR.
+   d. Clicar em COMEÇAR REGENCIA; ouvir os tempos de preparacao.
+   e. Acompanhar o ponto azul no desenho com a mao: a bolinha laranja
+      representa a mao detectada. A avaliacao mede chegada no ponto de cada
+      tempo em sincronia com o metronomo.
+   f. Ao fim do exercicio, ver o resultado, repetir ou ir para a proxima aula.
+7. Se necessario, use o controle "Amplitude do movimento" e calibre novamente.
+
+CONTEUDO
+- Unidade 1: compasso 2/4, tres exercicios (60, 76 e 92 BPM).
+- Unidade 2: compasso 3/4, tres exercicios (56, 72 e 88 BPM).
+- Unidade 3: compasso 4/4, tres exercicios (56, 72 e 90 BPM).
+- Todos usam a webcam, tres ou quatro compassos por atividade, pontuacao,
+  estrelas e persistencia por perfil no armazenamento local do navegador.
+
+IMPORTANTE
+- Para usar a webcam no celular, publique o Cactom em HTTPS; abrir pelo
+  endereco http://IP-do-computador na rede normalmente BLOQUEIA a camera.
+- Webcam funciona em localhost no notebook, com permissao do usuario.
+- O processamento da mao ocorre no proprio navegador (MediaPipe, modelo local).
+- Nenhum video e gravado, enviado ou armazenado pelo curso.
+- A regencia e um prototipo pedagogico. A pontuacao analisa a palma da mao,
+  pontos e tempo: nao valida postura, preparacao, ombros, cotovelos ou tecnica
+  interpretativa de um regente profissional.
+- Se o reconhecimento estiver instavel: melhore luz, enquadramento,
+  fundo e distancia, depois calibre novamente.
+- No momento, este ambiente nao conseguiu instalar as dependencias do npm;
+  os testes de logica foram executados, mas a CAMERA REAL ainda nao foi
+  validada em Windows/Android/iPhone. Teste e relate como ficou.
+- Os outros cursos, trilha limpa e Login 3.1 nao foram redesenhados.

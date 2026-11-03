@@ -1,0 +1,228 @@
+/* Shared Cactom finish for the learning journey and its companion tabs. */
+.cactom-dashboard{--ink:#174b45;--soft-ink:#698477;--border:#deebe2;--paper:#fcfefb;--home-header-height:82px;min-width:0;max-width:100%;overflow-x:clip;background:radial-gradient(ellipse at 95% 0,#edf8f0,transparent 40%),#fcfefb;color:var(--ink)}
+.cactom-dashboard .learning-sidebar{width:220px;padding:22px 14px;background:#fff;border-right:1px solid #deebe3;overflow-y:auto}
+.cactom-dashboard .learning-body{margin-left:220px;min-width:0}
+.cactom-dashboard .learning-brand{display:flex;justify-content:center;min-height:64px;margin:0 0 18px;padding:0}
+.cactom-dashboard .learning-brand>.cactom-wordmark{display:block;width:159px;height:auto}
+.cactom-dashboard .learning-sidebar nav{gap:7px;margin:0}
+.cactom-dashboard .learning-nav{height:49px;min-height:49px;gap:12px;border:1px solid transparent;border-radius:15px;padding:10px 14px;font-size:13px;font-weight:800;color:#71877b;box-shadow:none}
+.cactom-dashboard .learning-nav.selected{background:#eaf7ee;border-color:#d3eada;color:#197653;box-shadow:none}
+.cactom-dashboard .learning-nav:hover{background:#f0f8f2}
+.cactom-dashboard .learning-nav>svg{transition:transform .18s;color:inherit}
+.cactom-dashboard .learning-nav:hover>svg{transform:translateY(-2px)}
+.cactom-dashboard .nav-dot{background:#249264;width:6px;height:6px}
+.cactom-dashboard .sidebar-bottom{padding:20px 12px 0;text-align:center}
+.cactom-dashboard .sidebar-tom{display:block;width:74px;height:78px;object-fit:contain;margin:0 auto 8px}
+.cactom-dashboard .sidebar-bottom>b{font-size:14px;line-height:1.4;color:#3c6b55}
+.cactom-dashboard .sidebar-bottom>p{font-size:11px;margin-top:5px;color:#8ba08c}
+.cactom-dashboard .help-button{justify-content:center;margin:12px auto 0;font-size:11px;min-height:40px}
+.cactom-dashboard .sidebar-bottom>small{font-size:9px;line-height:1.6;margin-top:8px}
+.cactom-dashboard .learning-topbar{position:sticky;top:0;z-index:30;height:var(--home-header-height);width:100%;max-width:none;padding:0 32px;border-bottom:1px solid #e0ebe3;background:rgba(252,254,251,.96);backdrop-filter:blur(14px);gap:16px}
+.cactom-dashboard .course-picker-button{display:flex;min-width:0;max-width:54%;padding:5px;border-radius:16px;background:transparent;gap:10px}
+.cactom-dashboard .course-picker-button:hover{background:#edf6ee}
+.cactom-dashboard .course-label>div{min-width:0}
+.cactom-dashboard .course-label b{font-size:16px;font-weight:900;color:#255a48;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cactom-dashboard .course-label small{font-size:8px;letter-spacing:.09em;color:#7b9684;margin-top:3px}
+.cactom-dashboard .course-instrument{display:grid;place-items:center;flex:none;width:49px;height:49px;border:1px solid #e5ead7;border-radius:15px;background:#f7f6e9;overflow:hidden}
+.cactom-dashboard .course-instrument>.course-artwork{width:66px;height:50px;max-width:none}
+.cactom-dashboard .course-chevron{font-size:18px;color:#759680;margin-left:0}
+.cactom-dashboard .topbar-metrics{gap:10px;flex:none}
+.cactom-dashboard .topbar-metrics>span,.cactom-dashboard .topbar-streak{min-height:37px;border:1px solid #e7eadf;background:#fffaf0;border-radius:12px;padding:6px 9px;gap:5px;color:#b3832e}
+.cactom-dashboard .topbar-metrics>.topbar-progress{background:#f0f6fb;border-color:#e2edf4;color:#527fa4}
+.cactom-dashboard .topbar-metrics>span>b,.cactom-dashboard .topbar-streak>b{font-size:14px;font-weight:900}
+.cactom-dashboard .topbar-metrics>span>svg,.cactom-dashboard .topbar-streak>svg{width:19px;height:21px;flex:none}
+.cactom-dashboard .topbar-metrics>span>small{display:none}
+.cactom-dashboard .home-account{position:relative;flex:none;z-index:31}
+.cactom-dashboard .student-avatar{display:grid;width:35px;height:35px;margin:0;border:1px solid #d8e7db;outline:0;background:#e8f4ea;color:#368064;font-size:13px;cursor:pointer;list-style:none}
+.cactom-dashboard .student-avatar::-webkit-details-marker{display:none}
+.cactom-dashboard .home-account>div{position:absolute;right:0;top:calc(100% + 12px);width:230px;max-width:calc(100vw - 32px);padding:12px;border:1px solid #dbe8df;border-radius:18px;background:white;box-shadow:0 12px 36px #164b3821}
+.cactom-dashboard .home-account>div>b{display:block;font-size:13px;overflow-wrap:anywhere;color:#2a614f}
+.cactom-dashboard .home-account>div>small{display:block;font-size:10px;color:#869a89;margin:4px 0 9px}
+.cactom-dashboard .home-account button{display:block;min-height:42px;width:100%;padding:9px 10px;border:0;border-radius:11px;background:transparent;color:#49765f;font-size:12px;font-weight:800;text-align:left}
+.cactom-dashboard .home-account button:hover{background:#eff8f1}
+.cactom-dashboard .home-account summary:focus-visible{outline:3px solid #4a84c3;outline-offset:4px}
+.cactom-dashboard .learning-grid{width:100%;max-width:1160px;padding:30px 32px 0;grid-template-columns:minmax(0,1fr) 260px;gap:26px}
+.cactom-dashboard.learning-app--path .learning-grid{max-width:730px;padding:0 28px;display:block}
+.cactom-dashboard .learning-main{min-width:0;outline:none;animation:cactom-view-in .2s ease-out}
+.cactom-dashboard .page-heading{margin:0 0 24px}
+.cactom-dashboard .page-heading h1{font-size:31px;font-weight:900;color:#1e5147;line-height:1.15;letter-spacing:-.035em}
+.cactom-dashboard .page-heading>p{font-size:13px;line-height:1.65;color:#7a9180;margin-top:10px}
+.cactom-dashboard .small-eyebrow{font-size:9px;letter-spacing:.09em;color:#71907c}
+.cactom-dashboard .journey-unit{--unit-color:#24724f;--unit-paper:#eaf6ed;scroll-margin-top:calc(var(--home-header-height) + 12px)}
+.cactom-dashboard .journey-unit-1{--unit-color:#426e86;--unit-paper:#edf5f8}
+.cactom-dashboard .journey-unit-2{--unit-color:#936b2c;--unit-paper:#fcf3df}
+.cactom-dashboard .journey-unit .unit-banner{top:var(--home-header-height);margin-top:18px;min-height:78px;padding:14px 18px;gap:13px;background:var(--unit-paper);border:1px solid #dce9df;border-bottom-width:3px;border-radius:22px;box-shadow:0 5px 16px #194c3810}
+.cactom-dashboard .journey-unit .unit-number{width:45px;height:45px;border:1px solid #ffffffb3;border-radius:15px;background:#ffffffa3;color:var(--unit-color);font-size:22px;font-weight:900}
+.cactom-dashboard .journey-unit .unit-banner-copy small{font-size:8px;font-weight:900;letter-spacing:.1em;color:var(--unit-color)}
+.cactom-dashboard .journey-unit .unit-banner-copy h3{font-size:18px;line-height:1.3;font-weight:900;color:#285b4c;margin-top:3px}
+.cactom-dashboard .unit-progress{flex:none;min-width:36px;padding:5px 8px;background:#ffffffa8;border-radius:9px;color:var(--unit-color);font-size:11px;font-weight:900;text-align:center}
+.cactom-dashboard .journey-unit .unit-banner-icon{display:none}
+.cactom-dashboard .journey-unit .path-nodes{position:relative;max-width:520px;margin:0 auto;padding:64px 0 0;isolation:isolate}
+.cactom-dashboard .journey-unit .path-connector{position:absolute;top:64px;left:0;width:100%;height:var(--track-height);z-index:-1;overflow:visible}
+.cactom-dashboard .path-segment{fill:none;stroke:#d9e9dd;stroke-width:3;stroke-dasharray:2 9;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:stroke .3s}
+.cactom-dashboard .path-segment.traversed{stroke:#add4b9;stroke-dasharray:none}
+.cactom-dashboard .journey-unit .path-item{display:block;position:relative;width:100%;height:var(--path-step);min-height:var(--path-step);margin:0;transform:none;scroll-margin-top:calc(var(--home-header-height) + 100px)}
+.cactom-dashboard .journey-unit .lesson-node{position:absolute;top:0;left:var(--node-x);translate:-50% 0;display:grid;place-items:center;width:var(--node-size);height:var(--node-size);border:0;border-radius:50%;margin:0;outline:0;background:#eaf1eb;color:#9cb0a1;box-shadow:0 5px 0 #d5e2d7,inset 0 2px 0 #fafffb}
+.cactom-dashboard .journey-unit .lesson-node:after{inset:8px;border:1.5px solid #ffffff9c}
+.cactom-dashboard .journey-unit .lesson-node>svg{width:29px;height:29px}
+.cactom-dashboard .journey-unit .lesson-node.done{background:linear-gradient(145deg,#f9cf75,#f1b646);color:#856029;box-shadow:0 5px 0 #d8a03a,inset 0 2px 0 #ffe5ac}
+.cactom-dashboard .journey-unit .lesson-node.available{background:linear-gradient(140deg,#2fa770,#21885c);color:white;box-shadow:0 5px 0 #14684b,inset 0 2px 0 #7acb96}
+.cactom-dashboard .journey-unit .lesson-node.available:before{content:'';position:absolute;inset:-10px;border:2px solid #bfe3cb;border-radius:50%;animation:cactom-node-breathe 3.3s ease-in-out infinite;pointer-events:none}
+.cactom-dashboard .journey-unit .lesson-node.upcoming{background:#edf3ed;color:#778e7c;box-shadow:0 5px 0 #dce7dc}
+.cactom-dashboard .journey-unit .lesson-node:focus-visible{outline:3px solid #4a84c3;outline-offset:14px}
+.cactom-dashboard .journey-unit .start-bubble{left:var(--node-x);top:-42px;translate:-50% 0;min-width:104px;padding:7px 13px;border:1px solid #d6e9db;border-bottom-width:3px;border-radius:12px;background:white;box-shadow:0 4px 12px #1c553a08;color:#398260;font-size:9px;letter-spacing:.05em}
+.cactom-dashboard .journey-unit .start-bubble:after{border-color:#d6e9db}
+.cactom-dashboard .journey-unit .unit-finish{display:flex;height:72px;padding:0;margin:0;justify-content:center;align-items:center}
+.cactom-dashboard .journey-unit .unit-finish>span{width:45px;height:45px;margin:0;border:1px solid #e5dfc9;border-bottom-width:3px;border-radius:15px;background:#fff7e3;color:#c6a05d}
+.cactom-dashboard .journey-unit .unit-finish.is-complete>span{background:#e7f5ea;border-color:#c6dfca;color:#278658}
+.cactom-dashboard .chunky-button{border:0;border-radius:14px;font-size:12px;min-height:48px;font-weight:900;letter-spacing:0;gap:12px}
+.cactom-dashboard .chunky-button.teal{background:#248961;box-shadow:0 3px 0 #146c49}
+.cactom-dashboard .chunky-button.orange{background:#f5bb55;color:#755521;box-shadow:0 3px 0 #dca13a}
+.cactom-dashboard .badge-grid{gap:16px;margin:0 0 30px}
+.cactom-dashboard .achievement-banner{gap:20px;border:1px solid #d7e9db;border-bottom-width:3px;border-radius:24px;padding:20px;background:#edf8ef}
+.cactom-dashboard .achievement-tom{width:105px;height:130px;object-fit:contain;flex:none}
+.cactom-dashboard .achievement-banner h2{font-size:24px;color:#2a5e49;margin:7px 0;line-height:1.2}
+.cactom-dashboard .achievement-banner p{font-size:12px;color:#78917b}
+.cactom-dashboard .badge-card{padding:25px 20px;border:1px solid #e0e9df;border-bottom-width:3px;border-radius:24px;background:#f8fbf7}
+.cactom-dashboard .badge-card.earned{background:#fffbf0;border-color:#ecdbb5}
+.cactom-dashboard .badge-medal{width:80px;height:80px;border-width:2px;border-radius:26px;margin-bottom:20px;background:#edf3ea;border-color:#d9e5d5;box-shadow:0 4px 0 #e4ebe1}
+.cactom-dashboard .badge-card.earned .badge-medal{background:#ffdf94;border-color:#edbf62;color:#b98129;box-shadow:0 5px 0 #eec66e}
+.cactom-dashboard .badge-card h2{font-size:19px;color:#658267;margin:10px 0 8px}
+.cactom-dashboard .badge-card.earned h2{color:#95702d}
+.cactom-dashboard .badge-card p{font-size:12px;line-height:1.6;color:#859782}
+.cactom-dashboard .badge-status{font-size:8px;letter-spacing:.06em}
+.cactom-dashboard .progress-overview{margin:0 0 25px}
+.cactom-dashboard .progress-summary{border:1px solid #d7e7dc;border-bottom-width:3px;border-radius:25px;padding:24px;background:#eff8f1;gap:22px}
+.cactom-dashboard .big-percent{display:flex;align-items:center;justify-content:center;flex:none;width:122px;height:122px;border-radius:50%;background:radial-gradient(closest-side,#f6fcf7 82%,transparent 83%),conic-gradient(#299465 var(--course-percent),#d9e8dc 0);font-size:39px;color:#2b8259;letter-spacing:-.04em}
+.cactom-dashboard .big-percent>small{font-size:18px;letter-spacing:0}
+.cactom-dashboard .progress-summary h2{font-size:22px;line-height:1.25;color:#2e634d}
+.cactom-dashboard .progress-summary p{font-size:12px;color:#76917b;line-height:1.6}
+.cactom-dashboard .learning-progress{height:8px;background:#deebe0}
+.cactom-dashboard .learning-progress>span{background:#5aaf7c;box-shadow:none}
+.cactom-dashboard .history-heading{font-size:22px;color:#38654f}
+.cactom-dashboard .history-row{gap:13px;min-width:0;min-height:79px;padding:14px;border:1px solid #e2ece2;border-radius:17px;background:white;margin-bottom:10px}
+.cactom-dashboard .history-row>span{width:35px;height:35px;border-radius:11px;background:#edf3ec;color:#91a48f}
+.cactom-dashboard .history-row>.history-check{background:#e2f4e5;color:#2e8d56}
+.cactom-dashboard .history-row>div{min-width:0}
+.cactom-dashboard .history-row b{font-size:13px;color:#416a51}
+.cactom-dashboard .history-row small{font-size:11px;line-height:1.5;color:#8b9d87}
+.cactom-dashboard .adaptive-history,.cactom-dashboard .adaptive-card{border:1px solid #dce8db;border-radius:21px;background:#f8fcf6;padding:20px}
+.cactom-dashboard .adaptive-history h2{font-size:18px;color:#466f51}
+.cactom-dashboard .adaptive-history p{font-size:12px;line-height:1.6;gap:12px;padding:10px 0}
+.cactom-dashboard .rail-card,.cactom-dashboard .daily-goal-card{border:1px solid #dce8de;border-bottom-width:3px;border-radius:23px;box-shadow:0 5px 16px #194c3805}
+.cactom-dashboard .rail-card{padding:21px;background:white}
+.cactom-dashboard .virtual-invite{background:#f3f9f0;padding-bottom:0}
+.cactom-dashboard .recorder-badge-art{height:110px;margin:8px 0}
+.cactom-dashboard .recorder-badge-art>.course-artwork{display:block;width:100%;height:100%}
+.cactom-dashboard .learning-footer{border-color:#e1ebe0;padding:22px 0 27px;gap:10px}
+.cactom-dashboard .learning-footer>span{font-size:11px;color:#699176}
+.cactom-dashboard .learning-footer>small{font-size:9px;line-height:1.5;color:#9aaa93}
+.cactom-dashboard .local-note{font-size:11px;line-height:1.6;color:#91a18d}
+/* Library artwork and cards; the score reader and its evaluator are unchanged. */
+.cactom-score-library{min-height:100dvh;max-width:100%;min-width:0;padding:25px clamp(18px,5vw,64px) 35px;background:radial-gradient(ellipse at 5% 0,#edf8ef,transparent 45%),#fcfefb;color:#27594c;font-family:Nunito,'Segoe UI',sans-serif;overflow-x:clip}
+.cactom-score-library>header{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1050px;margin:0 auto}
+.cactom-score-library>header>.cactom-wordmark{width:150px;height:auto;flex:none}
+.cactom-score-library .back-to-trail{background:white;border:1px solid #d9e7dc;border-bottom-width:3px;border-radius:13px;font-size:12px;color:#4a7c60;padding:9px 14px}
+.cactom-score-library .score-library-heading{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:24px;align-items:center;max-width:1050px;margin:22px auto;padding:22px 28px;border:1px solid #d8e8dc;border-radius:27px;background:#eef8f0}
+.cactom-score-library .score-library-heading>.activity-heading{text-align:left;margin:0;min-width:0}
+.cactom-score-library .score-library-heading h1{font-size:34px;font-weight:900;color:#275c4b;line-height:1.15;letter-spacing:-.035em;margin:10px 0}
+.cactom-score-library .score-library-heading p{font-size:13px;line-height:1.6;color:#78917c}
+.cactom-score-library .score-library-heading>.course-artwork{width:180px;height:135px}
+.cactom-score-library .score-import{max-width:1050px;margin:0 auto 22px;padding:24px;border:1px solid #e7dfc8;border-radius:24px;background:#fffaf0}
+.cactom-score-library .score-import>svg{color:#bb9a59;flex:none}
+.cactom-score-library .score-import h2{font-size:22px;color:#836e42;line-height:1.25}
+.cactom-score-library .score-import p{font-size:12px;line-height:1.65;color:#958768}
+.cactom-score-library .score-import .activity-secondary{border:1px solid #ddcdab;border-bottom-width:3px;border-radius:13px;color:#917c49;background:white;min-height:44px;font-size:12px}
+.cactom-score-library .score-library-grid{max-width:1050px;margin:0 auto;gap:17px}
+.cactom-score-library .score-library-card{padding:24px;border:1px solid #dce8dd;border-bottom-width:3px;border-radius:24px;background:white;box-shadow:0 5px 18px #194c3807;transition:transform .18s,border-color .18s,box-shadow .18s}
+.cactom-score-library .score-library-card:hover{transform:translateY(-3px);border-color:#98c7a9;box-shadow:0 9px 24px #194c3812}
+.cactom-score-library .score-library-icon{border:1px solid #d7e6db;border-radius:17px;background:#edf7ef;color:#498665;width:54px;height:54px}
+.cactom-score-library .score-library-card>small{font-size:8px;letter-spacing:.07em;color:#86a087}
+.cactom-score-library .score-library-card h2{font-size:23px;color:#305f4a;line-height:1.25;margin:12px 0 8px}
+.cactom-score-library .score-library-card>p{font-size:12px;line-height:1.6;color:#80977e}
+.cactom-score-library .score-library-card>span:last-child{color:#3a8b5e;font-size:12px;font-weight:900}
+.cactom-score-library .score-notice{max-width:1050px;margin:18px auto 0;font-size:11px;line-height:1.6;color:#93a28c}
+@keyframes cactom-node-breathe{0%,100%{scale:1;opacity:.65}50%{scale:1.07;opacity:1}}
+@keyframes cactom-view-in{from{opacity:.5;translate:0 5px}to{opacity:1;translate:0 0}}
+@media(max-width:1050px){
+ .cactom-dashboard .learning-sidebar{width:190px;padding-left:11px;padding-right:11px}
+ .cactom-dashboard .learning-body{margin-left:190px}
+ .cactom-dashboard .learning-grid{display:block;max-width:760px;padding:25px 25px 0}
+ .cactom-dashboard .learning-rail{display:none}
+ .cactom-dashboard .learning-topbar{padding:0 24px}
+}
+@media(max-width:650px){
+ .cactom-dashboard{--home-header-height:76px}
+ .cactom-dashboard .learning-sidebar{position:fixed;inset:auto 10px max(10px,env(safe-area-inset-bottom));width:calc(100% - 20px);height:72px;padding:7px 3px;border:1px solid #dce8dd;border-radius:22px;background:rgba(255,255,255,.97);box-shadow:0 5px 28px #224f3b1c;z-index:50;overflow:visible}
+ .cactom-dashboard .learning-sidebar nav{display:flex;align-items:center;gap:0;height:100%;margin:0}
+ .cactom-dashboard .learning-brand,.cactom-dashboard .sidebar-bottom{display:none}
+ .cactom-dashboard .learning-nav{height:56px;min-height:56px;min-width:0;flex:1;flex-direction:column;justify-content:center;gap:4px;padding:5px 1px;border:0;border-radius:15px;font-size:8px;font-weight:900;white-space:nowrap}
+ .cactom-dashboard .learning-nav.selected{border:0;box-shadow:none}
+ .cactom-dashboard .learning-nav>svg{width:22px;height:22px}
+ .cactom-dashboard .nav-dot{display:none}
+ .cactom-dashboard .learning-body{margin-left:0;padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+ .cactom-dashboard .learning-topbar{height:var(--home-header-height);padding:0 14px;gap:8px}
+ .cactom-dashboard .course-picker-button{max-width:50%;gap:6px;padding:4px}
+ .cactom-dashboard .course-instrument{width:37px;height:39px;border-radius:12px}
+ .cactom-dashboard .course-instrument>.course-artwork{width:53px;height:40px}
+ .cactom-dashboard .course-label b{font-size:13px}
+ .cactom-dashboard .course-label small{font-size:7px;letter-spacing:.06em}
+ .cactom-dashboard .course-chevron{display:none}
+ .cactom-dashboard .topbar-metrics{gap:5px}
+ .cactom-dashboard .topbar-metrics>span,.cactom-dashboard .topbar-streak{min-height:32px;min-width:0;padding:5px 6px;gap:3px;border-radius:10px}
+ .cactom-dashboard .topbar-metrics>span>b,.cactom-dashboard .topbar-streak>b{font-size:11px}
+ .cactom-dashboard .topbar-metrics>span>svg,.cactom-dashboard .topbar-streak>svg{width:15px;height:18px}
+ .cactom-dashboard .student-avatar{width:30px;height:30px;font-size:11px}
+ .cactom-dashboard .learning-grid{padding:23px 17px 0}
+ .cactom-dashboard.learning-app--path .learning-grid{padding:0 17px}
+ .cactom-dashboard .journey-unit .unit-banner{padding:12px;gap:10px;min-height:75px;margin-top:14px;border-radius:19px}
+ .cactom-dashboard .journey-unit .unit-number{width:37px;height:41px;font-size:19px;border-radius:12px}
+ .cactom-dashboard .journey-unit .unit-banner-copy h3{font-size:15px;line-height:1.3}
+ .cactom-dashboard .journey-unit .unit-banner-copy small{font-size:7px}
+ .cactom-dashboard .unit-progress{font-size:10px;padding:4px 6px;min-width:30px}
+ .cactom-dashboard .page-heading{margin-bottom:20px}
+ .cactom-dashboard .page-heading h1{font-size:27px;line-height:1.18}
+ .cactom-dashboard .page-heading>p{font-size:12px;line-height:1.6}
+ .cactom-dashboard .badge-grid{gap:12px}
+ .cactom-dashboard .achievement-banner{padding:17px;gap:12px;border-radius:22px}
+ .cactom-dashboard .achievement-tom{width:85px;height:115px}
+ .cactom-dashboard .achievement-banner h2{font-size:20px}
+ .cactom-dashboard .achievement-banner p{font-size:11px}
+ .cactom-dashboard .badge-card{padding:21px 12px;border-radius:21px}
+ .cactom-dashboard .badge-card h2{font-size:16px}
+ .cactom-dashboard .badge-card p{font-size:11px}
+ .cactom-dashboard .badge-medal{width:65px;height:65px;border-radius:21px}
+ .cactom-dashboard .progress-summary{gap:16px;padding:19px;border-radius:23px}
+ .cactom-dashboard .big-percent{width:94px;height:94px;font-size:30px}
+ .cactom-dashboard .big-percent>small{font-size:14px}
+ .cactom-dashboard .progress-summary h2{font-size:19px}
+ .cactom-dashboard .progress-summary p{font-size:11px}
+ .cactom-dashboard .history-row{padding:12px;gap:10px}
+ .cactom-dashboard .history-row b{font-size:12px}
+ .cactom-dashboard .history-row small{font-size:10px}
+ .cactom-dashboard .adaptive-history p{flex-wrap:wrap;gap:6px}
+ .cactom-dashboard .learning-footer{text-align:center;flex-direction:column;line-height:1.6;gap:5px}
+ .cactom-score-library{padding:16px 18px 30px}
+ .cactom-score-library>header>.cactom-wordmark{width:112px}
+ .cactom-score-library .back-to-trail{font-size:11px;padding:8px 11px}
+ .cactom-score-library .score-library-heading{grid-template-columns:minmax(0,1fr) 90px;padding:20px 17px;gap:6px;border-radius:23px}
+ .cactom-score-library .score-library-heading>.course-artwork{width:105px;height:100px}
+ .cactom-score-library .score-library-heading h1{font-size:26px}
+ .cactom-score-library .score-library-heading p{font-size:12px}
+ .cactom-score-library .score-import{padding:19px;border-radius:22px;gap:13px}
+ .cactom-score-library .score-import h2{font-size:20px}
+ .cactom-score-library .score-library-grid{grid-template-columns:1fr;gap:14px}
+ .cactom-score-library .score-library-card{padding:21px;border-radius:22px}
+}
+@media(max-width:380px){
+ .cactom-dashboard .topbar-metrics>span:not(.topbar-progress){display:none}
+ .cactom-dashboard .course-picker-button{max-width:52%}
+ .cactom-dashboard .progress-summary{flex-direction:column;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+ .cactom-dashboard *,.cactom-dashboard *:before,.cactom-dashboard *:after,.streak-screen *,.cactom-score-library *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* Legible secondary text on the light Cactom surfaces. */
+.cactom-dashboard :is(.page-heading>p,.option-card>p,.badge-card p,.progress-summary p,.history-row small,.local-note,.learning-footer>small,.course-label small,.home-account>div>small,.recorder-config p){color:#58715f}
+.cactom-score-library :is(.score-library-heading p,.score-library-card>p,.score-notice){color:#60755c}

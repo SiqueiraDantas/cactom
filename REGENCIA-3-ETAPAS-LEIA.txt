@@ -1,0 +1,48 @@
+CACTOM — REGENCIA COM CAMÊRA, MÚSICA E ORQUESTRA INTERATIVA
+===========================================================
+Base: Login 3.1 + Trilha Limpa + Curso de Regência com 9 atividades.
+
+COMO ABRIR
+1. Extraia o ZIP numa pasta NOVA do computador.
+2. Abra CACTOM/ABRIR-CACTOM.bat (necessita Node.js/npm e, na primeira vez, conexão para dependências).
+3. Abra o navegador no endereço informado, normalmente http://127.0.0.1:5173.
+4. Selecione o curso Regência / Maestro e uma atividade da trilha.
+
+OS TRÊS MODOS NA MESMA ATIVIDADE
+01 GESTO — Apenas metrônomo (pratica o pulso com a câmera).
+02 MÚSICA — Metrônomo na preparação; toca uma peça instrumental original depois.
+03 ORQUESTRA VIRTUAL — Metrônomo na preparação; orquestra sintetizada só entra no tempo 1 correto.
+
+PEÇAS ORIGINAIS GERADAS LOCALMENTE
+- 2/4: Marcha do Mandacaru.
+- 3/4: Valsa das Flores.
+- 4/4: Abertura do Sertão.
+A reprodução é por Web Audio (melodia, harmonia e baixo); NÃO há áudio MP3 de uma orquestra real.
+Pode clicar em "Ouvir a peça" para escutar dois compassos, mesmo sem a câmera ligada.
+
+COMO TESTAR A ORQUESTRA VIRTUAL
+1. Selecione o modo Orquestra virtual.
+2. Ligue a câmera, enquadre a mão inteira e calibre no ponto inicial (alto do desenho).
+3. Clique em Começar regência e ouça UM compasso de preparação.
+4. Faça o tempo 1 (baixo) próximo da bolinha no ritmo para dar entrada à orquestra.
+5. Reja de forma ampla para aumentar o volume; de forma contida para baixar.
+6. Mantenha a mão na área SUPERIOR DIREITA do desenho por 1 segundo para cortar o som.
+7. Refaça um tempo 1 correto para trazer a orquestra de volta.
+8. Dois tempos perdidos também suspendem o som até o próximo tempo 1 reconhecido.
+O treino interativo usa 8 compassos para permitir experimentar os comandos.
+
+LIMITAÇÕES CONHECIDAS
+- O BPM ainda é definido no controle deslizante, a orquestra não segue aceleração/ritardando livres.
+- Os timbres são sintetizados; não são samples de instrumentos reais nem acompanhamento de partitura completa.
+- A avaliação é experimental: depende de luz, enquadramento, câmera e posição da mão.
+- Necessário localhost/HTTPS para permissão da câmera; câmera é analisada localmente, sem vídeo gravado.
+- A versão NÃO altera login, outras trilhas, cursos de trompete/flauta ou os dados existentes.
+
+ALTERAÇÕES DE CÓDIGO
+- src/lib/conductorMusic.ts (NOVO motor musical original; três estilos).
+- src/lib/metronome.ts (silenciar clique depois da contagem preparatória, opção padrão inalterada).
+- src/components/ConductorCourse.tsx (seleção de 3 etapas; comandos de câmera; modo prévia).
+- src/components/conductor.css (layout responsivo dos modos).
+- tests/conductor-music.test.mjs (testes de trilha sonora e entrada/corte).
+
+TESTES: veja o resumo fornecido junto do pacote. Validação da webcam real deve ser feita no Windows.

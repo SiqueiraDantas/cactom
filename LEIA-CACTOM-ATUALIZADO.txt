@@ -1,0 +1,16 @@
+CACTOM ATUALIZADO (montado em 02/11/2026)
+=========================================
+Esta é a versão mais nova do Cactom, com tudo o que foi feito em 01 e 02/11:
+entrada limpa com o Tom saindo do celular, "Eu quero aprender...", Tom carregando,
+"Oi! Eu sou o Tom!", jornada de boas-vindas com atividade de partitura, cartão
+"Crie seu perfil" e efeitos sonoros.
+
+COMO ABRIR NO MAC
+1. Abra o Terminal.
+2. Digite:  cd ~/Desktop/CACTOM
+3. Digite:  npm run dev
+4. Abra o endereço que aparecer (normalmente http://127.0.0.1:5173/).
+
+Se der erro na primeira vez, rode  npm install  e depois  npm run dev  de novo.
+
+A versão antiga desta pasta ficou guardada em _backup-versao-antiga-2026-11-02.

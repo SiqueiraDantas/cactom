@@ -1,0 +1,67 @@
+{
+  "data": "2026-10-22",
+  "contraste": [
+    {
+      "par": "Texto principal",
+      "texto": "#123f40",
+      "fundo": "#ffffff",
+      "contraste": 11.6
+    },
+    {
+      "par": "Texto secundário",
+      "texto": "#526866",
+      "fundo": "#ffffff",
+      "contraste": 5.95
+    },
+    {
+      "par": "Botão principal",
+      "texto": "#ffffff",
+      "fundo": "#2d841e",
+      "contraste": 4.74
+    },
+    {
+      "par": "Botão hover",
+      "texto": "#ffffff",
+      "fundo": "#287419",
+      "contraste": 5.83
+    },
+    {
+      "par": "Placeholder",
+      "texto": "#68776a",
+      "fundo": "#fafcf7",
+      "contraste": 4.58
+    },
+    {
+      "par": "Rótulo",
+      "texto": "#335b48",
+      "fundo": "#ffffff",
+      "contraste": 7.69
+    },
+    {
+      "par": "Erro",
+      "texto": "#963923",
+      "fundo": "#fff4eb",
+      "contraste": 6.67
+    },
+    {
+      "par": "Nota de teste",
+      "texto": "#596d55",
+      "fundo": "#ffffff",
+      "contraste": 5.61
+    },
+    {
+      "par": "Eyebrow",
+      "texto": "#49683a",
+      "fundo": "#f3f9ec",
+      "contraste": 5.89
+    }
+  ],
+  "assets_sha256": "Conferidos com o manifesto de origem",
+  "limite": "Medição de cores e inspeção dos assets; não constitui captura ou validação de layout, teclado, zoom, navegador ou aparelho real.",
+  "testes": {
+    "total": 156,
+    "aprovados": 156,
+    "falhas": 0
+  },
+  "estado_etapa": "implementada para conferência visual"
+}

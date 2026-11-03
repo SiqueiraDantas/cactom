@@ -1,0 +1,39 @@
+.community-hub{display:grid;gap:16px}
+.cm-preview{margin:0;padding:12px 16px;border-radius:14px;background:#FFF4D6;border:2px solid #FFD98A;color:#7A5200;font-size:14px;line-height:1.4}
+.cm-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;align-items:start}
+.cm-rooms{display:grid;gap:8px}
+.cm-room{display:flex;gap:10px;align-items:center;text-align:left;padding:10px 12px;border-radius:14px;border:2px solid #E5E5E5;border-bottom-width:4px;background:#fff;cursor:pointer;font:inherit;color:#3C3C3C}
+.cm-room b{display:block;font-size:15px}.cm-room small{display:block;color:#8A8A8A;font-size:12px;line-height:1.3}
+.cm-room-hash{font-weight:900;font-size:20px;color:#58CC02;width:22px;text-align:center}
+.cm-room.is-on{border-color:#84D8FF;background:#DDF4FF}
+.cm-room:focus-visible{outline:3px solid #1CB0F6;outline-offset:2px}
+.cm-chat{display:grid;grid-template-rows:auto minmax(260px,52vh) auto;border:2px solid #E5E5E5;border-radius:18px;background:#fff;overflow:hidden;min-width:0}
+.cm-chat-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:12px 16px;border-bottom:2px solid #F0F0F0}
+.cm-chat-head h2{margin:0;font-size:18px}.cm-chat-head span{color:#8A8A8A;font-size:13px}
+.cm-messages{list-style:none;margin:0;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;background:#FAFAF7}
+.cm-msg{display:flex;gap:10px;align-items:flex-start;max-width:88%}
+.cm-msg.is-mine{align-self:flex-end;flex-direction:row-reverse}
+.cm-avatar{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#CE82FF;color:#fff;font-weight:900}
+.cm-avatar--tom{background:#E9F8DC;overflow:hidden}.cm-avatar--tom>*{width:40px;height:40px}
+.cm-bubble{background:#fff;border:2px solid #E5E5E5;border-radius:16px;padding:8px 12px;min-width:0}
+.cm-msg.is-tom .cm-bubble{background:#FFE7C7;border-color:#FFC98A}
+.cm-msg.is-mine .cm-bubble{background:#DDF4FF;border-color:#84D8FF}
+.cm-meta{margin:0 0 2px;display:flex;gap:8px;align-items:baseline;font-size:13px}.cm-meta time{color:#9A9A9A;font-size:12px}
+.cm-text{margin:0;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.cm-hide{margin-top:4px;padding:0;border:0;background:none;color:#9A9A9A;font:700 12px inherit;cursor:pointer;text-decoration:underline}
+.cm-form{display:grid;gap:8px;padding:12px;border-top:2px solid #F0F0F0}
+.cm-quick{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.cm-quick button{flex:none;border:2px solid #E5E5E5;border-radius:999px;background:#fff;padding:6px 12px;font:700 13px inherit;color:#4B4B4B;cursor:pointer}
+.cm-quick button:hover{background:#F7F7F7}
+.cm-input{display:flex;gap:8px}
+.cm-input input{flex:1;min-width:0;border:2px solid #E5E5E5;border-radius:14px;padding:12px 14px;font:inherit;font-size:16px;background:#F7F7F7}
+.cm-input input:focus{outline:none;border-color:#1CB0F6;background:#fff}
+.cm-input button{border:0;border-radius:14px;padding:0 18px;background:#58CC02;box-shadow:0 4px 0 #46A302;color:#fff;font:900 15px inherit;text-transform:uppercase;letter-spacing:.04em;cursor:pointer}
+.cm-input button:disabled{background:#E5E5E5;box-shadow:0 4px 0 #CFCFCF;color:#AFAFAF;cursor:default}
+.cm-error{margin:0;color:#D73A3A;font-weight:700;font-size:14px}
+.cm-rules{color:#8A8A8A;font-size:12px}
+.cm-guest{padding:14px;border-top:2px solid #F0F0F0;display:grid;gap:10px}.cm-guest p{margin:0;font-weight:700;color:#4B4B4B}
+.cm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:760px){.cm-layout{grid-template-columns:minmax(0,1fr)}.cm-rooms{display:flex;overflow-x:auto;gap:8px;padding-bottom:4px}.cm-room{flex:none}.cm-room small{display:none}.cm-chat{grid-template-rows:auto minmax(300px,56vh) auto}}
+.cactom-dashboard .topbar-metrics>button.topbar-progress{min-height:37px;border:1px solid #e2edf4;border-radius:12px;padding:6px 9px;gap:5px;display:inline-flex;align-items:center;font:inherit;cursor:pointer}
+.cactom-dashboard .topbar-metrics>button.topbar-progress>b{font-size:14px;font-weight:900}

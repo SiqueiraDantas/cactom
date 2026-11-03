@@ -1,0 +1,252 @@
+/* ==========================================================================
+   CACTOM — remaster (etapa 1: base visual comum)
+   Linguagem de produto no estilo Duolingo com as cores do Cactom: cores
+   saturadas, bordas de 2px com "degrau" inferior (3D), cantos generosos,
+   tipografia pesada e movimento elástico. Carregado por último (main.tsx).
+   Só altera aparência: posições, dados e fluxos continuam nos componentes.
+   ========================================================================== */
+:root{
+ --ct-green:#58b03b;--ct-green-dark:#3f8f27;--ct-green-soft:#e8f7df;--ct-green-line:#a5dd8c;
+ --ct-teal:#1f8a8c;--ct-teal-dark:#156b6d;--ct-sky:#1cb0f6;--ct-sky-dark:#1899d6;
+ --ct-orange:#f5a528;--ct-orange-dark:#d48612;--ct-gold:#ffc23d;--ct-gold-dark:#e3a01a;
+ --ct-red:#ff5a5f;--ct-red-dark:#d93a40;
+ --ct-ink:#25403b;--ct-ink-soft:#6c7f79;--ct-line:#e5e9e7;--ct-line-dark:#d2d9d6;--ct-paper:#fff;--ct-wash:#f7f9f8;
+ --ct-radius:16px;--ct-press:cubic-bezier(.34,1.56,.64,1);
+}
+body{font-family:Nunito,'Segoe UI',system-ui,sans-serif;color:var(--ct-ink);-webkit-font-smoothing:antialiased}
+
+/* ——— Botões 3D reutilizáveis ——— */
+.chunky-button,.practice-start,.access-button.primary,.help-button{transition:transform .08s,box-shadow .08s,filter .15s}
+.chunky-button,.practice-start{border-radius:var(--ct-radius)!important;font-weight:900!important;letter-spacing:.06em!important;text-transform:uppercase}
+.chunky-button:active,.practice-start:active{transform:translateY(4px)!important;box-shadow:none!important}
+.access-page .access-button.primary{background:var(--ct-green)!important;border-color:var(--ct-green)!important;box-shadow:0 5px 0 var(--ct-green-dark)!important;border-radius:var(--ct-radius)!important;text-transform:uppercase;letter-spacing:.07em!important;font-weight:900!important}
+.access-page .access-button.primary:hover:not(:disabled){filter:brightness(1.05);transform:none!important}
+.access-page .access-button.primary:active:not(:disabled){transform:translateY(5px)!important;box-shadow:0 0 0 var(--ct-green-dark)!important}
+.access-page .access-button.secondary{background:#fff!important;color:var(--ct-teal)!important;border:2px solid var(--ct-line)!important;box-shadow:0 4px 0 var(--ct-line)!important;border-radius:var(--ct-radius)!important;text-transform:uppercase;letter-spacing:.07em!important;font-weight:900!important}
+.access-page .access-button.secondary:hover:not(:disabled){background:var(--ct-wash)!important;transform:none!important}
+.access-page .access-button.secondary:active:not(:disabled){transform:translateY(4px)!important;box-shadow:0 0 0 var(--ct-line)!important}
+.access-page .access-demo-link{text-transform:uppercase;letter-spacing:.07em;font-weight:900!important;color:var(--ct-teal)!important}
+
+/* ——— Painel do curso (trilha e abas) ——— */
+.cactom-dashboard{background:#fff;color:var(--ct-ink)}
+.cactom-dashboard .learning-sidebar{border-right:2px solid var(--ct-line);padding:24px 16px}
+.cactom-dashboard .learning-brand{margin-bottom:22px}
+.cactom-dashboard .learning-nav{height:52px;min-height:52px;border:2px solid transparent;border-radius:14px;padding:10px 14px;font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7b8b86}
+.cactom-dashboard .learning-nav:hover{background:var(--ct-wash);color:#5a6d67}
+.cactom-dashboard .learning-nav.selected{background:#e4f6fc;border-color:#84d8ff;color:var(--ct-sky-dark)}
+.cactom-dashboard .learning-nav>svg{width:28px;height:28px}
+.cactom-dashboard .nav-dot{background:var(--ct-sky-dark)}
+.cactom-dashboard .sidebar-bottom{margin:18px 4px 0;padding:16px 12px 14px;border:2px solid var(--ct-line);border-radius:var(--ct-radius)}
+.cactom-dashboard .sidebar-tom{width:86px;height:92px}
+.cactom-dashboard .sidebar-bottom>b{font-size:15px;font-weight:900;color:var(--ct-ink)}
+.cactom-dashboard .sidebar-bottom>p{font-size:12px;color:var(--ct-ink-soft)}
+.cactom-dashboard .help-button{border:2px solid var(--ct-line)!important;border-bottom-width:4px!important;border-radius:12px!important;background:#fff!important;color:var(--ct-teal)!important;font-weight:900!important;text-transform:uppercase;letter-spacing:.06em}
+.cactom-dashboard .help-button:active{transform:translateY(2px);border-bottom-width:2px!important}
+
+.cactom-dashboard .learning-topbar{border-bottom:2px solid var(--ct-line);background:rgba(255,255,255,.96)}
+.cactom-dashboard .course-picker-button{border:2px solid transparent;border-radius:14px}
+.cactom-dashboard .course-picker-button:hover{background:var(--ct-wash);border-color:var(--ct-line)}
+.cactom-dashboard .course-instrument{border:2px solid var(--ct-line);border-radius:14px;background:#fff}
+.cactom-dashboard .course-label b{font-size:17px;color:var(--ct-ink)}
+.cactom-dashboard .course-label small{font-size:10px;font-weight:900;color:var(--ct-ink-soft)}
+.cactom-dashboard .topbar-metrics>span,.cactom-dashboard .topbar-streak{border:0;background:transparent;padding:6px 8px;border-radius:12px;transition:background-color .15s}
+.cactom-dashboard .topbar-streak:hover{background:#fff4e0}
+.cactom-dashboard .topbar-streak{color:var(--ct-orange-dark)}
+.cactom-dashboard .topbar-metrics>.topbar-progress{background:transparent;color:var(--ct-sky-dark)}
+.cactom-dashboard .topbar-metrics>span>b,.cactom-dashboard .topbar-streak>b{font-size:17px}
+.cactom-dashboard .topbar-metrics>span>svg,.cactom-dashboard .topbar-streak>svg{width:24px;height:26px}
+.cactom-dashboard .student-avatar{width:40px;height:40px;border:2px solid var(--ct-line);background:#e4f6fc;color:var(--ct-sky-dark);font-weight:900}
+.cactom-dashboard .home-account>div{border:2px solid var(--ct-line);border-radius:var(--ct-radius);box-shadow:0 10px 30px rgba(20,40,35,.12)}
+
+/* Títulos de página */
+.cactom-dashboard .page-heading h1{font-size:32px;color:var(--ct-ink)}
+.cactom-dashboard .page-heading>p{font-size:15px;color:var(--ct-ink-soft)}
+.cactom-dashboard .small-eyebrow{font-size:12px;font-weight:900;letter-spacing:.08em;color:var(--ct-ink-soft)}
+
+/* ——— Unidades: faixas saturadas como seções de um mapa ——— */
+.cactom-dashboard .journey-unit{--unit-color:var(--ct-green);--unit-dark:var(--ct-green-dark)}
+.cactom-dashboard .journey-unit-1{--unit-color:#1cb0f6;--unit-dark:#1899d6}
+.cactom-dashboard .journey-unit-2{--unit-color:#ce82ff;--unit-dark:#a568cc}
+.cactom-dashboard .journey-unit-3{--unit-color:#ff9600;--unit-dark:#cd7900}
+.cactom-dashboard .journey-unit .unit-banner{background:var(--unit-color);border:0;border-radius:var(--ct-radius);box-shadow:0 5px 0 var(--unit-dark);color:#fff;min-height:86px;padding:16px 20px}
+.cactom-dashboard .journey-unit .unit-banner-copy small{font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.85)}
+.cactom-dashboard .journey-unit .unit-banner-copy h3{font-size:21px;color:#fff;letter-spacing:-.01em}
+.cactom-dashboard .journey-unit .unit-number{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.35);color:#fff}
+.cactom-dashboard .journey-unit .unit-progress{background:rgba(0,0,0,.12);color:#fff;border:0;border-radius:12px;font-weight:900}
+
+/* ——— Nós da trilha: botões redondos 3D ——— */
+.cactom-dashboard .journey-unit .lesson-node{transition:transform .1s,box-shadow .1s,filter .15s}
+.cactom-dashboard .journey-unit .lesson-node:after{display:none}
+.cactom-dashboard .journey-unit .lesson-node>svg{width:34px;height:34px}
+.cactom-dashboard .journey-unit .lesson-node.available{background:var(--unit-color,var(--ct-green));color:#fff;box-shadow:0 8px 0 var(--unit-dark,var(--ct-green-dark)),inset 0 -2px 0 rgba(0,0,0,.06)}
+.cactom-dashboard .journey-unit .lesson-node.available:before{display:none}
+.cactom-dashboard .journey-unit .lesson-node.done{background:var(--ct-gold);color:#fff;box-shadow:0 8px 0 var(--ct-gold-dark)}
+.cactom-dashboard .journey-unit .lesson-node.upcoming{background:#e5e9e7;color:#aeb8b4;box-shadow:0 8px 0 #c9d1ce}
+.cactom-dashboard .journey-unit .lesson-node:hover{filter:brightness(1.06)}
+.cactom-dashboard .journey-unit .lesson-node:active{transform:translateY(6px);box-shadow:0 2px 0 var(--unit-dark,var(--ct-green-dark))}
+.cactom-dashboard .journey-unit .lesson-node.upcoming:active{box-shadow:0 2px 0 #c9d1ce}
+.cactom-dashboard .journey-unit .path-item.current .lesson-node.available:before{display:block;inset:-12px;border:6px solid;border-color:color-mix(in srgb,var(--unit-color,var(--ct-green)) 30%,#fff);animation:ct-node-ring 2s ease-in-out infinite}
+.cactom-dashboard .journey-unit .start-bubble{border:2px solid var(--ct-line);border-bottom-width:4px;border-radius:12px;background:#fff;color:var(--unit-color,var(--ct-green));font-weight:900;letter-spacing:.08em;text-transform:uppercase;animation:ct-bubble-bob 1.6s ease-in-out infinite}
+.cactom-dashboard .journey-unit .start-bubble:after{border-color:var(--ct-line)}
+.cactom-dashboard .journey-unit .unit-finish>span{border:2px solid var(--ct-line);border-bottom-width:5px;background:#fff;color:var(--ct-gold-dark)}
+@keyframes ct-node-ring{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.75}}
+@keyframes ct-bubble-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* Módulos do curso completo (cartões) */
+.full-path-section>header>span{background:var(--ct-orange);color:#fff;border-radius:10px;box-shadow:0 3px 0 var(--ct-orange-dark)}
+.full-path-section>header h2{color:var(--ct-ink);font-weight:900}
+.full-path-module{border:2px solid var(--ct-line);border-bottom-width:4px;border-radius:var(--ct-radius)}
+.full-path-module>summary{color:var(--ct-ink)}
+.full-path-module>summary:hover{background:var(--ct-wash)}
+.full-path-module[open]{border-color:var(--ct-green-line)}
+.full-path-module-number{background:var(--ct-green);color:#fff;border-radius:12px;box-shadow:0 3px 0 var(--ct-green-dark)}
+.full-path-module>summary small{color:var(--ct-ink-soft);font-size:11px}
+
+/* ——— Celular: barra inferior como app ——— */
+@media(max-width:650px){
+ .cactom-dashboard .learning-sidebar{border-top:2px solid var(--ct-line);border-right:0;padding-top:6px}
+ .cactom-dashboard .learning-nav{height:56px;min-height:56px;font-size:9px;letter-spacing:.04em;border-radius:12px}
+ .cactom-dashboard .learning-nav>svg{width:26px;height:26px}
+ .cactom-dashboard .topbar-metrics>span>b,.cactom-dashboard .topbar-streak>b{font-size:15px}
+ .cactom-dashboard .journey-unit .unit-banner{border-radius:14px;min-height:76px;padding:12px 14px}
+ .cactom-dashboard .journey-unit .unit-banner-copy h3{font-size:17px}
+}
+@media(prefers-reduced-motion:reduce){
+ .cactom-dashboard .journey-unit .start-bubble,.cactom-dashboard .journey-unit .path-item.current .lesson-node.available:before{animation:none!important}
+}
+
+/* ——— Percurso completo (flauta e demais cursos com módulos) ——— */
+.full-path-overview{border:2px solid var(--ct-line)!important;border-bottom-width:5px!important;border-radius:20px!important;background:#fff!important;box-shadow:none!important}
+.full-path-overview .activity-eyebrow{color:var(--ct-green-dark)!important;font-size:12px!important;font-weight:900!important;letter-spacing:.08em}
+.full-path-overview h2{color:var(--ct-ink)!important;font-size:clamp(24px,3vw,30px)!important;font-weight:900!important;letter-spacing:-.02em}
+.full-path-overview>p{color:var(--ct-ink-soft)!important;font-size:15px!important;font-weight:700}
+.full-path-count strong{color:var(--ct-green)!important;font-size:34px!important;font-weight:900}
+.full-path-count span{color:var(--ct-ink-soft)!important;font-weight:700}
+.full-path-meter{height:18px!important;border-radius:99px!important;background:#e5e9e7!important;overflow:hidden;position:relative}
+.full-path-meter>span{display:block;height:100%;min-width:18px;border-radius:99px;background:var(--ct-green)!important;position:relative;transition:width .6s var(--ct-press)}
+.full-path-meter>span::after{content:'';position:absolute;left:8px;right:8px;top:4px;height:4px;border-radius:99px;background:rgba(255,255,255,.35)}
+.full-path-system{color:var(--ct-ink)!important;font-weight:800!important;font-size:14px!important}
+.full-path-system select,.full-path-jump select,.full-path-jump input{border:2px solid var(--ct-line)!important;border-radius:12px!important;font-weight:800!important;color:var(--ct-ink)!important;background:var(--ct-wash)!important;min-height:44px}
+.full-path-jump>summary,.full-path-task-list>summary{color:var(--ct-teal)!important;font-weight:900!important;letter-spacing:.06em;text-transform:uppercase;font-size:13px!important}
+.full-path-diagnostic{border:2px solid var(--ct-line)!important;border-bottom-width:4px!important;border-radius:var(--ct-radius)!important;background:#fff!important}
+.full-path-diagnostic>summary{font-weight:900!important;color:var(--ct-ink)!important;font-size:15px!important}
+
+/* Cada seção ganha sua cor, como as unidades de um mapa */
+.full-path-section{--unit-color:var(--ct-green);--unit-dark:var(--ct-green-dark)}
+.full-path-section:nth-of-type(4n+2){--unit-color:#1cb0f6;--unit-dark:#1899d6}
+.full-path-section:nth-of-type(4n+3){--unit-color:#ce82ff;--unit-dark:#a568cc}
+.full-path-section:nth-of-type(4n){--unit-color:#ff9600;--unit-dark:#cd7900}
+.full-path-section>header{background:var(--unit-color);border-radius:var(--ct-radius);box-shadow:0 5px 0 var(--unit-dark);padding:16px 18px!important;margin-bottom:6px;color:#fff}
+.full-path-section>header>span{background:rgba(255,255,255,.22)!important;color:#fff!important;border:2px solid rgba(255,255,255,.4);box-shadow:none!important}
+.full-path-section>header h2{color:#fff!important;font-size:22px!important}
+.full-path-section>header>small{color:rgba(255,255,255,.9)!important;font-size:12px!important;font-weight:800}
+.full-path-module-number{background:var(--unit-color)!important;box-shadow:0 3px 0 var(--unit-dark)!important}
+.full-path-module[open]{border-color:color-mix(in srgb,var(--unit-color) 45%,#fff)!important}
+.full-path-module>summary strong{font-weight:900;color:var(--ct-ink)}
+.full-path-module>summary>b{color:var(--ct-ink-soft)!important;font-weight:900}
+.full-path-goal{color:var(--ct-ink-soft)!important;font-weight:700!important;font-size:14px!important}
+.full-path-lesson-label{font-weight:900!important;color:var(--ct-ink)!important;font-size:13px!important}
+
+/* Nós da trilha dentro dos módulos: mesmo botão redondo 3D */
+.full-path-module .lesson-node,.diagnostic-journey .lesson-node{border:0!important}
+.full-path-module .lesson-node.available{background:var(--unit-color)!important;color:#fff!important;box-shadow:0 8px 0 var(--unit-dark)!important}
+.full-path-module .lesson-node.done,.full-path-module .lesson-node.recorded{background:var(--ct-gold)!important;box-shadow:0 8px 0 var(--ct-gold-dark)!important}
+.full-path-module .lesson-node:hover{filter:brightness(1.06)}
+.full-path-module .lesson-node:active{transform:translateY(6px);box-shadow:0 2px 0 var(--unit-dark)!important}
+.full-path-module .lesson-node:after{display:none!important}
+.full-path-module .lesson-node:before{display:none!important}
+.full-course-node>span{font-weight:900;font-size:12px!important;color:#fff}
+.full-path-task-list button{border-radius:12px}
+.full-path-task-list button:hover{background:var(--ct-wash)}
+
+@media(max-width:650px){
+ .cactom-dashboard .learning-nav>span:not(.nav-dot){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .cactom-dashboard .learning-nav{justify-content:center;padding:8px}
+ .cactom-dashboard .learning-nav>svg{width:30px;height:30px}
+ .cactom-dashboard .learning-nav .nav-dot{display:none}
+ .cactom-dashboard .course-label small,.cactom-dashboard .course-chevron{display:none}
+ .cactom-dashboard .course-picker-button{max-width:none;flex:1}
+ .full-path-section>header h2{font-size:19px!important}
+}
+.full-path-overview{position:relative}
+.full-path-tom{position:absolute;right:20px;top:16px;width:104px;height:108px;pointer-events:none}
+.full-path-overview>.activity-eyebrow,.full-path-overview>h2,.full-path-overview>p{padding-right:112px}
+.full-path-diagnostic{overflow:clip}
+@media(max-width:600px){.full-path-tom{width:70px;height:74px;right:12px;top:12px}.full-path-overview>.activity-eyebrow,.full-path-overview>h2,.full-path-overview>p{padding-right:72px}}
+
+/* ——— Atividades: cabeçalho, conteúdo, opções e rodapé ——— */
+.activity-session{font-family:Nunito,'Segoe UI',system-ui,sans-serif;color:var(--ct-ink)}
+.activity-session .session-progress{height:18px;border-radius:99px;background:#e5e9e7;box-shadow:none}
+.activity-session .session-progress>span{position:relative;border-radius:99px;background:var(--ct-green);transition:width .5s var(--ct-press)}
+.activity-session .session-progress>span::after{content:'';position:absolute;left:8px;right:8px;top:4px;height:5px;border-radius:99px;background:rgba(255,255,255,.35)}
+.session-progress-caption{font-size:12px;color:var(--ct-ink-soft)}
+.session-progress-caption>b{font-size:14px;color:var(--ct-green-dark)}
+.session-exit{color:#aab5b1;font-size:38px}
+.session-exit:hover{background:var(--ct-wash);color:var(--ct-ink)}
+.activity-session .activity-eyebrow{color:var(--ct-green-dark);font-weight:900;letter-spacing:.07em;font-size:12px}
+.activity-session .full-course-task>header h1,.activity-session .activity-heading h1{color:var(--ct-ink);font-weight:900;letter-spacing:-.02em}
+
+/* Botões principais e secundários das atividades */
+.activity-session .activity-primary{background:var(--ct-green)!important;border:0!important;box-shadow:0 5px 0 var(--ct-green-dark)!important;border-radius:var(--ct-radius)!important;color:#fff!important;font-weight:900!important;letter-spacing:.07em;text-transform:uppercase;min-height:52px;transition:transform .08s,box-shadow .08s,filter .15s}
+.activity-session .activity-primary:hover:not(:disabled){filter:brightness(1.05)}
+.activity-session .activity-primary:active:not(:disabled){transform:translateY(5px);box-shadow:0 0 0 var(--ct-green-dark)!important}
+.activity-session .activity-primary:disabled{background:#e5e9e7!important;box-shadow:0 5px 0 #d2d9d6!important;color:#9fadaa!important}
+.activity-session .activity-secondary{background:#fff!important;border:2px solid var(--ct-line)!important;border-bottom-width:5px!important;border-radius:var(--ct-radius)!important;color:var(--ct-sky-dark)!important;font-weight:900!important;letter-spacing:.06em;text-transform:uppercase}
+.activity-session .activity-secondary:active{transform:translateY(3px);border-bottom-width:2px!important}
+
+/* Opções de resposta como cartões pressionáveis */
+.full-course-options,.full-course-report{border:0!important;padding:0!important}
+.full-course-options>legend,.full-course-report>legend{font-size:19px!important;font-weight:900!important;color:var(--ct-ink)!important;margin-bottom:12px}
+.full-course-options>label,.full-course-report>label{display:flex;align-items:center;gap:12px;min-height:58px;margin:0 0 10px;padding:12px 16px!important;border:2px solid var(--ct-line)!important;border-bottom-width:5px!important;border-radius:var(--ct-radius)!important;background:#fff!important;font-weight:800!important;font-size:15px!important;color:var(--ct-ink)!important;cursor:pointer;transition:background-color .15s,border-color .15s,transform .08s}
+.full-course-options>label:hover,.full-course-report>label:hover{background:var(--ct-wash)!important}
+.full-course-options>label:active,.full-course-report>label:active{transform:translateY(3px);border-bottom-width:2px!important}
+.full-course-options>label:has(input:checked),.full-course-report>label:has(input:checked){border-color:#84d8ff!important;background:#e4f6fc!important;color:var(--ct-sky-dark)!important}
+.full-course-options input[type=radio],.full-course-options input[type=checkbox],.full-course-report input[type=radio],.full-course-report input[type=checkbox]{width:22px;height:22px;accent-color:var(--ct-sky-dark);flex:none}
+
+/* Rodapé suspenso: barra limpa com degrau */
+.activity-floating-controls>.session-footer{border:2px solid var(--ct-line);border-bottom-width:5px;border-radius:20px;box-shadow:0 10px 30px rgba(20,40,35,.12)}
+.activity-floating-controls>.session-footer.positive{background:#d7ffb8;border-color:#a5ed6e}
+.activity-floating-controls>.session-footer.positive .session-footer-feedback b{color:#58a700}
+
+/* Apresentação do Tom antes da atividade */
+.activity-introduction-kicker{color:var(--ct-orange-dark)!important;font-weight:900!important;letter-spacing:.08em}
+.activity-introduction-speech{border:2px solid var(--ct-line)!important;border-bottom-width:5px!important;border-radius:22px!important}
+.activity-introduction-speech:before{border-color:var(--ct-line)!important;border-width:2px 0 0 2px!important;top:-10px!important}
+.activity-session .activity-introduction-speech h1{color:var(--ct-ink)!important;font-weight:900}
+.activity-session .activity-introduction-speech .activity-introduction-goal{color:var(--ct-green-dark)!important;font-weight:900}
+.activity-introduction-speaker{display:inline-block!important;justify-self:center;align-self:center;width:auto!important;margin:0 auto 6px!important;padding:3px 12px!important;background:var(--ct-green)!important;color:#fff!important;border-radius:999px!important;font-weight:900!important;font-size:.78rem!important;letter-spacing:.06em;text-transform:uppercase}
+.activity-introduction-skip{border:2px solid var(--ct-line)!important;border-bottom-width:5px!important;border-radius:var(--ct-radius)!important;background:#fff!important;color:var(--ct-ink-soft)!important;font-weight:900!important;text-transform:uppercase;letter-spacing:.07em}
+.activity-introduction-skip:active{transform:translateY(3px);border-bottom-width:2px!important}
+
+/* Ferramentas laterais (dicas, afinação) */
+.activity-tool-icons>button{border:2px solid var(--ct-line)!important;border-bottom-width:4px!important;border-radius:14px!important;background:#fff!important;font-weight:900!important;color:var(--ct-teal)!important}
+.activity-tool-icons>button[aria-pressed=true],.activity-tool-icons>button.active{border-color:#84d8ff!important;background:#e4f6fc!important;color:var(--ct-sky-dark)!important}
+
+/* Vitória */
+.activity-victory h1{color:var(--ct-orange-dark)!important;font-weight:900!important}
+
+
+/* Logo cactom leva ao início; seletor de curso em pílula 3D */
+.brand-home{appearance:none;border:0;background:transparent;padding:4px 6px;margin:0;cursor:pointer;border-radius:14px;font:inherit;color:inherit;transition:transform .18s cubic-bezier(.3,1.4,.5,1),background .18s}
+.brand-home:hover{transform:scale(1.04)}
+.brand-home:active{transform:scale(.97)}
+.brand-home:focus-visible{outline:3px solid var(--ct-blue,#1cb0f6);outline-offset:3px}
+.cactom-dashboard .learning-brand.brand-home{width:100%}
+.library-hub-topbar .brand-home .cactom-wordmark{display:block}
+.cactom-dashboard .course-picker-button{display:inline-flex!important;align-items:center;gap:10px!important;max-width:min(54%,340px)!important;padding:6px 14px 6px 6px!important;border:2px solid var(--ct-line,#e5e5e5)!important;border-bottom-width:4px!important;border-radius:16px!important;background:#fff!important;cursor:pointer;transition:background .15s,transform .1s}
+.cactom-dashboard .course-picker-button:hover{background:var(--ct-wash,#f7f7f7)!important}
+.cactom-dashboard .course-picker-button:active{transform:translateY(2px);border-bottom-width:2px!important;margin-bottom:2px}
+.cactom-dashboard .course-instrument{width:42px!important;height:42px!important;border:0!important;border-radius:12px!important;background:#eef8e8!important}
+.cactom-dashboard .course-instrument>.course-artwork{width:58px!important;height:44px!important}
+.cactom-dashboard .course-text{display:flex;flex-direction:column;min-width:0;text-align:left;line-height:1.15}
+.cactom-dashboard .course-text b{font-size:16px!important;font-weight:900;color:var(--ct-ink,#3c3c3c)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cactom-dashboard .course-text small{margin-top:2px;font-size:11px!important;font-weight:800!important;letter-spacing:0!important;text-transform:none!important;color:var(--ct-blue-dark,#1899d6)!important}
+.cactom-dashboard .course-chevron{flex:none;width:18px;height:18px;margin-left:2px;color:var(--ct-ink-soft,#777)}
+@media (max-width:700px){
+ .cactom-dashboard .course-picker-button{max-width:none!important;flex:0 1 auto;padding:4px 10px 4px 4px!important;gap:8px!important}
+ .cactom-dashboard .course-instrument{width:34px!important;height:34px!important}
+ .cactom-dashboard .course-instrument>.course-artwork{width:48px!important;height:36px!important}
+ .cactom-dashboard .course-text b{font-size:14px!important}
+ .cactom-dashboard .course-text small{display:none}
+ .cactom-dashboard .course-chevron{display:block!important;width:16px;height:16px}
+}

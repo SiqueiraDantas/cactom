@@ -1,0 +1,16 @@
+Data: 22/10/2026
+Exit code: 0
+Origem: execução local durante auditoria. O arquivo de testes contém os trechos capturados e o resumo final; não é transcrição integral.
+
+made-in-sertao-music-lab@0.8.2 C:\Users\siqda\OneDrive\Documentos\ChatGPT\App de aprendizado musical\Made_In_Sertao_Music_Lab_v0.6_Novo_Visual\made-in-sertao-music-lab-v0.6
+├── @mediapipe/tasks-vision@1.1.1
+├── @types/react-dom@19.3.0
+├── @types/react@19.3.0
+├── @vitejs/plugin-react@4.7.0
+├── @xmldom/xmldom@0.9.12
+├── opensheetmusicdisplay@2.2.1
+├── pitchy@4.1.0
+├── react-dom@19.3.1
+├── react@19.3.1
+├── typescript@5.9.3
+└── vite@6.4.5

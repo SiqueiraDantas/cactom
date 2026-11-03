@@ -1,0 +1,52 @@
+/* Tom (vector) — shared idle life for every place he appears: blink, look around, flower sway,
+   instruments, expression extras. Only transforms/opacity. Hosts may pause or disable via
+   [data-paused] / prefers-reduced-motion. */
+.ct-tom{display:block;width:100%;height:auto;overflow:visible}
+.ct-tom *{transform-box:fill-box}
+.ct-eyes{transform-origin:50% 50%;animation:ct-blink 4.6s linear var(--blink,1.2s) infinite}
+.ct-eyes--happy{animation:none}
+.ct-brows{transform-origin:50% 100%;animation:ct-brows 4.6s linear var(--blink,1.2s) infinite}
+.ct-tom[data-expression=animado] .ct-brows,.ct-tom[data-expression=comemorando] .ct-brows{animation:ct-brow-bounce 1.6s ease-in-out infinite}
+.ct-pupils{animation:ct-look 7s ease-in-out calc(var(--blink,1.2s) * 2) infinite}
+.ct-tom[data-expression=concentrado] .ct-pupils,.ct-tom[data-expression=triste] .ct-pupils{animation:none}
+.ct-flower{transform-origin:50% 100%;animation:ct-sway 2.6s ease-in-out var(--blink,1.2s) infinite}
+.ct-tom[data-expression=triste] .ct-flower{animation:ct-droop 3.4s ease-in-out infinite}
+.ct-trumpet{transform-origin:0% 50%;animation:ct-toot 1.15s ease-in-out infinite}
+.ct-flute{transform-origin:50% 50%;animation:ct-flute 1.9s ease-in-out infinite}
+.ct-stick--left{transform-origin:0% 0%;animation:ct-hit .52s cubic-bezier(.5,0,.5,1) infinite}
+.ct-stick--right{transform-origin:100% 0%;animation:ct-hit-r .52s cubic-bezier(.5,0,.5,1) .26s infinite}
+.ct-drum-shell{transform-origin:50% 100%;animation:ct-drum .26s ease-out infinite}
+.ct-tom[data-expression=comemorando] .ct-arm--left{transform-origin:100% 100%;animation:ct-cheer-l .9s ease-in-out infinite}
+.ct-tom[data-expression=comemorando] .ct-arm--right{transform-origin:0% 100%;animation:ct-cheer-r .9s ease-in-out infinite}
+.ct-tom[data-expression=pensativo] .ct-think circle{transform-origin:50% 50%;animation:ct-think 2.4s ease-in-out infinite}
+.ct-tom[data-expression=pensativo] .ct-think circle:nth-child(2){animation-delay:.25s}
+.ct-tom[data-expression=pensativo] .ct-think circle:nth-child(3){animation-delay:.5s}
+.ct-drop{transform-origin:50% 0%;animation:ct-drop 2.8s ease-in infinite}
+.ct-sparkles path{transform-origin:50% 50%;animation:ct-twinkle 1.2s ease-in-out infinite}
+.ct-sparkles path:nth-child(2){animation-delay:.6s}
+.ct-tom[data-expression=surpreso] .ct-extra{transform-origin:50% 50%;animation:ct-pulse .9s ease-in-out infinite}
+@keyframes ct-blink{0%,93%,100%{transform:scaleY(1)}95.5%{transform:scaleY(.08)}}
+@keyframes ct-brows{0%,93%,100%{transform:translateY(0)}95.5%{transform:translateY(5%)}}
+@keyframes ct-brow-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14%)}}
+@keyframes ct-look{0%,18%,100%{transform:translate(0,0)}24%,40%{transform:translate(-7%,2%)}48%,64%{transform:translate(7%,-2%)}72%,90%{transform:translate(0,4%)}}
+@keyframes ct-sway{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes ct-droop{0%,100%{transform:rotate(10deg)}50%{transform:rotate(14deg)}}
+@keyframes ct-toot{0%,100%{transform:rotate(0)}40%{transform:rotate(-5deg)}70%{transform:rotate(2deg)}}
+@keyframes ct-flute{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+@keyframes ct-hit{0%,100%{transform:rotate(-22deg)}45%{transform:rotate(6deg)}}
+@keyframes ct-hit-r{0%,100%{transform:rotate(22deg)}45%{transform:rotate(-6deg)}}
+@keyframes ct-drum{0%{transform:scale(1.02,.97)}100%{transform:scale(1,1)}}
+@keyframes ct-cheer-l{0%,100%{transform:rotate(0)}50%{transform:rotate(-14deg)}}
+@keyframes ct-cheer-r{0%,100%{transform:rotate(0)}50%{transform:rotate(14deg)}}
+@keyframes ct-think{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(-18%);opacity:1}}
+@keyframes ct-drop{0%{transform:translateY(0) scale(.6);opacity:0}20%{opacity:1;transform:translateY(0) scale(1)}80%{opacity:1}100%{transform:translateY(160%);opacity:0}}
+@keyframes ct-twinkle{0%,100%{transform:scale(.6) rotate(0);opacity:.6}50%{transform:scale(1.15) rotate(20deg);opacity:1}}
+@keyframes ct-pulse{0%,100%{transform:scale(.85);opacity:.7}50%{transform:scale(1.1);opacity:1}}
+
+/* Standalone Tom (TomOfficial): Duolingo-like idle bob and a pop whenever the expression changes. */
+.tom-official{display:inline-block;line-height:0}
+.tom-official>.tom-official-pose{display:block;width:100%;height:100%;transform-origin:50% 92%;animation:ct-pose-pop .5s cubic-bezier(.34,1.56,.64,1) both}
+.tom-official .ct-tom{width:100%;height:100%;transform-origin:50% 92%;animation:ct-idle 2.6s ease-in-out infinite}
+@keyframes ct-idle{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-2.5%) scale(.985,1.02)}}
+@keyframes ct-pose-pop{0%{transform:scale(.86,1.1)}60%{transform:scale(1.05,.95)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){.ct-tom,.ct-tom *,.tom-official *{animation:none!important;transition:none!important}}

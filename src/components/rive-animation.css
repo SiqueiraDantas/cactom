@@ -1,0 +1,3 @@
+.rive-animation{display:block;width:100%;aspect-ratio:3/2;opacity:0;transition:opacity .25s ease}
+.rive-animation.is-ready{opacity:1}
+@media(prefers-reduced-motion:reduce){.rive-animation{transition:none}}

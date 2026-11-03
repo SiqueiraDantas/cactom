@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-30",
+  "tool": "imagegen built-in",
+  "intent": "Refinamento das cinco artes fornecidas, com transparência e maior definição; versões derivadas, originais preservados.",
+  "assets": [
+    {
+      "id": "tiquinho",
+      "original_filename": "Tiquinho.png",
+      "original_sha256": "e3c6cc6c7010f9d427b1e7ceb1bb0b2d69d160f72dd1005d1c8f587f5c93cf6c",
+      "output_filename": "tiquinho-v1.png",
+      "sha256": "0f0161edabb181092545a348cbd201656aeac0aa0a5f9c5a8f07f06d3e2b94d1",
+      "width": 1122,
+      "height": 1402,
+      "png_color_type": 6,
+      "bytes": 1347685
+    },
+    {
+      "id": "passinho",
+      "original_filename": "Passinho.png",
+      "original_sha256": "70b35b13ec47ef1ee78b22a15d59d9fa35c5c7848395d9737da4fea03403c875",
+      "output_filename": "passinho-v1.png",
+      "sha256": "93e38d41c50285db1c13038b20381297e6e160e6d2b029d83dc4cdee3117bc84",
+      "width": 1122,
+      "height": 1402,
+      "png_color_type": 6,
+      "bytes": 1574731
+    },
+    {
+      "id": "embalo",
+      "original_filename": "Embalo.png",
+      "original_sha256": "9fc2c12df389d03e928f5d2b9a6d27ada9994cef17d82bcfd81767cfe737d676",
+      "output_filename": "embalo-v1.png",
+      "sha256": "8faec4dc81e2a5c40b4637853d6a724ceb4c969111fb489110743a7f94f44223",
+      "width": 1122,
+      "height": 1402,
+      "png_color_type": 6,
+      "bytes": 1461510
+    },
+    {
+      "id": "rojao-firme",
+      "original_filename": "Rojao_Firme.png",
+      "original_sha256": "7b1cd9a0b9693720820c0fb7d8d5d6dc18bd31729b0566fe8d60cd3f1897eabd",
+      "output_filename": "rojao-firme-v1.png",
+      "sha256": "6c516f62c754ff4a5eb7d94fe78c3c2ca29c4bca7dfdfa8a8a8cc409367ba1ec",
+      "width": 1122,
+      "height": 1402,
+      "png_color_type": 6,
+      "bytes": 1516474
+    },
+    {
+      "id": "estirao",
+      "original_filename": "Estirao.png",
+      "original_sha256": "7ed30a81bfcc7029bebb44a9d522483c93fa0ad10fa3ddf58c4f823f16e87ddb",
+      "output_filename": "estirao-v1.png",
+      "sha256": "302a271635b9e17c1a68eb3478ceb3896aaf50eb6e0e4d9a1117c4eaa38b8f05",
+      "width": 1122,
+      "height": 1402,
+      "png_color_type": 6,
+      "bytes": 1669571
+    }
+  ]
+}

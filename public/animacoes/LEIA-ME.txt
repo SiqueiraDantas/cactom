@@ -1,0 +1,7 @@
+Coloque aqui as animações feitas no Rive (rive.app):
+
+  abertura.riv  -> substitui a cena de abertura da página inicial.
+                   Se tiver uma máquina de estados chamada "Abertura", ela é usada;
+                   senão, a primeira máquina de estados ou a primeira animação do arquivo.
+
+Sem arquivo aqui, o site continua com a cena atual. Guia completo: docs/cactom/GUIA-RIVE.md

@@ -1,0 +1,62 @@
+/* A shared, quiet workshop catalog for onboarding and existing profiles. */
+.instrument-picker.workshop-selection,.access-page--workshops.workshop-selection{font-family:Nunito,'Segoe UI',system-ui,sans-serif;color:#244b4d;background:#fff}
+.workshop-selection .workshop-heading{max-width:1000px;margin:52px auto 42px;padding:0;text-align:center;border:0;background:none}
+.workshop-selection .workshop-heading h1{font:900 clamp(28px,3.2vw,36px)/1.25 Nunito,'Segoe UI',sans-serif;letter-spacing:-.035em;color:#244b4d;margin:0 0 12px;text-wrap:balance}
+.workshop-selection .workshop-heading h1:focus{outline:none}
+.workshop-selection .workshop-heading p{font-size:15px;line-height:1.6;color:#657972;margin:0}
+.workshop-selection .instrument-grid.workshop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;max-width:1000px;width:100%;margin:0 auto}
+.workshop-selection .workshop-grid>.instrument-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:0;min-height:245px;margin:0;padding:20px 16px 17px;border:2px solid #e3e8e3;border-bottom-width:5px;border-radius:17px;background:#fff;box-shadow:none;color:#244b4d;text-align:center;font:inherit;cursor:pointer;transition:border-color .16s,background .16s,transform .16s}
+.workshop-selection .workshop-grid>.instrument-card:hover:not(:disabled){border-color:#a4cbb3;background:#fcfefb;transform:translateY(-2px)}
+.workshop-selection .workshop-grid>.instrument-card.selected{border-color:#2b9760;background:#f1faf3;box-shadow:none}
+.workshop-selection .workshop-grid>.instrument-card:active:not(:disabled){transform:translateY(2px)}
+.workshop-selection .workshop-grid .instrument-emoji{display:block;position:static;width:100%;height:107px;min-height:0;margin:0 0 9px;padding:0;background:none;border:0;border-radius:0;line-height:1;flex:none}
+.workshop-selection .workshop-grid .course-artwork{display:block;position:static;width:100%;height:100%;max-width:170px;margin:0 auto;filter:none}
+.workshop-selection .workshop-grid .instrument-check{position:absolute;right:11px;top:11px;display:grid;place-items:center;width:23px;height:23px;border-radius:50%;color:#788b7c}
+.workshop-selection .workshop-grid .selected .instrument-check{background:#278d55;color:#fff}
+.workshop-selection .workshop-grid .instrument-card>strong{font-size:17px;font-weight:900;line-height:1.3;color:inherit;margin:0;text-wrap:balance}
+.workshop-selection .workshop-grid .instrument-card>small{display:block;min-height:36px;max-width:190px;margin:7px 0 9px;font-size:12px;line-height:1.5;color:#63766d}
+.workshop-selection .workshop-grid .instrument-card-status{display:block;margin:auto 0 0;padding:0;border:0;font-size:10px;line-height:1.5;font-weight:900;letter-spacing:.035em;text-transform:uppercase;color:#496f59}
+.workshop-selection .workshop-grid>.instrument-card:disabled{opacity:1;cursor:not-allowed;background:#fafbf9;border-color:#e7ebe5;box-shadow:none;color:#5d6c61}
+.workshop-selection .workshop-grid>.instrument-card:disabled .instrument-emoji{opacity:.65;filter:grayscale(.4)}
+.workshop-selection .workshop-grid>.instrument-card:disabled .instrument-card-status{color:#637362}
+.workshop-selection>.workshop-footer{position:fixed;inset:auto 0 0;z-index:15;width:100%;max-width:none;margin:0;padding:15px max(24px,env(safe-area-inset-right)) max(15px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));border:0;border-top:1px solid #e7ece7;background:#fff;box-shadow:none}
+.workshop-footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1000px;width:100%;margin:0 auto}
+.workshop-footer-selection{min-width:0;color:#68796f;font-size:13px;line-height:1.5}
+.workshop-footer-selection>p{margin:0}
+.workshop-summary{display:flex;align-items:center;gap:10px;min-width:0;text-align:left}
+.workshop-summary-art{display:block;flex:none;width:52px;height:43px}
+.workshop-summary-art>.course-artwork{display:block;width:100%;height:100%}
+.workshop-summary>span:last-child{display:grid;gap:2px;min-width:0}
+.workshop-summary small{font-size:10px;line-height:1.3;font-weight:700;color:#66796c}
+.workshop-summary strong{font-size:15px;line-height:1.3;font-weight:900;color:#295648;overflow-wrap:anywhere}
+.workshop-footer .access-button.primary{flex:none;width:auto;min-width:200px;min-height:50px;padding:11px 24px;border:1px solid #23863d;border-radius:12px;background:#23863d;box-shadow:0 4px 0 #16692d;color:#fff;font:900 13px/1.4 Nunito,'Segoe UI',sans-serif;letter-spacing:.02em;cursor:pointer}
+.workshop-footer .access-button.primary:hover:not(:disabled){background:#1c7b34;box-shadow:0 4px 0 #125b26;transform:none}
+.workshop-footer .access-button:disabled{opacity:1;background:#e8ede7;border-color:#e8ede7;box-shadow:0 4px 0 #dbe3d8;color:#788573;cursor:not-allowed}
+.workshop-selection :where(button,summary):focus-visible{outline:3px solid #2c5163;outline-offset:4px}
+@media(max-width:950px){.workshop-selection .instrument-grid.workshop-grid{gap:14px}.workshop-selection .workshop-grid>.instrument-card{padding:18px 12px 15px}.workshop-selection .workshop-grid .instrument-card>strong{font-size:16px}.workshop-selection .workshop-grid .instrument-card>small{font-size:11px}}
+@media(max-width:740px){
+ .workshop-selection .workshop-heading{margin:30px auto 28px}
+ .workshop-selection .workshop-heading h1{font-size:29px}.workshop-selection .workshop-heading p{font-size:13px;max-width:280px;margin:auto}
+ .workshop-selection .instrument-grid.workshop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+ .workshop-selection .workshop-grid>.instrument-card{min-height:229px;padding:17px 12px 14px;border-radius:15px}
+ .workshop-selection .workshop-grid .instrument-emoji{height:95px;margin-bottom:8px}
+ .workshop-selection .workshop-grid .instrument-card>strong{font-size:16px}
+ .workshop-selection .workshop-grid .instrument-card>small{font-size:11px;min-height:34px;max-width:170px}
+ .workshop-selection>.workshop-footer{padding:12px 18px max(15px,env(safe-area-inset-bottom))}
+ .workshop-footer-inner{gap:14px}.workshop-footer .access-button.primary{min-width:160px}
+}
+@media(max-width:440px){
+ .workshop-selection .instrument-grid.workshop-grid{gap:11px}.workshop-selection .workshop-grid>.instrument-card{min-height:224px;padding:17px 10px 13px}
+ .workshop-selection .workshop-grid .instrument-card>strong{font-size:15px}.workshop-selection .workshop-grid .instrument-card>small{font-size:10.5px}
+ .workshop-footer-inner{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ .workshop-footer-selection:has(>p){display:none}.workshop-footer-selection>.workshop-summary{justify-content:center}
+ .workshop-footer .workshop-summary-art{width:37px;height:27px}.workshop-footer .workshop-summary small{display:none}.workshop-footer .workshop-summary strong{font-size:12px}
+ .workshop-footer .access-button.primary{width:100%;min-height:48px}
+}
+@media(prefers-reduced-motion:reduce){.workshop-selection .workshop-grid>.instrument-card{transition:none}.workshop-selection .workshop-grid>.instrument-card:hover:not(:disabled){transform:none}}
+@media(forced-colors:active){.workshop-selection .workshop-grid>.instrument-card.selected{outline:3px solid Highlight}.workshop-footer .access-button:disabled{color:GrayText;border:1px solid GrayText}}
+
+.instrument-picker.workshop-selection>header{flex-wrap:nowrap}
+@media(max-width:350px){.instrument-picker.workshop-selection .cactom-wordmark{width:125px}}
+
+.workshop-summary-art>.instrument-tile{display:block;width:100%;height:100%}

@@ -1,0 +1,22 @@
+STATUS DE VALIDACAO — CACTOM REGENCIA 3 ETAPAS
+=============================================
+- Testes direcionados a condução e à música: 11 testes passaram.
+- Testes gerais na instalação de desenvolvimento deste ambiente: 125 passaram e 5
+  não executaram por módulos JavaScript de terceiros indisponíveis (npm ci
+  não conseguiu baixar as dependências neste ambiente).
+- Arquivos TypeScript/TSX modificados: verificação sintática sem erros.
+- Compilação completa e webcam real: NÃO validadas neste ambiente. Validar no Windows.
+- Não marque esta versão como homologada antes de testar o som e a câmera.
+
+Alterados em relação ao ZIP de Regência com 9 atividades:
+- src/components/ConductorCourse.tsx
+- src/components/conductor.css
+- src/lib/metronome.ts
+
+Arquivos novos:
+- src/lib/conductorMusic.ts
+- tests/conductor-music.test.mjs
+- REGENCIA-3-ETAPAS-LEIA.txt
+- TESTES-REGENCIA-3-ETAPAS.txt
+
+Nenhuma outra funcionalidade, curso ou autenticação foi modificada.

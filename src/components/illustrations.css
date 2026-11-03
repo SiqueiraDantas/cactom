@@ -1,0 +1,73 @@
+.lab-illustration {
+  display: block;
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.lab-mascot {
+  width: 320px;
+  height: auto;
+  aspect-ratio: 6 / 5;
+  isolation: isolate;
+}
+
+.lab-mascot .lab-mascot-character {
+  transform-origin: 180px 278px;
+  animation: lab-mascot-hello 820ms cubic-bezier(.2, .7, .3, 1) both;
+}
+
+.lab-mascot .lab-scene-notes {
+  transform-origin: center;
+  animation: lab-notes-arrive 1s ease-out both;
+}
+
+.lab-mascot--victory .lab-scene-confetti,
+.lab-mascot--streak .lab-scene-confetti {
+  transform-origin: 180px 150px;
+  animation: lab-confetti-arrive 900ms cubic-bezier(.2, .7, .3, 1) both;
+}
+
+.lab-instrument {
+  width: 200px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+
+.lab-streak-flame {
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.lab-streak-flame.is-active {
+  filter: drop-shadow(0 2px 0 rgba(225, 143, 25, .12));
+}
+
+@keyframes lab-mascot-hello {
+  from { opacity: 0; transform: translateY(6px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes lab-notes-arrive {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lab-confetti-arrive {
+  from { opacity: 0; transform: scale(.85) rotate(-4deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (max-width: 600px) {
+  .lab-mascot { width: 260px; }
+  .lab-instrument { width: 170px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-mascot .lab-mascot-character,
+  .lab-mascot .lab-scene-notes,
+  .lab-mascot--victory .lab-scene-confetti,
+  .lab-mascot--streak .lab-scene-confetti {
+    animation: none;
+  }
+}

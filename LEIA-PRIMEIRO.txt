@@ -1,0 +1,31 @@
+MADE IN SERTÃO MUSIC LAB — MVP 0.8.1
+
+1. Extraia toda a pasta; abra a pasta que contém package.json.
+2. No terminal:
+      npm install
+      npm run dev -- --port 5174 --strictPort
+3. Abra http://127.0.0.1:5174/
+   Ou execute ABRIR-MUSIC-LAB.bat.
+   Se o servidor já estiver rodando nessa porta, atualize a página.
+4. Na primeira abertura, escolha Trompete ou Flauta doce soprano.
+   Para trocar, clique no nome do instrumento no topo da trilha.
+5. Aprender: 13 aulas por instrumento. Praticar: reforço adaptativo e virtual.
+   Partituras: três estudos originais por instrumento e importação MusicXML.
+
+FLAUTA DOCE:
+Selecione digitação barroca ou germânica no início do curso.
+Comece por Si, Lá e Sol. Há furos interativos e prática com microfone.
+A soprano soa uma oitava acima da pauta com 8: Si4 escrito = Si5 real.
+Progresso separado do trompete; exploração por toque não dá check acústico.
+
+AULA 13 DO TROMPETE:
+Teste o microfone primeiro: confira se aparece Sol ao tocar Sol e Fá ao tocar Fá.
+Depois comece a atividade: aguarde quatro pulsos.
+Sol nos tempos 1–2; silêncio no 3; Fá no 4. Use fones.
+Sol4 escrito = 349,23 Hz reais; Fá4 escrito = 311,13 Hz reais.
+
+Node.js 22.18 ou superior. Internet para instalar dependências.
+Câmera em celular exige HTTPS. Modelo/WASM do MediaPipe incluídos.
+Sem cadastro e sem área do professor. Áudio/vídeo não são gravados.
+npm test e npm run build verificam código; hardware e interface exigem teste real.
+Consulte README.md, PROGRESSO.md e docs/ENTREGA-08-E-TESTES.md.

@@ -1,0 +1,132 @@
+.recorder-discovery,.recorder-touch-card{border:2px solid #dfe7d4;border-bottom-width:5px;border-radius:22px;background:#fff;padding:22px;margin:18px 0;color:#2c5163}.recorder-discovery>p,.recorder-touch-card>p{font-size:12px;line-height:1.8;color:#768b68;text-align:center}.recorder-diagram{display:grid;grid-template-columns:132px 240px;gap:14px 18px;justify-content:center;align-items:start;max-width:100%;margin:19px auto}.recorder-thumb{padding-top:70px;display:flex;flex-direction:column;gap:10px}.recorder-thumb>span,.recorder-front-label{font-size:8px;letter-spacing:1.5px;font-weight:900;color:#9a8458;text-align:center}.recorder-body{position:relative;background:#fff3d4;border:2px solid #e0c78f;border-bottom-width:5px;border-radius:28px;padding:16px 12px 7px;display:grid;gap:5px;max-width:100%}.recorder-mouth{height:45px;width:47px;border-radius:16px 16px 9px 9px;border:2px solid #d7b879;background:#f3d692;margin:0 auto 4px;display:grid;place-items:center}.recorder-mouth>i{width:24px;height:11px;border-radius:4px;background:#987541;box-shadow:0 3px 0 #fff6df}.recorder-hole{border:0;background:transparent;color:#7f744f;font-family:inherit;display:flex;align-items:center;gap:9px;padding:4px;min-height:37px;text-align:left;border-radius:9px;cursor:default}.recorder-hole:not(:disabled){cursor:pointer}.recorder-hole:not(:disabled):hover{background:#fffbef}.recorder-hole>b{font-size:10px;width:13px;flex:none}.recorder-hole-dots{display:flex;gap:3px;min-width:31px;justify-content:center}.recorder-hole-dots>i{width:22px;height:22px;border:2px solid #9e8b59;border-radius:50%;background:#fffefa;flex:none;transition:background .12s}.recorder-hole-dots>i+i,.recorder-hole-dots:has(i+i)>i{width:13px;height:13px}.recorder-hole.covered .recorder-hole-dots>i{background:#239143;border-color:#177d35;box-shadow:inset 0 2px 0 #50b969}.recorder-hole>small{font-size:9px;line-height:1.5;white-space:normal}.recorder-thumb .recorder-hole{border:2px solid #dfd7bc;border-bottom-width:4px;background:#faf7ec;padding:10px;min-height:63px}.recorder-thumb .recorder-hole>small{max-width:60px}.recorder-foot{height:17px;width:70px;border-radius:6px 6px 12px 12px;border:2px solid #ddc180;background:#efd49a;margin:5px auto 0}.recorder-diagram>p{grid-column:1/-1;text-align:center;font-size:10px;color:#7c8d6f;line-height:1.8;margin:0}.recorder-hole:focus-visible{outline:3px solid #4a84c3;outline-offset:3px}.recorder-config{border:2px solid #dce6d1;border-radius:14px;padding:15px 18px;margin:0 0 20px;background:#f6faee}.recorder-config label{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:12px;font-weight:900}.recorder-config select{font-family:inherit;color:#2c5163;border:1px solid #cad9ba;border-radius:9px;background:white;min-height:42px;padding:7px 12px;max-width:60%}.recorder-config p{font-size:10px;line-height:1.8;color:#788a6c;margin-top:8px}.recorder-touch-page{min-height:100dvh;background:#fffefa;color:#2c5163;font-family:Nunito,'Segoe UI',sans-serif;padding:25px 28px 45px}.recorder-touch-page>header{max-width:1040px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;gap:15px}.recorder-touch-card{max-width:700px;margin:20px auto;text-align:center}.recorder-touch-target{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:13px}.recorder-touch-target>span{font-size:9px;letter-spacing:1px;color:#86956f}.recorder-touch-target>b{font-size:15px}.recorder-touch-target>strong{font-size:27px}.recorder-touch-card>.sound-hold-progress{margin:15px 0}.sound-fingering.recorder-sound-fingering{display:block}.recorder-sound-fingering>div:first-child{text-align:center}.recorder-sound-fingering .recorder-diagram{margin-bottom:0}.recorder-badge-art{font-size:50px;color:#d7ad5f;margin:12px 0}
+@media(max-width:650px){.recorder-discovery,.recorder-touch-card{padding:15px;border-radius:17px}.recorder-diagram{grid-template-columns:92px minmax(0,200px);gap:11px}.recorder-body{padding:11px 7px 5px;border-radius:23px}.recorder-thumb .recorder-hole{flex-wrap:wrap;gap:6px;padding:9px 7px}.recorder-thumb .recorder-hole>small{flex-basis:100%;max-width:none}.recorder-hole{gap:6px;min-height:43px}.recorder-hole>small{font-size:8px}.recorder-hole-dots{min-width:29px}.recorder-touch-page{padding:20px 16px}.recorder-touch-page>header>span{font-size:7px;text-align:right}.recorder-config{padding:12px}.recorder-config label{font-size:11px}.recorder-config select{font-size:11px}.recorder-discovery .discovery-stage-heading{gap:10px;font-size:11px}.recorder-discovery .activity-eyebrow{font-size:7px}.recorder-thumb{padding-top:75px}}
+.recorder-sound-fingering .recorder-hole{min-height:27px;padding-top:1px;padding-bottom:1px}.recorder-sound-fingering .recorder-mouth{height:25px;width:32px}.recorder-sound-fingering .recorder-hole-dots>i{height:18px;width:18px}.recorder-sound-fingering .recorder-hole-dots:has(i+i)>i{height:12px;width:12px}.recorder-sound-fingering .recorder-thumb{padding-top:42px}.course-instrument>img{display:block;object-fit:contain}.instrument-emoji>img{display:block;max-height:100%;object-fit:contain}
+
+/* Anatomical soprano recorder silhouette with separate, accessible finger controls. */
+.recorder-diagram{grid-template-columns:115px minmax(0,320px);gap:12px;align-items:start}
+.recorder-body{height:620px;width:100%;padding:188px 0 0;display:flex;flex-direction:column;gap:0;background:transparent;border:0;border-radius:0;isolation:isolate}
+.recorder-realistic-art{position:absolute;top:0;left:50%;width:320px;height:620px;transform:translateX(-50%);z-index:-1;pointer-events:none}
+.recorder-body .recorder-front-label{position:absolute;top:155px;left:calc(50% - 10px);color:#72867b;font-size:9px}
+.recorder-body .recorder-hole{position:relative;flex:none;height:46px;min-height:46px;width:100%;padding:0;border-radius:10px;gap:0;color:#385f55}
+.recorder-body .recorder-hole>b{position:absolute;left:calc(50% - 102px);width:18px;text-align:center;font-size:11px}
+.recorder-body .recorder-hole-dots{position:absolute;left:calc(50% - 66px);width:32px;min-width:32px;justify-content:center}
+.recorder-body .recorder-hole>small{margin-left:calc(50% - 9px);padding-right:6px;font-size:11px;line-height:1.35}
+.recorder-body .recorder-hole-dots>i{width:19px;height:19px;background:radial-gradient(circle at 45% 65%,#74604a,#302b25);border:2px solid #baa887;box-shadow:0 1px 1px #fff9}
+.recorder-body .recorder-hole-dots:has(i+i)>i{width:11px;height:11px}
+.recorder-body .recorder-hole.covered .recorder-hole-dots>i{background:#239143;border-color:#166a37;box-shadow:0 0 0 3px #23914325}
+.recorder-body .recorder-hole:not(:disabled):hover{background:#2391430c}
+.recorder-body .recorder-foot{display:none}
+.recorder-thumb{padding-top:188px}
+.recorder-thumb .recorder-hole{background:#f5faf6;border-color:#d5e5d9;color:#385f55;border-radius:14px;min-height:66px}
+.recorder-diagram>p{font-size:11px;color:#637d70}
+.recorder-discovery{border-color:#dce9df;border-bottom-width:3px;background:linear-gradient(140deg,#fff,#f8fcf9)}
+.recorder-sound-fingering .recorder-body .recorder-hole{height:46px;min-height:46px;padding:0}
+.recorder-sound-fingering .recorder-thumb{padding-top:188px}
+@media(max-width:650px){
+ .recorder-diagram{grid-template-columns:minmax(0,320px);justify-content:center;gap:14px}
+ .recorder-thumb,.recorder-sound-fingering .recorder-thumb{padding-top:0;flex-direction:row;align-items:center;justify-content:center}
+ .recorder-thumb .recorder-hole{flex-wrap:nowrap;gap:10px;padding:10px 14px;min-height:48px}
+ .recorder-thumb .recorder-hole>small{flex-basis:auto;max-width:none;font-size:11px}
+ .recorder-thumb>span{font-size:9px}
+ .recorder-body{padding:188px 0 0}
+}
+
+/* Read-only fingering belongs beside the note, never a full-height discovery diagram. */
+.recorder-diagram.recorder-diagram--compact{grid-template-columns:72px 96px;gap:4px;margin:4px auto 0;max-width:190px}
+.recorder-diagram--compact .recorder-body{height:300px;padding:90.97px 0 0}
+.recorder-diagram--compact .recorder-realistic-art{width:154.84px;height:300px;left:calc(50% + 24.19px)}
+.recorder-diagram--compact .recorder-body .recorder-hole{height:22.258px;min-height:22.258px;padding:0}
+.recorder-diagram--compact .recorder-body .recorder-hole-dots{left:calc(50% - 16px)}
+.recorder-diagram--compact .recorder-body .recorder-hole-dots>i{width:13px;height:13px;border-width:1.5px}
+.recorder-diagram--compact .recorder-body .recorder-hole-dots:has(i+i)>i{width:8px;height:8px}
+.recorder-diagram--compact .recorder-body .recorder-hole>b{left:calc(50% - 37px);font-size:10px}
+.recorder-diagram--compact .recorder-body .recorder-hole>small,.recorder-diagram--compact .recorder-front-label{display:none}
+.recorder-diagram--compact .recorder-thumb,.recorder-sound-fingering .recorder-diagram--compact .recorder-thumb{padding-top:88px;display:flex;flex-direction:column;gap:5px}
+.recorder-diagram--compact .recorder-thumb .recorder-hole{padding:6px;min-height:40px;flex-wrap:wrap;gap:4px;justify-content:center}
+.recorder-diagram--compact .recorder-thumb .recorder-hole>small{font-size:9px;text-align:center;flex-basis:100%}
+.recorder-diagram--compact .recorder-thumb .recorder-hole-dots{min-width:22px}
+.recorder-diagram--compact .recorder-thumb>span{font-size:8px;letter-spacing:.06em}
+.recorder-diagram--compact>p{font-size:9px;line-height:1.4}
+.activity-session .sound-challenge--recorder{display:grid;grid-template-columns:minmax(0,1fr) minmax(175px,1fr);gap:12px 18px;padding:18px 22px}
+.sound-challenge--recorder .sound-challenge-top,.sound-challenge--recorder .sound-hold{grid-column:1/-1}
+.sound-challenge--recorder .sound-target{flex-direction:column;justify-content:center;gap:8px;min-height:0;margin:0}
+.sound-challenge--recorder .sound-note-name{text-align:center}
+.sound-challenge--recorder .sound-note-name>strong{font-size:64px}
+.sound-challenge--recorder .sound-staff{width:210px;max-width:100%}
+.sound-challenge--recorder .recorder-sound-fingering{padding:0;border:0;min-width:0}
+.sound-challenge--recorder .recorder-sound-fingering>div:first-child>b{font-size:13px}
+.sound-challenge--recorder .recorder-sound-fingering .activity-eyebrow{font-size:8px}
+.sound-challenge--recorder .sound-hold{padding-top:12px;border-top:1px solid #dfeae2;margin:0}
+.activity-session:has(.sound-challenge--recorder) .session-header{padding-top:15px;padding-bottom:12px}
+.activity-session:has(.sound-challenge--recorder) .session-main{padding-top:8px}
+.activity-session:has(.sound-challenge--recorder) .activity-heading{margin-bottom:12px}
+.activity-session:has(.sound-challenge--recorder) .activity-heading h1{font-size:27px;margin:6px 0}
+.activity-session:has(.sound-challenge--recorder) .activity-heading>p{font-size:13px}
+.activity-session:has(.sound-challenge--recorder) .activity-coach{margin-bottom:12px}
+.activity-session:has(.sound-challenge--recorder) .coach-mascot{width:65px;height:65px}
+.activity-session:has(.sound-challenge--recorder) .coach-bubble{padding:9px 14px}
+.activity-session:has(.sound-challenge--recorder) .coach-bubble>b{font-size:13px}
+.activity-session:has(.sound-challenge--recorder) .coach-bubble>p{font-size:11px}
+@media(max-width:600px){
+ .activity-session .sound-challenge--recorder{grid-template-columns:minmax(0,1fr) 175px;gap:10px 4px;padding:13px 10px;border-radius:18px}
+ .sound-challenge--recorder .sound-challenge-top{gap:6px;align-items:center}
+ .sound-challenge--recorder .sound-challenge-top>.activity-eyebrow{font-size:7px;line-height:1.5;letter-spacing:.02em}
+ .sound-challenge--recorder .sound-note-name{min-width:0}
+ .sound-challenge--recorder .sound-note-name>strong{font-size:44px}
+ .sound-challenge--recorder .sound-staff{max-width:100%;width:150px}
+ .sound-challenge--recorder .recorder-sound-fingering>div:first-child>b{font-size:11px;line-height:1.4}
+ .activity-session:has(.sound-challenge--recorder) .session-main{padding:8px 12px 16px}
+ .activity-session:has(.sound-challenge--recorder) .activity-heading h1{font-size:23px}
+ .activity-session:has(.sound-challenge--recorder) .activity-heading>p{font-size:12px}
+ .activity-session:has(.sound-challenge--recorder) .session-footer{padding-top:10px;padding-bottom:10px}
+ .activity-session:has(.sound-challenge--recorder) .session-footer-inner{gap:8px}
+}
+/* The duration precedes the visual reference so it is visible before any scrolling. */
+.sound-challenge--recorder .sound-challenge-top{grid-row:1}
+.sound-challenge--recorder .sound-hold{grid-row:2}
+.sound-challenge--recorder .sound-target{grid-column:1;grid-row:3}
+.sound-challenge--recorder .recorder-sound-fingering{grid-column:2;grid-row:3}
+
+/* Single-note reference: a readable score first, not an empty narrow column. */
+.activity-session .sound-challenge--recorder.recorder-reference-card{
+ display:flex;flex-direction:column;gap:14px;padding:18px;max-width:640px;margin:0 auto;border:1px solid #d9e7dd;border-bottom-width:3px;border-radius:24px;box-shadow:0 5px 20px #20543d08;
+}
+.activity-session .recorder-reference-card>.sound-challenge-top{order:0;gap:12px;padding-bottom:12px;border-bottom:1px solid #e6eee8}
+.activity-session .recorder-reference-card .sound-challenge-top>.activity-eyebrow{font-size:10px;letter-spacing:.09em;line-height:1.4;color:#608779}
+.activity-session .recorder-reference-card .activity-listen{border:1px solid #d6e7dc;background:#f5faf7;border-radius:13px;min-height:40px;padding:9px 12px;font-size:12px;color:#2e735c;flex-shrink:0}
+.activity-session .recorder-reference-card>.sound-target{
+ order:1;display:grid;grid-template-columns:74px minmax(0,1fr);align-items:center;justify-content:initial;gap:16px;width:100%;min-height:0;margin:0;padding:8px 0;
+}
+.activity-session .recorder-reference-card .sound-note-name{display:flex;align-items:baseline;justify-content:center;gap:4px;min-width:0;padding:14px 8px;background:#edf7ef;border-radius:17px}
+.activity-session .recorder-reference-card .sound-note-name>strong{font-size:40px;letter-spacing:-.04em;line-height:1.1;color:#17474a}
+.activity-session .recorder-reference-card .sound-note-name>span{font-size:14px;line-height:1;color:#56816f}
+.activity-session .recorder-reference-card .sound-staff{width:100%;max-width:420px;min-width:0;justify-self:center}
+.activity-session .recorder-reference-card .music-staff{width:100%;min-width:0;max-width:100%;height:auto}
+.activity-session .recorder-reference-card>.sound-hold{order:2;width:100%;padding:0 0 2px;border:0;margin:0}
+.activity-session .recorder-reference-card .sound-hold>div:first-child{font-size:12px;color:#547869;gap:7px}
+.activity-session .recorder-reference-card .sound-hold>div:first-child>b{font-size:12px;line-height:1.4}
+.activity-session .recorder-reference-card .sound-hold>div:first-child>span{font-size:13px;color:#235d47}
+.activity-session .recorder-reference-card .sound-hold-progress{height:8px;margin-top:10px;background:#e8f0e9}
+.activity-session .recorder-reference-card>.activity-metronome{order:3;width:100%}
+.activity-session .recorder-reference-card>.recorder-sound-fingering{order:4;display:flex;flex-direction:column;gap:8px;width:100%;padding:12px;background:#f6faf7;border:1px solid #e1ebe3;border-radius:18px}
+.activity-session .recorder-reference-card .recorder-sound-fingering>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left}
+.activity-session .recorder-reference-card .recorder-sound-fingering>div:first-child>.activity-eyebrow{font-size:10px;letter-spacing:.06em;color:#658677}
+.activity-session .recorder-reference-card .recorder-sound-fingering>div:first-child>b{font-size:12px;line-height:1.4;margin:0;color:#245c47;text-align:right}
+/* Same fingering coordinates, scaled proportionally from the 620px source. */
+.activity-session .recorder-reference-card .recorder-diagram--compact{margin:0 auto;gap:3px 4px}
+.activity-session .recorder-reference-card .recorder-diagram--compact .recorder-body{height:240px;padding-top:72.7742px}
+.activity-session .recorder-reference-card .recorder-diagram--compact .recorder-realistic-art{width:123.871px;height:240px;left:calc(50% + 19.3548px)}
+.activity-session .recorder-reference-card .recorder-diagram--compact .recorder-body .recorder-hole{height:17.8065px;min-height:17.8065px}
+.activity-session .recorder-reference-card .recorder-diagram--compact .recorder-body .recorder-hole-dots>i{width:11px;height:11px}
+.activity-session .recorder-reference-card .recorder-diagram--compact .recorder-body .recorder-hole-dots:has(i+i)>i{width:6px;height:6px}
+.activity-session .recorder-reference-card .recorder-diagram--compact .recorder-thumb{padding-top:61px}
+.activity-session .recorder-reference-card .recorder-diagram--compact>p{font-size:10px;line-height:1.5;color:#6c8777}
+.activity-session .recorder-reference-card.correct{border-color:#7dbb93;background:#fcfffc}
+@media(max-width:600px){
+ .activity-session .sound-challenge--recorder.recorder-reference-card{padding:14px;gap:12px;border-radius:21px}
+ .activity-session .recorder-reference-card>.sound-target{grid-template-columns:66px minmax(0,1fr);gap:10px;padding:0}
+ .activity-session .recorder-reference-card .sound-note-name{padding:13px 6px;border-radius:15px}
+ .activity-session .recorder-reference-card .sound-note-name>strong{font-size:35px}
+ .activity-session .recorder-reference-card .sound-hold>div:first-child>b{font-size:11px}
+ .activity-session .recorder-reference-card>.recorder-sound-fingering{padding:10px}
+}

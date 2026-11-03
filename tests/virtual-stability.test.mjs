@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {advanceVirtualProgress,freshVirtualProgress,visibleHandAngles,smoothAngles,anglesToValves} from '../src/lib/virtualTrumpet.ts';
+test('um salto de relógio nunca vira uma sustentação contínua',()=>{let p=advanceVirtualProgress(freshVirtualProgress(),[1],[1],100,900);p=advanceVirtualProgress(p,[1],[1],3000,900);assert.equal(p.completed,false);assert.equal(p.matchedSince,3000);});
+test('perda da mão não libera repetição de posição idêntica',()=>{let p={...freshVirtualProgress(),readyForDifferentPose:false};for(let t=0;t<=1000;t+=100)p=advanceVirtualProgress(p,null,[],t,500,true);assert.equal(p.readyForDifferentPose,false);});
+test('tempo retrocedendo, duração inválida ou gesto incorreto não completam',()=>{let p=advanceVirtualProgress(freshVirtualProgress(),[1],[1],500,500);p=advanceVirtualProgress(p,[1],[1],100,500);assert.equal(p.completed,false);assert.equal(advanceVirtualProgress(p,[1],[1],1000,-1).completed,false);assert.equal(advanceVirtualProgress(p,[2],[1],1000,500).completed,false);});
+test('mão fora do quadro ou com valores inválidos é recusada',()=>{assert.equal(visibleHandAngles(Array.from({length:21},()=>({x:1.1,y:.5}))),null);assert.equal(visibleHandAngles(Array.from({length:21},()=>({x:NaN,y:.5}))),null);assert.equal(visibleHandAngles([]),null);});
+test('suavização reseta ao perder a mão e sensibilidade é limitada',()=>{assert.deepEqual(smoothAngles([170,170,170],[100,100,100]),[142,142,142]);assert.equal(smoothAngles([170,170,170],null),null);assert.deepEqual(anglesToValves([150,170,170],null,[],15),[1]);assert.deepEqual(anglesToValves([150,170,170],null,[],999),[1]);});

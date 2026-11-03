@@ -1,0 +1,32 @@
+CACTOM - CODIGO-FONTE COMPLETO + INSIGNIAS SEU ROJAO
+
+Este pacote foi montado a partir da ultima versao de codigo entregue nesta conversa:
+CACTOM_Regencia_Gestos_Livres_Clarinete_9_Atividades.zip
+
+CONTEM
+- Codigo React + TypeScript + Vite, scripts e package-lock.json
+- Login 3.1 e trilha continua limpa (preservados)
+- Cursos de Trompete, Flauta Doce, Clarinete e Regencia (conforme versao de origem)
+- 5 PNGs individuais em public/branding/cactom/insignias/
+
+IMPORTANTE: as imagens das insignias foram adicionadas como ASSETS. A pagina Seu Rojao e sua
+logica de concessao NAO foram alteradas nem implementadas neste pacote.
+
+INSIGNIAS / DIAS CONSECUTIVOS DE PRATICA VALIDA
+- Tiquinho: 1 dia
+- Passinho: 3 dias
+- Embalo: 7 dias
+- Rojao firme: 14 dias
+- Estirao: 30 dias ou mais
+
+Regra planejada: somente a conclusao de uma atividade valida conta o dia. Abrir o aplicativo
+nao conta. Se um dia for perdido, a sequencia atual recomeça; insignias conquistadas permanecem
+registradas, conforme o recorde historico.
+
+INICIAR NO MAC OU WINDOWS
+Abra o terminal na pasta CACTOM (aquela que contem package.json), depois:
+  npm install
+  npm run dev
+Abra a URL local que o terminal mostrar (geralmente http://localhost:5173/).
+
+A integracao de webcam e microfone precisa ser validada no computador do usuario.

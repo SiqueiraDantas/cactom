@@ -1,0 +1,2049 @@
+{
+  "id": "recorder-discipline-v1",
+  "title": "Flauta doce soprano — iniciação à autonomia musical",
+  "sourceSha256": "afa6e7d8810a3e0866bed3d9420489229a8452213f137e2177397b19dfb9969d",
+  "diagnostic": [
+    {
+      "id": "D01",
+      "task": "Acompanhar oito pulsações com palmas.",
+      "observe": "Percepção e manutenção do pulso."
+    },
+    {
+      "id": "D02",
+      "task": "Reproduzir um ritmo de quatro tempos.",
+      "observe": "Memória e imitação rítmica."
+    },
+    {
+      "id": "D03",
+      "task": "Identificar qual de dois sons é mais agudo.",
+      "observe": "Discriminação de altura."
+    },
+    {
+      "id": "D04",
+      "task": "Reconhecer se uma sequência sobe ou desce.",
+      "observe": "Percepção de contorno."
+    },
+    {
+      "id": "D05",
+      "task": "Imitar uma frase curta com voz ou outro recurso acessível.",
+      "observe": "Memória sonora, sem confundir execução vocal com percepção."
+    },
+    {
+      "id": "D06",
+      "task": "Posicionar as mãos e alcançar os furos.",
+      "observe": "Adequação física do instrumento."
+    },
+    {
+      "id": "D07",
+      "task": "Produzir um som após demonstração.",
+      "observe": "Emissão, cobertura e resposta às pistas."
+    },
+    {
+      "id": "D08",
+      "task": "Apresentar uma música conhecida ou contar sua experiência musical.",
+      "observe": "Conhecimentos prévios e interesses."
+    }
+  ],
+  "sections": [
+    {
+      "id": "S1",
+      "number": 1,
+      "title": "Primeiros Passos",
+      "level": "A1",
+      "modules": [
+        {
+          "id": "S1-M01",
+          "number": 1,
+          "title": "Conhecer o instrumento e produzir o primeiro som",
+          "goal": "preparar a flauta, organizar as mãos e produzir si com emissão confortável.",
+          "microLessons": [
+            {
+              "id": "S1-M01-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S1-M01-L01-A01",
+                  "task": "Explorar as partes da flauta e como segurá-la.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L01-A02",
+                  "task": "Preparar a posição das mãos por imitação.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L01-A03",
+                  "task": "Conferir se o instrumento está estável sem apertar excessivamente.",
+                  "status": "guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M01-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S1-M01-L02-A01",
+                  "task": "Ouvir dois modelos de emissão na mesma nota.",
+                  "status": "guided-live-demonstration"
+                },
+                {
+                  "id": "S1-M01-L02-A02",
+                  "task": "Identificar o modelo sonoro solicitado.",
+                  "status": "guided-live-demonstration"
+                },
+                {
+                  "id": "S1-M01-L02-A03",
+                  "task": "Experimentar uma emissão curta e comparar.",
+                  "status": "guided-live-demonstration"
+                }
+              ]
+            },
+            {
+              "id": "S1-M01-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S1-M01-L03-A01",
+                  "task": "Preparar si sem soprar.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L03-A02",
+                  "task": "Produzir três sons curtos com ataque leve.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L03-A03",
+                  "task": "Repetir após ajustar uma variável que você observou.",
+                  "status": "guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M01-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S1-M01-L04-A01",
+                  "task": "Associar o cartão SI ao dedilhado.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L04-A02",
+                  "task": "Tocar quando o cartão aparece e parar quando desaparece.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L04-A03",
+                  "task": "Criar uma sequência de três entradas por gestos.",
+                  "status": "guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M01-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S1-M01-L05-A01",
+                  "task": "Resolver a história “A flauta precisa encontrar sua voz”.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L05-A02",
+                  "task": "Preparar e tocar si sem demonstração simultânea.",
+                  "status": "guided-practice"
+                },
+                {
+                  "id": "S1-M01-L05-A03",
+                  "task": "Realizar os cuidados de limpeza e secagem apropriados ao instrumento.",
+                  "status": "guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S1-M02",
+          "number": 2,
+          "title": "Conversar com si e lá",
+          "goal": "perceber e executar a passagem entre duas notas.",
+          "microLessons": [
+            {
+              "id": "S1-M02-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S1-M02-L01-A01",
+                  "task": "Comparar os dedilhados de si e lá.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L01-A02",
+                  "task": "Descobrir qual dedo muda.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L01-A03",
+                  "task": "Alternar os dedilhados silenciosamente.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M02-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S1-M02-L02-A01",
+                  "task": "Ouvir si–lá e lá–si.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L02-A02",
+                  "task": "Associar cada sequência ao caminho visual correspondente.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L02-A03",
+                  "task": "Conferir uma escolha tocando.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M02-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S1-M02-L03-A01",
+                  "task": "Executar si–si–lá–lá com apoio.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L03-A02",
+                  "task": "Executar si–lá–si–lá em andamento confortável.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L03-A03",
+                  "task": "Repetir um dos padrões sem modelo simultâneo.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M02-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S1-M02-L04-A01",
+                  "task": "Localizar si e lá na pauta em clave de sol.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L04-A02",
+                  "task": "Ler uma sequência de quatro notas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L04-A03",
+                  "task": "Criar outra sequência com dois cartões de cada nota.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M02-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S1-M02-L05-A01",
+                  "task": "Responder musicalmente a uma pergunta de duas notas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L05-A02",
+                  "task": "Resolver “O eco trocou a ordem das notas”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M02-L05-A03",
+                  "task": "Recuperar o preparo e a emissão de si trabalhados no módulo anterior.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S1-M03",
+          "number": 3,
+          "title": "Sol, pulsação e silêncio",
+          "goal": "integrar sol às notas conhecidas e manter o pulso durante uma pausa.",
+          "microLessons": [
+            {
+              "id": "S1-M03-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S1-M03-L01-A01",
+                  "task": "Preparar sol comparando seu dedilhado ao de lá.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L01-A02",
+                  "task": "Executar lá–sol em fragmentos curtos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L01-A03",
+                  "task": "Experimentar si–lá–sol após demonstração.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M03-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S1-M03-L02-A01",
+                  "task": "Reconhecer uma sequência ascendente ou descendente.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L02-A02",
+                  "task": "Identificar em qual tempo ocorreu um silêncio.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L02-A03",
+                  "task": "Escolher entre dois cartões rítmicos.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M03-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S1-M03-L03-A01",
+                  "task": "Marcar quatro pulsos sem tocar.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L03-A02",
+                  "task": "Tocar si–lá–sol–pausa sobre os pulsos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L03-A03",
+                  "task": "Manter um gesto contínuo durante a pausa e retomar.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M03-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S1-M03-L04-A01",
+                  "task": "Associar sol à segunda linha da pauta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L04-A02",
+                  "task": "Relacionar a pausa de um tempo à sua representação convencional em contexto definido.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L04-A03",
+                  "task": "Criar um padrão com três ataques e uma pausa.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M03-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S1-M03-L05-A01",
+                  "task": "Resolver “A banda perdeu a entrada”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L05-A02",
+                  "task": "Executar um padrão inédito com si, lá, sol e pausa.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M03-L05-A03",
+                  "task": "Recuperar uma sequência de duas notas sem cartões.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S1-M04",
+          "number": 4,
+          "title": "Minha primeira peça",
+          "goal": "integrar notas, durações, articulação e respiração em uma peça curta.",
+          "microLessons": [
+            {
+              "id": "S1-M04-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S1-M04-L01-A01",
+                  "task": "Ouvir uma peça de quatro compassos com si, lá e sol.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L01-A02",
+                  "task": "Identificar uma ideia que se repete.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L01-A03",
+                  "task": "Reproduzir essa ideia por imitação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M04-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S1-M04-L02-A01",
+                  "task": "Distinguir sons de um e dois tempos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L02-A02",
+                  "task": "Montar um compasso usando durações previamente apresentadas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L02-A03",
+                  "task": "Conferir a montagem com o modelo sonoro.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M04-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S1-M04-L03-A01",
+                  "task": "Tocar a primeira metade da peça.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L03-A02",
+                  "task": "Tocar a segunda metade com respirações combinadas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L03-A03",
+                  "task": "Unir as duas partes em andamento confortável.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M04-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S1-M04-L04-A01",
+                  "task": "Ler o trecho na pauta com apoio progressivamente reduzido.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L04-A02",
+                  "task": "Criar um compasso alternativo com as notas conhecidas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L04-A03",
+                  "task": "Experimentar o novo compasso dentro da peça.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S1-M04-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S1-M04-L05-A01",
+                  "task": "Simular uma apresentação com preparação e entrada.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L05-A02",
+                  "task": "Ouvir a própria execução ou uma gravação opcional e escolher um ajuste.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S1-M04-L05-A03",
+                  "task": "Reexecutar o trecho aplicando o ajuste escolhido.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "id": "A1.1",
+          "title": "Escuta",
+          "task": "reconhecer notas, contornos e pausas em exemplos curtos.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "A1.2",
+          "title": "Execução",
+          "task": "tocar uma peça de quatro compassos com si, lá e sol.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "A1.3",
+          "title": "Transferência",
+          "task": "executar uma variação nova de dificuldade semelhante e explicar uma estratégia de estudo.",
+          "status": "guided-assessment"
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "number": 2,
+      "title": "Fundamentos",
+      "level": "A2",
+      "modules": [
+        {
+          "id": "S2-M05",
+          "number": 5,
+          "title": "Ampliar as notas e alcançar o registro grave",
+          "goal": "introduzir fá, mi, ré e dó graves progressivamente, conforme cobertura dos furos e qualidade de emissão.",
+          "microLessons": [
+            {
+              "id": "S2-M05-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S2-M05-L01-A01",
+                  "task": "Ouvir um fragmento que utiliza notas abaixo de sol.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L01-A02",
+                  "task": "Comparar sol e fá, preparando o dedilhado adequado ao instrumento.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L01-A03",
+                  "task": "Experimentar uma resposta curta com essas notas.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M05-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S2-M05-L02-A01",
+                  "task": "Introduzir mi por demonstração e comparação de dedilhados.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L02-A02",
+                  "task": "Reconhecer a direção em fragmentos com sol, fá e mi.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L02-A03",
+                  "task": "Executar um fragmento escolhido pela escuta.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M05-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S2-M05-L03-A01",
+                  "task": "Preparar e experimentar ré grave.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L03-A02",
+                  "task": "Preparar e experimentar dó grave quando houver prontidão.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L03-A03",
+                  "task": "Comparar a emissão de duas notas graves e ajustar uma variável.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M05-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S2-M05-L04-A01",
+                  "task": "Localizar as novas notas na pauta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L04-A02",
+                  "task": "Ler fragmentos descendentes curtos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L04-A03",
+                  "task": "Criar uma resposta usando parte das notas consolidadas.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M05-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S2-M05-L05-A01",
+                  "task": "Resolver “A melodia precisa de um final mais grave”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L05-A02",
+                  "task": "Executar um trecho com notas antigas e novas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M05-L05-A03",
+                  "task": "Recuperar si–lá–sol com pulsação e pausas.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S2-M06",
+          "number": 6,
+          "title": "Ritmos e compassos",
+          "goal": "executar semínimas, mínimas, pares de colcheias e pausas em contextos simples de 2/4, 3/4 e 4/4.",
+          "microLessons": [
+            {
+              "id": "S2-M06-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S2-M06-L01-A01",
+                  "task": "Caminhar sobre uma pulsação e experimentar dois ataques por pulso.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L01-A02",
+                  "task": "Imitar ritmos com palmas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L01-A03",
+                  "task": "Transferir um ritmo para uma única nota da flauta.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M06-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S2-M06-L02-A01",
+                  "task": "Associar padrões ouvidos a cartões rítmicos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L02-A02",
+                  "task": "Completar um pequeno ditado com peças.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L02-A03",
+                  "task": "Conferir pela escuta e corrigir uma escolha.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M06-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S2-M06-L03-A01",
+                  "task": "Sentir agrupamentos de dois tempos com movimento corporal.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L03-A02",
+                  "task": "Sentir agrupamentos de três tempos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L03-A03",
+                  "task": "Executar um fragmento em quatro tempos com apoio.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M06-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S2-M06-L04-A01",
+                  "task": "Relacionar as experiências às fórmulas 2/4, 3/4 e 4/4.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L04-A02",
+                  "task": "Completar compassos com figuras disponíveis.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L04-A03",
+                  "task": "Criar e tocar dois compassos em uma fórmula escolhida.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M06-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S2-M06-L05-A01",
+                  "task": "Resolver “O compasso ganhou um tempo a mais”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L05-A02",
+                  "task": "Reparar um compasso incompleto ou excedente.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M06-L05-A03",
+                  "task": "Recuperar notas graves em um ritmo já conhecido.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S2-M07",
+          "number": 7,
+          "title": "Articular e organizar frases",
+          "goal": "diferenciar ataques separados e ligações simples, planejando respirações compatíveis com as frases.",
+          "microLessons": [
+            {
+              "id": "S2-M07-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S2-M07-L01-A01",
+                  "task": "Ouvir a mesma frase com duas articulações.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L01-A02",
+                  "task": "Descrever o contraste com palavras próprias.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L01-A03",
+                  "task": "Imitar um fragmento de cada versão.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M07-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S2-M07-L02-A01",
+                  "task": "Associar gravações a indicações de articulação.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L02-A02",
+                  "task": "Identificar um ponto de respiração que interrompeu a ideia musical.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L02-A03",
+                  "task": "Comparar duas possibilidades de respiração.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M07-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S2-M07-L03-A01",
+                  "task": "Executar duas notas articuladas separadamente.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L03-A02",
+                  "task": "Experimentar a ligação entre duas notas conforme orientação técnica.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L03-A03",
+                  "task": "Alternar os dois modos em uma frase curta.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M07-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S2-M07-L04-A01",
+                  "task": "Reconhecer ligaduras de expressão no trecho estudado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L04-A02",
+                  "task": "Marcar respirações em uma melodia.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L04-A03",
+                  "task": "Criar duas interpretações curtas com articulações diferentes.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M07-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S2-M07-L05-A01",
+                  "task": "Resolver “A frase ficou sem fôlego”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L05-A02",
+                  "task": "Reorganizar o trecho com respiração planejada.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M07-L05-A03",
+                  "task": "Recuperar compassos e durações em uma leitura curta.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S2-M08",
+          "number": 8,
+          "title": "Tocar em duo",
+          "goal": "sustentar uma parte simples enquanto escuta outra voz.",
+          "microLessons": [
+            {
+              "id": "S2-M08-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S2-M08-L01-A01",
+                  "task": "Ouvir um duo e identificar suas duas partes.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L01-A02",
+                  "task": "Acompanhar uma parte com gesto ou canto.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L01-A03",
+                  "task": "Tocar uma resposta curta à frase que o app toca.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M08-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S2-M08-L02-A01",
+                  "task": "Reconhecer uma entrada correta após contagem.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L02-A02",
+                  "task": "Perceber um desencontro rítmico em um modelo.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L02-A03",
+                  "task": "Escolher uma estratégia de retomada.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M08-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S2-M08-L03-A01",
+                  "task": "Tocar um acompanhamento repetitivo simples.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L03-A02",
+                  "task": "Manter a parte enquanto o app toca a melodia.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L03-A03",
+                  "task": "Experimentar a troca de funções.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M08-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S2-M08-L04-A01",
+                  "task": "Localizar sua parte em uma partitura de duo.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L04-A02",
+                  "task": "Marcar entradas, pausas e respirações.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L04-A03",
+                  "task": "Criar uma introdução de dois compassos para o duo.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S2-M08-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S2-M08-L05-A01",
+                  "task": "Resolver “Um colega se perdeu no ensaio”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L05-A02",
+                  "task": "Retomar o duo a partir de um ponto combinado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S2-M08-L05-A03",
+                  "task": "Apresentar o trecho e escolher um ajuste coletivo.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "id": "A2.1",
+          "title": "Escuta e leitura",
+          "task": "relacionar um trecho ouvido à representação correspondente.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "A2.2",
+          "title": "Execução",
+          "task": "apresentar uma melodia de oito a dezesseis compassos com articulação e respiração planejadas.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "A2.3",
+          "title": "Conjunto",
+          "task": "tocar um duo com entrada, pausas e retomada combinadas.",
+          "status": "guided-assessment"
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "number": 3,
+      "title": "Intermediário",
+      "level": "B1",
+      "modules": [
+        {
+          "id": "S3-M09",
+          "number": 9,
+          "title": "Ampliar o registro",
+          "goal": "explorar notas acima do conjunto inicial e iniciar o trabalho de região aguda conforme a resposta do instrumento.",
+          "microLessons": [
+            {
+              "id": "S3-M09-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S3-M09-L01-A01",
+                  "task": "Ouvir frases em regiões diferentes da flauta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L01-A02",
+                  "task": "Identificar a região mais aguda.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L01-A03",
+                  "task": "Experimentar uma nova nota apresentada pelo app.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M09-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S3-M09-L02-A01",
+                  "task": "Comparar diagramas de notas conhecidas e novas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L02-A02",
+                  "task": "Observar o papel do polegar em cada dedilhado apresentado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L02-A03",
+                  "task": "Preparar silenciosamente uma transição.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M09-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S3-M09-L03-A01",
+                  "task": "Produzir a nota nova em emissões curtas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L03-A02",
+                  "task": "Alternar a nota nova com uma nota estável.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L03-A03",
+                  "task": "Ajustar ar e dedilhado a partir de uma observação específica.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M09-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S3-M09-L04-A01",
+                  "task": "Localizar as novas notas na pauta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L04-A02",
+                  "task": "Ler um fragmento que cruza regiões.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L04-A03",
+                  "task": "Criar uma chamada musical com duas ou três notas consolidadas.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M09-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S3-M09-L05-A01",
+                  "task": "Resolver “A melodia mudou de andar”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L05-A02",
+                  "task": "Executar uma frase com mudança de região.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M09-L05-A03",
+                  "task": "Recuperar uma frase grave preservando sua emissão adequada.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S3-M10",
+          "number": 10,
+          "title": "Alterações e caminhos tonais",
+          "goal": "introduzir fá sustenido e si bemol, relacionando dedilhado, escuta e escrita.",
+          "microLessons": [
+            {
+              "id": "S3-M10-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S3-M10-L01-A01",
+                  "task": "Ouvir um fragmento com fá natural e outro com fá sustenido.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L01-A02",
+                  "task": "Identificar o fragmento que corresponde ao modelo.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L01-A03",
+                  "task": "Experimentar fá sustenido com dedilhado conferido.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M10-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S3-M10-L02-A01",
+                  "task": "Ouvir si e si bemol em contexto curto.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L02-A02",
+                  "task": "Comparar seus dedilhados.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L02-A03",
+                  "task": "Executar uma transição simples com si bemol.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M10-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S3-M10-L03-A01",
+                  "task": "Tocar um fragmento em sol maior adequado à tessitura estudada.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L03-A02",
+                  "task": "Tocar um fragmento em fá maior.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L03-A03",
+                  "task": "Identificar qual transição precisa de prática isolada.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M10-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S3-M10-L04-A01",
+                  "task": "Relacionar sustenido, bemol e bequadro aos exemplos executados.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L04-A02",
+                  "task": "Aplicar uma alteração escrita em um compasso.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L04-A03",
+                  "task": "Reconhecer sua função em uma armadura simples.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M10-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S3-M10-L05-A01",
+                  "task": "Resolver “A nota não combina com a versão do grupo”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L05-A02",
+                  "task": "Corrigir uma alteração omitida em um trecho preparado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M10-L05-A03",
+                  "task": "Recuperar uma passagem com notas naturais e comparar os contextos.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S3-M11",
+          "number": 11,
+          "title": "Síncopas e compasso composto",
+          "goal": "manter o pulso diante de deslocamentos rítmicos e sentir a subdivisão ternária em 6/8.",
+          "microLessons": [
+            {
+              "id": "S3-M11-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S3-M11-L01-A01",
+                  "task": "Marcar pulsos enquanto ouve um ataque antecipado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L01-A02",
+                  "task": "Imitar o padrão com palmas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L01-A03",
+                  "task": "Transferi-lo para uma nota da flauta.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M11-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S3-M11-L02-A01",
+                  "task": "Distinguir dois padrões que diferem na posição dos ataques.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L02-A02",
+                  "task": "Montar o padrão ouvido em uma grade de subdivisões.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L02-A03",
+                  "task": "Conferir a montagem com execução corporal.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M11-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S3-M11-L03-A01",
+                  "task": "Executar uma síncopa curta sobre acompanhamento estável.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L03-A02",
+                  "task": "Sentir dois pulsos com três subdivisões em cada um.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L03-A03",
+                  "task": "Tocar uma célula simples de 6/8 por imitação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M11-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S3-M11-L04-A01",
+                  "task": "Relacionar ligadura de prolongamento e duração ao ritmo executado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L04-A02",
+                  "task": "Ler um fragmento simples em 6/8.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L04-A03",
+                  "task": "Criar uma resposta rítmica dentro de um modelo fornecido.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M11-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S3-M11-L05-A01",
+                  "task": "Resolver “A banda confundiu os apoios do ritmo”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L05-A02",
+                  "task": "Executar um trecho preservando o agrupamento proposto.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M11-L05-A03",
+                  "task": "Recuperar um padrão em 3/4 e comparar a organização dos pulsos.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S3-M12",
+          "number": 12,
+          "title": "Escutar, ajustar e estudar em conjunto",
+          "goal": "reconhecer problemas musicais e escolher estratégias de ensaio.",
+          "microLessons": [
+            {
+              "id": "S3-M12-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S3-M12-L01-A01",
+                  "task": "Ouvir dois sons sustentados em conjunto.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L01-A02",
+                  "task": "Comparar uma versão mais estável e outra com desencontro de afinação.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L01-A03",
+                  "task": "Experimentar ajustes orientados em uma nota confortável.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M12-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S3-M12-L02-A01",
+                  "task": "Identificar se um problema apresentado é principalmente de nota, ritmo ou entrada.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L02-A02",
+                  "task": "Escolher uma estratégia de estudo entre alternativas.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L02-A03",
+                  "task": "Justificar a escolha com linguagem simples.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M12-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S3-M12-L03-A01",
+                  "task": "Isolar uma transição difícil.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L03-A02",
+                  "task": "Praticá-la lentamente e reintegrá-la à frase.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L03-A03",
+                  "task": "Tocar a própria parte com outra voz.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M12-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S3-M12-L04-A01",
+                  "task": "Dividir a partitura em trechos de estudo.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L04-A02",
+                  "task": "Marcar pontos de encontro do conjunto.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L04-A03",
+                  "task": "Elaborar um plano curto de prática para um trecho.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S3-M12-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S3-M12-L05-A01",
+                  "task": "Resolver “O ensaio só repete a música inteira”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L05-A02",
+                  "task": "Conduzir uma rodada de estudo de um problema localizado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S3-M12-L05-A03",
+                  "task": "Comparar antes e depois e registrar o que ajudou.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "id": "B1.1",
+          "title": "Percepção e diagnóstico",
+          "task": "localizar um problema em um trecho e propor uma estratégia pertinente.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "B1.2",
+          "title": "Execução",
+          "task": "tocar uma peça que reúna recursos técnicos e rítmicos consolidados na seção.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "B1.3",
+          "title": "Autonomia",
+          "task": "apresentar um plano de estudo, aplicá-lo e demonstrar uma melhora observável.",
+          "status": "guided-assessment"
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "number": 4,
+      "title": "Autonomia Musical",
+      "level": "B2",
+      "modules": [
+        {
+          "id": "S4-M13",
+          "number": 13,
+          "title": "Articulação, caráter e estilo",
+          "goal": "escolher articulações e modos de frasear com base em referências sonoras e contexto musical.",
+          "microLessons": [
+            {
+              "id": "S4-M13-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S4-M13-L01-A01",
+                  "task": "Ouvir duas interpretações de um trecho.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L01-A02",
+                  "task": "Identificar diferenças de articulação e fraseado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L01-A03",
+                  "task": "Imitar um fragmento de cada interpretação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M13-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S4-M13-L02-A01",
+                  "task": "Associar exemplos sonoros a descrições de caráter.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L02-A02",
+                  "task": "Relacionar uma escolha interpretativa ao contexto apresentado na lição.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L02-A03",
+                  "task": "Selecionar uma referência para experimentar.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M13-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S4-M13-L03-A01",
+                  "task": "Executar uma frase com duas articulações possíveis.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L03-A02",
+                  "task": "Ajustar finais e direções de frase.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L03-A03",
+                  "task": "Testar variações expressivas preservando emissão e afinação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M13-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S4-M13-L04-A01",
+                  "task": "Anotar escolhas de articulação na partitura.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L04-A02",
+                  "task": "Planejar uma interpretação de quatro a oito compassos.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L04-A03",
+                  "task": "Explicar a intenção musical dessa versão.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M13-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S4-M13-L05-A01",
+                  "task": "Resolver “Todos tocam as notas, mas as frases não combinam”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L05-A02",
+                  "task": "Escolher uma interpretação e explicar por quê.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M13-L05-A03",
+                  "task": "Recuperar respirações e pontos de encontro na execução final.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S4-M14",
+          "number": 14,
+          "title": "Ornamentar e variar",
+          "goal": "experimentar ornamentos simples e variações sem perder a estrutura da melodia.",
+          "microLessons": [
+            {
+              "id": "S4-M14-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S4-M14-L01-A01",
+                  "task": "Comparar uma melodia simples e uma versão ornamentada.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L01-A02",
+                  "task": "Localizar onde ocorreu a ornamentação.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L01-A03",
+                  "task": "Reproduzir um pequeno gesto ornamental por imitação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M14-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S4-M14-L02-A01",
+                  "task": "Reconhecer a nota principal de um fragmento ornamentado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L02-A02",
+                  "task": "Identificar uma ornamentação que prejudicou o pulso em um modelo.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L02-A03",
+                  "task": "Escolher uma versão adequada ao objetivo da frase.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M14-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S4-M14-L03-A01",
+                  "task": "Praticar lentamente um ornamento selecionado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L03-A02",
+                  "task": "Integrá-lo a uma frase curta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L03-A03",
+                  "task": "Comparar a execução com e sem ornamento.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M14-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S4-M14-L04-A01",
+                  "task": "Relacionar o ornamento à notação utilizada no repertório.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L04-A02",
+                  "task": "Criar uma variação rítmica ou melódica simples.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L04-A03",
+                  "task": "Registrar e executar a variação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M14-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S4-M14-L05-A01",
+                  "task": "Resolver “A melodia ficou cheia demais”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L05-A02",
+                  "task": "Selecionar quais ornamentos manter e justificar.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M14-L05-A03",
+                  "task": "Executar a versão revisada preservando o caráter escolhido.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S4-M15",
+          "number": 15,
+          "title": "Adaptar melodias e criar um arranjo",
+          "goal": "adaptar uma ideia musical à tessitura, à respiração e ao conjunto disponível.",
+          "microLessons": [
+            {
+              "id": "S4-M15-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S4-M15-L01-A01",
+                  "task": "Ouvir uma melodia e identificar suas frases.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L01-A02",
+                  "task": "Testar a melodia na flauta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L01-A03",
+                  "task": "Localizar notas ou passagens que precisam de adaptação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M15-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S4-M15-L02-A01",
+                  "task": "Comparar duas tonalidades ou posições possíveis.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L02-A02",
+                  "task": "Escolher a alternativa mais adequada aos recursos do aluno.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L02-A03",
+                  "task": "Conferir a escolha executando o trecho crítico.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M15-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S4-M15-L03-A01",
+                  "task": "Transpor um fragmento curto com apoio quando necessário.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L03-A02",
+                  "task": "Ajustar oitava, ritmo ou extensão preservando a intenção musical.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L03-A03",
+                  "task": "Experimentar a adaptação com acompanhamento.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M15-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S4-M15-L04-A01",
+                  "task": "Criar uma introdução curta.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L04-A02",
+                  "task": "Organizar melodia, acompanhamento e final.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L04-A03",
+                  "task": "Registrar o arranjo em partitura ou representação adequada aos participantes.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M15-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S4-M15-L05-A01",
+                  "task": "Resolver “Entrou um novo músico na banda”.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L05-A02",
+                  "task": "Redistribuir uma função musical no arranjo.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M15-L05-A03",
+                  "task": "Ensaiar e revisar a nova versão.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S4-M16",
+          "number": 16,
+          "title": "Projeto final e continuidade",
+          "goal": "planejar, preparar, apresentar e avaliar um pequeno programa musical.",
+          "microLessons": [
+            {
+              "id": "S4-M16-L01",
+              "number": 1,
+              "name": "Descobrir",
+              "activities": [
+                {
+                  "id": "S4-M16-L01-A01",
+                  "task": "Selecionar repertório compatível com o nível alcançado.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L01-A02",
+                  "task": "Definir um objetivo musical para a apresentação.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L01-A03",
+                  "task": "Identificar os trechos que exigem preparação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M16-L02",
+              "number": 2,
+              "name": "Discriminar",
+              "activities": [
+                {
+                  "id": "S4-M16-L02-A01",
+                  "task": "Analisar uma execução própria ou um ensaio.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L02-A02",
+                  "task": "Escolher duas prioridades de melhoria.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L02-A03",
+                  "task": "Definir estratégias e critérios para essas prioridades.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M16-L03",
+              "number": 3,
+              "name": "Executar",
+              "activities": [
+                {
+                  "id": "S4-M16-L03-A01",
+                  "task": "Realizar estudo focado de um trecho técnico.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L03-A02",
+                  "task": "Realizar estudo focado de uma decisão expressiva.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L03-A03",
+                  "task": "Integrar os resultados em uma passagem completa.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M16-L04",
+              "number": 4,
+              "name": "Ler e criar",
+              "activities": [
+                {
+                  "id": "S4-M16-L04-A01",
+                  "task": "Organizar ordem das peças, entradas e transições.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L04-A02",
+                  "task": "Realizar uma simulação de apresentação.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L04-A03",
+                  "task": "Ajustar um aspecto observado na simulação.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            },
+            {
+              "id": "S4-M16-L05",
+              "number": 5,
+              "name": "Aplicar e recuperar",
+              "activities": [
+                {
+                  "id": "S4-M16-L05-A01",
+                  "task": "Resolver uma mudança simulada de ensaio, como reiniciar de outro ponto.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L05-A02",
+                  "task": "Preparar uma autoavaliação baseada em evidências.",
+                  "status": "interactive-guided-practice"
+                },
+                {
+                  "id": "S4-M16-L05-A03",
+                  "task": "Definir o próximo objetivo de aprendizagem após o curso.",
+                  "status": "interactive-guided-practice"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "id": "B2.1",
+          "title": "Apresentação",
+          "task": "executar um pequeno programa com peça solo e participação em conjunto, conforme os recursos disponíveis.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "B2.2",
+          "title": "Criação",
+          "task": "apresentar uma adaptação ou arranjo e explicar decisões de tessitura, respiração, estrutura e expressão.",
+          "status": "guided-assessment"
+        },
+        {
+          "id": "B2.3",
+          "title": "Reflexão e transferência",
+          "task": "avaliar a própria preparação e adaptar um trecho diante de uma solicitação musical nova.",
+          "status": "guided-assessment"
+        }
+      ]
+    }
+  ]
+}

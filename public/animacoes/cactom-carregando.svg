@@ -1,0 +1,165 @@
+<svg id="cactom-carregando" xmlns="http://www.w3.org/2000/svg" viewBox="0 -34 420 474" role="img" aria-label="Carregando: o Cactom anda pensando">
+  <style>
+    /* Tela de carregamento: Cactom de perfil andando no lugar, pensando.
+       Passo completo = 0,8s. Pontinhos = 1,2s. Olhar e piscada = 4,8s. Tudo em loop. */
+    #cactom-carregando * { transform-box: view-box; }
+
+    /* pés: o pé no chão desliza pra trás, o outro levanta e volta pra frente */
+    .pe { animation: passo .8s linear infinite; }
+    #pe-tras { animation-delay: -.4s; }
+    /* corpo sobe e desce duas vezes por passo, inclinado pra frente */
+    #corpo { transform-origin: 200px 382px; animation: balanco .4s cubic-bezier(.45, 0, .55, 1) infinite; }
+    #flor { transform-origin: 196px 128px; animation: flor .4s cubic-bezier(.45, 0, .55, 1) -.12s infinite; }
+    #braco-tras { transform-origin: 132px 222px; animation: braco-tras .8s cubic-bezier(.45, 0, .55, 1) infinite; }
+    /* dedo batendo no queixo enquanto pensa */
+    #braco-frente { transform-origin: 206px 238px; animation: queixo 1.6s cubic-bezier(.34, 1.56, .64, 1) infinite; }
+    #pupila { animation: olhar 4.8s cubic-bezier(.34, 1.56, .64, 1) infinite; }
+    #olho { transform-origin: 255px 200px; animation: piscar 4.8s ease-in-out infinite; }
+    #sobrancelha { animation: sobrancelha 4.8s cubic-bezier(.34, 1.56, .64, 1) infinite; }
+    #sombra { transform-origin: 200px 386px; animation: sombra .4s cubic-bezier(.45, 0, .55, 1) infinite; }
+    .traco { animation: chao 1.2s linear infinite; }
+
+    /* balão de pensamento */
+    #pensamento { animation: flutuar 2.4s ease-in-out infinite; }
+    .bolinha { transform-origin: var(--o); animation: bolinha 2.4s ease-in-out infinite; animation-delay: var(--d); }
+    .ponto { transform-origin: var(--o); animation: ponto 1.2s cubic-bezier(.34, 1.56, .64, 1) infinite; animation-delay: var(--d); }
+
+    @keyframes passo {
+      0%   { transform: translate(22px, 0); }
+      50%  { transform: translate(-22px, 0); animation-timing-function: cubic-bezier(.45, 0, .55, 1); }
+      75%  { transform: translate(0, -16px); animation-timing-function: cubic-bezier(.45, 0, .55, 1); }
+      100% { transform: translate(22px, 0); }
+    }
+    @keyframes balanco {
+      0%, 100% { transform: translateY(0) rotate(3deg) scale(1.02, .98); }
+      50%      { transform: translateY(-7px) rotate(3deg) scale(.99, 1.01); }
+    }
+    @keyframes flor { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+    @keyframes braco-tras { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(18deg); } }
+    @keyframes queixo {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      70% { transform: rotate(-5deg); }
+      80% { transform: rotate(0deg); }
+      90% { transform: rotate(-5deg); }
+    }
+    @keyframes olhar {
+      0%, 40%  { transform: translate(5px, -7px); }
+      46%, 70% { transform: translate(8px, 0); }
+      76%, 100% { transform: translate(5px, -7px); }
+    }
+    @keyframes piscar {
+      0%, 30%, 34%, 100% { transform: scaleY(1); }
+      32% { transform: scaleY(.08); }
+    }
+    @keyframes sobrancelha {
+      0%, 40%  { transform: translate(0, -5px) rotate(0deg); }
+      46%, 70% { transform: translate(0, 0); }
+      76%, 100% { transform: translate(0, -5px); }
+    }
+    @keyframes sombra { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.9); } }
+    @keyframes chao {
+      0%   { transform: translateX(0); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateX(-300px); opacity: 0; }
+    }
+    @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes bolinha { 0%, 100% { transform: scale(1); } 50% { transform: scale(.85); } }
+    @keyframes ponto {
+      0%, 60%, 100% { transform: translateY(0) scale(1); fill: #B7C0C9; }
+      20% { transform: translateY(-9px) scale(1.15); fill: #5CB531; }
+      40% { transform: translateY(0) scale(1); fill: #B7C0C9; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #cactom-carregando * { animation-duration: 3s !important; }
+      .pe, #corpo, #flor, #braco-tras, .traco, #sombra { animation: none !important; }
+    }
+  </style>
+
+  <defs>
+    <clipPath id="recorte-perfil"><ellipse cx="200" cy="240" rx="92" ry="118"/></clipPath>
+  </defs>
+
+  <!-- chão: tracinhos passando pra trás -->
+  <g fill="#E4E8EC">
+    <rect class="traco" style="animation-delay:0s" x="340" y="398" width="34" height="7" rx="3.5"/>
+    <rect class="traco" style="animation-delay:-.4s" x="340" y="410" width="22" height="7" rx="3.5"/>
+    <rect class="traco" style="animation-delay:-.8s" x="340" y="398" width="46" height="7" rx="3.5"/>
+  </g>
+  <ellipse id="sombra" cx="200" cy="386" rx="92" ry="11" fill="#ECEFF1"/>
+
+  <!-- pé de trás (lado de longe) -->
+  <g id="pe-tras" class="pe"><ellipse cx="196" cy="368" rx="36" ry="17" fill="#3F8A24"/></g>
+
+  <g id="corpo">
+    <g id="braco-tras">
+      <path d="M132 224 Q96 262 106 296" fill="none" stroke="#3F8A24" stroke-width="34" stroke-linecap="round"/>
+    </g>
+    <g id="flor">
+      <circle cx="170" cy="128" r="23" fill="#E36F05"/>
+      <circle cx="222" cy="128" r="23" fill="#E36F05"/>
+      <circle cx="170" cy="123" r="22" fill="#FF8A12"/>
+      <circle cx="222" cy="123" r="22" fill="#FF8A12"/>
+      <circle cx="196" cy="116" r="27" fill="#E36F05"/>
+      <circle cx="196" cy="110" r="26" fill="#FF8A12"/>
+      <ellipse cx="187" cy="100" rx="8" ry="5" fill="#FFB057"/>
+    </g>
+    <g fill="#1F5A32">
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(156.8 135.8) rotate(-124.3)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(129.5 164.2) rotate(-146.8)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(112.5 203.5) rotate(-165.8)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(108.2 248.2) rotate(176.9)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(117.3 291.7) rotate(159.2)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(138.4 327.7) rotate(139.1)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(168.5 350.9) rotate(115.0)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(225.4 126.6) rotate(-69.8)"/>
+        <rect x="-3" y="-4.5" width="21" height="9" rx="4.5" transform="translate(243.2 344.2) rotate(55.7)"/>
+    </g>
+    <g clip-path="url(#recorte-perfil)">
+      <rect x="100" y="114" width="200" height="250" fill="#4B9E2B"/>
+      <ellipse cx="210" cy="232" rx="90" ry="114" fill="#5CB531"/>
+      <g fill="none" stroke="#4A9628" stroke-width="6" stroke-linecap="round">
+        <path d="M132 150 Q112 240 132 334"/>
+        <path d="M172 126 Q140 240 172 354"/>
+        <path d="M218 124 Q204 168 208 186"/>
+        <path d="M206 300 Q200 330 210 356"/>
+      </g>
+      <ellipse cx="236" cy="150" rx="13" ry="26" fill="#7FCD52" transform="rotate(-22 236 150)"/>
+    </g>
+    <!-- rosto de perfil, virado pra direita -->
+    <path id="sobrancelha" d="M234 160 Q254 148 276 160" fill="none" stroke="#1F5A32" stroke-width="7" stroke-linecap="round"/>
+    <g id="olho">
+      <ellipse cx="255" cy="200" rx="24" ry="30" fill="#FDF5E2"/>
+      <g id="pupila">
+        <ellipse cx="258" cy="203" rx="11" ry="14" fill="#1C2A28"/>
+        <circle cx="262" cy="197" r="4" fill="#FFFFFF"/>
+      </g>
+    </g>
+    <path d="M254 262 Q262 256 268 262 T282 260" fill="none" stroke="#6A2A14" stroke-width="6" stroke-linecap="round"/>
+    <!-- braço da frente: mão no queixo -->
+    <g id="braco-frente">
+      <path d="M206 238 Q198 326 282 296" fill="none" stroke="#2F6E1B" stroke-width="44" stroke-linecap="round"/>
+      <path d="M206 238 Q198 326 282 296" fill="none" stroke="#6CC43F" stroke-width="36" stroke-linecap="round"/>
+      <path d="M200 262 Q202 312 262 304" fill="none" stroke="#5CB531" stroke-width="12" stroke-linecap="round"/>
+      <ellipse cx="288" cy="288" rx="6" ry="10" fill="#9BDD72" transform="rotate(30 288 288)"/>
+      <rect x="-3" y="-4.5" width="19" height="9" rx="4.5" fill="#1F5A32" transform="translate(182 314) rotate(150)"/>
+    </g>
+  </g>
+
+  <!-- pé da frente -->
+  <g id="pe-frente" class="pe"><ellipse cx="204" cy="368" rx="36" ry="17" fill="#4B9E2B"/><ellipse cx="202" cy="364" rx="33" ry="14" fill="#5CB531"/></g>
+
+  <!-- balão de pensamento com os três pontinhos -->
+  <g id="pensamento">
+    <circle class="bolinha" style="--o:270px 98px; --d:0s" cx="270" cy="98" r="7" fill="#F1F3F5"/>
+    <circle class="bolinha" style="--o:290px 74px; --d:-.3s" cx="290" cy="74" r="11" fill="#F1F3F5"/>
+    <g fill="#F1F3F5">
+      <rect x="292" y="6" width="120" height="58" rx="29"/>
+      <circle cx="322" cy="12" r="18"/><circle cx="356" cy="8" r="20"/><circle cx="388" cy="14" r="16"/>
+    </g>
+    <circle class="ponto" style="--o:326px 36px; --d:0s" cx="326" cy="36" r="8" fill="#B7C0C9"/>
+    <circle class="ponto" style="--o:352px 36px; --d:.18s" cx="352" cy="36" r="8" fill="#B7C0C9"/>
+    <circle class="ponto" style="--o:378px 36px; --d:.36s" cx="378" cy="36" r="8" fill="#B7C0C9"/>
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+CACTOM — AJUSTE DE REGENCIA E NOVO CURSO DE CLARINETE
+27/10/2026
+
+O QUE MUDOU
+1) REGENCIA
+- Avaliacao por movimento e DIRECAO, em vez de exigir a passagem exata pela bolinha.
+- Janela de pulso maior, movimentos com posicao e amplitude mais livres.
+- Calibracao aceita movimento em uma area maior.
+- Controle de Area de reconhecimento (ampla por padrao) e ampliacao do gesto.
+- Mao parada, gesto invertido e movimentos fora da sequencia NAO geram acertos.
+- Mantidos metronomo, musica original e orquestra virtual.
+
+2) CLARINETE
+- Curso disponivel na escolha de instrumentos: Clarinete (Sib).
+- 9 atividades em 3 unidades consecutivas.
+- Primeiro contato com chaves e posicoes; notas escritas Sol4, Fa4, Mi4, Re4 e Do4.
+- Exemplo visual das posicoes da mao esquerda; som de referencia.
+- Treino com microfone que confere a altura real transposta em Sib.
+- Progresso salvo localmente, separado dos outros cursos.
+
+COMO INICIAR NO WINDOWS
+- Extraia este ZIP em uma pasta NOVA.
+- Abra a pasta CACTOM e execute ABRIR-CACTOM.bat.
+- Necessario Node.js LTS instalado (node -v e npm.cmd -v).
+- Na primeira execucao as dependencias exigem conexao com a internet.
+
+TESTE REGENCIA
+1) Selecione Regencia - Maestro.
+2) Abra uma aula, ative a camera e calibre com a mao em posicao confortavel.
+3) Deixe Area de reconhecimento em Ampla e rega seguindo os pulsos.
+4) Teste gestos moderados, diferentes amplitudes e mao parada.
+5) Teste os 3 modos sonoros.
+
+TESTE CLARINETE
+1) Selecione Clarinete na tela de cursos.
+2) Explore as posicoes na primeira atividade.
+3) Use Ouvir a nota e, depois, Ativar microfone.
+4) Toque um clarinete em Sib real; o app verifica a nota na altura sonora correta.
+5) Prossiga pelas 3 unidades e confira a retomada apos fechar e abrir.
+
+LIMITACOES
+- Testes de logica e sintaxe passaram, mas a camera, audio e build nao foram validados ao vivo neste ambiente por falta de dependencias.
+- A avaliacao automatica da regencia e heuristica, nao mede tecnica completa.
+- O microfone detecta altura/sustentacao; nao avalia embocadura, postura ou dedos reais.
+- Clarinetes em outros tons e instrumentos virtuais nao sao suportados por estas atividades.
+- As imagens da camera e o audio do microfone nao sao gravados.
+- Progresso armazenado somente neste perfil do navegador.
+
+ARQUIVOS PRINCIPAIS MODIFICADOS
+src/lib/conducting.ts
+src/components/ConductorCourse.tsx
+src/components/conductor.css
+src/lib/instruments.ts
+src/components/InstrumentPicker.tsx
+src/App.tsx
+
+ARQUIVOS PRINCIPAIS ADICIONADOS
+src/lib/clarinet.ts
+src/components/ClarinetCourse.tsx
+src/components/clarinet.css
+tests/clarinet.test.mjs
+TESTAR-REGENCIA-E-CLARINETE.txt
+
+Os demais cursos e o Login 3.1 foram preservados.

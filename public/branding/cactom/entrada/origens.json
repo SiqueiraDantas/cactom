@@ -1,0 +1,89 @@
+{
+  "source": "Arte enviada pelo responsável em 30/10/2026",
+  "sourceFile": "codex-clipboard-cf1a22e0-ecd0-41cd-a2d8-e78f82f23b48.png",
+  "projectFile": "sertao-musical-v1.png",
+  "sha256": "b91eda96e7db02f7fc37f13fb42f20b582debb360651606fe9685be1f23c1330",
+  "width": 1536,
+  "height": 1024,
+  "status": "v3: 60 fps com pouso suave, branco exato, reprodução só após carregar o clipe inteiro; uma apresentação por carga da página.",
+  "referenceMotion": "Gravação fornecida pelo responsável; vídeo de terceiros apenas analisado, não distribuído no site.",
+  "video": {
+    "file": "cactom-saindo-do-livro-v3.mp4",
+    "derivedFrom": "cactom-saindo-do-livro-v2.mp4",
+    "derivedFromSha256": "195f40486e009132bcc727ff88f52033e206f22ce2948f6c344217b2c4b5be06",
+    "width": 1080,
+    "height": 720,
+    "fps": 60,
+    "frames": 269,
+    "durationSeconds": 4.48,
+    "audioTracks": 0,
+    "codec": "H.264 High, yuv420p bt709 limited range, faststart",
+    "bytes": 1247132,
+    "sha256": "eaaac3f74f28116469513fae4cde54cd0458e71923f904fe18f07605dcef4a6f",
+    "whiteLuma": 235,
+    "processing": [
+      "24 -> 60 fps por interpolação de movimento (ffmpeg minterpolate mci/aobmc/bidir); teste de validação: SSIM mínimo 0,978 ao reconstruir quadros removidos",
+      "início (6 quadros) e pouso final (10 quadros) re-temporizados com curva de raiz para aceleração/desaceleração suaves; trecho central na velocidade original",
+      "fundo levado ao branco exato (Y=235 -> 255 no navegador), dispensando filtro CSS"
+    ],
+    "posters": {
+      "start": "inicio-livro-v3.jpg",
+      "final": "turma-final-v3.jpg",
+      "note": "primeiro e último quadro decodificados do próprio v3",
+      "startSha256": "b496ee132baa6552255e6d49983f4e8749c2bf4ace606821134313f4e57555da",
+      "finalSha256": "b99947fc89c210f192fbf371b93443126578dd094f1973d93f9a5daceaf78a9e"
+    },
+    "playback": "uma vez por carga completa da página; clipe carregado inteiro antes de tocar; mantém o último quadro"
+  },
+  "previousVideoVersions": [
+    {
+      "audioTracks": 0,
+      "background": "neutral near-white normalized to white",
+      "crop": {
+        "height": 1072,
+        "width": 1608,
+        "x": 156,
+        "y": 4
+      },
+      "durationSeconds": 4.25,
+      "fps": 24,
+      "frames": 102,
+      "height": 720,
+      "playback": "once per page load, then hold final frame",
+      "reversed": true,
+      "sourceCutEndSeconds": 4.25,
+      "sourceCutStartSeconds": 0,
+      "sourceDurationSeconds": 7.8486666666666665,
+      "sourceFile": "Cactus_animation_loops_into_book_1ae7e6f3_1080p.mp4",
+      "width": 1080,
+      "file": "cactom-saindo-do-livro-v2.mp4",
+      "sha256": "195f40486e009132bcc727ff88f52033e206f22ce2948f6c344217b2c4b5be06",
+      "sourceSha256": "4462d6948b8104a41398e04a439e33e1e01a48e38c9c3e1e7d13977127d0ca50",
+      "bytes": 735768,
+      "cssWhiteCorrection": "brightness(1.012) on video and posters"
+    },
+    {
+      "audioTracks": 0,
+      "crop": {
+        "height": 1080,
+        "width": 1620,
+        "x": 150,
+        "y": 0
+      },
+      "durationSeconds": 4.25,
+      "fps": 24,
+      "frames": 102,
+      "height": 720,
+      "playback": "once, then hold final frame",
+      "reversed": true,
+      "sourceCutEndSeconds": 4.25,
+      "sourceCutStartSeconds": 0,
+      "sourceDurationSeconds": 7.8486666666666665,
+      "sourceFile": "Cactus_animation_loops_into_book_1ae7e6f3_1080p.mp4",
+      "width": 1080,
+      "sha256": "6b61b383ff62e6ddd39fa597de9dfd0e7bd8b109ed404e4ca72b19e5be523d17",
+      "sourceSha256": "4462d6948b8104a41398e04a439e33e1e01a48e38c9c3e1e7d13977127d0ca50",
+      "bytes": 739025
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "arquivo": "backups\\CACTOM_BASE_0.8.2_EM_DESENV_2026-10-22.zip",
+  "estado": "snapshot experimental anterior a auditoria CACTOM; nao e release aprovada",
+  "sha256": "a218156a7d37c4242752212a35718118d12a40f2554e3448d459f9b410ec7807",
+  "bytes": 18222410,
+  "arquivos": 136,
+  "crc": "aprovado",
+  "exclusoes": [
+    "node_modules",
+    "dist",
+    ".git",
+    ".env*"
+  ]
+}

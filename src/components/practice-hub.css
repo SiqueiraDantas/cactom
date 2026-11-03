@@ -1,0 +1,131 @@
+/* Praticar: one featured lesson, then two compact ways to explore. */
+.cactom-dashboard.learning-app--practice .learning-grid{display:block;max-width:1000px;padding:32px 38px 0}
+.cactom-dashboard .practice-hub{--practice-ink:#164b43;--practice-muted:#597366;display:grid;gap:25px;min-width:0;margin-bottom:32px}
+.cactom-dashboard .practice-heading{padding:0 2px}
+.cactom-dashboard .practice-eyebrow{display:inline-flex;align-items:center;gap:7px;color:#398365;font-size:10px;font-weight:900;letter-spacing:.12em}
+.cactom-dashboard .practice-eyebrow>svg{width:18px;height:18px}
+.cactom-dashboard .practice-heading h1{font-size:clamp(28px,3.1vw,38px);font-weight:1000;letter-spacing:-.055em;line-height:1.2;color:var(--practice-ink);margin:10px 0 9px}
+.cactom-dashboard .practice-heading h1>span{color:#289365;white-space:nowrap}
+.cactom-dashboard .practice-heading p{font-size:13px;line-height:1.65;color:var(--practice-muted)}
+.cactom-dashboard .practice-feature{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:8px 20px;align-items:center;position:relative;isolation:isolate;padding:29px 30px 27px;border:1px solid #c9e5d3;border-bottom:4px solid #b9d9c4;border-radius:29px;background:radial-gradient(ellipse at 95% 10%,#f9f9dc 0,transparent 50%),#edf7ed;box-shadow:0 8px 26px #194c3806}
+.cactom-dashboard .practice-feature-copy{min-width:0;position:relative;z-index:1}
+.cactom-dashboard .practice-kicker{display:inline-flex;align-items:center;gap:7px;font-size:9px;font-weight:1000;letter-spacing:.09em;color:#3f7958;line-height:1.5}
+.cactom-dashboard .practice-kicker i{width:6px;height:6px;background:#48a571;border-radius:50%;flex:none}
+.cactom-dashboard .practice-lesson-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:17px 0 7px;font-size:11px;color:#5a7865;font-weight:800}
+.cactom-dashboard .practice-feature h2{font-size:clamp(24px,2.6vw,31px);font-weight:1000;line-height:1.18;letter-spacing:-.045em;color:var(--practice-ink);max-width:450px;text-wrap:balance}
+.cactom-dashboard .practice-lesson-description{font-size:13px;line-height:1.65;color:#597561;max-width:370px;margin-top:11px}
+.cactom-dashboard .practice-tom-scene{position:relative;min-width:0;width:220px;height:206px;display:grid;place-items:center;grid-column:2;grid-row:1/3;align-self:center;pointer-events:none}
+.cactom-dashboard .practice-tom-orbit{position:absolute;width:183px;height:183px;border-radius:50%;background:#ffffff85;border:1px solid #ffffff;box-shadow:0 0 0 13px #ffffff2e}
+.cactom-dashboard .practice-tom{position:relative;display:block;width:192px;height:192px;max-width:none;object-fit:contain;filter:drop-shadow(0 8px 9px #36643210);transform:rotate(4deg)}
+.cactom-dashboard .practice-tom-hello{position:absolute;bottom:-1px;left:50%;translate:-50% 0;transform:rotate(-4deg);white-space:nowrap;padding:6px 12px;background:#fffef5;color:#55794d;border:1px solid #dbe7cf;border-radius:11px;font-size:11px;font-weight:1000;box-shadow:0 3px 0 #d8e6ca}
+.cactom-dashboard .practice-tom-spark{position:absolute;width:10px;height:10px;background:#f1b655;clip-path:polygon(50% 0,64% 36%,100% 50%,64% 64%,50% 100%,36% 64%,0 50%,36% 36%)}
+.cactom-dashboard .spark-one{top:15px;right:5px;width:18px;height:18px;rotate:12deg}
+.cactom-dashboard .spark-two{bottom:29px;left:7px}
+.cactom-dashboard .practice-feature-action{min-width:0;padding-top:13px}
+.cactom-dashboard .practice-start{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;max-width:300px;min-height:52px;border:1px solid #208555;border-radius:15px;background:#248e5c;box-shadow:0 4px 0 #176c45;color:#fff;padding:12px 18px;font-size:14px;font-weight:1000;cursor:pointer;transition:transform .18s,background .18s,box-shadow .18s}
+.cactom-dashboard .practice-start>svg{width:22px;height:22px;flex:none;transition:translate .18s}
+.cactom-dashboard .practice-start:active{transform:translateY(3px);box-shadow:0 1px 0 #176c45}
+.cactom-dashboard .practice-section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 2px 14px}
+.cactom-dashboard .practice-section-heading h2{font-size:19px;font-weight:1000;letter-spacing:-.035em;color:var(--practice-ink)}
+.cactom-dashboard .practice-section-heading>span{font-size:11px;color:#647d6c}
+.cactom-dashboard .practice-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cactom-dashboard .practice-mode{display:grid;grid-template-columns:105px minmax(0,1fr);align-items:center;gap:10px;position:relative;min-width:0;margin:0;padding:21px 18px 21px 10px;border:1px solid var(--mode-border);border-bottom-width:3px;border-radius:24px;background:var(--mode-bg);color:var(--practice-ink);text-align:left;cursor:pointer;transition:border-color .18s,transform .18s,box-shadow .18s}
+.cactom-dashboard .practice-mode--touch{--mode-bg:#fffbf0;--mode-border:#eddfbb;--mode-accent:#946d2d;--mode-hover:#ceaf67}
+.cactom-dashboard .practice-mode--score{--mode-bg:#f1f7fc;--mode-border:#d4e2ed;--mode-accent:#39728b;--mode-hover:#95b8cd}
+.cactom-dashboard .practice-mode-art{display:grid;place-items:center;width:105px;max-width:100%;height:115px;pointer-events:none}
+.cactom-dashboard .practice-mode-art>.course-artwork{width:133px;height:105px;max-width:none;transform:rotate(-8deg)}
+.cactom-dashboard .practice-mode-art>.practice-sheet-art{width:120px;height:105px;max-width:none;transform:rotate(3deg)}
+.cactom-dashboard .practice-mode-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0;height:100%}
+.cactom-dashboard .practice-mode-label{font-size:8px;line-height:1.5;letter-spacing:.08em;font-weight:1000;color:var(--mode-accent)}
+.cactom-dashboard .practice-mode-title{display:block;font-size:21px;font-weight:1000;letter-spacing:-.035em;line-height:1.17;margin:8px 0;color:var(--practice-ink)}
+.cactom-dashboard .practice-mode-description{display:block;font-size:11px;line-height:1.65;color:#5a736a;max-width:240px;margin-bottom:15px}
+.cactom-dashboard .practice-mode-link{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:1000;color:var(--mode-accent);margin-top:auto;min-height:23px}
+.cactom-dashboard .practice-mode-link>svg{width:17px;height:17px;flex:none;transition:translate .18s}
+.cactom-dashboard .practice-config{border:1px solid #dce7dd;border-radius:18px;background:#fff;min-width:0;max-width:100%;color:var(--practice-ink)}
+.cactom-dashboard .practice-config>summary{display:flex;align-items:center;gap:12px;padding:15px 17px;min-height:75px;list-style:none;cursor:pointer;border-radius:18px}
+.cactom-dashboard .practice-config>summary::-webkit-details-marker{display:none}
+.cactom-dashboard .practice-config-icon{display:grid;place-items:center;width:37px;height:37px;border-radius:12px;background:#eff5ed;color:#678365;flex:none}
+.cactom-dashboard .practice-config-icon>svg{width:22px;height:22px}
+.cactom-dashboard .practice-config-title{font-size:13px;font-weight:900;line-height:1.4;min-width:0}
+.cactom-dashboard .practice-config-title>small{display:block;font-size:11px;line-height:1.5;font-weight:600;color:#607768;margin-top:2px}
+.cactom-dashboard .practice-system-value{margin-left:auto;background:#eef6ec;border:1px solid #dfebd9;border-radius:9px;padding:5px 8px;font-size:10px;font-weight:900;color:#5a7856;flex:none}
+.cactom-dashboard .practice-config>summary>svg{width:19px;height:19px;color:#6e896f;flex:none;transition:rotate .18s}
+.cactom-dashboard .practice-config[open]>summary>svg{rotate:180deg}
+.cactom-dashboard .practice-config-content{border-top:1px solid #e6eee3;margin:0 17px;padding:18px 0 20px}
+.cactom-dashboard .practice-config-content label{display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:12px;font-weight:900;color:#416d55}
+.cactom-dashboard .practice-config-content select{font-family:inherit;font-size:12px;color:#416a54;min-width:0;max-width:65%;min-height:44px;border:1px solid #c8dcca;border-radius:11px;background:#fafff8;padding:9px 30px 9px 12px}
+.cactom-dashboard .practice-config-content p{font-size:11px;line-height:1.75;color:#60755f;max-width:640px;margin-top:13px}
+.cactom-dashboard .practice-reinforcement{min-width:0}
+.cactom-dashboard .practice-reinforcement>.adaptive-card{margin:0;border-color:#d5e6db;background:#f4faf4;padding:21px}
+.cactom-dashboard .practice-reinforcement .adaptive-card h2{font-size:20px;line-height:1.3}
+.cactom-dashboard .practice-reinforcement .adaptive-card p{font-size:12px;line-height:1.7}
+.cactom-dashboard .practice-hub :is(button,summary,select):focus-visible{outline:3px solid #4a84c3;outline-offset:5px}
+@media(hover:hover){
+ .cactom-dashboard .practice-start:hover{background:#1c8151;transform:translateY(-1px)}
+ .cactom-dashboard .practice-start:hover>svg,.cactom-dashboard .practice-mode:hover .practice-mode-link>svg{translate:3px 0}
+ .cactom-dashboard .practice-mode:hover{border-color:var(--mode-hover);transform:translateY(-3px);box-shadow:0 8px 20px #214f3c0c}
+ .cactom-dashboard .practice-config>summary:hover{background:#f7fbf5}
+}
+@media(max-width:800px){
+ .cactom-dashboard .practice-mode{grid-template-columns:85px minmax(0,1fr);padding-right:15px;gap:5px}
+ .cactom-dashboard .practice-mode-art{width:85px}
+ .cactom-dashboard .practice-mode-art>.course-artwork{width:112px;height:95px}
+ .cactom-dashboard .practice-mode-art>.practice-sheet-art{width:105px;height:95px}
+ .cactom-dashboard .practice-mode-title{font-size:19px}
+}
+@media(max-width:850px){
+ .cactom-dashboard.learning-app--practice .learning-grid{padding:23px 17px 0}
+ .cactom-dashboard .practice-hub{gap:22px;margin-bottom:22px}
+ .cactom-dashboard .practice-heading h1{font-size:30px;margin-top:9px;letter-spacing:-.05em}
+ .cactom-dashboard .practice-heading p{font-size:12px;max-width:300px}
+ .cactom-dashboard .practice-eyebrow{font-size:9px}
+ .cactom-dashboard .practice-feature{grid-template-columns:minmax(0,1fr) 112px;gap:0 7px;padding:23px 19px 22px;border-radius:25px}
+ .cactom-dashboard .practice-kicker{font-size:8px;letter-spacing:.055em;gap:5px}
+ .cactom-dashboard .practice-lesson-meta{font-size:10px;margin-top:15px;gap:5px}
+ .cactom-dashboard .practice-feature h2{font-size:25px;line-height:1.16;max-width:260px}
+ .cactom-dashboard .practice-lesson-description{font-size:12px;line-height:1.65;margin-top:10px}
+ .cactom-dashboard .practice-tom-scene{width:112px;height:145px;grid-row:1;align-self:center}
+ .cactom-dashboard .practice-tom{width:133px;height:133px}
+ .cactom-dashboard .practice-tom-orbit{width:113px;height:113px;box-shadow:0 0 0 6px #ffffff2e}
+ .cactom-dashboard .practice-tom-hello{bottom:-2px;padding:4px 8px;border-radius:9px;font-size:9px}
+ .cactom-dashboard .spark-one{width:12px;height:12px;top:1px;right:3px}
+ .cactom-dashboard .spark-two{width:7px;height:7px;bottom:10px;left:2px}
+ .cactom-dashboard .practice-feature-action{grid-column:1/-1;padding-top:23px}
+ .cactom-dashboard .practice-start{max-width:none;min-height:51px;font-size:13px;padding-left:17px}
+ .cactom-dashboard .practice-section-heading h2{font-size:18px}
+ .cactom-dashboard .practice-section-heading>span{font-size:10px}
+ .cactom-dashboard .practice-modes{grid-template-columns:1fr;gap:12px}
+ .cactom-dashboard .practice-mode{grid-template-columns:101px minmax(0,1fr);gap:13px;padding:19px 19px 18px 12px;border-radius:22px}
+ .cactom-dashboard .practice-mode-art{width:101px;height:107px}
+ .cactom-dashboard .practice-mode-art>.course-artwork{width:128px;height:110px}
+ .cactom-dashboard .practice-mode-art>.practice-sheet-art{width:119px;height:105px}
+ .cactom-dashboard .practice-mode-label{font-size:8px}
+ .cactom-dashboard .practice-mode-title{font-size:21px;margin:6px 0}
+ .cactom-dashboard .practice-mode-description{font-size:11px;margin-bottom:9px}
+ .cactom-dashboard .practice-mode-link{font-size:11px}
+ .cactom-dashboard .practice-config>summary{gap:9px;padding:14px 12px}
+ .cactom-dashboard .practice-config-title{font-size:12px}
+ .cactom-dashboard .practice-config-title>small{font-size:10px}
+ .cactom-dashboard .practice-system-value{font-size:9px;padding:5px 6px}
+ .cactom-dashboard .practice-config-content label{flex-direction:column;align-items:stretch;gap:9px}
+ .cactom-dashboard .practice-config-content select{max-width:100%;width:100%}
+ .cactom-dashboard .practice-reinforcement>.adaptive-card{padding:17px}
+}
+@media(max-width:360px){
+ .cactom-dashboard .practice-heading h1{font-size:28px}
+ .cactom-dashboard .practice-feature{grid-template-columns:minmax(0,1fr) 88px;padding:21px 16px}
+ .cactom-dashboard .practice-feature h2{font-size:23px}
+ .cactom-dashboard .practice-tom-scene{width:88px}
+ .cactom-dashboard .practice-tom{width:110px;height:110px}
+ .cactom-dashboard .practice-tom-orbit{width:89px;height:89px}
+ .cactom-dashboard .practice-tom-hello{bottom:8px;font-size:8px}
+ .cactom-dashboard .practice-mode{grid-template-columns:79px minmax(0,1fr);gap:10px;padding-left:8px}
+ .cactom-dashboard .practice-mode-art{width:79px}
+ .cactom-dashboard .practice-mode-art>.course-artwork{width:105px}
+ .cactom-dashboard .practice-mode-art>.practice-sheet-art{width:98px}
+ .cactom-dashboard .practice-mode-title{font-size:19px}
+ .cactom-dashboard .practice-config-icon{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .cactom-dashboard .practice-hub *{transition:none!important;animation:none!important}
+}

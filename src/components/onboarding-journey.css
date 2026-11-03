@@ -1,0 +1,170 @@
+/* Boas-vindas do Tom depois da escolha da oficina: perguntas, atividade de partitura, trilha e ofensiva. */
+.obj{--ink:#3c4a46;--soft:#6f7d78;--line:#e5e5e5;--green:#58cc02;--green-dark:#58a700;--blue:#1cb0f6;--blue-soft:#ddf4ff;--blue-line:#84d8ff;--red:#ff4b4b;
+ display:flex;flex-direction:column;min-height:100svh;background:#fff;color:var(--ink);font-family:Nunito,'Segoe UI',system-ui,sans-serif}
+.obj *{box-sizing:border-box}
+.obj-top{display:flex;align-items:center;gap:18px;width:100%;max-width:1080px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.obj-back{display:grid;place-items:center;flex:none;width:40px;height:40px;padding:6px;border:0;border-radius:10px;background:transparent;color:#afafaf;cursor:pointer}
+.obj-back svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.obj-back:hover{background:#f3f4f4}
+.obj-progress{position:relative;flex:1;height:16px;border-radius:99px;background:var(--line);overflow:hidden}
+.obj-progress>span{position:absolute;inset:0 auto 0 0;border-radius:99px;background:var(--green);transition:width .45s cubic-bezier(.34,1.3,.64,1)}
+.obj-progress>span::after{content:'';position:absolute;left:8px;right:8px;top:4px;height:4px;border-radius:99px;background:rgba(255,255,255,.32)}
+.obj-hearts{display:flex;align-items:center;gap:6px;font-weight:900;font-size:18px;color:var(--red)}
+.obj-hearts svg{width:30px;height:30px}
+.obj-sound{display:grid;place-items:center;flex:none;width:40px;height:40px;padding:8px;border:0;border-radius:10px;background:transparent;color:#afafaf;cursor:pointer}
+.obj-sound:hover{background:#f3f4f4}
+.obj-sound svg{width:24px;height:24px}
+.obj-sound[aria-pressed=false]{color:#d0d0d0}
+.obj-main{flex:1;width:100%;max-width:1000px;margin:0 auto;padding:clamp(24px,5vh,48px) max(16px,env(safe-area-inset-right,0px)) 32px max(16px,env(safe-area-inset-left,0px))}
+.obj-main h1:focus{outline:none}
+.obj-footer{border-top:2px solid var(--line);background:#fff}
+.obj-footer-inner{display:flex;align-items:center;justify-content:flex-end;gap:16px;max-width:1000px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.obj-continue{min-width:200px;min-height:50px;padding:12px 24px;border:0;border-radius:16px;background:var(--green);box-shadow:0 4px 0 var(--green-dark);color:#fff;font:900 15px Nunito,'Segoe UI',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .08s,filter .15s}
+.obj-continue:hover:not(:disabled){filter:brightness(1.05)}
+.obj-continue:active:not(:disabled){transform:translateY(4px);box-shadow:none}
+.obj-continue:disabled{background:var(--line);box-shadow:0 4px 0 #d0d0d0;color:#afafaf;cursor:default}
+.obj-continue--bad{background:var(--red);box-shadow:0 4px 0 #ea2b2b}
+.obj :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* falas do Tom */
+.obj-speaker{display:flex;align-items:center;gap:18px;margin:0 0 clamp(24px,5vh,44px)}
+.obj-speaker img{flex:none;width:clamp(96px,11vw,124px);height:auto}
+.obj-bubble{position:relative;margin:0;padding:14px 20px;border:2px solid var(--line);border-radius:16px;background:#fff;font:700 clamp(18px,2vw,22px)/1.35 Nunito,'Segoe UI',sans-serif;color:var(--ink);text-wrap:balance;animation:obj-pop .35s cubic-bezier(.175,.885,.32,1.275) both}
+.obj-bubble::before,.obj-bubble::after{content:'';position:absolute;width:0;height:0;border-style:solid}
+.obj-bubble--left::before{left:-14px;top:50%;margin-top:-11px;border-width:11px 14px 11px 0;border-color:transparent var(--line) transparent transparent}
+.obj-bubble--left::after{left:-10px;top:50%;margin-top:-8px;border-width:8px 11px 8px 0;border-color:transparent #fff transparent transparent}
+.obj-bubble--down{max-width:380px;text-align:left}
+.obj-bubble--down::before{left:50%;bottom:-14px;margin-left:-11px;border-width:14px 11px 0;border-color:var(--line) transparent transparent}
+.obj-bubble--down::after{left:50%;bottom:-10px;margin-left:-8px;border-width:11px 8px 0;border-color:#fff transparent transparent}
+.obj-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:100%;padding-top:clamp(20px,12vh,120px)}
+.obj-tom-big{width:min(210px,52vw);height:auto;animation:obj-rise .5s cubic-bezier(.175,.885,.32,1.275) both}
+
+/* opções */
+.obj-ask{max-width:900px;margin:0 auto}
+.obj-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:780px;margin:0 auto}
+.obj-list{display:grid;gap:14px;max-width:520px;margin:0 auto}
+.obj-list--big .obj-option{padding:22px 22px}
+.obj-option{display:flex;align-items:center;gap:16px;width:100%;min-height:68px;padding:12px 18px;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;background:#fff;color:var(--ink);font:800 17px/1.3 Nunito,'Segoe UI',sans-serif;text-align:left;cursor:pointer;transition:background .15s}
+.obj-option:hover{background:#f7f7f7}
+.obj-option.is-selected{border-color:var(--blue-line);background:var(--blue-soft);color:#1899d6}
+.obj-option:active{transform:translateY(2px);border-bottom-width:2px;margin-bottom:2px}
+.obj-icon{flex:none;width:40px;height:40px}
+.obj-icon--big{width:56px;height:56px}
+.obj-goal-tag{margin-left:auto;font-weight:600;color:var(--soft)}
+.obj-option.is-selected .obj-goal-tag{color:#1899d6}
+.obj-path-text{display:grid;gap:4px}
+.obj-path-text span{font-weight:600;color:var(--soft)}
+.obj-overview{list-style:none;display:grid;max-width:560px;margin:0 auto;padding:0}
+.obj-overview li{display:flex;align-items:center;gap:20px;padding:20px 8px}
+.obj-overview li+li{border-top:2px solid var(--line)}
+.obj-overview b{display:block;font-size:18px;font-weight:900}
+.obj-overview span{color:var(--soft);font-weight:600}
+.obj-overview-tile{flex:none;width:56px}
+.obj-overview-tile svg{display:block;width:56px;height:auto}
+
+/* atividade */
+.obj-quiz{max-width:640px}
+.obj-tag{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-weight:900;font-size:15px;letter-spacing:.04em;color:#ce82ff}
+.obj-tag svg{width:24px;height:24px}
+.obj-quiz h1{margin:0 0 26px;font:900 clamp(24px,3vw,30px)/1.25 Nunito,'Segoe UI',sans-serif;color:var(--ink)}
+.obj-prompt-art{width:min(240px,70%);margin:0 0 22px;padding:8px;border:2px solid var(--line);border-radius:16px}
+.obj-prompt-art svg,.obj-answer-art svg{display:block;width:100%;height:auto}
+.obj-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.obj-answers{display:grid;gap:12px}
+.obj-answer{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;background:#fff;color:var(--ink);font:700 18px Nunito,'Segoe UI',sans-serif;text-align:left;cursor:pointer}
+.obj-answer:hover:not(:disabled){background:#f7f7f7}
+.obj-answer:disabled{cursor:default}
+.obj-answer-art{display:block;padding:6px 0}
+.obj-answer-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:30px}
+.obj-answer--list{flex-direction:row-reverse;justify-content:flex-end;align-items:center;padding:14px 16px}
+.obj-answer--list .obj-answer-row{flex:1;flex-direction:row-reverse;justify-content:flex-end;gap:16px}
+.obj-key{display:grid;place-items:center;width:30px;height:30px;border:2px solid var(--line);border-radius:8px;font-size:14px;color:#afafaf}
+.obj-answer.is-selected{border-color:var(--blue-line);background:var(--blue-soft);color:#1899d6}
+.obj-answer.is-selected .obj-key{border-color:var(--blue-line);color:#1899d6}
+.obj-answer.is-right{border-color:#a5ed6e;background:#d7ffb8;color:#58a700}
+.obj-answer.is-wrong{border-color:#ffb2b2;background:#ffdfe0;color:#ea2b2b}
+.obj-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.obj-skip{min-width:140px;min-height:50px;padding:12px 22px;border:2px solid var(--line);border-bottom-width:4px;border-radius:16px;background:#fff;color:#afafaf;font:900 15px Nunito,'Segoe UI',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-right:auto}
+.obj-footer--quiz.is-right{background:#d7ffb8;border-top-color:#d7ffb8}
+.obj-footer--quiz.is-wrong{background:#ffdfe0;border-top-color:#ffdfe0}
+.obj-feedback{margin-right:auto;display:grid;gap:4px;font-size:22px}
+.obj-feedback b{font-weight:900}
+.is-right .obj-feedback{color:#58a700}
+.is-wrong .obj-feedback{color:#ea2b2b}
+.is-wrong .obj-feedback span{font-size:17px;font-weight:600}
+.obj-interlude{display:flex;align-items:center;gap:22px;max-width:none;padding-left:0;overflow:hidden}
+.obj-peek{flex:none;width:clamp(140px,16vw,190px);height:auto;margin-left:-38px;transform:rotate(18deg);animation:obj-peek .55s cubic-bezier(.175,.885,.32,1.275) both}
+
+/* lição concluída */
+.obj-complete{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:clamp(10px,6vh,60px)}
+.obj-celebrate{position:relative;width:min(220px,56vw)}
+.obj-celebrate img{display:block;width:100%;height:auto;animation:obj-rise .55s cubic-bezier(.175,.885,.32,1.275) both}
+.obj-celebrate i{position:absolute;left:50%;top:40%;width:9px;height:14px;border-radius:3px;background:hsl(calc(var(--i) * 36) 90% 60%);animation:obj-confetti 1.4s cubic-bezier(.2,.7,.3,1) calc(var(--i) * .05s) both}
+.obj-complete h1{margin:18px 0 28px;font:900 clamp(28px,3.4vw,36px) Nunito,'Segoe UI',sans-serif;color:#ffb020}
+.obj-stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.obj-stat{min-width:150px;border:2px solid;border-radius:16px;overflow:hidden;animation:obj-pop .4s cubic-bezier(.175,.885,.32,1.275) .3s both}
+.obj-stat b{display:block;padding:6px 10px;font-size:13px;font-weight:900;letter-spacing:.04em;color:#fff}
+.obj-stat span{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;font-size:22px;font-weight:900}
+.obj-stat svg{width:26px;height:26px}
+.obj-stat--xp{border-color:#ffc800}.obj-stat--xp b{background:#ffc800}.obj-stat--xp span{color:#ffb020}
+.obj-stat--acc{border-color:var(--green)}.obj-stat--acc b{background:var(--green)}.obj-stat--acc span{color:var(--green)}
+
+/* trilha */
+.obj-hop{display:flex;justify-content:center}
+.obj-trail{position:relative;width:300px;height:470px}
+.obj-node{position:absolute;display:grid;place-items:center;width:64px;height:58px;margin:-29px 0 0 -32px;border-radius:50%;background:#e5e5e5;box-shadow:0 7px 0 #cfcfcf}
+.obj-node svg{width:30px;height:30px}
+.obj-node.is-first{background:var(--green);box-shadow:0 7px 0 var(--green-dark);animation:obj-glow 1.2s ease-in-out 2.4s both}
+.obj-start-bubble{position:absolute;transform:translateX(-50%);padding:8px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--green);font-weight:900;letter-spacing:.04em;animation:obj-pop .35s cubic-bezier(.175,.885,.32,1.275) 2.5s both}
+.obj-hopper{position:absolute;left:0;top:0;width:96px;height:auto;margin:-96px 0 0 -48px;animation:obj-hop 2.6s ease-in-out .2s both}
+@keyframes obj-hop{
+ 0%{transform:translate(150px,420px)}
+ 12%{transform:translate(130px,330px)}20%{transform:translate(110px,330px)}
+ 32%{transform:translate(100px,230px)}40%{transform:translate(90px,240px)}
+ 52%{transform:translate(100px,140px)}60%{transform:translate(110px,150px)}
+ 74%{transform:translate(130px,40px)}84%,100%{transform:translate(150px,60px)}
+}
+
+/* ofensiva */
+.obj-streak{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:clamp(10px,6vh,60px)}
+.obj-flame{width:120px;height:auto;transform-origin:50% 100%;animation:obj-flame 1.6s ease-in-out infinite alternate}
+.obj-streak h1{margin:16px 0 8px;font:900 clamp(26px,3vw,32px) Nunito,'Segoe UI',sans-serif;color:#ff9600}
+.obj-streak p{max-width:380px;margin:0 0 26px;font-size:17px;font-weight:600;color:var(--soft)}
+.obj-week{list-style:none;display:flex;gap:10px;margin:0;padding:16px 18px;border:2px solid var(--line);border-radius:16px}
+.obj-week li{display:grid;justify-items:center;gap:8px;font-weight:800;color:#afafaf;font-size:14px}
+.obj-week i{width:26px;height:26px;border-radius:50%;background:#e5e5e5}
+.obj-week li.is-today{color:#ff9600}
+.obj-week li.is-today i{background:#fff;border:3px solid #ff9600}
+
+@keyframes obj-pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+@keyframes obj-rise{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes obj-peek{from{transform:translateX(-120px) rotate(18deg)}to{transform:rotate(18deg)}}
+@keyframes obj-confetti{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(calc((var(--i) - 4.5) * 26px),calc(-90px - var(--i) * 6px)) rotate(400deg)}}
+@keyframes obj-glow{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes obj-flame{from{transform:scale(1,1)}to{transform:scale(1.05,.96)}}
+
+@media(max-width:700px){
+ .obj-grid{grid-template-columns:minmax(0,1fr)}
+ .obj-speaker img{width:84px}
+ .obj-footer-inner{padding-top:16px}
+ .obj-footer-inner .obj-continue{flex:1;min-width:0}
+ .obj-skip{min-width:0;flex:1}
+ .obj-feedback{font-size:18px}
+ .obj-footer--quiz.is-right .obj-footer-inner,.obj-footer--quiz.is-wrong .obj-footer-inner{flex-wrap:wrap}
+ .obj-footer--quiz.is-right .obj-feedback,.obj-footer--quiz.is-wrong .obj-feedback{width:100%}
+ .obj-cards{gap:8px}.obj-answer{padding:10px;font-size:16px}
+ .obj-trail{transform:scale(.86);transform-origin:50% 0}
+}
+@media(prefers-reduced-motion:reduce){.obj *{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}}
+/* Rojão (Tom na corda) e gota d’água no lugar do coração */
+.obj-rojao{width:min(240px,62vw);height:auto}
+.obj-hearts{color:#1CB0F6}
+.obj-hearts.is-dry{color:#AFAFAF}
+.obj-drop{width:26px;height:auto;overflow:visible}
+.obj-drop-water{animation:obj-drain .6s ease-out}
+.obj-drop-wave{animation:obj-wave 1.6s ease-in-out infinite alternate}
+.obj-drop-drip{opacity:0;animation:obj-drip .7s ease-in}
+.obj-hearts.is-dry .obj-drop-drip{display:none}
+@keyframes obj-drain{from{transform:translateY(-9px)}to{transform:none}}
+@keyframes obj-wave{from{transform:translateX(0)}to{transform:translateX(-7px)}}
+@keyframes obj-drip{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(16px) scale(.6)}}

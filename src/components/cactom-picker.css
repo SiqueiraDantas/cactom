@@ -1,0 +1,21 @@
+/* Cactom course selection — illustrated cards and a quiet account menu. */
+.instrument-picker{min-height:100dvh;width:100%;max-width:100%;overflow-x:clip;background:#fff;color:#17474a;padding:24px clamp(18px,4vw,64px) 140px}
+.instrument-picker *{box-sizing:border-box}
+.instrument-picker>header{display:flex;align-items:center;justify-content:space-between;max-width:1120px;min-height:64px;margin:0 auto;gap:18px}
+.instrument-picker .cactom-wordmark{display:block;width:175px;height:auto;flex:none}
+.picker-account{position:relative;z-index:5;min-width:0;max-width:52%}
+.picker-account>summary{display:flex;align-items:center;gap:9px;padding:5px 10px 5px 5px;border:1px solid #d9e8df;background:#fff;border-radius:999px;list-style:none;cursor:pointer;color:#3e6a59;font-size:12px;font-weight:800;min-height:44px}
+.picker-account>summary::-webkit-details-marker{display:none}
+.picker-account>summary>span:not(.picker-avatar){max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.picker-avatar{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;background:#e6f4eb;color:#287858}
+.picker-avatar>svg{width:21px;height:21px}
+.picker-account-chevron{width:17px;height:17px;flex:none;transition:transform .16s}
+.picker-account[open] .picker-account-chevron{transform:rotate(180deg)}
+.picker-account-menu{position:absolute;right:0;top:calc(100% + 8px);width:min(230px,calc(100vw - 40px));padding:7px;border:1px solid #d9e8df;border-radius:17px;background:#fff;box-shadow:0 12px 36px #194c3921}
+.picker-account-menu>button{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;border:0;border-radius:11px;background:transparent;padding:10px 12px;color:#375f51;text-align:left;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.picker-account-menu>button:hover{background:#edf7f0}
+.picker-account-menu>button:first-child>svg{rotate:180deg}
+
+.instrument-picker :where(summary,button):focus-visible{outline:3px solid #2c5163;outline-offset:4px}
+@media(max-width:600px){.instrument-picker{padding:14px 18px 145px}.instrument-picker>header{min-height:56px;gap:12px}.instrument-picker .cactom-wordmark{width:143px}.picker-account>summary{font-size:11px;gap:5px;padding-right:7px}.picker-account>summary>span:not(.picker-avatar){max-width:70px}.picker-avatar{width:29px;height:29px}}
+@media(prefers-reduced-motion:reduce){.picker-account-chevron{transition:none}}

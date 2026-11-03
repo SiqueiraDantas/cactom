@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+.next/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+coverage/
+
+# Cache do Vite
+.vite/
+node_modules/.vite/
+
+# Backups locais
+_backup-*/

@@ -1,0 +1,65 @@
+/* Cactom entrance: the class pops out of the songbook with squash & stretch, then keeps a
+   light idle (bob, blink, playing). Transforms/opacity only; paused off-screen; static if reduced. */
+.wc-stage{position:relative;width:100%;aspect-ratio:3/2;contain:layout paint;isolation:isolate;container-type:inline-size;--k:1}
+.wc-stage[data-phase=settled]{--k:0}
+.wc-actor,.wc-book,.wc-note,.wc-burst{position:absolute}
+.wc-actor svg,.wc-book svg,.wc-note svg{display:block;width:100%;height:auto;overflow:visible}
+.wc-pop,.wc-bob{transform-origin:50% 92%}
+.wc-book{left:23%;bottom:2%;width:54%;transform-origin:50% 80%}
+.wc-note{width:5.6%;transform-origin:50% 100%}
+.wc-burst{left:50%;bottom:24%;width:0;height:0}
+.wc-burst i{--u:calc(100cqw / 540);position:absolute;left:calc(var(--u) * -1.5);top:calc(var(--u) * -11);width:calc(var(--u) * 3);height:calc(var(--u) * 22);border-radius:3px;background:#f5a528;opacity:0;transform:rotate(var(--a)) translateY(calc(var(--u) * -30))}
+
+/* Before the entrance starts (first paint) the stage shows only the closed scene. */
+.wc-stage[data-phase=waiting] .wc-actor,.wc-stage[data-phase=waiting] .wc-note,.wc-stage[data-phase=waiting] .wc-book{opacity:0}
+
+/* ——— Entrance (once per page load) ——— */
+.wc-stage[data-phase=entering] .wc-book{animation:wc-book .62s both}
+.wc-stage[data-phase=entering] .wc-burst i{animation:wc-burst .55s cubic-bezier(.2,.8,.3,1) .5s both}
+.wc-stage[data-phase=entering] .wc-pop{animation:wc-pop .82s var(--delay) both}
+.wc-stage[data-phase=entering] .wc-actor--lead .wc-pop{animation-name:wc-rise;animation-duration:.9s}
+.wc-stage[data-phase=entering] .wc-note{animation:wc-note-in .5s cubic-bezier(.34,1.56,.64,1) var(--delay) both}
+@keyframes wc-book{
+ 0%{transform:translateY(38%) scale(.55);opacity:0;animation-timing-function:cubic-bezier(.2,.8,.3,1)}
+ 25%{opacity:1}
+ 55%{transform:translateY(-5%) scale(1.05,.96);animation-timing-function:ease-in-out}
+ 78%{transform:translateY(1.5%) scale(.985,1.015);animation-timing-function:ease-in-out}
+ 100%{transform:none;opacity:1}}
+@keyframes wc-rise{
+ 0%{transform:translate(0,var(--dy)) scale(.5,.5);opacity:0;animation-timing-function:cubic-bezier(.15,.75,.35,1)}
+ 14%{opacity:1}
+ 42%{transform:translate(0,-26%) scale(.9,1.13);animation-timing-function:cubic-bezier(.55,0,.85,.4)}
+ 66%{transform:translate(0,0) scale(1.14,.86);animation-timing-function:cubic-bezier(.2,.8,.3,1)}
+ 80%{transform:translate(0,-3%) scale(.95,1.06);animation-timing-function:ease-in-out}
+ 91%{transform:translate(0,0) scale(1.03,.97);animation-timing-function:ease-in-out}
+ 100%{transform:none;opacity:1}}
+@keyframes wc-pop{
+ 0%{transform:translate(var(--dx),var(--dy)) scale(.25);opacity:0;animation-timing-function:cubic-bezier(.15,.7,.35,1)}
+ 12%{opacity:1}
+ 44%{transform:translate(calc(var(--dx)*.38),calc(var(--dy)*.3 - 62%)) scale(.9,1.12);animation-timing-function:cubic-bezier(.55,0,.85,.4)}
+ 68%{transform:translate(0,0) scale(1.16,.84);animation-timing-function:cubic-bezier(.2,.8,.3,1)}
+ 82%{transform:translate(0,-4%) scale(.95,1.06);animation-timing-function:ease-in-out}
+ 92%{transform:translate(0,0) scale(1.02,.98);animation-timing-function:ease-in-out}
+ 100%{transform:none;opacity:1}}
+@keyframes wc-burst{0%{opacity:0;transform:rotate(var(--a)) translateY(calc(var(--u) * -26)) scaleY(.4)}30%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateY(calc(var(--u) * -78)) scaleY(.2)}}
+@keyframes wc-note-in{0%{transform:translateY(160%) scale(.2) rotate(0);opacity:0}100%{transform:rotate(var(--rot));opacity:1}}
+
+/* ——— Idle (starts exactly when the entrance ends; immediately when already presented) ——— */
+.wc-bob{animation:wc-bob var(--bob) ease-in-out calc((var(--delay) + .82s) * var(--k)) infinite both}
+.wc-actor--lead .wc-bob{animation-delay:calc(1.38s * var(--k))}
+.wc-note svg{animation:wc-float var(--float) ease-in-out calc((var(--delay) + .5s) * var(--k)) infinite both}
+@keyframes wc-bob{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-3.2%) scale(.982,1.022)}}
+@keyframes wc-float{0%,100%{transform:translateY(0) rotate(var(--rot))}50%{transform:translateY(-22%) rotate(calc(var(--rot) * -1))}}
+
+/* Parts inside each Tom */
+.wc-actor--lead .ct-arm--right{transform-origin:0% 100%;animation:ct-wave 5.2s ease-in-out calc(1.6s * var(--k) + .2s) infinite}
+.wc-actor--lead .ct-arm--left{transform-origin:100% 100%;animation:ct-wave-l 5.2s ease-in-out calc(1.6s * var(--k) + .2s) infinite}
+.wc-actor--trumpet .ct-arm--right{transform-origin:0% 100%;animation:ct-toot 1.15s ease-in-out infinite}
+.wc-actor--maestro .ct-arm--right{transform-origin:0% 100%;animation:ct-conduct 1.3s ease-in-out infinite alternate}
+
+.wc-stage[data-paused=true] *,.wc-stage[data-paused=true] *::before{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.wc-stage *{animation:none!important;opacity:1!important}}
+.wc-stage[data-phase=settled][data-reduced=true] *{animation:none!important}
+@keyframes ct-wave{0%,62%,100%{transform:rotate(0)}68%{transform:rotate(-24deg)}74%{transform:rotate(12deg)}80%{transform:rotate(-20deg)}86%{transform:rotate(8deg)}92%{transform:rotate(0)}}
+@keyframes ct-wave-l{0%,62%,100%{transform:rotate(0)}70%{transform:rotate(8deg)}86%{transform:rotate(-4deg)}}
+@keyframes ct-conduct{0%{transform:rotate(-14deg)}100%{transform:rotate(16deg)}}

@@ -1,0 +1,36 @@
+.clarinet-course{min-height:100vh;color:#284e59;background:#f6faf7;font-family:inherit;padding-bottom:55px}
+.clarinet-course *{box-sizing:border-box}.clarinet-course button{font:inherit;cursor:pointer}
+.clarinet-bar{height:76px;padding:16px clamp(16px,4vw,46px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-bottom:1px solid #e2ede9}
+.clarinet-bar>button{background:transparent;color:#306b65;border:0;font-weight:800;padding:9px;border-radius:11px}.clarinet-bar>button:hover{background:#e9f6ee}
+.clarinet-bar strong{font-size:clamp(18px,2.2vw,27px);letter-spacing:-.5px}.clarinet-bar strong span{color:#f2a123}
+.clarinet-path{max-width:650px;margin:22px auto 40px;padding:0 14px}.clarinet-unit{margin-bottom:32px}
+.clarinet-unit-title{border-radius:20px;padding:17px 22px;display:flex;align-items:center;gap:14px;color:#fff;background:#3b8ac1;box-shadow:0 4px 0 #256994}
+.clarinet-unit-title.green{background:#289567;box-shadow:0 4px 0 #187249}.clarinet-unit-title.orange{background:#e5a03a;box-shadow:0 4px 0 #b17b2b}
+.clarinet-unit-title>span{flex:0 0 44px;height:44px;border-radius:50%;background:#ffffff2e;display:grid;place-items:center;font-weight:900;font-size:22px}
+.clarinet-unit-title small{font-size:10px;letter-spacing:.5px;font-weight:800;color:#fffdf8}.clarinet-unit-title h2{margin:4px 0 0;font-size:20px;letter-spacing:-.5px}
+.clarinet-node-row{display:flex;gap:16px;align-items:center;height:118px;padding:8px 9%}.clarinet-node-row.right{padding-left:37%}
+.clarinet-node-row>div{display:grid;gap:6px;max-width:180px}.clarinet-node-row b{font-size:14px;line-height:1.3}.clarinet-node-row small{font-size:11px;color:#5f7a80;line-height:1.35}
+.clarinet-node{flex:0 0 74px;height:74px;border:5px solid #e8f3ec;border-radius:50%;background:#4ea56c;color:white;font-size:28px;font-weight:900;box-shadow:0 6px 0 #287d53,0 0 0 1px #b4e5c4;transition:transform .18s}
+.clarinet-node:hover{transform:translateY(-3px)}.clarinet-node.complete{background:#e6a141;box-shadow:0 6px 0 #b57f2a}
+.clarinet-local{max-width:600px;margin:30px auto;padding:0 25px;text-align:center;color:#728b8d;font-size:12px;line-height:1.6}
+.clarinet-lesson-layout{max-width:1100px;margin:35px auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:start;gap:22px}
+.clarinet-lesson-card,.clarinet-teacher,.clarinet-victory-card{border-radius:25px;background:#fff;border:1px solid #e0eee7;box-shadow:0 12px 30px #2c516314;padding:clamp(18px,4vw,35px)}
+.clarinet-lesson-card>small{font-weight:900;color:#2b9b67;letter-spacing:1px;font-size:10px}.clarinet-lesson-card h1{font-size:clamp(26px,4vw,36px);letter-spacing:-.9px;margin:8px 0}.clarinet-lesson-card>p{font-size:14px;line-height:1.65;color:#5d7980}
+.clarinet-progress{height:9px;border-radius:20px;background:#e6f1ea;overflow:hidden;margin:18px 0 28px}.clarinet-progress span{height:100%;display:block;background:linear-gradient(90deg,#309c67,#eeb158);transition:width .2s}
+.clarinet-note-mark{display:grid;gap:5px;text-align:center;padding:20px 0 15px}.clarinet-note-mark small{font-size:10px;letter-spacing:1px;font-weight:900;color:#53887c}.clarinet-note-mark b{font-size:clamp(42px,7vw,64px);line-height:1.2;color:#245764;letter-spacing:-2px}.clarinet-note-mark span{font-size:12px;color:#8aa09e}
+.clarinet-fingering{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:28px;padding:18px;background:#f0f9f4;border-radius:19px;border:1px solid #dbf0e4;margin-bottom:16px}
+.clarinet-keys{display:flex;align-items:center;gap:10px}.clarinet-tube{display:flex;gap:18px;background:#2c5163;border-radius:21px;padding:12px 21px;position:relative}
+.clarinet-hole,.clarinet-thumb{width:34px;height:34px;border-radius:50%;background:white;border:3px solid #9fbfc2;display:grid;place-items:center;font-size:12px;font-weight:900;color:#2c5163;z-index:1}
+.clarinet-thumb{background:white;border-color:#89b4af}.clarinet-hole.closed,.clarinet-thumb.closed{background:#f5a528;color:#fff;border-color:#e8a13b}
+.clarinet-fingering p{flex:1;min-width:180px;line-height:1.5;font-size:13px;color:#486e73;margin:0}
+.clarinet-audition,.clarinet-action{display:block;border-radius:14px;border:1px solid #bfdcd1;background:#edf8f1;color:#207b57;min-height:46px;padding:12px 18px;font-weight:850;margin:12px 0;width:100%}
+.clarinet-action{color:white;background:#279763;border-color:#279763;box-shadow:0 4px 0 #18714d}.clarinet-action:hover{filter:brightness(1.05)}
+.clarinet-mic-controls{margin-top:20px}.clarinet-note-meter{height:9px;background:#e4f0ea;overflow:hidden;border-radius:12px;margin-top:15px}.clarinet-note-meter span{display:block;background:#33ac72;height:100%;transition:width .15s}
+.clarinet-feedback{background:#e6f6e9;color:#306b5a;border-radius:13px;padding:12px 14px;font-weight:800;font-size:13px!important}.clarinet-error{color:#aa4234!important;background:#fff0e9;padding:12px;border-radius:12px}
+.clarinet-mic-tip{font-size:11px!important;color:#8a9d9a!important}
+.clarinet-teacher>span{font-size:54px}.clarinet-teacher h2{font-size:20px;line-height:1.35}.clarinet-teacher p{font-size:13px;line-height:1.65;color:#6d888c}.clarinet-teacher b{font-size:13px}
+.clarinet-explore-buttons{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}.clarinet-explore-buttons button{border:1px solid #bcdccd;background:#fff;border-radius:12px;padding:12px;color:#246e55;font-weight:800}.clarinet-explore-buttons button.active{background:#238e60;color:#fff}
+.clarinet-victory{display:grid;place-items:center;padding:30px}.clarinet-victory-card{text-align:center;max-width:500px}.clarinet-victory-card>span{font-size:64px}.clarinet-victory-card h1{font-size:29px}.clarinet-victory-card p{font-size:14px;line-height:1.6;color:#628081}
+@media(max-width:740px){.clarinet-lesson-layout{grid-template-columns:1fr}.clarinet-teacher{display:none}.clarinet-bar{height:67px}.clarinet-bar>button{font-size:12px}.clarinet-unit-title{padding:14px 15px}.clarinet-unit-title h2{font-size:17px}}
+@media(max-width:420px){.clarinet-node-row{padding-left:4%;gap:10px}.clarinet-node-row.right{padding-left:25%}.clarinet-node{flex-basis:64px;height:64px}.clarinet-node-row small{font-size:10px}.clarinet-unit-title>span{flex-basis:35px;height:35px}.clarinet-tube{gap:12px;padding:10px}.clarinet-hole,.clarinet-thumb{height:29px;width:29px}}
+@media(prefers-reduced-motion:reduce){.clarinet-node,.clarinet-progress span,.clarinet-note-meter span{transition:none}}

@@ -1,0 +1,23 @@
+✔ entrada apresenta Cactom e Tom oficiais, acesso local explícito e demo antes do instrumento (4650.638ms)
+✔ campo de acesso conserva rótulo e associa dica, erro e descrição externa para leitor de tela (1.1236ms)
+✔ botão em espera bloqueia nova ação e comunica o estado, sem sucesso fictício (19.2561ms)
+✔ duas instâncias do rig têm máscaras distintas e a pose de senha usa o asset de olhos cobertos (13.2377ms)
+✔ após entrar ou pular, seleção oferece somente os dois cursos disponíveis (50.1006ms)
+✔ curso da flauta não importa as conquistas antigas do trompete (80.7131ms)
+✔ retomada da demo mantém os respectivos resultados dos dois cursos (207.3211ms)
+✔ contas locais não herdam progresso da demo nem de outra conta (329.3046ms)
+✔ tela de ofensiva mostra apenas calendário e marcos derivados das datas (39.9532ms)
+✔ olhar permanece central no centro do Tom e tem limites mesmo longe do formulário (3.3665ms)
+✔ coordenadas ou limites inválidos deixam o olhar neutro (0.4685ms)
+✔ senha focada ou mostrada cobre os olhos e impede rastreamento das pupilas (0.7141ms)
+✔ espera mantém privacidade e não é apresentada como sucesso (0.2935ms)
+✔ erro e foco de identificação têm reações distintas sem alterar a avaliação do acesso (0.328ms)
+✔ movimento reduzido neutraliza o olhar mantendo a pose necessária de privacidade (0.3014ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7522.8905
