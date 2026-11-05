@@ -1,16 +1,16 @@
-/* Seu Rojão, versão 2: bloco laranja com a contagem, a semana e a próxima insígnia. */
+/* Seu Rojão, versão 2: bloco branco com a contagem em laranja, a semana e a próxima insígnia. */
 .rojao-v2{display:flex;flex-direction:column;gap:22px;max-width:880px;margin:0 auto}
-.rojao-v2-hero{display:flex;flex-wrap:wrap;align-items:center;gap:26px;padding:30px 32px;border-radius:30px;background:#ff8a12;box-shadow:0 6px 0 #d96c00;color:#fff}
+.rojao-v2-hero{display:flex;flex-wrap:wrap;align-items:center;gap:26px;padding:30px 32px;border-radius:30px;background:#fff;border:2px solid #f3dfc4;border-bottom-width:6px;color:#0c3a3c}
 .rojao-v2-art{flex:none;width:170px;height:212px;display:grid;place-items:center}
 .rojao-v2-art img,.rojao-v2-art svg{width:100%;height:100%;object-fit:contain}
 .rojao-v2-copy{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:10px}
-.rojao-v2-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:900;letter-spacing:.14em;color:#ffe7c7}
-.rojao-v2-hero h1{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;color:#fff}
+.rojao-v2-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:900;letter-spacing:.14em;color:#b35c00}
+.rojao-v2-hero h1{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;color:#e36f05}
 .rojao-v2-hero h1 strong{font-size:clamp(80px,14vw,120px);line-height:.9;font-weight:1000}
 .rojao-v2-hero h1 span{font-size:clamp(26px,4vw,36px);font-weight:900}
-.rojao-v2-copy>p{margin:0;font-size:18px;font-weight:800;line-height:1.45;color:#fff3e3}
+.rojao-v2-copy>p{margin:0;font-size:18px;font-weight:800;line-height:1.45;color:#4a5f5a}
 .rojao-v2-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.rojao-v2-chips span{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.2);font-size:14px;font-weight:800;color:#fff}
+.rojao-v2-chips span{padding:6px 12px;border-radius:999px;background:#fff1e0;font-size:14px;font-weight:800;color:#9a4a00}
 .rojao-v2-chips b{font-weight:1000}
 .rojao-v2-card{border-radius:26px;background:#fff;border:2px solid #e9e2d6;border-bottom-width:6px;padding:24px 26px;display:flex;flex-direction:column;gap:18px}
 .rojao-v2-card-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
