@@ -1,3 +1,9 @@
+## 05/11/2026 — Site do Cactom
+
+- Novo site de apresentação em `public/site/` (abre em `/site/`), no estilo da página do Duolingo: cursos, recursos com telas reais, como funciona, segurança, Comunidade, chamada para escolas (Escola Parceira, em breve) e a história. Os botões levam ao app.
+- Comunidade: no celular, o selo ao lado da própria mensagem ficava cortado na borda; corrigido.
+- Pasta recriada a partir do GitHub (`git clone`) depois que a pasta antiga sumiu da Área de Trabalho.
+
 ## 05/11/2026 — Curso de Iniciação Musical
 
 - Novo curso **Iniciação musical**, para quem ainda não tem instrumento: tudo se responde tocando na tela (escolher, bater o ritmo no botão, montar o compasso). Plano completo em `docs/PLANO-INICIACAO.md`.

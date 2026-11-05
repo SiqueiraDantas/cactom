@@ -25,11 +25,14 @@
 .cm-tabs button:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}
 .cm-tab-icon{flex:none;width:52px;height:52px;display:grid;place-items:center;clip-path:polygon(50% 0,100% 14%,100% 62%,50% 100%,0 62%,0 14%);background:var(--teal);padding:4px}
 .cm-tab-icon>*{width:100%;height:100%;display:block}
-.cm-hall{display:grid;grid-template-rows:minmax(300px,56vh) auto;border-radius:24px;overflow:hidden;border:3px solid var(--teal);box-shadow:0 6px 0 #062426;background:var(--teal)}
-.cm-feed{list-style:none;margin:0;padding:16px 14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;
+.cm-hall{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(300px,56vh) auto;border-radius:24px;overflow:hidden;border:3px solid var(--teal);box-shadow:0 6px 0 #062426;background:var(--teal)}
+.cm-feed{min-width:0;list-style:none;margin:0;padding:16px 14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;
  background:linear-gradient(180deg,rgba(12,58,60,.06),transparent 40%),#eaf3ee;background-image:radial-gradient(#d4e6dc 1.2px,transparent 1.2px);background-size:18px 18px}
 .cm-day{align-self:center;list-style:none}.cm-day span{display:inline-block;padding:3px 12px;border-radius:999px;background:var(--teal);color:#fff;font-size:12px;font-weight:900;letter-spacing:.04em}
-.cm-row{display:flex;gap:10px;align-items:flex-end;max-width:min(92%,560px)}
+.cm-row{display:flex;gap:10px;align-items:flex-end;max-width:min(100%,560px);min-width:0;padding-right:2px}
+.cm-row:not(.is-mine){padding-right:14%}
+.cm-row.is-mine{padding-left:14%}
+.cm-row .cm-card{flex:0 1 auto}
 .cm-row.is-mine{align-self:flex-end}
 .cm-badge{position:relative;flex:none;width:40px;height:46px;display:grid;place-items:center}
 .cm-badge svg{position:absolute;inset:0;width:100%;height:100%}

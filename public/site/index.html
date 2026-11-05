@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cactom · Aprenda música brincando</title>
+<meta name="description" content="Cactom é o jeito divertido e gratuito de aprender música: lições curtas, o Tom como guia e o microfone que confere a nota e o ritmo. Iniciação musical, flauta doce, trompete e clarinete.">
+<meta property="og:title" content="Cactom · Aprenda música brincando">
+<meta property="og:description" content="Lições curtas de música para crianças, com o Tom de guia e correção pelo microfone. Gratuito, no navegador.">
+<meta property="og:image" content="/branding/cactom/tom-oficial.png">
+<meta name="theme-color" content="#58CC02">
+<link rel="icon" type="image/png" sizes="32x32" href="/branding/cactom-icone-32.png">
+<link rel="apple-touch-icon" href="/branding/cactom-icone-180.png">
+<style>
+@font-face{font-family:'Nunito';font-style:normal;font-display:swap;font-weight:200 1000;src:url('/fonts/nunito/nunito-latin-wght-normal.woff2') format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Nunito';font-style:normal;font-display:swap;font-weight:200 1000;src:url('/fonts/nunito/nunito-latin-ext-wght-normal.woff2') format('woff2-variations');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--teal:#0C3A3C;--ink:#2F3B37;--soft:#5F716B;--green:#58CC02;--green-d:#46A302;--green-t:#2F7A1F;--gold:#FFC53D;--orange:#FF9600;--line:#E5ECE7;--bg:#FFFFFF;--bg2:#F4FAF1;--sand:#FFF7EA}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,'Segoe UI',system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{color:var(--teal);line-height:1.12;margin:0;text-wrap:balance;font-weight:900}
+h2{font-size:clamp(30px,4.2vw,46px);letter-spacing:-.01em}
+h3{font-size:22px}
+p{margin:0}
+.kicker{font-size:14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--green-t)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 28px;border-radius:16px;font:900 16px/1 Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:0;transition:transform .08s,filter .15s}
+.btn:active{transform:translateY(3px)}
+.btn-main{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-d)}
+.btn-main:hover{filter:brightness(1.05)}
+.btn-ghost{background:#fff;color:#1A8FCB;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.btn:focus-visible{outline:3px solid #1CB0F6;outline-offset:3px}
+
+/* topo */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:70px}
+.brand img{height:40px;width:auto}
+.top nav{display:flex;align-items:center;gap:22px}
+.top nav a{font-weight:800;color:var(--soft);text-decoration:none;font-size:15px}
+.top nav a:hover{color:var(--teal)}
+.top .btn{min-height:44px;padding:0 18px;font-size:14px}
+
+/* hero */
+.hero{padding-block:56px 72px;background:radial-gradient(70% 90% at 78% 40%,#EAF7E1 0%,#fff 70%)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:center}
+.hero-tom{justify-self:center;width:min(100%,440px);aspect-ratio:1;max-width:100%}
+.hero h1{font-size:clamp(36px,5.4vw,60px);letter-spacing:-.015em}
+.hero-copy{display:grid;gap:22px;min-width:0}
+.hero-copy>p{font-size:20px;color:var(--soft);max-width:34ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero small{color:var(--soft);font-weight:700}
+
+/* faixa de cursos */
+.courses{border-block:2px solid var(--line);background:#fff}
+.courses .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 34px;padding-block:20px}
+.courses span{font-weight:900;color:var(--soft);font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.course{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--teal);text-decoration:none}
+.course img{width:52px;height:39px}
+
+/* blocos de recurso */
+.feature{padding-block:84px}
+.feature:nth-of-type(even){background:var(--bg2)}
+.feature .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.feature.flip .media{order:2}
+.feature .copy{display:grid;gap:16px;min-width:0}
+.feature .copy>p{font-size:19px;color:var(--soft);max-width:44ch}
+.feature ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.feature li{display:flex;gap:10px;align-items:flex-start;font-weight:700}
+.feature li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.media{display:flex;justify-content:center;gap:18px;min-width:0}
+.phone{width:min(100%,260px);border-radius:32px;border:2px solid var(--line);box-shadow:0 24px 60px rgba(12,58,60,.14);background:#fff;overflow:hidden}
+.phone img{width:100%;height:auto}
+.phone.tall{max-height:560px}.phone.tall img{height:560px;object-fit:cover;object-position:top}
+.phone.tilt-l{transform:rotate(-3deg)}
+.phone.tilt-r{transform:rotate(3deg);margin-top:40px}
+.pdf-art{width:min(100%,460px)}
+
+/* segurança */
+.safe{padding-block:84px;background:var(--teal);color:#DCEFE6}
+.safe h2{color:#fff}
+.safe .kicker{color:var(--gold)}
+.safe-head{display:grid;gap:14px;max-width:720px;margin-bottom:36px}
+.safe-head p{font-size:19px;color:#BFD8CF}
+.safe-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.safe-card{background:#145457;border-radius:22px;padding:24px;display:grid;gap:8px;align-content:start}
+.safe-card b{font-size:19px;color:#fff}
+.safe-card p{font-size:16px;color:#BFD8CF}
+.safe-card svg{width:34px;height:34px}
+
+/* como funciona */
+.steps{padding-block:84px}
+.steps-head{text-align:center;display:grid;gap:12px;justify-items:center;margin-bottom:40px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.step{border:2px solid var(--line);border-bottom-width:6px;border-radius:24px;padding:28px;display:grid;gap:10px;align-content:start}
+.step i{font-style:normal;display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:var(--sand);color:#B35C00;font-weight:1000;font-size:24px}
+.step p{color:var(--soft)}
+
+/* escolas */
+.schools{padding-block:84px;background:var(--sand)}
+.schools .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+.schools .copy{display:grid;gap:16px;min-width:0}
+.schools .copy>p{font-size:19px;color:var(--soft)}
+.schools-art{justify-self:center;width:min(100%,360px)}
+.badge{display:inline-block;justify-self:start;padding:4px 12px;border-radius:999px;background:var(--gold);color:#5B3C00;font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+
+/* origem */
+.origin{padding-block:84px}
+.origin .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center}
+.origin .copy{display:grid;gap:16px;min-width:0}
+.origin .copy>p{font-size:19px;color:var(--soft)}
+.origin-logo{justify-self:center;width:min(100%,340px);padding:32px;border-radius:28px;background:var(--teal)}
+
+/* final */
+.final{padding-block:84px 96px;background:radial-gradient(60% 80% at 50% 30%,#EAF7E1 0%,#fff 70%);text-align:center}
+.final .wrap{display:grid;justify-items:center;gap:18px}
+.final img{width:min(60vw,240px);height:auto}
+.final h2{font-size:clamp(34px,5vw,56px)}
+
+footer{border-top:2px solid var(--line);padding-block:28px;color:var(--soft);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+footer img{height:30px;width:auto}
+
+@media (max-width:860px){
+ .top nav a:not(.btn){display:none}
+ .hero .wrap,.feature .wrap,.schools .wrap,.origin .wrap{grid-template-columns:1fr}
+ .hero{padding-block:32px 56px}
+ .hero-tom{order:-1;width:min(56vw,230px)}
+ .hero-copy{text-align:center;justify-items:center}
+ .hero-cta{justify-content:center}
+ .feature{padding-block:60px}
+ .feature.flip .media{order:0}
+ .feature .copy,.schools .copy,.origin .copy{text-align:left}
+ .phone{width:min(46vw,230px)}
+ .phone.tilt-r{margin-top:24px}
+ .safe-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .steps-grid{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+ .safe-grid{grid-template-columns:1fr}
+ .hero-cta .btn{width:100%}
+ .top .btn-ghost{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.phone.tilt-l,.phone.tilt-r{transform:none}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="wrap">
+  <a class="brand" href="#inicio" aria-label="Cactom, início"><img src="/branding/cactom/cactom-wordmark.png" alt="Cactom" width="128" height="40"></a>
+  <nav aria-label="Seções">
+   <a href="#cursos">Cursos</a>
+   <a href="#como-funciona">Como funciona</a>
+   <a href="#seguranca">Segurança</a>
+   <a href="#escolas">Para escolas</a>
+   <a class="btn btn-ghost" href="/">Entrar</a>
+  </nav>
+ </div>
+</header>
+
+<main id="inicio">
+ <section class="hero" aria-labelledby="titulo">
+  <div class="wrap">
+   <div class="hero-copy">
+    <h1 id="titulo">O jeito divertido e gratuito de aprender música.</h1>
+    <p>Lições curtas, o Tom de guia e um app que escuta teu instrumento e diz o que saiu certo. Tudo no celular, sem instalar nada.</p>
+    <div class="hero-cta">
+     <a class="btn btn-main" href="/">Começar agora</a>
+     <a class="btn btn-ghost" href="/">Já tenho uma conta</a>
+    </div>
+    <small>Feito no sertão do Ceará, pra criança de todo canto.</small>
+   </div>
+   <img class="hero-tom" src="/animacoes/cactom-acenando.svg" alt="Tom, o cacto mascote do Cactom, acenando" width="440" height="440">
+  </div>
+ </section>
+
+ <section class="courses" id="cursos" aria-label="Cursos">
+  <div class="wrap">
+   <span>Cursos</span>
+   <a class="course" href="/"><img src="img/curso-iniciacao.svg" alt="" width="52" height="39">Iniciação musical</a>
+   <a class="course" href="/"><img src="img/curso-recorder-soprano.svg" alt="" width="52" height="39">Flauta doce</a>
+   <a class="course" href="/"><img src="img/curso-trumpet-bb.svg" alt="" width="52" height="39">Trompete</a>
+   <a class="course" href="/"><img src="img/curso-clarinet-bb.svg" alt="" width="52" height="39">Clarinete</a>
+  </div>
+ </section>
+
+ <section class="feature" aria-labelledby="f1">
+  <div class="wrap">
+   <div class="copy">
+    <p class="kicker">Gratuito. Divertido. Musical.</p>
+    <h2 id="f1">Aprenda tocando de verdade</h2>
+    <p>O Cactom ouve a flauta, o trompete ou o clarinete pelo microfone e confere a nota e o ritmo na hora. Acertou, comemora; errou, a atividade volta mais tarde pra treinar de novo.</p>
+    <ul><li>Nota, afinação e ritmo conferidos pelo microfone</li><li>O som é analisado no aparelho e não é gravado</li></ul>
+   </div>
+   <div class="media">
+    <div class="phone tilt-l"><img src="img/tela-microfone.jpg" alt="Tela de prática do trompete com a partitura, os pistos de cada nota e o botão para tocar com o microfone" width="780" height="1688" loading="lazy"></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="feature flip" aria-labelledby="f2">
+  <div class="wrap">
+   <div class="media">
+    <div class="phone tilt-l"><img src="img/tela-trilha.jpg" alt="Mapa da trilha de lições com o Tom marcando a próxima parada" width="780" height="1688" loading="lazy"></div>
+    <div class="phone tilt-r"><img src="img/tela-nota-nova.jpg" alt="Tela de nota nova com a pauta, o nome da nota e o desenho dos furos da flauta" width="780" height="1688" loading="lazy"></div>
+   </div>
+   <div class="copy">
+    <p class="kicker">Lições curtas</p>
+    <h2 id="f2">Um pouquinho por dia, do primeiro som à primeira música</h2>
+    <p>Cada curso é uma trilha de 16 unidades. Em cada unidade a criança descobre, pratica, cria e cumpre uma missão, sempre com uma tela de cada vez.</p>
+    <ul><li>Lições de poucos minutos</li><li>Revisão nos dias seguintes do que ficou difícil</li><li>Desafio a cada quatro unidades</li></ul>
+   </div>
+  </div>
+ </section>
+
+ <section class="feature" aria-labelledby="f3">
+  <div class="wrap">
+   <div class="copy">
+    <p class="kicker">Sem instrumento? Sem problema</p>
+    <h2 id="f3">Comece hoje com a Iniciação musical</h2>
+    <p>Pulso, notas, figuras e a força do som, tudo tocando na tela: ouvindo, batendo o ritmo no botão e montando compassos. Lá pela metade, a criança escolhe ler na clave de Sol ou na de Fá.</p>
+    <ul><li>Funciona só com o celular</li><li>Prepara pra qualquer instrumento</li></ul>
+   </div>
+   <div class="media">
+    <div class="phone tall tilt-r" style="margin-top:0"><img src="img/tela-clave.jpg" alt="Tela da iniciação musical com a escolha entre clave de Sol e clave de Fá" width="430" height="1160" loading="lazy"></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="feature flip" aria-labelledby="f4">
+  <div class="wrap">
+   <div class="media">
+    <div class="phone tilt-l"><img src="img/tela-rojao.jpg" alt="Tela do Rojão mostrando sete dias seguidos de prática" width="780" height="1688" loading="lazy"></div>
+   </div>
+   <div class="copy">
+    <p class="kicker">Motivação que não acaba</p>
+    <h2 id="f4">Acende o Rojão e não deixa apagar</h2>
+    <p>Cada dia de prática acende o Rojão. Tem pontos de experiência, conquistas e ranking por instrumento, pra criança querer voltar amanhã.</p>
+    <ul><li>Dias seguidos de prática</li><li>Conquistas a cada descoberta</li><li>Ranking da turma do instrumento</li></ul>
+   </div>
+  </div>
+ </section>
+
+ <section class="feature" aria-labelledby="f5">
+  <div class="wrap">
+   <div class="copy">
+    <p class="kicker">Partituras</p>
+    <h2 id="f5">A partitura do professor vira aula</h2>
+    <p>Coloque um PDF de partitura e o Cactom lê as notas, monta a pauta interativa e acompanha a criança tocando, compasso por compasso.</p>
+    <ul><li>Aceita PDF digital ou escaneado</li><li>Treino da música inteira ou por compasso</li></ul>
+   </div>
+   <div class="media">
+    <svg class="pdf-art" viewBox="0 0 460 300" role="img" aria-label="Uma folha de partitura em PDF se transformando em uma pauta interativa no celular">
+     <rect x="20" y="24" width="170" height="236" rx="14" fill="#fff" stroke="#E5ECE7" stroke-width="3"/>
+     <path d="M150 24v36h40" fill="#F4FAF1" stroke="#E5ECE7" stroke-width="3" stroke-linejoin="round"/>
+     <rect x="38" y="44" width="70" height="20" rx="6" fill="#FF9600"/><text x="73" y="59" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="900" fill="#fff">PDF</text>
+     <g stroke="#B9C7C0" stroke-width="2">
+      <path d="M40 100h130M40 108h130M40 116h130M40 124h130M40 132h130"/>
+      <path d="M40 170h130M40 178h130M40 186h130M40 194h130M40 202h130"/>
+     </g>
+     <g fill="#7E8E88"><ellipse cx="70" cy="120" rx="5" ry="4"/><ellipse cx="96" cy="112" rx="5" ry="4"/><ellipse cx="122" cy="128" rx="5" ry="4"/><ellipse cx="148" cy="116" rx="5" ry="4"/><ellipse cx="70" cy="190" rx="5" ry="4"/><ellipse cx="100" cy="182" rx="5" ry="4"/><ellipse cx="130" cy="198" rx="5" ry="4"/></g>
+     <path d="M206 142h40" stroke="#58CC02" stroke-width="8" stroke-linecap="round"/><path d="M240 126l20 16-20 16" fill="none" stroke="#58CC02" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+     <rect x="282" y="10" width="158" height="280" rx="28" fill="#0C3A3C"/>
+     <rect x="294" y="30" width="134" height="240" rx="18" fill="#fff"/>
+     <g stroke="#9AA5AE" stroke-width="2"><path d="M304 110h114M304 120h114M304 130h114M304 140h114M304 150h114"/></g>
+     <g fill="#2B2F36"><ellipse cx="328" cy="140" rx="6.5" ry="5" transform="rotate(-18 328 140)"/><rect x="333" y="112" width="2.4" height="28"/><ellipse cx="360" cy="130" rx="6.5" ry="5" transform="rotate(-18 360 130)"/><rect x="365" y="102" width="2.4" height="28"/></g>
+     <g fill="#58CC02"><ellipse cx="392" cy="120" rx="6.5" ry="5" transform="rotate(-18 392 120)"/><rect x="397" y="92" width="2.4" height="28"/></g>
+     <rect x="386" y="96" width="2" height="66" fill="#FF9600"/>
+     <rect x="310" y="200" width="102" height="40" rx="12" fill="#58CC02"/><text x="361" y="226" text-anchor="middle" font-family="Nunito,sans-serif" font-size="15" font-weight="900" fill="#fff">TOCAR</text>
+    </svg>
+   </div>
+  </div>
+ </section>
+
+ <section class="steps" id="como-funciona" aria-labelledby="como">
+  <div class="wrap">
+   <div class="steps-head">
+    <p class="kicker">Como funciona</p>
+    <h2 id="como">Em dois minutos, a primeira lição</h2>
+   </div>
+   <div class="steps-grid">
+    <div class="step"><i>1</i><h3>Crie o perfil</h3><p>Só o primeiro nome da criança. Dá pra ter vários perfis no mesmo aparelho.</p></div>
+    <div class="step"><i>2</i><h3>Escolha o curso</h3><p>Iniciação musical, flauta doce, trompete ou clarinete.</p></div>
+    <div class="step"><i>3</i><h3>Toque e comemore</h3><p>Uma lição por dia já faz diferença. O Tom acompanha cada passo.</p></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="safe" id="seguranca" aria-labelledby="seg">
+  <div class="wrap">
+   <div class="safe-head">
+    <p class="kicker">Segurança em primeiro lugar</p>
+    <h2 id="seg">Feito pra criança, do jeito que a família espera</h2>
+    <p>O Cactom segue a LGPD e o ECA Digital: dados mínimos, nada de propaganda e a família no controle.</p>
+   </div>
+   <div class="safe-grid">
+    <div class="safe-card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2.5" fill="#FFC53D"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10" fill="none" stroke="#FFC53D" stroke-width="2.4"/></svg><b>Sem anúncios</b><p>Nenhuma propaganda e nenhum dado usado pra vender nada.</p></div>
+    <div class="safe-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z" fill="#FFC53D"/><path d="M8 12l3 3 5-6" fill="none" stroke="#0C3A3C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Os pais autorizam</b><p>O chat da turma só abre com a autorização de um responsável.</p></div>
+    <div class="safe-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="#FFC53D"/></svg><b>Conversa protegida</b><p>Telefone, endereço, rede social e palavrão são bloqueados.</p></div>
+    <div class="safe-card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="#FFC53D"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4" fill="none" stroke="#FFC53D" stroke-width="2.2" stroke-linecap="round"/></svg><b>Áudio no aparelho</b><p>O microfone só escuta pra corrigir. Nada é gravado nem enviado.</p></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="feature" aria-labelledby="f6">
+  <div class="wrap">
+   <div class="copy">
+    <p class="kicker">Comunidade</p>
+    <h2 id="f6">Uma turma que toca junto</h2>
+    <p>Na Comunidade a criança conversa com quem estuda o mesmo instrumento, manda figurinha do Tom e vê o XP de cada um. Só duas salas, a Geral e a da turma, com moderação.</p>
+   </div>
+   <div class="media">
+    <div class="phone tall tilt-r" style="margin-top:0"><img src="img/tela-comunidade.jpg" alt="Tela da Comunidade, a Turma do Trompete, com mensagens, selos dos alunos e figurinhas do Tom" width="430" height="1100" loading="lazy"></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="schools" id="escolas" aria-labelledby="esc">
+  <div class="wrap">
+   <div class="copy">
+    <span class="badge">Em breve</span>
+    <h2 id="esc">Cactom para escolas, bandas e projetos</h2>
+    <p>Leve o Cactom para a sua turma. Com o programa <b>Escola Parceira</b>, o professor acompanha quem praticou, onde cada aluno trava, manda lição e tira relatórios para a coordenação.</p>
+    <ul style="margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink);font-weight:700"><li>Código da escola para os alunos entrarem na turma</li><li>Painel do professor com o progresso de cada aluno</li><li>Partituras próprias da escola ou da banda</li></ul>
+    <div class="hero-cta"><a class="btn btn-main" href="#contato">Quero ser parceira</a></div>
+   </div>
+   <img class="schools-art" src="/animacoes/tom-prancheta.svg" alt="Tom segurando uma prancheta" width="360" height="360" loading="lazy">
+  </div>
+ </section>
+
+ <section class="origin" aria-labelledby="ori">
+  <div class="wrap">
+   <img class="origin-logo" src="img/madeinsertao.png" alt="Logotipo da Escola de Música de Madalena, Made In Sertão" width="320" height="171" loading="lazy">
+   <div class="copy">
+    <p class="kicker">Nossa história</p>
+    <h2 id="ori">Nasceu numa escola de música do interior</h2>
+    <p>O Cactom começou na <b>Escola de Música de Madalena (CE)</b>, como um laboratório para os alunos praticarem entre uma aula e outra. Virou um app com o Tom, um cacto nordestino que ensina, comemora e não desiste de ninguém.</p>
+    <p>Idealizado por <b>Siqueira Neto</b>, músico, estudante de Inteligência Artificial e um dos responsáveis pela escola.</p>
+   </div>
+  </div>
+ </section>
+
+ <section class="final" id="contato" aria-labelledby="fim">
+  <div class="wrap">
+   <img src="/branding/cactom/tom-oficial.png" alt="" width="240" height="240" loading="lazy">
+   <h2 id="fim">Bora fazer o sertão tocar?</h2>
+   <a class="btn btn-main" href="/">Começar agora</a>
+   <p style="color:var(--soft);font-weight:700">Escola ou projeto querendo ser parceiro? Fale com a gente: <span>[contato do Cactom]</span></p>
+  </div>
+ </section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <img src="/branding/cactom/cactom-wordmark.png" alt="Cactom" width="96" height="30">
+  <p>© 2026 Cactom · Escola de Música de Madalena · Ceará</p>
+  <a href="/" style="font-weight:800">Abrir o app</a>
+ </div>
+</footer>
+</body>
+</html>
