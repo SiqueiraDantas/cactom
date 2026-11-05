@@ -1,6 +1,7 @@
 ## 05/11/2026 — Tela de atualização e ícone novo
 
 - Ícone novo do app e da aba do site: a carinha do Tom (sobrancelhas, olhos, boca e a flor) em fundo verde, no estilo de app infantil. Gerado em vetor a partir do Tom do app (`public/branding/cactom-icone.svg`), com versões comuns, "maskable" (Android), 180 px (iPhone) e favicon.
+- Tela de abertura do app instalado (Android): agora mostra o Tom inteiro, de corpo todo, sobre o fundo creme. O Android monta essa tela com o ícone "any" do manifesto (`cactom-icone-192/512.png`, Tom com fundo transparente); o ícone da tela inicial continua sendo o rosto em fundo verde ("maskable").
 - Service worker passou para `cactom-v2`, o que limpa o cache antigo e dispara a tela de atualização.
 
 - Quando sai uma versão nova com o app aberto, aparece uma tela cheia com o Tom, a lista do que mudou e o botão "Atualizar agora". "Depois" deixa a criança terminar a lição; a versão nova entra na próxima vez que abrir.
