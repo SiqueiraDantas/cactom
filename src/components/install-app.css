@@ -1,0 +1,11 @@
+.install-app{display:flex;align-items:center;gap:14px;margin:0 0 16px;padding:12px 14px;border-radius:20px;border:2px solid #d7efc6;border-bottom-width:5px;background:#f2fbea;color:#2f3b37;font-family:Nunito,'Segoe UI',system-ui,sans-serif}
+.install-app-tom{flex:none;width:56px;height:56px}.install-app-tom>*{width:100%;height:100%}
+.install-app-copy{flex:1;min-width:0;display:grid;gap:2px}
+.install-app-copy b{font-weight:900;color:#0c3a3c}
+.install-app-copy p{margin:0;font-size:14px;line-height:1.4;color:#5f716b}
+.install-app-actions{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.install-app-go{border:0;border-radius:12px;padding:10px 16px;background:#58cc02;box-shadow:0 3px 0 #46a302;color:#fff;font:900 14px Nunito,sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer}
+.install-app-go:disabled{opacity:.6;cursor:default}
+.install-app-close{border:0;background:none;color:#5f716b;font:800 13px Nunito,sans-serif;cursor:pointer;text-decoration:underline}
+.install-app-go:focus-visible,.install-app-close:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}
+@media(max-width:520px){.install-app{flex-wrap:wrap}.install-app-actions{flex-direction:row;width:100%}.install-app-go{flex:1}}

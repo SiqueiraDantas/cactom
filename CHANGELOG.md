@@ -1,3 +1,11 @@
+## 05/11/2026 — Cactom instalável (PWA)
+
+- O Cactom agora pode ser instalado como app: `public/manifest.webmanifest` (nome, cores, ícones comuns e "maskable" para Android) e `public/sw.js` (service worker).
+- Abre rápido e funciona sem internet nas partes que não dependem do servidor. Páginas sempre buscam a versão nova quando há internet; o Supabase nunca é guardado em cache.
+- Faixa "Instale o Cactom no celular" na aba Aprender (Android: botão Instalar; iPhone: passo a passo pelo Compartilhar). Some por 14 dias ao tocar em "Agora não".
+- O site (`/site/`) ganhou o botão "Instalar o app".
+- `customHttp.yml`: cabeçalhos do Amplify para o service worker e o manifesto não ficarem presos em cache.
+
 ## 05/11/2026 — Site do Cactom
 
 - Novo site de apresentação em `public/site/` (abre em `/site/`), no estilo da página do Duolingo: cursos, recursos com telas reais, como funciona, segurança, Comunidade, chamada para escolas (Escola Parceira, em breve) e a história. Os botões levam ao app.

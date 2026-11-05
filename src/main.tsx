@@ -4,10 +4,13 @@ import './fonts.css';
 import App from './App';
 import { startTelemetry, setTelemetrySink } from './lib/devEvents';
 import { queueEvent, startCloudSync } from './lib/cloud';
+import { startPwa } from './lib/pwa';
 // eventos vão para o navegador e, com o servidor configurado (.env.local), para o Supabase
 setTelemetrySink(queueEvent);
 startTelemetry();
 startCloudSync();
+// app instalável: service worker só no site publicado
+startPwa({ PROD: import.meta.env?.PROD });
 import './styles.css';
 import './remaster.css';
 
