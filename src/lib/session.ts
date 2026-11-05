@@ -18,7 +18,7 @@ export function clearSession(storage:Store|undefined=store()){try{storage?.remov
 export function readSession(storage:Store|undefined=store()):SavedSession|null{
  try{
   const raw=JSON.parse(storage?.getItem(SESSION_KEY)??'null');
-  if(raw?.mode==='local'){const p=raw.profile;if(p&&typeof p.id==='string'&&typeof p.username==='string'&&typeof p.name==='string')return {mode:'local',profile:{id:p.id,username:p.username,name:p.name}};return null;}
+  if(raw?.mode==='local'){const p=raw.profile;if(p&&typeof p.id==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(p.id)&&typeof p.username==='string'&&typeof p.name==='string')return {mode:'local',profile:{id:p.id,username:p.username,name:p.name}};return null;}
   if(raw?.mode==='demo')return {mode:'demo',profile:null};
   // visitante antigo que já fez o tutorial, antes desta chave existir
   if(storage?.getItem(ONBOARDING_KEY))return {mode:'demo',profile:null};

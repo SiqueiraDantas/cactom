@@ -13,8 +13,14 @@ export const COMMUNITY_CHANNELS:CommunityChannel[]=[
  {id:'recorder-soprano',name:'Flauta doce',instrument:'recorder-soprano',topic:'Dúvidas, dicas e conquistas da flauta.'},
  {id:'trumpet-bb',name:'Trompete',instrument:'trumpet-bb',topic:'Embocadura, pistos e primeiros sons.'},
  {id:'clarinet-bb',name:'Clarinete',instrument:'clarinet-bb',topic:'Palheta, dedilhados e respiração.'},
- {id:'conductor',name:'Regência',instrument:'conductor',topic:'Gestos, compassos e grupos.'},
 ];
+/** Salas que a criança vê: a Geral e a do curso que ela escolheu (a turma dela). */
+export function roomsFor(instrumentId:string):CommunityChannel[]{return COMMUNITY_CHANNELS.filter(c=>c.id==='geral'||c.id===instrumentId);}
+/** Figurinhas do Tom (mandadas como texto curto e mostradas grandes no chat). */
+export const STICKERS=['tom-feliz','tom-comemorando','tom-surpreso','tom-pensativo','tom-animado','tom-orgulhoso'] as const;
+export type Sticker=(typeof STICKERS)[number];
+export const STICKER_LABEL:Record<Sticker,string>={'tom-feliz':'Tom feliz','tom-comemorando':'Tom comemorando','tom-surpreso':'Tom surpreso','tom-pensativo':'Tom pensando','tom-animado':'Tom animado','tom-orgulhoso':'Tom orgulhoso'};
+export function stickerOf(text:string):Sticker|null{const m=/^:(tom-[a-z]+):$/.exec(text.trim());return m&&(STICKERS as readonly string[]).includes(m[1])?m[1] as Sticker:null;}
 export type CommunityMessage={id:string;channel:string;authorId:string;author:string;text:string;at:string;tom?:boolean};
 export const MESSAGE_MAX=240;
 export const QUICK_MESSAGES=['Bom dia, pessoal!','Consegui tocar uma nota nova!','Alguém tem dica pra respirar melhor?','Qual música vocês tão treinando?'];

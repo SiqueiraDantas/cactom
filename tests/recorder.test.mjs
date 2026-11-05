@@ -79,7 +79,7 @@ test('estudos de flauta e trompete permanecem em bibliotecas separadas',()=>{
 });
 test('MusicXML da flauta não aceita a transposição do trompete',()=>{
   assert.throws(()=>read(SCORE_LIBRARY[0].xml),/oitava/);
-  assert.throws(()=>parseMusicXml(RECORDER_SCORE_LIBRARY[0].xml,parser),/transposição/);
+  assert.throws(()=>parseMusicXml(RECORDER_SCORE_LIBRARY[0].xml,parser),/transposição|sem o 8/);
   const source=studyXml('Mesmas alturas',[[['G',4]]]);const untransposed=source.replace(/<transpose>.*?<\/transpose>/,'');
   assert.notEqual(read(untransposed).id,parseMusicXml(untransposed,parser).id);
 });

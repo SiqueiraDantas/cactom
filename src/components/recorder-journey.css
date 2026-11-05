@@ -71,3 +71,4 @@
 .rj-jump{position:fixed;right:16px;bottom:96px;z-index:40;appearance:none;border:2px solid var(--ct-line);border-bottom-width:5px;background:#fff;color:var(--ct-teal);border-radius:14px;padding:10px 14px;font:900 14px Nunito,system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.08)}
 @media(min-width:900px){.rj-jump{bottom:24px}}
 @media(prefers-reduced-motion:reduce){.rj-here,.rj-pop{animation:none}.rj-node{transition:none}}
+.rj-unit:has(.rj-pop){z-index:8}

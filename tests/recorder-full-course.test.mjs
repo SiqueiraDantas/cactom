@@ -111,3 +111,16 @@ test('colcheias tocadas certo, com o atraso normal do microfone (~150 ms), passa
  const wrongEighth=real.map(s=>s.at>=1600&&s.at<2100?{...s,frequency:targetFrequencyFor(courseNote(64))}:s);
  assert.equal(evaluateCourse(notes,'4/4',wrongEighth,60,0)[2].passed,false);
 });
+test('quando sai outra nota, o app diz qual saiu (ex.: Sol no lugar de Fá♯, como na gravação de 03/11)',()=>{
+ const notes=[{midi:66,beats:2},{midi:null,beats:2}],sol=783.3,real=[];
+ for(let at=0;at<4000;at+=90)real.push({at,frequency:at>=150&&at<1900?sol:null});
+ const v=evaluateCourse(notes,'4/4',real,60,0);assert.equal(v[0].passed,false);assert.match(v[0].message,/Saiu Sol em vez de Fá♯/);assert.match(v[0].message,/ar escapar/);
+ const fa=real.map(s=>s.frequency?{...s,frequency:739.99}:s);assert.equal(evaluateCourse(notes,'4/4',fa,60,0)[0].passed,true);
+});
+test('metrônomo tocando durante a música: um quadro “sujo” por tempo não reprova nota nem pausa',()=>{
+ const notes=[{midi:71,beats:2},{midi:null,beats:2},{midi:69,beats:4}];
+ const ev=courseScoreEvents(notes,'4/4'),real=[];
+ for(let at=0;at<8200;at+=90){const t=at-130;const e=ev.find(e=>t>=e.startBeat*1000&&t<(e.startBeat+e.beats)*1000-60);const click=(at%1000)<90;
+  real.push({at,frequency:click?NaN:e?.note?targetFrequencyFor(e.note):null});}
+ assert.deepEqual(evaluateCourse(notes,'4/4',real,60,0).map(v=>v.passed),[true,true,true]);
+});

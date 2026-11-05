@@ -148,7 +148,8 @@ export function courseScoreEvents(notes:readonly CourseNote[],meter:CourseMeter)
  * de cada figura e o SILÊNCIO nas pausas. Entrar um tiquinho atrasado, soltar um pouco antes ou ter um
  * quadro de ar no meio não reprova. Sem sinal nenhum, nada é aprovado.
  */
-export function evaluateCourse(notes:readonly CourseNote[],meter:CourseMeter,samples:readonly ScoreSample[],bpm:number,startAt:number){
+/** `transpose`: semitons entre a nota escrita e o som (flauta +12; trompete e clarinete em Si♭ −2). */
+export function evaluateCourse(notes:readonly CourseNote[],meter:CourseMeter,samples:readonly ScoreSample[],bpm:number,startAt:number,transpose=12){
  const quarter=60000/(bpm*pulseBeats(meter));
  // O microfone e a criança chegam um tiquinho depois do clique: a janela da nota anda junto (atraso),
  // e notas curtas (colcheia) só precisam de um trechinho afinado, não do tempo inteiro.
@@ -166,9 +167,15 @@ export function evaluateCourse(notes:readonly CourseNote[],meter:CourseMeter,sam
   }
   const pad=Math.min(250,len*.2),inner=samples.filter(s=>finite(s)&&s.at>=start+pad-EARLY&&s.at<=end+LAG);
   if(!samples.some(s=>finite(s)&&s.at>=start&&s.at<=end))return verdict(false,'signal','O microfone não ouviu esse trecho. Toque mais perto dele.');
-  const target=targetFrequencyFor(e.note!),off=(s:ScoreSample)=>s.frequency!==null&&Number.isFinite(s.frequency)&&s.frequency>0?Math.abs(1200*Math.log2(s.frequency/target)):Infinity;
+  const target=targetFrequencyFor({...e.note!,transposeSemitones:transpose}),off=(s:ScoreSample)=>s.frequency!==null&&Number.isFinite(s.frequency)&&s.frequency>0?Math.abs(1200*Math.log2(s.frequency/target)):Infinity;
   const tuned=inner.filter(s=>off(s)<=50).length,needed=Math.max(2,Math.round(len*.4/SAMPLE));
   if(tuned>=Math.min(needed,Math.max(2,Math.round(inner.length*.55))))return verdict(true,null,'Nota certa.');
+  // Qual nota saiu? (mediana dos quadros com som) — ajuda a criança a saber o que corrigir.
+  const heard=inner.flatMap(s=>s.frequency!==null&&Number.isFinite(s.frequency)&&s.frequency>0?[s.frequency]:[]).sort((x,y)=>x-y);
+  const got=heard.length>=2?Math.round(69+12*Math.log2(heard[Math.floor(heard.length/2)]/440))-transpose:null;
+  const want=e.note!.writtenMidi;
+  const wrong=got!==null&&got!==want?{midi:got,name:formatWrittenNote(got).replace(/ \d$/,''),dir:got>want?'agudo':'grave'}:null;
+  if(wrong)return {...verdict(false,'note',`Saiu ${wrong.name} em vez de ${e.note!.label.replace(/ \d$/,'')}. ${wrong.dir==='agudo'?'Som mais agudo que o pedido: algum furo tá deixando o ar escapar. Confira se cada furo do dedilhado tá bem fechado.':'Som mais grave que o pedido: confira se não fechou furo a mais e sopre um tiquinho mais firme.'}`),heardMidi:wrong.midi};
   return inner.some(s=>off(s)<=110)?verdict(false,'tuning','Quase: confira se os furos estão bem fechados e sopre mais leve.'):verdict(false,'note',`Estamos procurando ${e.note!.label}.`);
  });
 }

@@ -4,7 +4,7 @@ import {checkMessage,localCommunity,COMMUNITY_CHANNELS,tomWelcome} from '../src/
 
 const memory=()=>{const m=new Map();return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k),clear:()=>m.clear(),key:()=>null,length:0};};
 test('comunidade: salas geral + instrumentos, só públicas, com boas-vindas do Tom',()=>{
- assert.deepEqual(COMMUNITY_CHANNELS.map(c=>c.id),['geral','recorder-soprano','trumpet-bb','clarinet-bb','conductor']);
+ assert.deepEqual(COMMUNITY_CHANNELS.map(c=>c.id),['geral','recorder-soprano','trumpet-bb','clarinet-bb'],'regência bloqueada: sem sala');
  assert.match(tomWelcome(COMMUNITY_CHANNELS[0]).text,/não manda telefone/);
 });
 test('comunidade protege a criança: bloqueia dados pessoais, links e palavrões; deixa papo de música passar',()=>{

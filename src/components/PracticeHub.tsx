@@ -77,7 +77,7 @@ export function PracticeHub({instrument,lesson,lessonNumber,courseComplete,recor
     <section className="practice-more" aria-labelledby={id+'-more'}>
       <div className="practice-section-heading"><h2 id={id+'-more'}>Experimente também</h2><span>No seu ritmo</span></div>
       <div className="practice-modes">
-        <button type="button" className="practice-mode practice-mode--touch" onClick={onTouch} aria-label={recorder?'Explorar os furos':'Explorar posições do trompete'}>
+        <button type="button" className="practice-mode practice-mode--touch" onClick={onTouch} aria-label={recorder?'Explorar os furos':instrument.id==='clarinet-bb'?'Explorar posições do clarinete':'Explorar posições do trompete'}>
           <span className="practice-mode-art"><CourseArtwork instrument={instrument.id}/></span>
           <span className="practice-mode-copy"><span className="practice-mode-label">SEM INSTRUMENTO</span><span className="practice-mode-title">Música na ponta dos dedos</span><span className="practice-mode-description">{recorder?'Explore os furos por toque e ouça cada nota.':'Explore as posições e ouça os sons.'}</span><span className="practice-mode-link">{recorder?'Explorar os furos':'Explorar posições'}<PracticeIcon name="arrow"/></span></span>
         </button>

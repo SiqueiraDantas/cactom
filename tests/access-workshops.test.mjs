@@ -75,8 +75,10 @@ test('sessão lembrada: atualizar a página não repete tutorial; sair apaga; se
  const m=new Map(),store={getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)};
  const s=await import('../src/lib/session.ts');
  assert.equal(s.readSession(store),null);
- s.saveSession({mode:'local',profile:{id:'p1',username:'ana',name:'Ana',password:'x'}},store);
- assert.deepEqual(s.readSession(store),{mode:'local',profile:{id:'p1',username:'ana',name:'Ana'}});assert.doesNotMatch(m.get(s.SESSION_KEY),/password/);
+ const id='3f2b6a1e-8c4d-4e5f-9a6b-7c8d9e0f1a2b';s.saveSession({mode:'local',profile:{id,username:'ana',name:'Ana',password:'x'}},store);
+ assert.deepEqual(s.readSession(store),{mode:'local',profile:{id,username:'ana',name:'Ana'}});
+ store.setItem(s.SESSION_KEY,JSON.stringify({mode:'local',profile:{id:'quebrado',username:'a',name:'A'}}));assert.equal(s.readSession(store),null,'perfil inválido não trava o app');
+ s.saveSession({mode:'local',profile:{id,username:'ana',name:'Ana'}},store);assert.doesNotMatch(m.get(s.SESSION_KEY),/password/);
  s.clearSession(store);assert.equal(s.readSession(store),null);
  m.set('cactom-onboarding-v1','{}');assert.deepEqual(s.readSession(store),{mode:'demo',profile:null});
 });

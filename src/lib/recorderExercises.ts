@@ -7,7 +7,7 @@ import type {Evidence} from './recorderJourney.ts';
  * P1 = descoberta, P2 = aplicação em exemplo novo. Unidade 1 segue o roteiro de 30 telas do caderno.
  * Contagens separadas: tarefa-base (240) · apresentação (480) · feedback (estado, não conta como nova atividade).
  */
-export type ExerciseKind='choice'|'fingering'|'order'|'tap'|'perform'|'observe'|'create';
+export type ExerciseKind='choice'|'fingering'|'order'|'tap'|'perform'|'observe'|'create'|'meet';
 export type ArtId='flute-parts'|'flute-back'|'hands-left-up'|'hands-right-up'|'support-thumb'|'support-squeeze'|'card-si'|'gesture-breath'|'gesture-none'|'diagram';
 export type ExerciseOption={label:string;art?:ArtId;holes?:number[]};
 export type Exercise={
@@ -266,8 +266,33 @@ for(const task of COURSE_TASKS){
  }
 }
 export const RETURN_RULE=RETORNO;
-export function lessonExercises(lessonId:string,{includeDrafts=false}={}){return EXERCISES.filter(e=>e.lessonId===lessonId&&(includeDrafts||e.status==='pronto')).sort((x,y)=>x.slot-y.slot);}
-export function exerciseById(id:string){return EXERCISES.find(e=>e.id===id);}
+/* ---------- Nota nova: antes da primeira atividade que usa uma nota, uma tela ensina como fazer ---------- */
+function pitchesOf(e:Exercise):number[]{
+ const out=new Set<number>();
+ for(const n of [...(e.notes??[]),...(e.alternative??[])])if(n.midi!==null)out.add(n.midi);
+ if(e.target!==undefined)out.add(e.target);
+ for(const c of e.create?.choices??[])if(c!==null)out.add(c);
+ for(const c of e.create?.target??[])if(c!==null&&c!==undefined)out.add(c);
+ return [...out];
+}
+/** Notas novas por lição, na ordem da trilha (primeira vez que cada nota aparece numa atividade pronta). */
+export const NEW_NOTES=new Map<string,number[]>();
+{
+ const seen=new Set<number>(),lessons=[...new Set(EXERCISES.map(e=>e.lessonId))];
+ for(const lessonId of lessons){
+  const fresh:number[]=[];
+  for(const e of EXERCISES.filter(x=>x.lessonId===lessonId&&x.status==='pronto').sort((x,y)=>x.slot-y.slot))for(const p of pitchesOf(e))if(!seen.has(p)&&fingeringFor(p)){seen.add(p);fresh.push(p);}
+  if(fresh.length)NEW_NOTES.set(lessonId,fresh);
+ }
+}
+export const MEET_EXERCISES:Exercise[]=[...NEW_NOTES].flatMap(([lessonId,notes])=>{
+ const first=EXERCISES.find(e=>e.lessonId===lessonId)!;
+ return notes.map((midi,i)=>({id:`${lessonId}-N${midi}-P1`,taskId:first.taskId,unit:first.unit,lessonId,slot:-notes.length+i,phase:'descoberta' as const,kind:'meet' as const,target:midi,notes:[{midi,beats:4}],meter:'4/4' as const,bpm:60,
+  instruction:`Nota nova: ${NAME[midi]}`,prompt:`Veja como fazer o ${NAME[midi]}: feche os furos pintados, sopre leve como quem diz “tu” e escute o som.`,
+  hint:`${NAME[midi]}: furos ${fingeringFor(midi)!.join(' · ')} fechados.`,correct:`Agora tu já sabe fazer o ${NAME[midi]}!`,incorrect:'',answerKey:`${NAME[midi]} = furos ${fingeringFor(midi)!.join(' · ')}.`,evidence:['leitura'],status:'pronto' as const}));
+});
+export function lessonExercises(lessonId:string,{includeDrafts=false}={}){return [...MEET_EXERCISES,...EXERCISES].filter(e=>e.lessonId===lessonId&&(includeDrafts||e.status==='pronto')).sort((x,y)=>x.slot-y.slot);}
+export function exerciseById(id:string){return EXERCISES.find(e=>e.id===id)??MEET_EXERCISES.find(e=>e.id===id);}
 
 /* ---------- Correção ---------- */
 export function checkFingering(ex:Exercise,holes:readonly number[],system:RecorderSystem='baroque'){

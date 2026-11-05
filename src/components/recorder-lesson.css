@@ -152,3 +152,16 @@
 .ffb-view figcaption span{font-size:12px;color:#777}
 .ffb-turn{display:grid;justify-items:center;gap:2px;color:#ff9600;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .ffb-turn svg{width:40px;height:24px}
+
+/* Dedilhado de cada nota da atividade e tela “Nota nova” */
+.rl-fings{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:4px 0}
+.rl-fing{margin:0;display:flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;border:2px solid #E5E5E5;border-radius:14px;background:#fff}
+.rl-fing figcaption{display:grid;line-height:1.15}.rl-fing b{font-size:14px;color:#3C3C3C}.rl-fing small{font-size:12px;color:#777}
+.rl-mini-fing{width:20px;height:60px}
+.rl-meet-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center}
+.rl-meet-score{min-width:0}
+.rl-meet-holes{text-align:center;font-size:17px;margin:8px 0}
+.rl-meet .rl-listen{margin:4px auto 0;display:flex}
+@media(max-width:560px){.rl-meet-grid{grid-template-columns:minmax(0,1fr)}}
+.rl-meet-score .recorder-course-score{width:100%;border:1px solid #e0e9dd;border-radius:14px;background:#fff;padding:8px 0}.rl-meet-score .recorder-course-score>svg{display:block;width:100%;height:auto;overflow:visible}
+.rl-system{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin:6px 0;font-weight:800;color:#4B4B4B}.rl-system button{border:2px solid #E5E5E5;border-bottom-width:4px;border-radius:12px;background:#fff;padding:6px 16px;font:900 15px inherit;cursor:pointer}.rl-system button.is-on{border-color:#84D8FF;background:#DDF4FF;color:#1899D6}.rl-system small{flex-basis:100%;text-align:center;font-weight:600;color:#777}

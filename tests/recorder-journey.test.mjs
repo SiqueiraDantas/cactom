@@ -42,10 +42,10 @@ test('banco: 480 apresentações (2 por tarefa-base), 30 na Unidade 1 conforme o
   assert.doesNotMatch(`${e.instruction} ${e.prompt??''} ${(e.checklist??[]).join(' ')}`,/professor/i,e.id);
   if(e.kind==='create')assert.ok(e.create.slots>0&&e.create.choices.length>=2,e.id);
  }
- const u1=lessonExercises('S1-M01-L01');assert.equal(u1.length,6);assert.equal(u1[0].instruction,'Aponte o bocal no desenho.');assert.equal(lessonExercises('S1-M01-L05')[5].teacher,undefined);assert.equal(lessonExercises('S1-M01-L02')[0].audio,'AB');
+ const u1=lessonExercises('S1-M01-L01');assert.equal(u1.length,6);assert.equal(u1[0].instruction,'Aponte o bocal no desenho.');assert.equal(lessonExercises('S1-M01-L05')[5].teacher,undefined);assert.equal(lessonExercises('S1-M01-L02')[0].kind,'meet');assert.equal(lessonExercises('S1-M01-L02')[0].target,71);assert.equal(lessonExercises('S1-M01-L02')[1].audio,'AB');
 });
 test('material musical correto: SI = 0 e 1; Fá respeita o sistema; contornos e notas mais agudas vêm dos próprios dados',()=>{
- assert.deepEqual(fingeringFor(71),[0,1]);assert.deepEqual(fingeringFor(65,'german'),[0,1,2,3,4]);assert.equal(fingeringFor(66),null);
+ assert.deepEqual(fingeringFor(71),[0,1]);assert.deepEqual(fingeringFor(65,'german'),[0,1,2,3,4]);assert.deepEqual(fingeringFor(66),[0,1,2,3,5,6]);assert.deepEqual(fingeringFor(66,'german'),[0,1,2,3,5,6,7]);
  for(const e of EXERCISES.filter(x=>x.kind==='fingering'&&x.status==='pronto'&&x.target!==undefined))assert.deepEqual([...e.holes].sort(),[...recorderNote(e.target).holes].sort(),e.id);
  const si=exerciseById('S1-M01-L03-A01-P1');assert.deepEqual(si.options[si.answer].holes,[0,1]);
  for(const e of EXERCISES.filter(x=>x.prompt?.startsWith('Do primeiro ao último som')))assert.equal(['sobe','desce','igual'][e.answer],contour(e.notes),e.id);
@@ -110,4 +110,11 @@ test('contagem por unidade: implementadas, prontas e em rascunho somam 480',()=>
  const counts=unitCounts();assert.equal(counts.length,16);assert.equal(counts.reduce((n,c)=>n+c.presentations,0),480);
  assert.equal(counts.reduce((n,c)=>n+c.ready+c.draft,0),480);assert.equal(counts[0].draft,0);
  for(const e of EXERCISES.filter(x=>x.status==='rascunho'))assert.ok(e.draftReason.length>20);
+});
+test('toda nota é ensinada antes de ser cobrada: tela “Nota nova” na primeira lição que usa a nota (inclui Fá♯ e Si♭)',async()=>{
+ const m=await import('../src/lib/recorderExercises.ts');
+ const firstLesson=new Map();for(const [l,notes] of m.NEW_NOTES)for(const n of notes)firstLesson.set(n,l);
+ for(const n of [60,62,64,65,66,67,69,70,71,72,74])assert.ok(firstLesson.has(n),'sem tela de nota nova: '+n);
+ assert.equal(firstLesson.get(66),'S3-M10-L01');assert.deepEqual(m.fingeringFor(66),[0,1,2,3,5,6]);assert.deepEqual(m.fingeringFor(70),[0,1,3,4]);
+ const list=m.lessonExercises('S3-M10-L01');assert.equal(list[0].kind,'meet');assert.equal(list[0].target,66);assert.match(list[0].prompt,/Fá♯/);
 });

@@ -1,0 +1,37 @@
+.rk{background:#fff;border:2px solid #e3eee6;border-bottom-width:5px;border-radius:24px;padding:18px 18px 14px;margin:0 0 20px;display:grid;gap:14px}
+.rk-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.rk-eyebrow{font-size:12px;font-weight:900;letter-spacing:.1em;color:#3f8f27}
+.rk-head h2{margin:2px 0 0;font-size:22px;line-height:1.15;color:#0c3a3c;text-wrap:balance}
+.rk-modes{display:flex;gap:6px;background:#f2f7f3;border-radius:14px;padding:4px}
+.rk-modes button{border:0;background:transparent;border-radius:10px;padding:8px 12px;font:900 14px Nunito,'Segoe UI',sans-serif;color:#5d7f72;cursor:pointer}
+.rk-modes button.is-on{background:#fff;color:#0c3a3c;box-shadow:0 2px 0 #d6e6da}
+.rk-guest{display:flex;align-items:center;gap:12px;background:#fff7e0;border:2px solid #f6d98a;border-radius:16px;padding:10px 14px}
+.rk-guest-tom{width:56px;height:56px;flex:none}
+.rk-guest p{margin:0;font-weight:700;color:#6b4e0e;font-size:14px}
+.rk-empty{margin:0;text-align:center;font-weight:800;color:#5d7f72;padding:16px 8px}
+.rk-podium{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:10px}
+.rk-place{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
+.rk-avatar{position:relative;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#e8f7df;color:#3f8f27;font-weight:1000;font-size:24px;border:3px solid #fff;box-shadow:0 0 0 3px #a5dd8c}
+.rk-place--1 .rk-avatar{width:68px;height:68px;font-size:28px;background:#fff4cc;color:#b07800;box-shadow:0 0 0 3px #ffc800}
+.rk-place--2 .rk-avatar{background:#eef2f5;color:#5b6b78;box-shadow:0 0 0 3px #c2ccd4}
+.rk-place--3 .rk-avatar{background:#fbe9dd;color:#a5561f;box-shadow:0 0 0 3px #e3a272}
+.rk-crown{position:absolute;top:-24px;font-size:24px;color:#ffc800;line-height:1}
+.rk-name{font-size:15px;font-weight:1000;color:#0c3a3c;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-value{font-weight:900;font-size:14px;color:#3f8f27;white-space:nowrap}
+.rk-step{display:grid;place-items:center;width:100%;border-radius:14px 14px 6px 6px;background:#e8f7df;margin-top:4px}
+.rk-place--1 .rk-step{height:86px;background:#ffc800}
+.rk-place--2 .rk-step{height:62px;background:#d7dee4}
+.rk-place--3 .rk-step{height:46px;background:#efb88f}
+.rk-place.is-empty .rk-step{height:46px;background:#f2f7f3}
+.rk-medal{font-weight:1000;font-size:20px;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.18)}
+.rk-place.is-me .rk-name{color:#1899d6}
+.rk-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rk-list li{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:#f7faf8;min-width:0}
+.rk-list li.is-me{background:#ddf4ff;outline:2px solid #84d8ff}
+.rk-pos{width:30px;font-weight:1000;color:#5d7f72;flex:none}
+.rk-avatar--sm{width:38px;height:38px;font-size:17px;flex:none}
+.rk-who{flex:1;display:flex;flex-direction:column;min-width:0}
+.rk-who b{color:#0c3a3c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-who small{font-size:12px;font-weight:700;color:#6b8a7f}
+.rk-me{margin:0;font-weight:800;color:#0c3a3c;background:#f2f7f3;border-radius:14px;padding:10px 12px;font-size:14px}
+.rk-note{margin:0;font-size:12px;color:#6b8a7f}

@@ -8,6 +8,7 @@ import {workshopText} from './WorkshopGrid';
 import {playSound,soundsOn,setSoundsOn} from '../lib/uiSound';
 import './onboarding-journey.css';
 import {TomRojao} from './TomRojao';
+import {TREBLE_CLEF_PATH} from '../lib/trebleClef';
 
 const TOM_CLIPBOARD='/animacoes/tom-prancheta.svg',TOM_WAVE='/animacoes/cactom-acenando.svg';
 type Step='source'|'reason'|'level'|'overview'|'goal'|'path'|'motiv1'|'motiv2'|'quiz'|'complete'|'hop'|'streak';
@@ -174,7 +175,7 @@ function ArtView({art}:{art:Art}){
  const step=STAFF_STEP[art.pitch],y=70-step*5,up=step<4,ledger=step<=-2||step>=10;
  return <svg viewBox="0 0 120 90" aria-hidden="true">
   <g stroke="#9AA5AE" strokeWidth="1.4">{[30,40,50,60,70].map(l=><path key={l} d={`M8 ${l} H112`}/>)}</g>
-  <text x="10" y="76" fontSize="54" fill="#2B2F36" fontFamily="'Noto Music','Bravura','Apple Symbols','Segoe UI Symbol',serif">𝄞</text>
+  <path d={TREBLE_CLEF_PATH} transform="translate(12 60) scale(0.03)" fill="#2B2F36"/>
   {ledger&&<path d={`M62 ${y} H88`} stroke="#2B2F36" strokeWidth="1.6"/>}
   <g transform={`translate(75 ${y})`}>
    <ellipse rx="7.2" ry="5.2" transform="rotate(-20)" fill="#2B2F36"/>

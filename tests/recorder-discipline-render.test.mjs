@@ -48,7 +48,7 @@ test('diagnóstico integra a única trilha Aprender da flauta com 8 nós, 64 par
  assert.equal((recorder.match(/data-diagnostic-id="D0[1-8]"/g)??[]).length,8);
  assert.equal((recorder.match(/class="rj-node"/g)??[]).length,64);assert.match(recorder,/class="topbar-progress"[\s\S]*?<b>0%<\/b>/);assert.equal((recorder.match(/id="lesson-recorder-/g)??[]).length,13);
  assert.ok(recorder.indexOf('id="diagnostic-D01"')<recorder.indexOf('id="lesson-recorder-furos"'));
- assert.doesNotMatch(trumpet,/data-diagnostic-id/);assert.equal((trumpet.match(/class="lesson-node /g)??[]).length,13);
+ assert.doesNotMatch(trumpet,/data-diagnostic-id/);assert.equal((trumpet.match(/class="rj-node"/g)??[]).length,68,'16 unidades × 4 áreas + 4 desafios de seção');assert.equal((trumpet.match(/class="lesson-node /g)??[]).length,13,'13 treinos anteriores');assert.match(trumpet,/bj-unit-1/);
  assert.equal(JSON.parse(backing.get('mis-music-lab-recorder-v1')).passed['recorder-primeiro-si'][0],'rec-si-inicial');
 });
 

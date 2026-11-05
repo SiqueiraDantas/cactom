@@ -4,6 +4,10 @@ import { ActivityShell, type ActivityTool } from './ActivityExperience';
 import './cactom-dashboard.css';
 import { ScoreRenderer } from './ScoreRenderer';
 import { ScoreLibraryHub } from './ScoreLibraryHub';
+import { ScorePdfReview } from './ScorePdfReview';
+import { track } from '../lib/devEvents';
+import type { PdfReading } from '../lib/pdfScore';
+import { soundingOffset } from '../lib/bandTrail';
 import { scoresForInstrument, type LibraryScore } from '../lib/scoreLibrary';
 import { MAX_XML_SIZE, parseMusicXml, type ParsedScore } from '../lib/musicxml';
 import { activeScoreEvent, assessScore, assessScoreEvent, type ScoreSample, type ScoreVerdict } from '../lib/scoreAssessment';
@@ -20,11 +24,14 @@ import type { RecorderSystem } from '../lib/recorder';
 import { useProfileStorage } from './ProfileStorage';
 
 type Phase='idle'|'starting'|'countin'|'playing'|'review';
-type Props={instrument:InstrumentProfile;recorderSystem:RecorderSystem;onExit:()=>void;onAttempt:(attempt:Omit<PracticeAttempt,'id'|'at'|'instrumentId'>)=>void};
-export function ScoreLab({onExit,onAttempt,instrument,recorderSystem}:Props){
+/** Como a tela abre a partir da aba Partituras: direto numa partitura ou já lendo um arquivo. */
+export type ScoreStart={scoreId?:string;file?:File};
+type Props={instrument:InstrumentProfile;recorderSystem:RecorderSystem;onExit:()=>void;onAttempt:(attempt:Omit<PracticeAttempt,'id'|'at'|'instrumentId'>)=>void;start?:ScoreStart|null};
+export function ScoreLab({onExit,onAttempt,instrument,recorderSystem,start:opening=null}:Props){
   const {profileId}=useProfileStorage();
   const recorder=instrument.id==='recorder-soprano';
-  const readScore=(xml:string)=>parseMusicXml(xml,undefined,instrument.id,recorderSystem);
+  const readScore=(xml:string)=>parseMusicXml(xml,undefined,instrument.id,recorderSystem,instrument.id==='trumpet-bb'?soundingOffset('trumpet-bb'):-2);
+  const [pdf,setPdf]=useState<(PdfReading&{fileName:string})|null>(null),[pdfError,setPdfError]=useState(''),[importStep,setImportStep]=useState('');
   const [library,setLibrary]=useState<LibraryScore[]>([...scoresForInstrument(instrument.id)]),[chosen,setChosen]=useState<LibraryScore|null>(null);
   const [parsed,setParsed]=useState<ParsedScore|null>(null),[phase,setPhase]=useState<Phase>('idle');
   const [error,setError]=useState(''),[storageError,setStorageError]=useState(''),[reports,setReports]=useState<ScoreReport[]>([]);
@@ -52,30 +59,47 @@ export function ScoreLab({onExit,onAttempt,instrument,recorderSystem}:Props){
   },[]);
   useEffect(()=>{
     mounted.current=true;
-    void importedScores(profileId).then(items=>{if(mounted.current)setLibrary([...scoresForInstrument(instrument.id),...items.filter(i=>typeof i.xml==='string'&&typeof i.title==='string'&&(i.instrumentId??'trumpet-bb')===instrument.id)]);}).catch(()=>{if(mounted.current)setStorageError('A biblioteca importada ficará apenas nesta sessão, pois o armazenamento local não está disponível.');});
+    void importedScores(profileId).then(items=>{if(!mounted.current)return;const all=[...scoresForInstrument(instrument.id),...items.filter(i=>typeof i.xml==='string'&&typeof i.title==='string'&&(i.instrumentId??'trumpet-bb')===instrument.id)];setLibrary(all);const wanted=opening?.scoreId?all.find(i=>i.id===opening.scoreId):undefined;if(wanted)choose(wanted);}).catch(()=>{if(mounted.current)setStorageError('A biblioteca importada ficará apenas nesta sessão, pois o armazenamento local não está disponível.');});
     void scoreReports(profileId).then(items=>{if(mounted.current)setReports(items);}).catch(()=>{});
     const hide=()=>{if(document.hidden){stop();setFeedback('Treino pausado ao sair da tela. Recomece com uma nova contagem.');}};
     document.addEventListener('visibilitychange',hide);
+    if(opening?.file)void importFile(opening.file);
     return ()=>{mounted.current=false;stop();document.removeEventListener('visibilitychange',hide);};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[stop]);
   const choose=(item:LibraryScore)=>{
     stop();setError('');setResults([]);judged.current.clear();setRange(null);setCursor(null);setActive(-1);
     try{const score=readScore(item.xml);setParsed(score);setBpm(score.bpm);setChosen(item);setReady(false);setFeedback('Leia a partitura e prepare seu instrumento.');window.scrollTo({top:0,behavior:'instant'});}
     catch(e){setError(e instanceof Error?e.message:'Não foi possível ler a partitura.');}
   };
+  const keep=async(item:LibraryScore)=>{
+    if(library.filter(s=>s.imported).length>=20&&!library.some(s=>s.id===item.id))throw new Error('A biblioteca comporta até 20 partituras tuas. Apague uma no navegador para trazer outra.');
+    try{await saveScore(item,profileId);}catch{setStorageError('A partitura abriu, mas não pôde ser salva. Ela ficará disponível nesta sessão.');}
+    if(!mounted.current)return;
+    setLibrary(previous=>[...previous.filter(s=>s.id!==item.id),item]);choose(item);
+  };
+  const confirmPdf=async(xml:string,title:string)=>{
+    setPdfError('');
+    try{const score=readScore(xml);await keep({instrumentId:instrument.id,id:score.id,title,description:`${score.measures.length} compassos · lida do teu PDF`,xml:score.xml,imported:true});if(mounted.current)setPdf(null);}
+    catch(e){if(mounted.current)setPdfError(e instanceof Error?e.message:'Não consegui montar esta partitura.');}
+  };
   const importFile=async(file:File|undefined)=>{
     if(!file)return;setError('');setImporting(true);
     try{
+      if(/\.pdf$/i.test(file.name)||file.type==='application/pdf'){
+        const {readPdfScore}=await import('../lib/pdfScore');
+        const reading=await readPdfScore(file,step=>{if(mounted.current)setImportStep(step);});
+        track('score_import',{format:'pdf',pages:reading.pages,notes:reading.result.measures.reduce((n,m)=>n+m.items.filter(x=>x.midi!==null).length,0),instrument:instrument.id});
+        if(!mounted.current)return;
+        if(!reading.result.measures.some(m=>m.items.some(n=>n.midi!==null)))throw new Error('Não achei notas neste PDF. Ele precisa ter a partitura desenhada (não só texto), numa pauta com clave de Sol.');
+        setPdfError('');setPdf({...reading,fileName:file.name});window.scrollTo({top:0,behavior:'instant'});return;
+      }
       if(file.size>MAX_XML_SIZE)throw new Error('Escolha um arquivo de até 512 KB.');
       if(!/\.(musicxml|xml)$/i.test(file.name))throw new Error('Use .musicxml ou .xml descompactado. Arquivos .mxl ainda não são aceitos.');
       const xml=await file.text(),score=readScore(xml);
-      const item:LibraryScore={instrumentId:instrument.id,id:score.id,title:score.title,description:`${score.measures.length} compassos · importada por você`,xml:score.xml,imported:true};
-      if(library.filter(s=>s.imported).length>=20&&!library.some(s=>s.id===item.id))throw new Error('A biblioteca comporta até 20 partituras importadas nesta etapa.');
-      try{await saveScore(item,profileId);}catch{setStorageError('O arquivo abriu, mas não pôde ser salvo. Ele ficará disponível nesta sessão.');}
-      if(!mounted.current)return;
-      setLibrary(previous=>[...previous.filter(s=>s.id!==item.id),item]);choose(item);
+      await keep({instrumentId:instrument.id,id:score.id,title:score.title,description:`${score.measures.length} compassos · importada por você`,xml:score.xml,imported:true});
     }catch(e){if(mounted.current)setError(e instanceof Error?e.message:'Não foi possível importar o arquivo.');}
-    finally{if(mounted.current)setImporting(false);}
+    finally{if(mounted.current){setImporting(false);setImportStep('');}}
   };
   const start=async()=>{
     if(!exercise||!chosen||!ready||starting.current||phase==='playing'||phase==='countin')return;
@@ -130,10 +154,11 @@ export function ScoreLab({onExit,onAttempt,instrument,recorderSystem}:Props){
   };
   const running=phase==='starting'||phase==='countin'||phase==='playing';
   const backLibrary=()=>{stop();setChosen(null);setParsed(null);setError('');};
-  if(!chosen||!parsed||!exercise)return <ScoreLibraryHub instrument={instrument} library={library} reports={reports} importing={importing} error={error} storageError={storageError} onExit={onExit} onChoose={choose} onImport={importFile}/>;
-  const tools:ActivityTool[]=[{id:'score-help',label:'Dicas',title:'Como praticar a partitura',icon:<LabIcon name="book" size={23}/>,content:<><p>{recorder?'As notas são escritas para flauta doce soprano, que soa uma oitava acima da pauta com 8.':'As notas são escritas para trompete em Si♭, que soa dois semitons abaixo.'} Use fones para o metrônomo não entrar no microfone.</p><p>O marcador acompanha a posição esperada no andamento. Os checks aparecem após avaliar a nota e sua duração. Notas repetidas precisam de emissões separadas.</p><p>A avaliação rítmica é aproximada; ajuste a compensação do microfone se necessário. Ela não avalia embocadura nem respiração.</p>{parsed.warnings.map(w=><p key={w}>{w}</p>)}</>},{id:'score-history',label:'Histórico',title:'Tentativas desta partitura',icon:<LabIcon name="chart" size={23}/>,content:<>{reports.filter(r=>r.scoreId===chosen.id||r.scoreId.startsWith(chosen.id+'-measure-')).slice(0,12).map(r=><p key={r.id}><b>{r.passed?'✓ Trecho concluído':'Em prática'}</b><br/>{r.scoreTitle}<br/>{new Date(r.at).toLocaleString('pt-BR')} · {r.bpm} BPM</p>)}{!reports.some(r=>r.scoreId.startsWith(chosen.id))&&<p>Seu histórico aparece depois da primeira tentativa completa.</p>}</>}];
+  if(pdf&&!chosen)return <ScorePdfReview result={pdf.result} preview={pdf.preview} fileName={pdf.fileName} pdfTitle={pdf.title} pages={pdf.pages} instrumentId={instrument.id} error={pdfError} onCancel={()=>{setPdf(null);setPdfError('');}} onConfirm={(xml,title)=>void confirmPdf(xml,title)}/>;
+  if(!chosen||!parsed||!exercise)return <ScoreLibraryHub instrument={instrument} library={library} reports={reports} importing={importing} importStep={importStep} error={error} storageError={storageError} onExit={onExit} onChoose={choose} onImport={importFile}/>;
+  const tools:ActivityTool[]=[{id:'score-help',label:'Dicas',title:'Como praticar a partitura',icon:<LabIcon name="book" size={23}/>,content:<><p>{recorder?'As notas são escritas para flauta doce soprano, que soa uma oitava acima da pauta com 8.':instrument.id==='clarinet-bb'?'As notas são escritas para clarinete em Si♭, que soa dois semitons abaixo.':soundingOffset('trumpet-bb')===0?'As notas são escritas para trompete; teu trompete em Dó soa como está escrito.':'As notas são escritas para trompete em Si♭, que soa dois semitons abaixo.'} Use fones para o metrônomo não entrar no microfone.</p><p>O marcador acompanha a posição esperada no andamento. Os checks aparecem após avaliar a nota e sua duração. Notas repetidas precisam de emissões separadas.</p><p>A avaliação rítmica é aproximada; ajuste a compensação do microfone se necessário. Ela não avalia embocadura nem respiração.</p>{parsed.warnings.map(w=><p key={w}>{w}</p>)}</>},{id:'score-history',label:'Histórico',title:'Tentativas desta partitura',icon:<LabIcon name="chart" size={23}/>,content:<>{reports.filter(r=>r.scoreId===chosen.id||r.scoreId.startsWith(chosen.id+'-measure-')).slice(0,12).map(r=><p key={r.id}><b>{r.passed?'✓ Trecho concluído':'Em prática'}</b><br/>{r.scoreTitle}<br/>{new Date(r.at).toLocaleString('pt-BR')} · {r.bpm} BPM</p>)}{!reports.some(r=>r.scoreId.startsWith(chosen.id))&&<p>Seu histórico aparece depois da primeira tentativa completa.</p>}</>}];
   return <ActivityShell key={chosen.id} title={chosen.title} lessonNumber={0} total={exercise.events.length} completed={results.filter(r=>r.passed).length} onExit={()=>{stop();onExit();}} success={phase==='review'&&results.length>0&&results.every(r=>r.passed)} tools={tools} footer={<><div className="session-footer-feedback"><span className="footer-feedback-icon"><LabIcon name={phase==='review'&&results.every(r=>r.passed)?'check':'music'} size={23}/></span><div><b>{phase==='countin'?`Prepare-se: ${count} pulso(s)`:phase==='review'?'Seu trecho, compasso a compasso.':phase==='playing'?'Siga o seu compasso.':'Seu próximo som começa aqui.'}</b><p>{feedback}</p></div></div><div className="session-footer-actions"><button className="session-text-button" type="button" onClick={backLibrary}>Biblioteca</button><button className="activity-primary" type="button" disabled={!ready||phase==='starting'} onClick={()=>running?stop():void start()}>{phase==='starting'?'PREPARANDO…':running?'PAUSAR TREINO':phase==='review'?'TENTAR NOVAMENTE':'COMEÇAR A TOCAR'}</button></div></>}>
-    <div className="activity-heading"><span className="activity-eyebrow">{recorder?'FLAUTA DOCE SOPRANO · CLAVE 8':'TROMPETE EM SI♭ · NOTAS ESCRITAS'}</span><h1>{chosen.title}</h1><p>{range===null?`${parsed.measures.length} compassos`:`Praticando o compasso ${range+1}`} · {phase==='playing'?'Marcador: posição esperada no andamento':'Leia com calma antes de tocar.'}</p></div>
+    <div className="activity-heading"><span className="activity-eyebrow">{recorder?'FLAUTA DOCE SOPRANO · CLAVE 8':instrument.id==='clarinet-bb'?'CLARINETE EM SI♭ · NOTAS ESCRITAS':'TROMPETE · NOTAS ESCRITAS'}</span><h1>{chosen.title}</h1><p>{range===null?`${parsed.measures.length} compassos`:`Praticando o compasso ${range+1}`} · {phase==='playing'?'Marcador: posição esperada no andamento':'Leia com calma antes de tocar.'}</p></div>
     <div className="score-controls"><label>Andamento <b>{bpm} BPM</b><input aria-label="Andamento da partitura" type="range" min="45" max="120" step="5" value={bpm} disabled={running} onChange={e=>setBpm(Number(e.target.value))}/></label><label>Compensação <b>{offset>0?'+':''}{offset} ms</b><input aria-label="Compensação do microfone na partitura" type="range" min="-300" max="300" step="25" value={offset} disabled={running} onChange={e=>setOffset(Number(e.target.value))}/></label><label>Trecho<select aria-label="Trecho da partitura" value={range??'all'} disabled={running} onChange={e=>{const value=e.target.value;if(value==='all'){setRange(null);}else{const index=Number(value),bar=parsed.measures[index];if(parsed.events.some(ev=>ev.startBeat<bar.startBeat&&ev.startBeat+ev.beats>bar.startBeat||ev.startBeat<bar.startBeat+bar.beats&&ev.startBeat+ev.beats>bar.startBeat+bar.beats)){setError('Este compasso contém uma ligadura com o vizinho. Pratique a partitura inteira para respeitar a duração.');return;}setRange(index);}setResults([]);setCursor(null);setPhase('idle');setError('');}}><option value="all">Partitura inteira</option>{parsed.measures.map(m=><option value={m.index} key={m.index}>Compasso {m.label}</option>)}</select></label></div>
     <div className="score-pulse"><span>{exercise.beatsPerBar}/4</span><div className="activity-beats">{Array.from({length:exercise.beatsPerBar},(_,i)=><span key={i} className={running&&beat===i+1?'active':''}>{i+1}</span>)}</div><b>{running&&phase==='countin'?`Entrando em ${count}…`:phase==='playing'?exercise.events[active]?.kind==='rest'?'Silêncio':exercise.events[active]?.note?.label:'Use fones para praticar'}</b></div>
     <ScoreRenderer xml={parsed.xml} cursorIndex={cursor} onReady={readyCallback}/>

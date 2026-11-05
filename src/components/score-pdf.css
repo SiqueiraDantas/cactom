@@ -1,0 +1,31 @@
+/* Aba Partituras dentro da página inicial */
+.library-hub--embedded{background:transparent}
+.library-hub--embedded .library-hub-content{padding:8px 0 24px;max-width:none}
+
+/* Conferência do PDF lido */
+.pdf-review-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin:8px 0 18px}
+.pdf-review-compare figure{margin:0;min-width:0;border:2px solid #e0ebe3;border-bottom-width:4px;border-radius:18px;background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px}
+.pdf-review-compare figcaption{font-weight:900;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#4f8a6e}
+.pdf-review-compare img{width:100%;height:auto;max-height:520px;object-fit:contain;object-position:top;border-radius:10px;background:#fff}
+.pdf-review-score{min-width:0;overflow-x:auto;max-height:520px;overflow-y:auto}
+.pdf-review-tips{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:18px;background:#fff7e0;border:2px solid #f6d98a;padding:12px 16px;margin-bottom:16px}
+.pdf-review-tips .hub-tom-scene{flex:0 0 auto;transform:scale(.8);transform-origin:left center}
+.pdf-review-tips ul{flex:1 1 220px;margin:0;padding-left:18px;font-weight:700;color:#6b4e0e;display:grid;gap:4px;min-width:0}
+.pdf-review-fix{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:14px}
+.pdf-review-fix p{grid-column:1/-1;margin:0;font-weight:800;color:#27594c}
+.pdf-review-fix label{display:flex;flex-direction:column;gap:6px;font-weight:800;font-size:14px;color:#3d6b5c;min-width:0}
+.pdf-review-fix input,.pdf-review-fix select{font:700 15px Nunito,'Segoe UI',sans-serif;border:2px solid #e0ebe3;border-radius:12px;padding:10px 12px;background:#fff;color:#27594c;min-width:0;width:100%}
+.pdf-review-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
+.pdf-review-note{font-size:13px;color:#5d7f72;max-width:65ch;margin:0}
+.pdf-review .library-hub-topbar .brand-home{display:flex;align-items:center}
+.pdf-review .library-hub-topbar .cactom-wordmark{width:148px;height:auto}
+
+/* Aba Aprender: reforço e instrumento na tela, no alto da trilha */
+.learn-reinforcement{margin:0 auto 14px;max-width:640px}
+.learn-virtual{display:flex;align-items:center;gap:14px;width:100%;max-width:640px;margin:0 auto 18px;padding:12px 16px;border:2px solid #e0ebe3;border-bottom-width:4px;border-radius:18px;background:#fff;color:#27594c;font:inherit;text-align:left;cursor:pointer}
+.learn-virtual:hover{background:#f3fbf5}
+.learn-virtual>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.learn-virtual b{font-size:16px;font-weight:900}
+.learn-virtual small{font-size:13px;font-weight:700;color:#5d7f72}
+.learn-virtual-art{width:52px;height:52px;flex:none;display:grid;place-items:center}
+.learn-virtual-art svg{width:100%;height:100%}

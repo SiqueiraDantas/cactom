@@ -1,5 +1,6 @@
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
-import {COURSE_TASKS,evaluateCourse,barBeats,pulseBeats} from '../lib/recorderFullCourse';
+import {track} from '../lib/devEvents';
+import {COURSE_TASKS,evaluateCourse,courseScoreEvents,barBeats,pulseBeats} from '../lib/recorderFullCourse';
 import {lessonExercises,exerciseById,checkFingering,checkCreation,scoreTaps,tapFeedback,fingeringFor,NAME,type Exercise} from '../lib/recorderExercises';
 import {journeyStop,readJourney,writeJourney,completeLesson,lessonXp,EVIDENCE_LABEL,type Evidence,type LegacyResponse,type LessonOutcome} from '../lib/recorderJourney';
 import {FluteFrontBack} from './FluteFrontBack';
@@ -8,11 +9,12 @@ import {LessonSound} from '../lib/lessonSound';
 import {MicrophonePitchMonitor} from '../lib/audio';
 import {ModuleOneMedia} from '../lib/recorderModuleOneMedia';
 import type {ScoreSample} from '../lib/scoreAssessment';
-import type {RecorderSystem} from '../lib/recorder';
+import {CHECK_GERMAN,type RecorderSystem} from '../lib/recorder';
 import {useProfileStorage} from './ProfileStorage';
 import {markPracticeDay} from '../lib/practiceDay';
 import {RecorderDiagram} from './RecorderExperience';
 import {RecorderCourseScore} from './RecorderCourseScore';
+import {startLessonMetronome,stopLessonMetronome} from '../lib/lessonMetronome';
 import {TomOfficial} from './CactomBrand';
 import {JourneyArt} from './JourneyArt';
 import './recorder-lesson.css';
@@ -31,7 +33,7 @@ export function reviewExercises(stopId:string,needed:readonly string[]):Exercise
  return [...missed,...auto].slice(0,6);
 }
 
-export function RecorderLesson({stopId,lessonId,review=false,system,legacy,silent:initialSilent=false,onExit}:{stopId:string;lessonId?:string;review?:boolean;system:RecorderSystem;legacy:Record<string,LegacyResponse|undefined>;silent?:boolean;onExit:()=>void}){
+export function RecorderLesson({stopId,lessonId,review=false,system,legacy,silent:initialSilent=false,onExit,onSystem}:{stopId:string;lessonId?:string;review?:boolean;system:RecorderSystem;legacy:Record<string,LegacyResponse|undefined>;silent?:boolean;onExit:()=>void;onSystem?:(s:RecorderSystem)=>void}){
  const storage=useProfileStorage();
  const stop=journeyStop(stopId)!;
  const [loaded]=useState(()=>readJourney(storage));
@@ -49,7 +51,7 @@ export function RecorderLesson({stopId,lessonId,review=false,system,legacy,silen
  useEffect(()=>{headingRef.current?.focus({preventScroll:true});window.scrollTo({top:0,behavior:'auto'});},[stage,pos]);
  useEffect(()=>{if(verdict)feedbackRef.current?.focus({preventScroll:true});},[verdict]);
 
- const check=()=>{if(!pending?.ready||verdict)return;const v=pending.check();setVerdict(v);if(!silent&&!v.neutral&&!v.skipped)void sound.current.chime(v.ok);};
+ const check=()=>{if(!pending?.ready||verdict)return;const v=pending.check();setVerdict(v);if(item)track('answer',{exercise:item.ex.id,kind:item.ex.kind,ok:v.ok||!!v.neutral,skipped:!!v.skipped,retry:item.retry,lesson:lessonId??stop.lessonIds[0],instruction:item.ex.instruction});if(!silent&&!v.neutral&&!v.skipped)void sound.current.chime(v.ok);};
  const advance=()=>{
   if(!item||!verdict)return;const {ex,retry}=item,previous=results[ex.id];
   const ok=verdict.ok||!!verdict.neutral;
@@ -63,7 +65,7 @@ export function RecorderLesson({stopId,lessonId,review=false,system,legacy,silen
  const finish=(final:Record<string,Result>)=>{
   const outcome:LessonOutcome={lessonId:review?`review:${stopId}`:(lessonId??stop.lessonIds[0]),stopId,review,at:new Date(),presentations:Object.entries(final).map(([id,r])=>({id,correctFirst:r.correctFirst,recovered:r.recovered,evidence:r.evidence,validated:r.validated,skipped:r.skipped}))};
   const fresh=readJourney(storage);let warning=fresh.warning;
-  try{const updated=completeLesson(fresh.ledger,outcome,legacy);if(fresh.safeToWrite&&!writeJourney(storage,updated))warning='Seu avanço ficou nesta sessão, mas este navegador não permitiu salvar.';if(outcome.presentations.some(p=>!p.skipped))markPracticeDay(storage);setSaved({xp:lessonXp(outcome),nextReview:updated.stops[stopId]?.nextReview,warning});}
+  try{const updated=completeLesson(fresh.ledger,outcome,legacy);if(fresh.safeToWrite&&!writeJourney(storage,updated))warning='Seu avanço ficou nesta sessão, mas este navegador não permitiu salvar.';if(outcome.presentations.some(p=>!p.skipped))markPracticeDay(storage);track('lesson_complete',{lesson:outcome.lessonId,stop:stopId,instrument:'recorder-soprano',review,xp:lessonXp(outcome),total:outcome.presentations.length,correctFirst:outcome.presentations.filter(p=>p.correctFirst).length});setSaved({xp:lessonXp(outcome),nextReview:updated.stops[stopId]?.nextReview,warning});}
   catch(error){setSaved({xp:0,warning:error instanceof Error?error.message:'Não foi possível registrar.'});}
   setStage('conclusion');if(!silent)void sound.current.celebrate();
  };
@@ -79,7 +81,7 @@ export function RecorderLesson({stopId,lessonId,review=false,system,legacy,silen
   return <div className="rl rl--intro" data-environment="introducao">{header}<main className="rl-main">
    <div className="rl-intro-hero"><TomOfficial decorative expression="animado" className="rl-intro-tom"/><div className="rl-bubble"><span className="rl-eyebrow">Unidade {stop.unit} · {stop.label}{review?'':` · ${lessonName}`}</span><h1 ref={headingRef} tabIndex={-1}>{review?'Hora de revisar':stop.unitGoal}</h1><p>{review?'Bora retomar o que pediu mais atenção nesta parada, visse?':`Bora! Nesta lição tu vai ${tasks[0]?.charAt(0).toLocaleLowerCase('pt-BR')}${tasks[0]?.slice(1)}`}</p></div></div>
    <section className="rl-card"><h2>O que você vai praticar</h2><ul className="rl-goals">{tasks.slice(0,3).map(t=><li key={t}>{t}</li>)}</ul><p className="rl-meta">{exercises.length} telas · cerca de {Math.max(2,Math.round(exercises.length*.6))} min</p></section>
-  </main><footer className="rl-footer"><button type="button" className="rl-btn rl-btn--ghost" onClick={onExit}>Agora não</button><button type="button" className="rl-btn" onClick={()=>setStage(queue[0]?.ex.story?'story':'activity')} disabled={!queue.length}>Começar</button></footer></div>;
+  </main><footer className="rl-footer"><button type="button" className="rl-btn rl-btn--ghost" onClick={onExit}>Agora não</button><button type="button" className="rl-btn" onClick={()=>{track('lesson_start',{lesson:lessonId??stop.lessonIds[0],stop:stopId,instrument:'recorder-soprano',review,screens:queue.length});setStage(queue[0]?.ex.story?'story':'activity')}} disabled={!queue.length}>Começar</button></footer></div>;
  }
  if(stage==='story'&&item?.ex.story){
   return <div className="rl rl--story" data-environment="historia">{header}<main className="rl-main"><section className="rl-story"><span className="rl-eyebrow">História do ensaio</span><h1 ref={headingRef} tabIndex={-1}>{item.ex.story.title}</h1><div className="rl-story-scene"><TomOfficial decorative expression="pensativo" className="rl-story-tom"/><div className="rl-bubble rl-story-bubble"><p className="rl-story-text">{item.ex.story.scene}</p></div></div></section></main><footer className="rl-footer"><button type="button" className="rl-btn" onClick={()=>setStage('activity')}>Resolver</button></footer></div>;
@@ -105,14 +107,14 @@ export function RecorderLesson({stopId,lessonId,review=false,system,legacy,silen
    {retry&&<p className="rl-retry-label">Corrija o erro de antes</p>}
    <h1 className="rl-instruction" ref={headingRef} tabIndex={-1}>{ex.instruction}</h1>
    {ex.prompt&&<p className="rl-prompt">{ex.prompt}</p>}
-   <ExerciseBody key={ex.id+(retry?'-r':'')} ex={ex} system={system} locked={!!verdict} setPending={setPending} silent={silent}/>
+   <ExerciseBody key={ex.id+(retry?'-r':'')} ex={ex} system={system} locked={!!verdict} setPending={setPending} silent={silent} onSystem={onSystem}/>
   </main>
   {verdict?<div className={`rl-feedback ${verdict.skipped?'is-skip':verdict.neutral?'is-neutral':verdict.ok?'is-ok':'is-error'}`} role="status" ref={feedbackRef} tabIndex={-1} data-environment="feedback">
    <div className="rl-feedback-copy"><strong>{verdict.skipped?'Fica pra depois, visse':verdict.neutral?'Anotado!':verdict.ok?(retry?'Agora foi!':'Arretado!'):'Eita, quase!'}</strong><p>{verdict.message}</p>{!verdict.ok&&!verdict.neutral&&!verdict.skipped&&<p className="rl-hint"><b>Pista:</b> {ex.hint}</p>}{!verdict.ok&&!verdict.neutral&&!verdict.skipped&&!retry&&<p className="rl-meta">Esta tela volta no fim da lição.</p>}</div>
    <button type="button" className="rl-btn" onClick={advance} autoFocus>Continuar</button>
   </div>:<footer className="rl-footer">
    {['perform','tap','observe'].includes(ex.kind)||ex.audio?<button type="button" className="rl-btn rl-btn--ghost" onClick={()=>setVerdict({ok:false,skipped:true,message:ex.audio?'Sem problema. Esta escuta entra na sua revisão.':'Sem problema. Esta prática entra na sua revisão.',evidence:[]})}>{ex.audio?'Não posso ouvir agora':'Não posso tocar agora'}</button>:<span/>}
-   <button type="button" className="rl-btn" disabled={!pending?.ready} onClick={check}>Verificar</button>
+   <button type="button" className="rl-btn" disabled={!pending?.ready} onClick={check}>{ex.kind==='meet'?'Entendi':'Verificar'}</button>
   </footer>}
  </div>;
 }
@@ -139,14 +141,15 @@ function useListener(ex:Exercise){
  return {buttons,ready,error,playing};
 }
 
-function ExerciseBody({ex,system,locked,setPending,silent}:{ex:Exercise;system:RecorderSystem;locked:boolean;setPending:(p:Pending|null)=>void;silent:boolean}){
+function ExerciseBody({ex,system,locked,setPending,silent,onSystem}:{ex:Exercise;system:RecorderSystem;locked:boolean;setPending:(p:Pending|null)=>void;silent:boolean;onSystem?:(s:RecorderSystem)=>void}){
  switch(ex.kind){
   case 'choice':return <ChoiceBody ex={ex} locked={locked} setPending={setPending}/>;
   case 'fingering':return <FingeringBody ex={ex} system={system} locked={locked} setPending={setPending}/>;
   case 'tap':return <TapBody ex={ex} locked={locked} setPending={setPending} silent={silent}/>;
   case 'perform':return <PerformBody ex={ex} system={system} locked={locked} setPending={setPending}/>;
-  case 'create':return <CreateBody ex={ex} locked={locked} setPending={setPending}/>;
+  case 'create':return <CreateBody ex={ex} system={system} locked={locked} setPending={setPending}/>;
   case 'observe':return <ObserveBody ex={ex} locked={locked} setPending={setPending}/>;
+  case 'meet':return <MeetBody ex={ex} system={system} setPending={setPending} onSystem={onSystem}/>;
   default:return null;
  }
 }
@@ -212,31 +215,30 @@ function TapBody({ex,locked,setPending,silent}:{ex:Exercise;locked:boolean;setPe
 
 function PerformBody({ex,system,locked,setPending}:{ex:Exercise;system:RecorderSystem;locked:boolean;setPending:(p:Pending|null)=>void}){
  const notes=ex.notes!,meter=ex.meter??'4/4';
- const [bpm]=useState(ex.bpm??60),[mode,setMode]=useState<'idle'|'opening'|'running'|'measured'|'declared'>('idle'),[results,setResults]=useState<boolean[]>([]),[active,setActive]=useState(-1),[error,setError]=useState(''),[status,setStatus]=useState('');
+ const [tip,setTip]=useState('');const [bpm]=useState(ex.bpm??60),[mode,setMode]=useState<'idle'|'opening'|'running'|'measured'|'declared'>('idle'),[results,setResults]=useState<boolean[]>([]),[active,setActive]=useState(-1),[error,setError]=useState(''),[status,setStatus]=useState('');
  const guide=useRef(new RecorderCourseAudio()),beeper=useRef<AudioContext|null>(null),samples=useRef<ScoreSample[]>([]),timer=useRef<ReturnType<typeof setInterval>|null>(null),token=useRef(0);
  const [media]=useState(()=>new ModuleOneMedia(()=>MicrophonePitchMonitor.create(),{stop:()=>guide.current.stop(),play:()=>guide.current.play(notes,meter,bpm,{duo:ex.audio==='duo'})}));
- const stop=useCallback(()=>{token.current++;media.stop();if(timer.current)clearInterval(timer.current);timer.current=null;setActive(-1);},[media]);
+ const stop=useCallback(()=>{token.current++;media.stop();stopLessonMetronome(beeper);if(timer.current)clearInterval(timer.current);timer.current=null;setActive(-1);},[media]);
  useEffect(()=>()=>{const c=beeper.current;beeper.current=null;if(c&&c.state!=='closed')void c.close().catch(()=>{});},[]);
  /** Bipes do metrônomo na contagem antes de tocar (o primeiro mais agudo). Devolve o atraso até o 1º bipe. */
- const countIn=(pulses:number,pulseMs:number)=>{try{const c=beeper.current??=new AudioContext();void c.resume();const lead=.06,t0=c.currentTime+lead;for(let i=0;i<pulses;i++){const at=t0+i*pulseMs/1000,o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=i===0?1760:1320;g.gain.setValueAtTime(.0001,at);g.gain.exponentialRampToValueAtTime(.35,at+.004);g.gain.exponentialRampToValueAtTime(.0001,at+.07);o.connect(g).connect(c.destination);o.start(at);o.stop(at+.09);}return lead*1000;}catch{return 0;}};
  useEffect(()=>{const hide=()=>{if(document.hidden){stop();setMode(m=>m==='running'||m==='opening'?'idle':m);setStatus('Prática interrompida. Comece de novo quando voltar.');}};document.addEventListener('visibilitychange',hide);return ()=>{document.removeEventListener('visibilitychange',hide);stop();};},[stop]);
  const matched=results.filter(Boolean).length;
  useEffect(()=>{setPending({ready:mode==='measured'||mode==='declared',check:()=>{
   if(mode==='declared')return {ok:true,message:'Prática declarada registrada. Quando puder, toque com o microfone para conferir.',evidence:['pratica-declarada']};
   const ok=results.length>0&&matched===results.length;
-  return {ok,message:ok?`${ex.correct} ${matched} de ${results.length} eventos no lugar.`:`${matched} de ${results.length} eventos dentro do critério. ${ex.incorrect}`,evidence:['tentativa-fisica','medicao-automatica'],validated:false};
- }});},[mode,results]);
+  return {ok,message:ok?`${ex.correct} ${matched} de ${results.length} eventos no lugar.`:`${matched} de ${results.length} no lugar. ${tip||ex.incorrect}`,evidence:['tentativa-fisica','medicao-automatica'],validated:false};
+ }});},[mode,results,tip]);
  const listen=async()=>{stop();setError('');try{await media.playGuide();}catch{setError('Não foi possível tocar o modelo.');}};
  const begin=async()=>{
   stop();setError('');setResults([]);setMode('opening');setStatus('Abrindo o microfone…');const my=token.current;samples.current=[];
   const quarter=60000/(bpm*pulseBeats(meter)),prep=barBeats(meter)*quarter,length=notes.reduce((s,n)=>s+n.beats,0)*quarter;
-  try{const ok=await media.openMicrophone(()=>{},snap=>{if(my!==token.current)return;if(snap.status==='inactive'){stop();setMode('idle');setError('O microfone foi interrompido.');return;}samples.current.push({at:performance.now(),frequency:snap.status==='quiet'?null:snap.status==='pitched'&&snap.clarity>=.8&&snap.frequency!==null?snap.frequency:NaN});});if(!ok||my!==token.current)return;}
-  catch(cause){if(my===token.current){setMode('idle');setError(cause instanceof Error?cause.message:'Não foi possível abrir o microfone. Você pode marcar “Toquei sem microfone”.');}return;}
-  const startAt=performance.now()+countIn(Math.round(barBeats(meter)/pulseBeats(meter)),quarter*pulseBeats(meter))+prep;setMode('running');
+  try{const ok=await media.openMicrophone(()=>{},snap=>{if(my!==token.current)return;if(snap.status==='inactive'){stop();setMode('idle');setError('O microfone foi interrompido.');return;}samples.current.push({at:performance.now(),frequency:snap.status==='quiet'?null:snap.status==='pitched'&&snap.clarity>=.8&&snap.frequency!==null?snap.frequency:NaN});});track('mic',{ok:!!ok});if(!ok||my!==token.current)return;}
+  catch(cause){track('mic',{ok:false,error:cause instanceof Error?cause.message:'erro'});if(my===token.current){setMode('idle');setError(cause instanceof Error?cause.message:'Não foi possível abrir o microfone. Você pode marcar “Toquei sem microfone”.');}return;}
+  const startAt=performance.now()+startLessonMetronome(beeper,{countIn:Math.round(barBeats(meter)/pulseBeats(meter)),playing:Math.ceil(length/(quarter*pulseBeats(meter))),pulseMs:quarter*pulseBeats(meter),perBar:Math.round(barBeats(meter)/pulseBeats(meter))})+prep;setMode('running');
   timer.current=setInterval(()=>{const el=performance.now()-startAt;
    if(el<0){setStatus(`Prepare · ${Math.floor((el+prep)/(quarter*pulseBeats(meter)))+1}`);return;}
    let at=0,idx=-1;notes.forEach((x,i)=>{if(el/quarter>=at&&el/quarter<at+x.beats)idx=i;at+=x.beats;});setActive(idx);setStatus(idx>=0?(notes[idx].midi===null?'Silêncio':`Toque ${NAME[notes[idx].midi!]}`):'Conferindo…');
-   if(el>=length+360){const verdicts=evaluateCourse(notes,meter,samples.current,bpm,startAt).map(v=>v.passed);stop();
+   if(el>=length+360){const all=evaluateCourse(notes,meter,samples.current,bpm,startAt),verdicts=all.map(v=>v.passed);{const k=all.findIndex(v=>!v.passed&&v.reason==='note'),evs=courseScoreEvents(notes,meter),m=k>=0?evs[k]?.note?.writtenMidi:undefined,h=m!==undefined?fingeringFor(m,system):null;setTip(k>=0?`${all[k].message}${h?` ${NAME[m!]} = furos ${h.join(' · ')} fechados${m===66?(system==='german'?' (flauta germânica: o furo 4 fica aberto e o 7 fecha)':' (o furo 4 fica aberto)'):''}.`:''}`:all.find(v=>!v.passed&&v.reason!=='signal')?.message??all.find(v=>!v.passed)?.message??'');}stop();
     const painted:boolean[]=[];let ev=0;notes.forEach((x,i)=>{if(i>0&&!(notes[i-1].tie&&notes[i-1].midi===x.midi))ev++;painted.push(verdicts[ev]??false);});
     setResults(painted);setMode('measured');setStatus('');}
   },50);
@@ -246,7 +248,8 @@ function PerformBody({ex,system,locked,setPending}:{ex:Exercise;system:RecorderS
  return <section className="rl-stimulus rl-perform">
   {ex.cue?<div className={`rl-cue ${cueOn?'is-up':''}`} aria-live="polite"><JourneyArt id="card-si" label={cueOn?'Cartão SI levantado: toque':'Cartão SI abaixado: silêncio'}/></div>:null}
   <RecorderCourseScore notes={notes} meter={meter} active={active} results={results}/>
-  <p className="rl-meta">{meter} · {bpm} BPM · {[...new Set(notes.filter(x=>x.midi!==null).map(x=>NAME[x.midi!]))].join(', ')}{(()=>{const f=notes.find(x=>x.midi!==null);const h=f?fingeringFor(f.midi!,system):null;return h?` · ${NAME[f!.midi!]}: furos ${h.join(' ')}`:'';})()}</p>
+  <p className="rl-meta">{meter} · {bpm} BPM</p>
+  <NoteFingerings midis={notes.flatMap(x=>x.midi===null?[]:[x.midi])} system={system}/>
   {status&&<p className="rl-status" role="status">{status}</p>}
   {error&&<p className="rl-warning" role="alert">{error}</p>}
   <div className="rl-perform-actions">
@@ -260,7 +263,7 @@ function PerformBody({ex,system,locked,setPending}:{ex:Exercise;system:RecorderS
  </section>;
 }
 
-function CreateBody({ex,locked,setPending}:{ex:Exercise;locked:boolean;setPending:(p:Pending|null)=>void}){
+function CreateBody({ex,system,locked,setPending}:{ex:Exercise;system:RecorderSystem;locked:boolean;setPending:(p:Pending|null)=>void}){
  const c=ex.create!,[values,setValues]=useState<(number|null|undefined)[]>(()=>Array(c.slots).fill(undefined));
  const audio=useRef(new RecorderCourseAudio());useEffect(()=>()=>audio.current.stop(),[]);const listener=useListener(ex);
  const complete=values.every(v=>v!==undefined)&&(!ex.audio||listener.ready);
@@ -272,6 +275,7 @@ function CreateBody({ex,locked,setPending}:{ex:Exercise;locked:boolean;setPendin
   {ex.audio&&<div className="rl-audio">{listener.buttons}{!listener.ready&&<small>Ouça antes de montar.</small>}</div>}
   <div className="rl-slots">{values.map((v,i)=><button type="button" key={i} disabled={locked} className={`rl-slot ${v===undefined?'is-empty':v===null?'is-rest':''}`} onClick={()=>cycle(i)} aria-label={`Tempo ${i+1}: ${label(v)}. Toque para trocar.`}><small>{i+1}</small><b>{label(v)}</b></button>)}</div>
   <p className="rl-meta">Toque em cada tempo para escolher: {c.choices.map(x=>label(x)).join(' → ')}.</p>
+  <NoteFingerings midis={c.choices.flatMap(x=>x===null?[]:[x])} system={system}/>
   {!ex.audio&&<button type="button" className="rl-btn rl-btn--secondary" disabled={!complete} onClick={()=>void audio.current.play(values.map(v=>({midi:v??null,beats:beat})),ex.meter??'4/4',66).catch(()=>{})}><SpeakerIcon/>Ouvir minha criação</button>}
  </section>;
 }
@@ -283,5 +287,33 @@ function ObserveBody({ex,locked,setPending}:{ex:Exercise;locked:boolean;setPendi
  return <section className="rl-stimulus rl-observe">
   {ex.audio&&<div className="rl-audio">{listener.buttons}{!listener.ready&&<small>Ouça os dois modelos para continuar.</small>}{listener.error&&<p className="rl-warning" role="alert">{listener.error}</p>}</div>}
   {list.length>0&&<ul className="rl-checklist">{list.map((c,i)=><li key={i}><label><input type="checkbox" disabled={locked} checked={checked.includes(i)} onChange={()=>setChecked(o=>o.includes(i)?o.filter(x=>x!==i):[...o,i])}/><span>{c}</span></label></li>)}</ul>}
+ </section>;
+}
+
+/** Dedilhado de cada nota usada na atividade: a criança nunca toca uma nota sem ver como se faz. */
+function MiniFingering({holes}:{holes:readonly number[]}){
+ const ys=[0,1,2,3,4,5,6,7].map(n=>n===0?6:10+n*9+(n>=4?5:0));
+ return <svg className="rl-mini-fing" viewBox="0 0 30 92" aria-hidden="true"><rect x="9" y="2" width="12" height="88" rx="6" fill="#F3ECD9" stroke="#C9B892"/>
+  {ys.map((y,n)=><circle key={n} cx={n===0?5:15} cy={y} r={n===0?3.6:4.2} fill={holes.includes(n)?'#2B241D':'#fff'} stroke="#6b5a43" strokeWidth="1.3"/>)}</svg>;
+}
+export function NoteFingerings({midis,system}:{midis:readonly number[];system:RecorderSystem}){
+ const list=[...new Set(midis)].filter(m=>fingeringFor(m,system));
+ if(!list.length)return null;
+ return <div className="rl-fings" aria-label="Como fazer cada nota">{list.map(m=>{const h=fingeringFor(m,system)!;return <figure key={m} className="rl-fing"><MiniFingering holes={h}/><figcaption><b>{NAME[m]}</b><small>furos {h.join(' ')}</small></figcaption></figure>;})}</div>;
+}
+function MeetBody({ex,system,setPending,onSystem}:{ex:Exercise;system:RecorderSystem;setPending:(p:Pending|null)=>void;onSystem?:(s:RecorderSystem)=>void}){
+ const midi=ex.target!,holes=fingeringFor(midi,system)??[],audio=useRef(new RecorderCourseAudio()),[playing,setPlaying]=useState(false),[heard,setHeard]=useState(false);
+ useEffect(()=>()=>audio.current.stop(),[]);
+ useEffect(()=>{setPending({ready:true,check:()=>({ok:true,neutral:!heard,message:heard?ex.correct:`${ex.correct} Quando puder, toque em “Ouvir o ${NAME[midi]}” pra escutar.`,evidence:['leitura']})});},[heard]);
+ const listen=async()=>{if(playing){audio.current.stop();setPlaying(false);return;}setPlaying(true);try{if(await audio.current.play([{midi,beats:3}],'4/4',72,{countIn:false}))setHeard(true);}catch{/* sem áudio */}setPlaying(false);};
+ return <section className="rl-stimulus rl-meet">
+  <div className="rl-meet-grid">
+   <div className="rl-meet-score"><RecorderCourseScore notes={[{midi,beats:4}]} meter="4/4" single/><p className="rl-meta">Na pauta, o {NAME[midi]} fica aqui.</p></div>
+   <RecorderDiagram holes={holes} compact/>
+  </div>
+  <p className="rl-meet-holes"><b>{NAME[midi]}</b> = furos {holes.join(' · ')} fechados · os outros abertos.</p>
+  {(midi===65||midi===66)&&onSystem&&<div className="rl-system" role="radiogroup" aria-label="Tipo da tua flauta"><span>Minha flauta é:</span>{(['baroque','german'] as const).map(v=><button key={v} type="button" role="radio" aria-checked={system===v} className={system===v?'is-on':''} onClick={()=>onSystem(v)}>{v==='baroque'?'Barroca':'Germânica'}</button>)}<small>No Fá e no Fá sustenido o dedilhado muda. Na dúvida, veja a caixinha ou o manual da tua flauta: lá diz “barroca” ou “germânica”.</small></div>}
+  {system==='german'&&CHECK_GERMAN.has(midi)&&<p className="rl-fine">Na flauta germânica, este dedilhado pode mudar: confira a tabela que veio com a sua flauta.</p>}
+  <button type="button" className="rl-listen" onClick={()=>void listen()}><SpeakerIcon/>{playing?'Parar':`Ouvir o ${NAME[midi]}`}</button>
  </section>;
 }

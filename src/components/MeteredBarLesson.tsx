@@ -10,6 +10,7 @@ import { FIGURES, BPM_MAX, BPM_MIN, beatMs } from '../lib/rhythm';
 import { scoreBar, validBar, barEvents, type TimedPitch, type EventAssessment } from '../lib/pulseAssessment';
 import { formatWrittenNote, frequencyToMidi } from '../lib/music';
 import type { Lesson } from '../lib/curriculum';
+import {TREBLE_CLEF_PATH} from '../lib/trebleClef';
 
 export type MeteredControls={start:()=>Promise<void>;stop:()=>Promise<void>};
 export type MeteredControlState={preparing:boolean;running:boolean;review:boolean};
@@ -164,7 +165,7 @@ export function MeteredBarLesson({lesson,onComplete,onAttempt,completed,instrume
     <div className="beats metered-beats" aria-live="off">{[1,2,3,4].map(n=><span key={n} className={clockOn&&beat===n?'beat-active':''}>{n}</span>)}</div>
     <svg className="metered-staff" viewBox="0 0 415 126" role="img" aria-label={`Partitura didática em clave de sol, ${lesson.steps.map(s=>s.kind==='rest'?'pausa':s.note.label).join(', ')}`}>
       {[20,35,50,65,80].map(y=><line key={y} x1="35" x2="389" y1={y} y2={y} stroke="currentColor" strokeWidth="1.2" opacity=".42"/>)}
-      <text x="41" y="83" fontSize="59" fill="currentColor" fontFamily="'Noto Music','Segoe UI Symbol',serif">𝄞</text>
+      <path d={TREBLE_CLEF_PATH} transform="translate(40 65) scale(0.045)" fill="currentColor"/>
       {instrument.id==='recorder-soprano'&&<text x="63" y="15" fontSize="10" fill="currentColor">8</text>}
       <text x="355" y="12" fontSize="10" fill="currentColor">4/4</text>
       <line x1="388" x2="388" y1="20" y2="80" stroke="currentColor" strokeWidth="2"/>

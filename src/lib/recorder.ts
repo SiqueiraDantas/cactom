@@ -5,10 +5,14 @@ export const RECORDER_ID='recorder-soprano';
 export const RECORDER_HOLES=[0,1,2,3,4,5,6,7] as const;
 export const HOLE_FINGERS=['Polegar esquerdo · atrás','Indicador esquerdo','Médio esquerdo','Anelar esquerdo','Indicador direito','Médio direito','Anelar direito','Mínimo direito'] as const;
 // Traditional soprano notation: written C4 sounds C5. Hole 0 is the rear thumb.
-const positions:Record<number,readonly number[]>={60:[0,1,2,3,4,5,6,7],62:[0,1,2,3,4,5,6],64:[0,1,2,3,4,5],65:[0,1,2,3,4,6,7],67:[0,1,2,3],69:[0,1,2],71:[0,1],72:[0,2],74:[2]};
+// Fá♯ e Si♭ (sistema barroco): posições de forquilha da tabela padrão da soprano.
+const positions:Record<number,readonly number[]>={60:[0,1,2,3,4,5,6,7],62:[0,1,2,3,4,5,6],64:[0,1,2,3,4,5],65:[0,1,2,3,4,6,7],66:[0,1,2,3,5,6],67:[0,1,2,3],69:[0,1,2],70:[0,1,3,4],71:[0,1],72:[0,2],74:[2]};
+/** Notas cujo dedilhado no sistema germânico varia por fabricante: o app mostra o barroco e pede para conferir. */
+export const CHECK_GERMAN=new Set([70]);
 export function recorderNote(midi:number,system:RecorderSystem='baroque'):PracticeNote{
-  if(!Number.isInteger(midi)||!positions[midi])throw new Error('Neste curso, use notas naturais escritas de Dó4 a Ré5 para flauta doce soprano.');
-  const holes=system==='german'&&midi===65?[0,1,2,3,4]:positions[midi];
+  if(!Number.isInteger(midi)||!positions[midi])throw new Error('Neste curso, use notas escritas de Dó4 a Ré5 (com Fá♯ e Si♭) para flauta doce soprano.');
+  // Germânico (woodwind.org, “Basic for German models”): Fá = 0 1 2 3 4; Fá♯ = 0 1 2 3 · 5 6 7.
+  const holes=system==='german'&&midi===65?[0,1,2,3,4]:system==='german'&&midi===66?[0,1,2,3,5,6,7]:positions[midi];
   return {id:'recorder-'+midi,writtenMidi:midi,label:formatWrittenNote(midi),valves:[],valveDescription:'Furos '+holes.join(' · '),holes,transposeSemitones:12};
 }
 export const RECORDER_NOTES=[71,69,67,72,74,65,64,62,60].map(n=>recorderNote(n));

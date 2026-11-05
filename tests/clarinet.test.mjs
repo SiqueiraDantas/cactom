@@ -7,7 +7,7 @@ test('curso de clarinete está disponível sem alterar cursos anteriores',()=>{
  assert.ok(availableInstrument('clarinet-bb'));
  assert.ok(availableInstrument('trumpet-bb'));
  assert.ok(availableInstrument('recorder-soprano'));
- assert.ok(availableInstrument('conductor'));
+ assert.equal(availableInstrument('conductor'),null,'regência bloqueada');
  assert.equal(CLARINET_LESSONS.length,9);
  assert.equal(CLARINET_UNITS.length,3);
  assert.deepEqual(CLARINET_LESSONS.map(x=>x.unit).sort((a,b)=>a-b),[0,0,0,1,1,1,2,2,2]);

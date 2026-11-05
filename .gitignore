@@ -15,3 +15,7 @@ node_modules/.vite/
 
 # Backups locais
 _backup-*/
+.env.local
+
+# Vídeos de divulgação (arquivos grandes, ficam fora do GitHub)
+videos/

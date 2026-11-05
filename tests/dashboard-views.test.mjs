@@ -39,18 +39,20 @@ test('course percentage, unit counters and achievements remain derived from actu
  assert.match(progress,/2 de 13 aulas concluídas/);assert.match(progress,/0 notas avaliadas/);
 });
 test('every dashboard tab uses official branding and keeps the six navigation destinations',()=>{
- for(const tab of ['learn','practice','streak','achievements','progress']){
+ for(const tab of ['learn','scores','streak','achievements','progress']){
   const html=home(tab);
   assert.match(html,new RegExp('data-learning-view="'+tab+'"'));
   assert.match(html,/cactom-wordmark.png/);assert.match(html,/class="tom-official/);
   assert.doesNotMatch(html,/logo-madeinsertao|lab-mascot|Made in Sertão Music Lab/);
-  for(const name of ['Aprender','Praticar','Seu Rojão','Conquistas','Meu progresso','Comunidade'])assert.ok(html.includes('aria-label="'+name+'"'));
+  for(const name of ['Aprender','Partituras','Seu Rojão','Conquistas','Meu progresso','Comunidade'])assert.ok(html.includes('aria-label="'+name+'"'));
  }
- const practice=home('practice');assert.match(practice,/Digitação barroca/);assert.match(practice,/Digitação germânica/);assert.match(practice,/Explorar os furos/);
+ assert.ok(!home('learn').includes('aria-label="Praticar"'));
+ const scores=home('scores');assert.match(scores,/Enviar minha partitura/);assert.match(scores,/accept="\.pdf/);
+ const learn=home('learn');assert.match(learn,/Tá sem a flauta aí\?/);
 });
 test('score library keeps its original studies and MusicXML import under the new visual shell',()=>{
  const html=wrap(React.createElement(ScoreLab,{instrument,recorderSystem:'baroque',onExit:noop,onAttempt:noop}));
- assert.match(html,/cactom-score-library/);assert.match(html,/cactom-wordmark.png/);assert.match(html,/type="file"/);assert.match(html,/Importar MusicXML para flauta doce/);
+ assert.match(html,/cactom-score-library/);assert.match(html,/cactom-wordmark.png/);assert.match(html,/type="file"/);assert.match(html,/Enviar partitura em PDF ou MusicXML para flauta doce/);
  assert.equal((html.match(/class="score-library-card"/g)??[]).length,scoresForInstrument(instrument.id).length);
  for(const score of scoresForInstrument(instrument.id))assert.ok(html.includes(score.title));
 });

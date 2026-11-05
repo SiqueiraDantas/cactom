@@ -53,11 +53,11 @@ test('Tom vetorial muda de expressão com o formulário e cobre os olhos na senh
   assert.match(html,/class="[^"]*ct-front-arms[^"]*"/);
   const ids=[...html.matchAll(/ id="([^"]+)"/g)].map(value=>value[1]);assert.equal(new Set(ids).size,ids.length);
 });
-test('após entrar ou pular, seleção oferece os quatro cursos disponíveis',()=>{
+test('após entrar ou pular, seleção oferece os três cursos liberados (regência bloqueada)',()=>{
   storage=new Map();
   for(const access of [demo,{mode:'local',profile:profileA}]){
     const html=render(React.createElement(Provider,{profileId:access.profile?.id??null},React.createElement(CourseEntry,{access,onSignOut:noop})));
-    assert.match(html,/Eu quero aprender…/);assert.match(html,/Flauta doce/);assert.match(html,/Trompete/);assert.match(html,/Regência/);assert.match(html,/Clarinete/);assert.equal((html.match(/<button[^>]*class="wsp-card[^"]*"[^>]*>/g)??[]).filter(tag=>!tag.includes('disabled=')).length,4);
+    assert.match(html,/Eu quero aprender…/);assert.match(html,/Flauta doce/);assert.match(html,/Trompete/);assert.doesNotMatch(html,/Regência/);assert.match(html,/Clarinete/);assert.equal((html.match(/<button[^>]*class="wsp-card[^"]*"[^>]*>/g)??[]).filter(tag=>!tag.includes('disabled=')).length,3);
   }
 });
 test('curso da flauta não importa as conquistas antigas do trompete',()=>{
@@ -67,12 +67,14 @@ test('curso da flauta não importa as conquistas antigas do trompete',()=>{
 test('retomada da demo mantém os respectivos resultados dos dois cursos',()=>{
   storage=new Map([['mis-music-lab-v03',saved([1,2,3],{})],['mis-music-lab-recorder-v1',saved([0,1,2,3,4,5,6,7],{'recorder-primeiro-si':['rec-si-inicial']})]]);
   const recorder=course('recorder-soprano');assert.equal(pathPercent(recorder),0,'flauta: topo mostra a trilha nova');assert.match(recorder,/Um novo som: Lá/);
-  const trumpet=course('trumpet-bb');assert.equal(pathPercent(trumpet),8);assert.match(trumpet,/Seu primeiro Sol/);assert.doesNotMatch(trumpet,/Seu primeiro Si/);
+  const trumpet=course('trumpet-bb');assert.equal(pathPercent(trumpet),0,'trompete: topo mostra a trilha nova');assert.match(trumpet,/Seu primeiro Sol/);assert.doesNotMatch(trumpet,/Seu primeiro Si/);
 });
 test('contas locais não herdam progresso da demo nem de outra conta',()=>{
   storage=new Map([['mis-music-lab-v03',saved([1,2,3],{'primeiro-sol':['sol-inicial']})]]);
-  const a=createProfileStorage(profileA.id,backing);a.setItem('mis-music-lab-v03',saved([1,2,3],{}));
-  assert.equal(pathPercent(course('trumpet-bb',profileA)),8);assert.equal(pathPercent(course('trumpet-bb',profileB)),0);assert.equal(pathPercent(course('trumpet-bb')),15);
+  const band=n=>JSON.stringify({version:1,xp:10*n,lessons:Object.fromEntries(['TPT-M01-L1','TPT-M01-L2'].slice(0,n).map(id=>[id,{at:'2026-11-03T12:00:00.000Z',xp:10,total:3,correctFirst:3}]))});
+  storage.set('cactom-trilha-trumpet-bb-v1',band(2));
+  const a=createProfileStorage(profileA.id,backing);a.setItem('cactom-trilha-trumpet-bb-v1',band(1));
+  assert.equal(pathPercent(course('trumpet-bb',profileA)),1);assert.equal(pathPercent(course('trumpet-bb',profileB)),0);assert.equal(pathPercent(course('trumpet-bb')),2,'2 de 84 lições da trilha nova');
 });
 test('tela de Seu Rojão mostra apenas calendário e marcos derivados das datas',()=>{
   const summary=streakSummary({version:1,days:['2026-10-19','2026-10-20','2026-10-21']},new Date('2026-10-21T15:00:00Z'));

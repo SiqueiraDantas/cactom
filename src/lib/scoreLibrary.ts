@@ -1,14 +1,15 @@
 export type LibraryScore={id:string;title:string;description:string;xml:string;imported?:boolean;instrumentId?:string};
-function note(step:string|null,beats:number):string{
+function note(step:string|null,beats:number,octaveUp=0):string{
   const duration=beats*4,type=beats===4?'whole':beats===2?'half':beats===.5?'eighth':'quarter';
-  return `<note>${step?`<pitch><step>${step[0]}</step><octave>${step.slice(1)||4}</octave></pitch>`:'<rest/>'}<duration>${duration}</duration><type>${type}</type></note>`;
+  return `<note>${step?`<pitch><step>${step[0]}</step><octave>${Number(step.slice(1)||4)+octaveUp}</octave></pitch>`:'<rest/>'}<duration>${duration}</duration><type>${type}</type></note>`;
 }
 export function studyXml(title:string,bars:readonly (readonly [string|null,number][])[],instrumentId='trumpet-bb'):string{
   const recorder=instrumentId==='recorder-soprano',name=recorder?'Flauta doce soprano':'Trompete em Si♭';
   const clef=recorder?'<clef-octave-change>1</clef-octave-change>':'';
-  const transpose=recorder?'<diatonic>0</diatonic><chromatic>0</chromatic><octave-change>1</octave-change>':'<diatonic>-1</diatonic><chromatic>-2</chromatic>';
-  const attributes=`<attributes><divisions>4</divisions><key><fifths>0</fifths></key><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>G</sign><line>2</line>${clef}</clef><transpose>${transpose}</transpose></attributes><direction placement="above"><direction-type><words>Com calma</words></direction-type><sound tempo="60"/></direction>`;
-  const measures=bars.map((bar,i)=>`<measure number="${i+1}">${i===0?attributes:""}${bar.map(([s,b])=>note(s,b)).join("")}</measure>`).join("");
+  // Flauta: clave de Sol com 8 e a altura do som real (1 oitava acima), para a pauta mostrar a nota escrita no lugar certo.
+  const transpose=recorder?'':'<transpose><diatonic>-1</diatonic><chromatic>-2</chromatic></transpose>';
+  const attributes=`<attributes><divisions>4</divisions><key><fifths>0</fifths></key><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>G</sign><line>2</line>${clef}</clef>${transpose}</attributes><direction placement="above"><direction-type><words>Com calma</words></direction-type><sound tempo="60"/></direction>`;
+  const measures=bars.map((bar,i)=>`<measure number="${i+1}">${i===0?attributes:""}${bar.map(([s,b])=>note(s,b,recorder?1:0)).join("")}</measure>`).join("");
   return `<?xml version="1.0" encoding="UTF-8"?><score-partwise version="4.0"><work><work-title>${title}</work-title></work><part-list><score-part id="P1"><part-name>${name}</part-name></score-part></part-list><part id="P1">${measures}</part></score-partwise>`;
 }
 export const SCORE_LIBRARY:readonly LibraryScore[]=[

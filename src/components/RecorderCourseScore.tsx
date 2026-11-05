@@ -1,7 +1,11 @@
 import {barBeats,courseNote,type CourseMeter,type CourseNote} from '../lib/recorderFullCourse';
-type Props={notes:readonly CourseNote[];meter:CourseMeter;active?:number;marks?:readonly number[];results?:readonly boolean[];onMark?:(index:number)=>void;slur?:boolean};
+type Props={notes:readonly CourseNote[];meter:CourseMeter;active?:number;marks?:readonly number[];results?:readonly boolean[];onMark?:(index:number)=>void;slur?:boolean;single?:boolean;
+ /** Partitura de flauta tem o “8” em cima da clave (soa 8ª acima). Trompete/clarinete não. */
+ instrument?:string;
+ /** Esconde o nome embaixo das notas (atividades de leitura: o nome é a resposta). */
+ hideLabels?:boolean};
 /** Responsive, font-independent noteheads, flags and rests; four bars per staff row. */
-export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],onMark,slur=false}:Props){
+export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],onMark,slur=false,single=false,instrument='flauta doce soprano',hideLabels=false}:Props){
  const bar=barBeats(meter);let offset=0;
  const items=notes.map((n,index)=>{const at=offset;offset+=n.beats;return {n,index,at,measure:Math.floor((at+1e-6)/bar)};});
  /** Colcheias seguidas dentro do mesmo tempo (ou do mesmo grupo de 3 no 6/8) ficam ligadas por barra. */
@@ -19,11 +23,11 @@ export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],o
  }
  const [top,bottom]=meter.split('/');
  const measures=Math.max(1,Math.ceil(offset/bar)),rows=Array.from({length:Math.ceil(measures/2)},(_,i)=>i);
- return <div className="recorder-course-score" role="group" aria-label={`Partitura em ${meter}; flauta doce soprano, escrita uma oitava abaixo do som`}>
-  {rows.map(row=><svg key={row} viewBox="0 0 640 156" role="img" aria-label={`Compassos ${row*2+1} a ${Math.min(row*2+2,measures)}`}>
-   {[42,54,66,78,90].map(y=><line x1="15" x2="625" y1={y} y2={y} stroke="#bdccc7" strokeWidth="1.2" key={y}/>)}
+ return <div className="recorder-course-score" role="group" aria-label={`Partitura em ${meter}; ${instrument}${instrument==='flauta doce soprano'?', escrita uma oitava abaixo do som':''}`}>
+  {rows.map(row=><svg key={row} viewBox={single?"0 0 364 156":"0 0 640 156"} role="img" aria-label={`Compassos ${row*2+1} a ${Math.min(row*2+2,measures)}`}>
+   {[42,54,66,78,90].map(y=><line x1="15" x2={single?360:625} y1={y} y2={y} stroke="#bdccc7" strokeWidth="1.2" key={y}/>)}
    <path d="M45 98c-26-8-14-32 3-38 18-6 25 17 12 25-14 8-30-7-19-20 16-20 25-36 20-47-15 6-7 43-3 67l4 25c2 13-17 20-20 6-2-8 8-9 11-4" fill="none" stroke="#315c60" strokeWidth="3" strokeLinecap="round"/>
-   <text x="49" y="12" fontSize="11" textAnchor="middle" fill="#466e68">8</text>
+   {instrument==='flauta doce soprano'&&<text x="49" y="12" fontSize="11" textAnchor="middle" fill="#466e68">8</text>}
    {row===0&&<g fill="#315c60" fontSize="23" fontWeight="800" textAnchor="middle" aria-label={`Compasso ${meter}`}><text x="80" y="62">{top}</text><line x1="71" x2="89" y1="67.5" y2="67.5" stroke="#315c60" strokeWidth="2.6" strokeLinecap="round"/><text x="80" y="89">{bottom}</text></g>}
    {[1,2].map(m=><line key={m} x1={100+m*260} x2={100+m*260} y1="42" y2="90" stroke="#76928a" strokeWidth={m===2?2:1}/>)}
    {[0,1].map(m=><text key={m} x={108+m*260} y="24" fontSize="11" fill="#6e8478">{row*2+m+1<=measures?row*2+m+1:''}</text>)}
@@ -37,7 +41,7 @@ export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],o
     return <g key={index} color={color} onClick={onMark?()=>onMark(index):undefined} role={onMark?'button':undefined} tabIndex={onMark?0:undefined} onKeyDown={onMark?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onMark(index);}}:undefined} aria-label={`${label}, duração escrita ${n.beats===.5?'colcheia':n.beats===1?'semínima':n.beats===1.5?'semínima pontuada':n.beats===2?'mínima':n.beats===3?'mínima pontuada':'semibreve'}${marks.includes(index)?', marcado':''}`}>
      {(active===index||marks.includes(index))&&<rect x={x-17} y="27" width="35" height="89" rx="8" fill={marks.includes(index)?'#e5f2e3':'#fff0c9'}/>}
      {n.midi===null?<Rest x={x} beats={n.beats}/>:<>
-      {y>=102&&<line x1={x-14} x2={x+14} y1={y} y2={y} stroke="currentColor" strokeWidth="1.5"/>}
+      {[102,114,126].filter(l=>l<=y+0.5).map(l=><line key={l} x1={x-14} x2={x+14} y1={l} y2={l} stroke="currentColor" strokeWidth="1.5"/>)}
       <ellipse cx={x} cy={y} rx={whole?10:8} ry="5.2" transform={`rotate(-16 ${x} ${y})`} fill={open?'white':'currentColor'} stroke="currentColor" strokeWidth="1.8"/>
       {!whole&&(()=>{const beam=beamOf.has(index)?beams[beamOf.get(index)!]:null,down=beam?beam.down:y<=MIDDLE,sx=down?x-7:x+7,end=beam?(down?beam.y+5.5:beam.y):down?y+33:y-33;return <>
        <line x1={sx} x2={sx} y1={down?y+1:y-1} y2={end} stroke="currentColor" strokeWidth="2"/>
@@ -48,7 +52,7 @@ export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],o
      </>}
      {n.midi===null&&(n.beats===1.5||n.beats===3)&&<circle cx={x+13} cy={60} r="2.2" fill="currentColor"/>}
      {n.tie&&<path d={`M${x} ${y+10}q${235*n.beats/bar/2} 13 ${235*n.beats/bar} 0`} fill="none" stroke="currentColor" strokeWidth="1.7"/>}
-     <text x={x} y="135" textAnchor="middle" fill="currentColor" fontSize="10.5">{label.replace(' 4','').replace(' 5','↑')}</text>
+     {!hideLabels&&<text x={x} y="135" textAnchor="middle" fill="currentColor" fontSize="10.5">{label.replace(' 4','').replace(' 5','↑')}</text>}
      {marks.includes(index)&&<text x={x} y="152" textAnchor="middle" fill="#49804a" fontSize="10">ponto</text>}
     </g>;
    })}

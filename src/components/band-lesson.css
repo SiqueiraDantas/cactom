@@ -1,0 +1,37 @@
+.band-fing{display:block;width:150px;height:auto}
+.band-fing--cla{width:110px}
+.band-fing.is-small{width:46px}
+.band-fing--cla.is-small{width:30px}
+.band-options{display:grid;gap:10px}
+.band-options--fing{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.band-option{display:flex;align-items:center;gap:12px;text-align:left}
+.band-options--fing .band-option{flex-direction:column;justify-content:center;text-align:center;padding:14px}
+.band-options--fing .band-fing.is-small{width:110px}
+.band-options--fing .band-fing--cla.is-small{width:64px}
+.band-option.is-right{border-color:#58CC02;background:#D7FFB8}
+.band-option.is-wrong{border-color:#FF4B4B;background:#FFDFE0}
+.band-fing--cla{width:96px}.band-fing--cla.is-small{width:26px}.band-options--fing .band-fing--cla.is-small{width:56px}
+.band-read{max-width:420px;margin:0 auto 12px}.band-story{margin-bottom:12px}
+.band-options .band-option{width:100%;justify-content:flex-start}.band-options--fing .band-option{justify-content:center}
+.band-options{width:100%;max-width:560px;margin-inline:auto;align-self:stretch}
+.band-fing--tpt{width:200px}.band-fing--tpt.is-small{width:64px}.band-options--fing .band-fing--tpt.is-small{width:150px}
+.band-fing--cla{width:110px}.band-fing--cla.is-small{width:28px}.band-options--fing .band-fing--cla.is-small{width:60px}
+.band-key{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-weight:800;color:#4B4B4B}.band-key button{border:2px solid #E5E5E5;border-bottom-width:4px;border-radius:12px;background:#fff;padding:6px 16px;font:900 15px inherit;cursor:pointer}.band-key button.is-on{border-color:#84D8FF;background:#DDF4FF;color:#1899D6}.band-key small{flex-basis:100%;font-weight:600;color:#777}
+.band-options--fing{grid-template-columns:repeat(auto-fit,minmax(104px,1fr))}.band-options--fing .band-option{padding:10px 6px;font-size:14px}.band-options--fing .band-fing--tpt.is-small{width:100%;max-width:150px}
+/* Montar o dedilhado */
+.band-build .rl-meet-grid{align-items:center}
+.band-keys{display:grid;gap:8px;width:100%;max-width:560px;margin:14px auto 0}
+.band-keys--tpt{grid-template-columns:repeat(3,1fr)}
+.band-keys--cla{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.band-keys button{min-height:48px;border:2px solid #E5E5E5;border-bottom-width:4px;border-radius:14px;background:#fff;color:#4B4B4B;font:800 15px Nunito,'Segoe UI',sans-serif;cursor:pointer;padding:8px 10px}
+.band-keys button.is-on{border-color:#7C3AED;background:#EFE7FF;color:#5B21B6}
+.band-keys--cla button.is-on{border-color:#1F1F1F;background:#2B2B2B;color:#fff}
+.band-keys button:disabled{cursor:default;opacity:.75}
+.band-phase{background:#DDF4FF;color:#1899D6}
+/* Trilha do trompete e do clarinete */
+.bj-section{text-align:center}
+.bj-section b{font-size:17px}
+.rj-stop.is-challenge .rj-node{background:#FFC800;border-color:#E5A600;color:#7A4A00}
+.rj-stop.is-challenge.is-concluida .rj-node{background:#FFC800}
+.bj-pop-lessons{display:grid;gap:6px;margin-top:8px}
+.bj-pop-lessons button{border:2px solid #E5E5E5;border-radius:12px;background:#fff;padding:8px 10px;font:800 14px Nunito,'Segoe UI',sans-serif;color:#4B4B4B;text-align:left;cursor:pointer}

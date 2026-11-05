@@ -58,3 +58,7 @@ export async function signInLocal(usernameValue:string,password:string,storage:A
   if(!account||!equalHash(hash,account.passwordHash))throw new Error('Usuário ou senha incorretos.');
   return profile(account);
 }
+/** Perfis locais deste navegador (sem senha nem hash), para o ranking e o painel do desenvolvedor. */
+export function listLocalProfiles(storage:Pick<Storage,'getItem'>=localStorage):(LocalProfile&{createdAt:string})[]{
+  try{return accounts(storage as AccountStorage).map(a=>({...profile(a),createdAt:a.createdAt}));}catch{return [];}
+}

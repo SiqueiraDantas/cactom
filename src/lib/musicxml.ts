@@ -1,5 +1,5 @@
 import { recorderNote, type RecorderSystem } from './recorder.ts';
-import { trumpetNote } from './instruments.ts';
+import { clarinetNote, trumpetNote } from './instruments.ts';
 import type { PracticeNote } from './music.ts';
 
 export type ScoreSegment={cursorIndex:number;startBeat:number;beats:number};
@@ -18,9 +18,13 @@ function number(element:Element,name:string,fallback?:number):number{
 }
 function reject(message:string):never{throw new Error(message);}
 function scoreId(xml:string):string{let hash=2166136261;for(let i=0;i<xml.length;i++){hash^=xml.charCodeAt(i);hash=Math.imul(hash,16777619);}return `xml-${(hash>>>0).toString(16)}-${xml.length}`;}
-export function parseMusicXml(source:string,parse:(xml:string)=>Document=xml=>new DOMParser().parseFromString(xml,'application/xml'),instrumentId='trumpet-bb',recorderSystem:RecorderSystem='baroque'):ParsedScore{
-  const recorder=instrumentId==='recorder-soprano';
-  if(!recorder&&instrumentId!=='trumpet-bb')reject('Este instrumento ainda não tem curso.');
+/**
+ * `soundingShift`: semitons entre a nota escrita e o som real (trompete/clarinete em Si♭ = −2;
+ * trompete em Dó = 0). A partitura continua escrita para Si♭; só o som esperado no microfone muda.
+ */
+export function parseMusicXml(source:string,parse:(xml:string)=>Document=xml=>new DOMParser().parseFromString(xml,'application/xml'),instrumentId='trumpet-bb',recorderSystem:RecorderSystem='baroque',soundingShift=-2):ParsedScore{
+  const recorder=instrumentId==='recorder-soprano',clarinet=instrumentId==='clarinet-bb';
+  if(!recorder&&!clarinet&&instrumentId!=='trumpet-bb')reject('Este instrumento ainda não tem curso.');
   if(new TextEncoder().encode(source).length>MAX_XML_SIZE)reject('A partitura deve ter no máximo 512 KB.');
   if(/<!ENTITY|<!DOCTYPE[^>]*\[/i.test(source))reject('O arquivo contém entidades XML que não são aceitas.');
   // Common MusicXML exports reference a DTD. Remove the declaration; never fetch it.
@@ -32,7 +36,7 @@ export function parseMusicXml(source:string,parse:(xml:string)=>Document=xml=>ne
   for(const tag of ['backup','forward','chord','grace','time-modification','repeat','multiple-rest','unpitched'])if(root.getElementsByTagName(tag).length)reject('Use uma linha melódica simples, sem acordes, vozes simultâneas, repetições, quiálteras ou notas de ornamento.');
   const parts=children(root,'part');if(parts.length!==1)reject('Importe uma partitura com uma única parte do instrumento.');
   const bars=children(parts[0],'measure');if(!bars.length||bars.length>64)reject('Use uma partitura com 1 a 64 compassos.');
-  let divisions=1,beats=4,beatType=4,position=0,cursorIndex=0,tempo=60,voice:string|null=null,pendingTie:number|null=null,tempoSet=false;
+  let clefShift=0,divisions=1,beats=4,beatType=4,position=0,cursorIndex=0,tempo=60,voice:string|null=null,pendingTie:number|null=null,tempoSet=false;
   const events:ScoreEvent[]=[],measures:ScoreMeasure[]=[],warnings:string[]=[];
   const steps:Record<string,number>={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const id=(recorder?'recorder-':'')+scoreId(xml);
@@ -50,7 +54,11 @@ export function parseMusicXml(source:string,parse:(xml:string)=>Document=xml=>ne
       if(recorder){
         if(transpose&&(number(transpose,'chromatic',0)!==0||number(transpose,'octave-change',0)!==1))reject('Exporte as notas escritas para flauta doce soprano, com oitava acima do escrito.');
         if(clef&&child(clef,'clef-octave-change')&&number(clef,'clef-octave-change')!==1)reject('Use a clave de Sol com 8 acima para flauta doce soprano.');
-      }else if(transpose&&(number(transpose,'chromatic')!==-2||number(transpose,'octave-change',0)!==0))reject('Exporte as notas escritas para trompete em Si♭, com transposição de dois semitons abaixo.');
+        // Clave de Sol com 8 em cima e sem transposição: a altura no arquivo é o som real (1 oitava acima da nota escrita).
+        // Clave com 8 e transposição de oitava juntas (formato antigo do Cactom): a altura já é a nota escrita.
+        if(clef)clefShift=child(clef,'clef-octave-change')&&!(transpose&&number(transpose,'octave-change',0)===1)?12:0;
+      }else if(clef&&child(clef,'clef-octave-change')&&number(clef,'clef-octave-change')!==0)reject('Use a clave de Sol sem o 8 (esse 8 é da flauta doce).');
+      else if(transpose&&(number(transpose,'chromatic')!==-2||number(transpose,'octave-change',0)!==0))reject(clarinet?'Exporte as notas escritas para clarinete em Si♭, com transposição de dois semitons abaixo.':'Exporte as notas escritas para trompete em Si♭, com transposição de dois semitons abaixo.');
     }
     const start=position;
     for(const item of children(bar)){
@@ -74,7 +82,7 @@ export function parseMusicXml(source:string,parse:(xml:string)=>Document=xml=>ne
       if(!rest){const pitch=child(item,'pitch');if(!pitch)reject('Uma nota está sem altura musical.');
         const letter=text(pitch,'step'),octave=number(pitch,'octave'),alter=number(pitch,'alter',0);
         if(!(letter in steps)||!Number.isInteger(octave)||!Number.isInteger(alter)||Math.abs(alter)>2)reject('A altura musical da nota não é compatível.');
-        const midi=(octave+1)*12+steps[letter]+alter;note=recorder?recorderNote(midi,recorderSystem):trumpetNote(midi);
+        const midi=(octave+1)*12+steps[letter]+alter-(recorder?clefShift:0);note=recorder?recorderNote(midi,recorderSystem):clarinet?clarinetNote(midi):{...trumpetNote(midi),transposeSemitones:soundingShift};
       }
       const ties=children(item,'tie').map(t=>t.getAttribute('type'));
       const segment={cursorIndex:cursorIndex++,startBeat:position,beats:length};

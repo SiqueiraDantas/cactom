@@ -1,4 +1,5 @@
 import {useEffect,useReducer,useRef,useState,type FormEvent} from 'react';
+import { track, setTelemetryContext } from '../lib/devEvents';
 import {createLocalAccount,signInLocal,type LocalProfile} from '../lib/localAuth';
 import {accessFlow,initialAccessFlow,accessWorkshopIntent,type AccessAction,type AccessFlow} from '../lib/accessFlow';
 import {LabIcon} from './LearningHome';
@@ -69,6 +70,7 @@ export function LoginScreen({onEnter,start}:{onEnter:(session:AccessSession)=>vo
   working.current=true;setBusy(true);setError('');setOutcome('idle');let handingOff=false;
   try{
    const profile=view==='login'?await signInLocal(fields.username,fields.password):await createLocalAccount(fields);
+   if(view!=='login'){setTelemetryContext({profileId:profile.id,profileName:profile.name});track('signup',{username:profile.username});}
    if(active.current){handingOff=true;enter({mode:'local',profile});}
   }catch(reason){if(active.current){setOutcome('error');setError(reason instanceof Error?reason.message:'Não foi possível entrar. Tente novamente.');}}
   finally{if(!handingOff){working.current=false;if(active.current)setBusy(false);}}
