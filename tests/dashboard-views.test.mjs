@@ -34,7 +34,7 @@ test('course percentage, unit counters and achievements remain derived from actu
  assert.match(html,/class="topbar-progress"[^>]*>[\s\S]*?<b>15%<\/b>/);
  assert.match(html,/2 de 4 aulas concluídas/);
  const achievements=home('achievements',{passed,seenValves});
- assert.equal((achievements.match(/class="badge-card earned"/g)??[]).length,2);
+ assert.match(achievements,/<span>2<\/span> de \d+ medalhas/);assert.match(achievements,/class="rk"/);assert.ok(achievements.indexOf('>Ranking')<achievements.indexOf('>Medalhas<'));
  const progress=home('progress',{passed,seenValves});
  assert.match(progress,/2 de 13 aulas concluídas/);assert.match(progress,/0 notas avaliadas/);
 });

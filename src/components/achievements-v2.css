@@ -1,0 +1,36 @@
+/* Conquistas v2: resumo com o Tom, abas Ranking/Medalhas e medalhas redondas. */
+.ach-v2{display:flex;flex-direction:column;gap:22px;max-width:1000px;margin:0 auto}
+.ach-head{display:flex;flex-wrap:wrap;align-items:center;gap:22px;padding:24px 28px;border-radius:28px;background:#fff;border:2px solid #f1e6c8;border-bottom-width:6px}
+.ach-tom{flex:none;width:108px;height:108px;display:block}.ach-tom>*{width:100%;height:100%}
+.ach-head-copy{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.ach-eyebrow{margin:0;font-size:13px;font-weight:900;letter-spacing:.14em;color:#b37a00}
+.ach-head h1{margin:0;font-size:clamp(28px,4.5vw,38px);line-height:1.05;font-weight:900;color:#0c3a3c}
+.ach-head h1 span{color:#e5a800}
+.ach-head-copy>p:last-child{margin:0;font-size:16px;font-weight:700;color:#4a5f5a}
+.ach-head-copy>p b{color:#0c3a3c}
+.ach-bar{height:14px;max-width:460px;border-radius:999px;background:#f5ebcf;overflow:hidden}
+.ach-bar span{display:block;height:100%;border-radius:999px;background:#ffc23d}
+.ach-tabs{align-self:flex-start;width:fit-content;display:inline-flex;padding:5px;border-radius:16px;background:#eef3ef;gap:4px;max-width:100%;flex-wrap:wrap}
+.ach-tabs button{min-height:44px;padding:0 20px;border:0;border-radius:12px;background:transparent;font:800 15px Nunito,sans-serif;color:#4a5f5a;cursor:pointer}
+.ach-tabs button.on{background:#fff;box-shadow:0 2px 0 #dde6df;font-weight:900;color:#0c3a3c}
+.ach-tabs button:focus-visible,.ach-go:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.ach-medals-panel{display:flex;flex-direction:column;gap:18px}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
+.ach-medal{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 16px;border-radius:24px;background:#fbfcfa;border:2px solid #eef1ee;text-align:center}
+.ach-medal.earned{background:#fff;border-color:#e3ebe5;border-bottom-width:6px}
+.ach-medal-art{position:relative;width:92px;height:92px;border-radius:50%;background:#f1f3f1;display:grid;place-items:center;color:#c3cbc6}
+.ach-medal-art svg{width:42px;height:42px}
+.ach-medal.earned .ach-medal-art{color:#fff}
+.ach-medal.earned[data-tone="0"] .ach-medal-art{background:#58cc02;box-shadow:0 5px 0 #46a302,inset 0 0 0 6px #8be03f}
+.ach-medal.earned[data-tone="1"] .ach-medal-art{background:#1cb0f6;box-shadow:0 5px 0 #0e7fb5,inset 0 0 0 6px #7dd3fa}
+.ach-medal.earned[data-tone="2"] .ach-medal-art{background:#ff8a12;box-shadow:0 5px 0 #d96c00,inset 0 0 0 6px #ffb861}
+.ach-medal.earned[data-tone="3"] .ach-medal-art{background:#8b5cf6;box-shadow:0 5px 0 #6a3fd6,inset 0 0 0 6px #b9a0fa}
+.ach-medal-art i{position:absolute;right:-4px;bottom:-2px;width:30px;height:30px;border-radius:50%;background:#ffc23d;border:3px solid #fff;display:grid;place-items:center;color:#fff}
+.ach-medal-art i svg{width:16px;height:16px}
+.ach-medal h3{margin:0;font-size:17px;font-weight:900;color:#0c3a3c}
+.ach-medal:not(.earned) h3{color:#4a5f5a}
+.ach-medal p{margin:0;font-size:13px;font-weight:800;color:#5f716b}
+.ach-medal.earned p{font-weight:900;letter-spacing:.08em;color:#2f7a1f}
+.ach-go{align-self:center;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:16px;background:#58cc02;box-shadow:0 4px 0 #46a302;color:#fff;font:900 16px Nunito,sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.ach-go svg{width:20px;height:20px}
+@media(max-width:560px){.ach-head{justify-content:center;text-align:center}.ach-bar{margin:0 auto}.ach-tabs{align-self:stretch;width:auto}.ach-tabs button{flex:1}.ach-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}

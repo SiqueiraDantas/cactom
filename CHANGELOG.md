@@ -1,3 +1,10 @@
+## 05/11/2026 — Conquistas de cara nova
+
+- Resumo no topo com o Tom: "X de N medalhas", barra e qual é a próxima.
+- Duas abas: **Ranking** (abre primeiro) e **Medalhas**.
+- Ranking: cartão maior, Pontos/Acertos/Rojão em destaque verde, aviso de login com cadeado, pódio em três alturas com coroa desenhada e a linha "Tu" marcada em verde.
+- Medalhas: círculos coloridos com selo ✓ nas conquistadas e cinza nas que faltam, mais o atalho para as insígnias do Seu Rojão.
+
 ## 05/11/2026 — Telas novas: Partituras, Seu Rojão, Progresso e Trilha
 
 - **Partituras:** virou "Tua estante de músicas", com capas coloridas, filtros (Todas, Estudos do Cactom, Minhas partituras), status de cada música e um cartão "Traz tua partitura" com o Tom.
