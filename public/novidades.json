@@ -2,25 +2,9 @@
   "versao": "2026.11.05",
   "titulo": "Tem novidade no Cactom!",
   "itens": [
-    {
-      "icone": "🌵",
-      "texto": "Ícone novo do Cactom, com a carinha do Tom."
-    },
-    {
-      "icone": "📲",
-      "texto": "Agora dá pra instalar o Cactom no celular e abrir direto da tela inicial."
-    },
-    {
-      "icone": "🎵",
-      "texto": "Curso novo: Iniciação musical, pra aprender sem instrumento e escolher a clave de Sol ou de Fá."
-    },
-    {
-      "icone": "💬",
-      "texto": "Comunidade por turma, com figurinhas do Tom."
-    },
-    {
-      "icone": "⚡",
-      "texto": "O app abre mais rápido e funciona sem internet nas lições."
-    }
+    { "icone": "🎼", "texto": "Partituras de cara nova: tua estante de músicas, com filtro e cartão pra trazer tua partitura." },
+    { "icone": "🔥", "texto": "Seu Rojão mostra a semana e quantos dias faltam pra próxima insígnia." },
+    { "icone": "🏅", "texto": "Progresso virou um álbum: cada unidade concluída vira uma figurinha." },
+    { "icone": "🌵", "texto": "A trilha ganhou detalhes do sertão e botões novos." }
   ]
 }

@@ -1,0 +1,41 @@
+/* Partituras, versão estante: capas coloridas, filtros e cartão para trazer a partitura. */
+.score-shelf{display:flex;flex-direction:column;gap:24px;max-width:1040px;margin:0 auto}
+.shelf-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px}
+.shelf-head-copy{display:flex;flex-direction:column;gap:6px;min-width:0}
+.shelf-eyebrow{margin:0;font-size:13px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#2f7a1f}
+.shelf-head h1{margin:0;font-size:clamp(32px,5vw,44px);line-height:1.05;font-weight:900;color:#0c3a3c;text-wrap:balance}
+.shelf-head-copy>p:last-child{margin:0;font-size:18px;font-weight:700;color:#4a5f5a}
+.shelf-add{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border:0;border-radius:16px;background:#58cc02;box-shadow:0 4px 0 #46a302;color:#fff;font:900 16px Nunito,sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.shelf-add svg{width:20px;height:20px}
+.shelf-add:active{transform:translateY(3px);box-shadow:0 1px 0 #46a302}
+.shelf-add:disabled{opacity:.7;cursor:default}
+.shelf-filters{display:flex;flex-wrap:wrap;gap:10px}
+.shelf-filters button{min-height:44px;padding:0 18px;border-radius:999px;border:2px solid #dde6df;background:#fff;color:#0c3a3c;font:800 15px Nunito,sans-serif;cursor:pointer}
+.shelf-filters button.on{background:#0c3a3c;border-color:#0c3a3c;color:#fff}
+.shelf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.shelf-card{display:flex;flex-direction:column;text-align:left;padding:0;border:2px solid #e3ebe5;border-bottom-width:6px;border-radius:24px;background:#fff;overflow:hidden;cursor:pointer;font-family:Nunito,sans-serif;color:#0c3a3c;transition:transform .15s}
+.shelf-card:hover{transform:translateY(-2px)}
+.shelf-card:focus-visible,.shelf-add:focus-visible,.shelf-filters button:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.shelf-cover{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px 10px;background:#ffe9c7}
+.shelf-card[data-tone="1"] .shelf-cover{background:#ddf0fb}
+.shelf-card[data-tone="2"] .shelf-cover{background:#e4f4d8}
+.shelf-cover small{align-self:flex-start;padding:4px 10px;border-radius:999px;background:#fff;font-size:12px;font-weight:900;letter-spacing:.06em;color:#9a5b00}
+.shelf-card[data-tone="1"] .shelf-cover small{color:#1b6a93}
+.shelf-card[data-tone="2"] .shelf-cover small{color:#2f7a1f}
+.shelf-cover .practice-sheet-art{width:150px;height:auto}
+.shelf-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.shelf-title{font-size:21px;font-weight:900;line-height:1.15}
+.shelf-desc{font-size:15px;font-weight:700;color:#4a5f5a;line-height:1.4}
+.shelf-status{margin-top:auto;padding-top:8px;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:900;color:#0c3a3c}
+.shelf-status svg{width:18px;height:18px}
+.shelf-status i{width:10px;height:10px;border-radius:50%;background:#ff8a12}
+.shelf-status.passed{color:#2f7a1f}
+.shelf-status.practicing{color:#1b6a93}.shelf-status.practicing i{background:#1cb0f6}
+.shelf-open{margin-left:auto;display:inline-flex;align-items:center;gap:4px;color:#2f7a1f}
+.shelf-upload{align-items:center;justify-content:center;gap:10px;min-height:300px;padding:26px;border:3px dashed #a9d58f;background:#f5fbf0;text-align:center}
+.shelf-upload .shelf-desc{max-width:240px}
+.shelf-upload-tom{width:110px;height:110px;display:block}
+.shelf-upload-tom>*{width:100%;height:100%}
+.shelf-upload:disabled{opacity:.7;cursor:default}
+.shelf-empty,.shelf-note{margin:0;font-size:14px;font-weight:700;color:#5f716b}
+.shelf-formats{max-width:720px}

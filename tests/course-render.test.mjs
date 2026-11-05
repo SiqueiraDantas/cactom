@@ -79,9 +79,9 @@ test('contas locais não herdam progresso da demo nem de outra conta',()=>{
 test('tela de Seu Rojão mostra apenas calendário e marcos derivados das datas',()=>{
   const summary=streakSummary({version:1,days:['2026-10-19','2026-10-20','2026-10-21']},new Date('2026-10-21T15:00:00Z'));
   const html=render(React.createElement(StreakScreen,{summary,instrument:'recorder-soprano',onPractice:noop}));
-  assert.match(html,/dias seguidos!/);assert.equal((html.match(/streak-day practiced/g)??[]).length,3);assert.equal((html.match(/<article class="earned"/g)??[]).length,2);assert.match(html,/CONQUISTADA/);
+  assert.match(html,/dias seguidos/);assert.match(html,/Próxima insígnia|PRÓXIMA INSÍGNIA/);assert.equal((html.match(/streak-day practiced/g)??[]).length,3);assert.equal((html.match(/<article class="earned"/g)??[]).length,2);assert.match(html,/CONQUISTADA/);
   const empty=render(React.createElement(StreakScreen,{summary:streakSummary({version:1,days:[]},new Date('2026-10-21T15:00:00Z')),instrument:'trumpet-bb',onPractice:noop}));
-  assert.match(empty,/Praticar hoje/);assert.equal((empty.match(/<article class="earned"/g)??[]).length,0);
+  assert.match(empty,/Praticar agora/);assert.equal((empty.match(/<article class="earned"/g)??[]).length,0);
 });
 
 

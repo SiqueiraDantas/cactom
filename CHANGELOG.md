@@ -1,3 +1,11 @@
+## 05/11/2026 — Telas novas: Partituras, Seu Rojão, Progresso e Trilha
+
+- **Partituras:** virou "Tua estante de músicas", com capas coloridas, filtros (Todas, Estudos do Cactom, Minhas partituras), status de cada música e um cartão "Traz tua partitura" com o Tom.
+- **Seu Rojão:** bloco branco, com os números em laranja e os dias seguidos, a insígnia atual, o recorde e os dias com música; a semana; e quantos dias faltam pra próxima insígnia, com o botão "Praticar agora". As insígnias e o "Como manter seu rojão?" continuam embaixo.
+- **Progresso:** virou um álbum. Cada unidade concluída vira uma figurinha colada; a atual mostra o Tom e o andamento. Tocando numa unidade, aparecem as paradas dela.
+- **Trilha:** cabeçalho mais compacto, botões cheios com brilho (cinza nas próximas paradas) e detalhes do sertão bem clarinhos no fundo (sol, mandacarus, morros, cerca, passarinhos). O "Tá sem a flauta aí?" ficou numa linha só.
+- Os ícones do app continuam os mesmos. Service worker em `cactom-v3` (mostra a tela de novidades).
+
 ## 05/11/2026 — Tela de atualização e ícone novo
 
 - Ícone novo do app e da aba do site: a carinha do Tom (sobrancelhas, olhos, boca e a flor) em fundo verde, no estilo de app infantil. Gerado em vetor a partir do Tom do app (`public/branding/cactom-icone.svg`), com versões comuns, "maskable" (Android), 180 px (iPhone) e favicon.

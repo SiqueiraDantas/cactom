@@ -7,6 +7,7 @@ import {TomOfficial} from './CactomBrand';
 import {StopIcon,type JourneyOpen} from './RecorderJourney';
 import {TrumpetKeyChoice,ClefChoice} from './BandLesson';
 import './recorder-journey.css';
+import './trail-v2.css';
 
 const X=[50,27,50,73],TOP=104,STEP=120;
 const STATUS_TEXT:Record<StopStatus,string>={'disponivel':'disponível','em-andamento':'em andamento','concluida':'concluída','revisao':'revisão recomendada'};

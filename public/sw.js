@@ -6,7 +6,7 @@
  * - Nada de outros sites é guardado (o Supabase passa direto), e nada além de GET.
  * Ao mudar a estratégia, suba o número da versão: os caches antigos são apagados.
  */
-const VERSION = 'cactom-v2';
+const VERSION = 'cactom-v3';
 const SHELL = `${VERSION}-paginas`;
 const ASSETS = `${VERSION}-build`;
 const MEDIA = `${VERSION}-midia`;

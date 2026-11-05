@@ -7,6 +7,7 @@ import './streak.css';
 import './cactom-dashboard.css';
 import './practice-hub.css';
 import './rojao-hub.css';
+import './rojao-v2.css';
 import {TomOfficial} from './CactomBrand';
 export function useStreakStatus(){
   const storage=useProfileStorage(),[ledger,setLedger]=useState(()=>readStreak(storage)),[now,setNow]=useState(()=>Date.now()),[saved,setSaved]=useState(()=>storage.isPersistent());
@@ -44,46 +45,46 @@ function CurrentInsignia({days,compact=false}:{days:number;compact?:boolean}){
 
 export function StreakScreen({summary,onPractice,saved=true}:{summary:StreakSummary;onPractice:()=>void;instrument:string;saved?:boolean}){
   const currentInsignia=insigniaForStreak(summary.currentStreak);
-  const nextMilestone=STREAK_INSIGNIAS.find(insignia=>insignia.days>summary.bestStreak);
+  const next=STREAK_INSIGNIAS.find(insignia=>insignia.days>summary.currentStreak);
+  const missing=next?next.days-summary.currentStreak:0;
+  const nextPct=next?Math.round(summary.currentStreak/next.days*100):100;
+  const practicedWeek=summary.week.filter(day=>day.practiced).length;
   const id=useId();
-  return <div className="streak-screen practice-hub rojao-hub">
-    <header className="practice-heading">
-      <span className="practice-eyebrow"><StreakFlame active={summary.currentStreak>0} size={18}/> SEU RITMO, TODO DIA</span>
-      <h1>Seu <span>Rojão.</span></h1>
-      <p>Um pouco de música hoje. Mais um passo amanhã.</p>
-    </header>
-
-    <section className="practice-feature rojao-feature" aria-labelledby={id+'-count'}>
-      <div className="practice-feature-copy">
-        <span className="practice-kicker"><i/>{summary.practicedToday?'HOJE JÁ TEVE MÚSICA':'UM DIA PUXA O OUTRO'}</span>
-        <div className="rojao-count" data-digits={String(summary.currentStreak).length}><strong>{summary.currentStreak}</strong><StreakFlame active={summary.currentStreak>0} size={48}/></div>
-        <h2 id={id+'-count'}>{summary.currentStreak===1?'dia seguido!':'dias seguidos!'}</h2>
-        <CurrentInsignia days={summary.currentStreak}/>
-        <p className="practice-lesson-description">{summary.practicedToday?'A prática de hoje já entrou na sua história. Amanhã tem mais música.':summary.currentStreak>0?'Faz uma etapa hoje pra não largar a corda do rojão.':'Bora começar? Uma etapa já é teu primeiro passo.'}</p>
+  return <div className="streak-screen practice-hub rojao-hub rojao-v2">
+    <section className="rojao-v2-hero" aria-labelledby={id+'-count'}>
+      <span className="rojao-v2-art">{currentInsignia?<InsigniaArtwork insignia={currentInsignia} priority/>:<TomOfficial decorative expression={summary.practicedToday?'orgulhoso':'animado'}/>}</span>
+      <div className="rojao-v2-copy">
+        <span className="rojao-v2-eyebrow"><StreakFlame active={summary.currentStreak>0} size={18}/> SEU ROJÃO</span>
+        <h1 id={id+'-count'}><strong>{summary.currentStreak}</strong><span>{summary.currentStreak===1?'dia seguido':'dias seguidos'}</span></h1>
+        <p>{summary.practicedToday?'Hoje já teve música. Volta amanhã pra não deixar o rojão apagar!':summary.currentStreak>0?'Faz uma etapa hoje pra não largar a corda do rojão.':'Bora começar? Uma etapa já é teu primeiro passo.'}</p>
+        <div className="rojao-v2-chips">
+          {currentInsignia&&<span>Insígnia: <b>{currentInsignia.name}</b></span>}
+          <span>Recorde: <b>{summary.bestStreak} {summary.bestStreak===1?'dia':'dias'}</b></span>
+          <span>Dias com música: <b>{summary.totalDays}</b></span>
+        </div>
       </div>
-      <div className={`practice-tom-scene ${currentInsignia?'rojao-badge-scene':''}`} aria-hidden="true">
-        <span className="practice-tom-orbit"/>
-        <span className="practice-tom-spark spark-one"/>
-        <span className="practice-tom-spark spark-two"/>
-        <>{currentInsignia?<InsigniaArtwork insignia={currentInsignia} className="rojao-feature-badge" priority/>:<TomOfficial decorative className="practice-tom" expression={summary.practicedToday?'orgulhoso':'animado'}/>}</>
-        {!currentInsignia&&<span className="practice-tom-hello">{summary.practicedToday?'Massa! Até amanhã, visse?':'Bora segurar o rojão?'}</span>}
-      </div>
-      <div className="practice-feature-action"><button className="practice-start" type="button" onClick={onPractice}><span>{summary.practicedToday?'Continuar praticando':'Praticar hoje'}</span><StreakIcon name="arrow"/></button></div>
     </section>
 
-    <section className="streak-calendar" aria-labelledby={id+'-week'}>
-      <div className="rojao-section-heading"><div><h2 id={id+'-week'}>Sua semana musical</h2><p>Cada dia com música deixa sua marca.</p></div><span className={`rojao-today ${summary.practicedToday?'done':''}`} aria-label={`Meta de hoje: ${summary.dailyGoal.completed} de 1 etapa concluída`}>{summary.practicedToday?<StreakIcon name="check"/>:<span className="rojao-today-dot"/>}<span>Hoje <b>{summary.dailyGoal.completed}/1</b></span></span></div>
+    <section className="rojao-v2-card streak-calendar" aria-labelledby={id+'-week'}>
+      <div className="rojao-v2-card-head"><h2 id={id+'-week'}>Esta semana</h2><span>{practicedWeek} de 7 dias com música</span></div>
       <StreakWeek summary={summary}/>
-      <p className="rojao-week-note"><span className="rojao-practiced-dot"/>Dia praticado<span className="rojao-today-outline"/>Hoje</p>
     </section>
 
-    <div className="rojao-stats">
-      <section className="rojao-stat rojao-stat--record"><span className="rojao-stat-icon"><StreakIcon name="award"/></span><span className="rojao-stat-label">SEU RECORDE</span><b>{summary.bestStreak}<small> {summary.bestStreak===1?'dia':'dias'}</small></b><p>Sua maior sequência até aqui.</p></section>
-      <section className="rojao-stat rojao-stat--total"><span className="rojao-stat-icon"><StreakIcon name="sun"/></span><span className="rojao-stat-label">DIAS COM MÚSICA</span><b>{summary.totalDays}<small> {summary.totalDays===1?'dia':'dias'}</small></b><p>Cada retorno faz parte da história.</p></section>
-    </div>
+    {next?<section className="rojao-v2-next" aria-labelledby={id+'-next'}>
+      <span className="rojao-v2-next-art"><InsigniaArtwork insignia={next}/></span>
+      <div className="rojao-v2-next-copy">
+        <span className="rojao-v2-label">PRÓXIMA INSÍGNIA</span>
+        <h2 id={id+'-next'}>{next.name} · {missing===1?'falta 1 dia':`faltam ${missing} dias`}</h2>
+        <div className="rojao-v2-bar" role="progressbar" aria-label={`Progresso até ${next.name}`} aria-valuemin={0} aria-valuemax={next.days} aria-valuenow={summary.currentStreak}><span style={{width:`${nextPct}%`}}/></div>
+      </div>
+      <button className="practice-start rojao-v2-go" type="button" onClick={onPractice}><span>{summary.practicedToday?'Continuar praticando':'Praticar agora'}</span><StreakIcon name="arrow"/></button>
+    </section>:<section className="rojao-v2-next" aria-label="Todas as insígnias conquistadas">
+      <div className="rojao-v2-next-copy"><span className="rojao-v2-label">TODAS AS INSÍGNIAS</span><h2>Tu chegou no Estirão. Que rojão!</h2></div>
+      <button className="practice-start rojao-v2-go" type="button" onClick={onPractice}><span>Continuar praticando</span><StreakIcon name="arrow"/></button>
+    </section>}
 
     <section className="rojao-milestones" aria-labelledby={id+'-milestones'}>
-      <div className="rojao-section-heading"><div><h2 id={id+'-milestones'}>Suas insígnias</h2><p>Marcos da sua maior sequência.</p></div>{nextMilestone&&<span className="rojao-next-milestone">Próxima: <b>{nextMilestone.name}</b><small>{nextMilestone.days} {nextMilestone.days===1?'dia':'dias'}</small></span>}</div>
+      <div className="rojao-section-heading"><div><h2 id={id+'-milestones'}>Suas insígnias</h2><p>Marcos da sua maior sequência.</p></div></div>
       <div className="rojao-milestone-grid">{STREAK_INSIGNIAS.map(insignia=>{const earned=summary.bestStreak>=insignia.days;return <article className={earned?'earned':''} data-insignia={insignia.id} key={insignia.id}><span className="streak-medallion"><InsigniaArtwork insignia={insignia}/>{earned&&<i><StreakIcon name="check"/></i>}</span><b>{insignia.name}</b><span className="rojao-insignia-days">{insignia.days===30?'30 dias ou mais':`${insignia.days} ${insignia.days===1?'dia':'dias'}`}</span><small>{earned?'CONQUISTADA':'POR DESCOBRIR'}</small></article>;})}</div>
     </section>
 

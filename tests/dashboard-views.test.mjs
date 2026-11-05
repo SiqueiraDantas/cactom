@@ -47,12 +47,12 @@ test('every dashboard tab uses official branding and keeps the six navigation de
   for(const name of ['Aprender','Partituras','Seu Rojão','Conquistas','Meu progresso','Comunidade'])assert.ok(html.includes('aria-label="'+name+'"'));
  }
  assert.ok(!home('learn').includes('aria-label="Praticar"'));
- const scores=home('scores');assert.match(scores,/Enviar minha partitura/);assert.match(scores,/accept="\.pdf/);
+ const scores=home('scores');assert.match(scores,/Adicionar partitura/);assert.match(scores,/Traz tua partitura/);assert.match(scores,/accept="\.pdf/);
  const learn=home('learn');assert.match(learn,/Tá sem a flauta aí\?/);
 });
 test('score library keeps its original studies and MusicXML import under the new visual shell',()=>{
  const html=wrap(React.createElement(ScoreLab,{instrument,recorderSystem:'baroque',onExit:noop,onAttempt:noop}));
  assert.match(html,/cactom-score-library/);assert.match(html,/cactom-wordmark.png/);assert.match(html,/type="file"/);assert.match(html,/Enviar partitura em PDF ou MusicXML para flauta doce/);
- assert.equal((html.match(/class="score-library-card"/g)??[]).length,scoresForInstrument(instrument.id).length);
+ assert.equal((html.match(/class="shelf-card"/g)??[]).length,scoresForInstrument(instrument.id).length);
  for(const score of scoresForInstrument(instrument.id))assert.ok(html.includes(score.title));
 });

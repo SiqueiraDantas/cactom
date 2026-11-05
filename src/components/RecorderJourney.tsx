@@ -10,6 +10,7 @@ import {TomOfficial} from './CactomBrand';
 import type {RecorderSystem} from '../lib/recorder';
 import type {DiagnosticId} from '../lib/recorderDiagnostic';
 import './recorder-journey.css';
+import './trail-v2.css';
 
 export type JourneyOpen={stopId:string;lessonId?:string;review?:boolean};
 const X=[50,27,50,73],TOP=104,STEP=120;
