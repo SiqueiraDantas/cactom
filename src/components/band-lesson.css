@@ -35,3 +35,16 @@
 .rj-stop.is-challenge.is-concluida .rj-node{background:#FFC800}
 .bj-pop-lessons{display:grid;gap:6px;margin-top:8px}
 .bj-pop-lessons button{border:2px solid #E5E5E5;border-radius:12px;background:#fff;padding:8px 10px;font:800 14px Nunito,'Segoe UI',sans-serif;color:#4B4B4B;text-align:left;cursor:pointer}
+
+/* Iniciação: escolha da clave */
+.ini-clef{border:0;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.ini-clef legend{font-weight:900;font-size:16px;margin-bottom:8px;color:#3c3c3c}
+.ini-clef-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}
+.ini-clef button{display:grid;gap:4px;text-align:left;padding:12px 14px;border-radius:18px;border:2px solid #e5e5e5;border-bottom-width:5px;background:#fff;color:#315c60;font:inherit;cursor:pointer}
+.ini-clef button svg{width:100%;max-width:180px;height:auto;color:#315c60}
+.ini-clef button b{font-size:17px;color:#3c3c3c}.ini-clef button small{font-size:13px;color:#6b7f77;line-height:1.35}.ini-clef button em{font-style:normal;font-size:12px;font-weight:900;color:#58a700}
+.ini-clef button.is-on{border-color:#58cc02;background:#f0fbe6}
+.ini-clef button:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}
+
+/* partitura do “bata o ritmo” ocupa a largura toda (antes encolhia a zero dentro do bloco centralizado) */
+.rl-tap>.recorder-course-score{width:100%;align-self:stretch;justify-self:stretch}

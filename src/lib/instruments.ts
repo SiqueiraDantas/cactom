@@ -4,6 +4,7 @@ export type InstrumentProfile = { id:string; name:string; emoji:string; descript
 export const INSTRUMENTS:readonly InstrumentProfile[]=[
   {id:'trumpet-bb',name:'Trompete',emoji:'🎺',description:'Pistos, primeiros sons e melodias em Si♭',available:true,transpose:-2,writtenRange:[60,84]},
   {id:'recorder-soprano',name:'Flauta doce',emoji:'♫',description:'Soprano em Dó · furos, sons e primeiras melodias',available:true,transpose:12,writtenRange:[60,74]},
+  {id:'iniciacao',name:'Iniciação musical',emoji:'🎵',description:'Sem instrumento: notas, durações, dinâmica e as claves de Sol e Fá',available:true,transpose:0,writtenRange:[43,79]},
   {id:'conductor',name:'Regência · Maestro',emoji:'🎼',description:'Aprenda a reger com movimentos reais pela câmera',available:false,transpose:0,writtenRange:[60,84]},
   {id:'clarinet-bb',name:'Clarinete',emoji:'♬',description:'Notas, digitações e prática com microfone em Si♭',available:true,transpose:-2,writtenRange:[50,94]},
   {id:'alto-sax',name:'Saxofone',emoji:'🎷',description:'O som que tem personalidade',available:false,transpose:-9,writtenRange:[58,89]},

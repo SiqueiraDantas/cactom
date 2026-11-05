@@ -64,7 +64,7 @@ create policy "desenvolvedor apaga eventos" on public.eventos
 -- 3. Ranking ------------------------------------------------------------------
 create table if not exists public.ranking (
   profile_id  text not null check (char_length(profile_id) <= 64),
-  instrument  text not null check (instrument in ('recorder-soprano','trumpet-bb','clarinet-bb')),
+  instrument  text not null check (instrument in ('iniciacao','recorder-soprano','trumpet-bb','clarinet-bb')),
   name        text not null check (char_length(name) between 1 and 40),
   xp          integer not null default 0,
   lessons     integer not null default 0,
@@ -91,7 +91,7 @@ declare
 begin
   if p_profile is null or char_length(p_profile) > 64 or char_length(coalesce(p_token, '')) < 20
      or p_name is null or char_length(p_name) not between 1 and 40
-     or p_instrument not in ('recorder-soprano','trumpet-bb','clarinet-bb')
+     or p_instrument not in ('iniciacao','recorder-soprano','trumpet-bb','clarinet-bb')
      or p_xp not between 0 and 100000 or p_lessons not between 0 and 2000
      or p_answered not between 0 and 100000 or p_correct not between 0 and p_answered
      or p_streak not between 0 and 5000 then

@@ -12,12 +12,14 @@ import {barBeats,pulseBeats,type CourseMeter,type CourseNote} from './recorderFu
 export type RecorderAttack='leve'|'explosivo';
 type PlayOptions={gate?:number;duo?:boolean;duoMidi?:number;sustained?:boolean;cents?:number;attack?:RecorderAttack;countIn?:boolean;
  /** Instrumento do modelo: flauta (soa 8ª acima do escrito), trompete e clarinete em Si♭ (soam 1 tom abaixo). */
- voice?:'flauta'|'trompete'|'trompete-do'|'clarinete'};
+ voice?:'flauta'|'trompete'|'trompete-do'|'clarinete'|'teclado'};
 const VOICES={
  flauta:{transpose:12,imag:[0,1,.2,.1,.045,.02,.01],breath:.025},
  trompete:{transpose:-2,imag:[0,1,.75,.6,.45,.32,.22,.14,.09,.06],breath:.012},
  'trompete-do':{transpose:0,imag:[0,1,.75,.6,.45,.32,.22,.14,.09,.06],breath:.012},
  clarinete:{transpose:-2,imag:[0,1,.04,.55,.03,.3,.02,.16,.01,.08],breath:.018},
+ /** curso de iniciação: som neutro de teclado, sem transposição */
+ teclado:{transpose:0,imag:[0,1,.45,.18,.12,.05,.03],breath:0},
 } as const;
 
 const SAMPLE_DIR='/sons/flauta-doce/';
@@ -53,7 +55,7 @@ export class RecorderCourseAudio{
   const click=(frequency:number,at:number,peak=.11)=>{const osc=context.createOscillator(),gain=context.createGain();osc.type='sine';osc.frequency.value=frequency;gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(peak,at+.005);gain.gain.exponentialRampToValueAtTime(.0001,at+.055);osc.connect(gain).connect(context.destination);osc.start(at);osc.stop(at+.07);};
   const wave=context.createPeriodicWave(new Float32Array(voice.imag.length),new Float32Array(voice.imag));
   const noise=(()=>{const length=context.sampleRate,buffer=context.createBuffer(1,length,context.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<length;i++)data[i]=Math.random()*2-1;return buffer;})();
-  const breath=(frequency:number,at:number,duration:number,level:number)=>{
+  const breath=(frequency:number,at:number,duration:number,level:number)=>{if(!(level>0))return;
    const src=context.createBufferSource(),band=context.createBiquadFilter(),gain=context.createGain();
    src.buffer=noise;src.loop=true;band.type='bandpass';band.frequency.value=frequency*2;band.Q.value=1.4;
    gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(level,at+.01);gain.gain.exponentialRampToValueAtTime(Math.max(.0001,level*.12),at+Math.min(duration,.09));gain.gain.setValueAtTime(Math.max(.0001,level*.12),at+Math.max(.1,duration-.04));gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
@@ -81,7 +83,7 @@ export class RecorderCourseAudio{
    for(let beat=0;beat<count;beat+=pulseBeats(meter))click(beat===0?2600:2100,start+beat*quarter);
    let offset=count;const attack=options.attack??'leve';
    for(let i=0;i<notes.length;i++){
-    const n=notes[i];if(n.midi!==null){let length=n.beats;while(notes[i]?.tie&&notes[i+1]?.midi===n.midi){i++;length+=notes[i].beats;}flute(n.midi,start+offset*quarter,length*quarter*(options.gate??.92),.11,attack);offset+=length;}else offset+=n.beats;
+    const n=notes[i];if(n.midi!==null){let length=n.beats;while(notes[i]?.tie&&notes[i+1]?.midi===n.midi){i++;length+=notes[i].beats;}flute(n.midi,start+offset*quarter,length*quarter*(options.gate??.92),.11*Math.min(2.2,Math.max(.15,n.vol??1)),attack);offset+=length;}else offset+=n.beats;
    }
    // a marcação do tempo continua baixinha durante o exemplo (só quando houve contagem)
    if(count>0)for(let beat=count;beat<offset;beat+=pulseBeats(meter))click((beat-count)%barBeats(meter)===0?2400:2000,start+beat*quarter,.05);

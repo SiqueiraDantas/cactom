@@ -53,11 +53,11 @@ test('Tom vetorial muda de expressão com o formulário e cobre os olhos na senh
   assert.match(html,/class="[^"]*ct-front-arms[^"]*"/);
   const ids=[...html.matchAll(/ id="([^"]+)"/g)].map(value=>value[1]);assert.equal(new Set(ids).size,ids.length);
 });
-test('após entrar ou pular, seleção oferece os três cursos liberados (regência bloqueada)',()=>{
+test('após entrar ou pular, seleção oferece os quatro cursos liberados (regência bloqueada)',()=>{
   storage=new Map();
   for(const access of [demo,{mode:'local',profile:profileA}]){
     const html=render(React.createElement(Provider,{profileId:access.profile?.id??null},React.createElement(CourseEntry,{access,onSignOut:noop})));
-    assert.match(html,/Eu quero aprender…/);assert.match(html,/Flauta doce/);assert.match(html,/Trompete/);assert.doesNotMatch(html,/Regência/);assert.match(html,/Clarinete/);assert.equal((html.match(/<button[^>]*class="wsp-card[^"]*"[^>]*>/g)??[]).filter(tag=>!tag.includes('disabled=')).length,3);
+    assert.match(html,/Eu quero aprender…/);assert.match(html,/Flauta doce/);assert.match(html,/Trompete/);assert.doesNotMatch(html,/Regência/);assert.match(html,/Clarinete/);assert.equal((html.match(/<button[^>]*class="wsp-card[^"]*"[^>]*>/g)??[]).filter(tag=>!tag.includes('disabled=')).length,4);
   }
 });
 test('curso da flauta não importa as conquistas antigas do trompete',()=>{
@@ -92,4 +92,10 @@ test('oficina escolhida antes do cadastro entra no curso correto sem uma segunda
  assert.match(html,/Flauta doce/);assert.match(html,/Seu primeiro Si/);assert.doesNotMatch(html,/class="instrument-picker|class="wsp"/);
  const invalid=render(React.createElement(Provider,{profileId:null},React.createElement(CourseEntry,{access:{...demo,initialInstrumentId:'alto-sax'},onSignOut:noop})));
  assert.match(invalid,/Eu quero aprender…/);
+});
+test('iniciação musical abre a trilha própria, sem instrumento virtual nem aba de partituras',()=>{
+  storage=new Map();
+  const html=course('iniciacao');
+  assert.match(html,/Iniciação musical · Unidade 1 de 16/);assert.match(html,/Descubra o mundo dos sons/);assert.match(html,/Seção 1 · O som/);
+  assert.doesNotMatch(html,/Tá sem/);assert.doesNotMatch(html,/aria-label="Partituras"/);
 });

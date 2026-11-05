@@ -3,7 +3,7 @@ import type {ReactElement} from 'react';
  * Ícones dos cursos no formato “bandeirinha” da escolha de oficina: quadrado arredondado
  * colorido com o instrumento desenhado em formas planas. Decorativos (aria-hidden).
  */
-const TILE:Record<string,string>={'trumpet-bb':'#58B9F5','recorder-soprano':'#7FD05B','clarinet-bb':'#FFCB3D','conductor':'#A98BF7'};
+const TILE:Record<string,string>={'trumpet-bb':'#58B9F5','recorder-soprano':'#7FD05B','clarinet-bb':'#FFCB3D','conductor':'#A98BF7','iniciacao':'#FF8FB1'};
 const GOLD={base:'#FFC51F',shade:'#E39A00',light:'#FFE58A'},SILVER={base:'#EEF3F6',shade:'#B9C7D0'};
 
 function Trumpet(){
@@ -75,7 +75,16 @@ function Baton(){
   </g>
  </g>;
 }
-const ART:Record<string,()=>ReactElement>={'trumpet-bb':Trumpet,'recorder-soprano':Recorder,'clarinet-bb':Clarinet,'conductor':Baton};
+function Notes(){
+ return <g fill="#FFFFFF">
+  <ellipse cx="44" cy="64" rx="9" ry="6.5" transform="rotate(-18 44 64)"/>
+  <ellipse cx="80" cy="56" rx="9" ry="6.5" transform="rotate(-18 80 56)"/>
+  <rect x="50.5" y="22" width="3.6" height="42" rx="1.6"/>
+  <rect x="86.5" y="14" width="3.6" height="42" rx="1.6"/>
+  <path d="M50.5 22 L90.1 14 V24 L50.5 32 Z"/>
+ </g>;
+}
+const ART:Record<string,()=>ReactElement>={'iniciacao':Notes,'trumpet-bb':Trumpet,'recorder-soprano':Recorder,'clarinet-bb':Clarinet,'conductor':Baton};
 export function InstrumentTile({instrument}:{instrument:string}){
  const Art=ART[instrument];
  return <svg className="instrument-tile" viewBox="0 0 120 90" aria-hidden="true" focusable="false">

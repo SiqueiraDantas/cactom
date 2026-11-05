@@ -15,7 +15,7 @@ create table if not exists public.chat_perfis (
   profile_id       text primary key check (char_length(profile_id) <= 64),
   token_hash       text not null,
   name             text not null check (char_length(name) between 1 and 40),
-  instrument       text not null check (instrument in ('recorder-soprano','trumpet-bb','clarinet-bb')),
+  instrument       text not null check (instrument in ('iniciacao','recorder-soprano','trumpet-bb','clarinet-bb')),
   responsavel      text not null check (char_length(responsavel) between 2 and 60),
   ano_responsavel  integer not null,
   consent_at       timestamptz not null default now(),
@@ -25,8 +25,8 @@ create table if not exists public.chat_perfis (
 alter table public.chat_perfis enable row level security;
 
 create table if not exists public.chat_mensagens (
-  id          uuid primary key default extensions.gen_random_uuid(),
-  channel     text not null check (channel in ('geral','recorder-soprano','trumpet-bb','clarinet-bb')),
+  id          uuid primary key default gen_random_uuid(),
+  channel     text not null check (channel in ('geral','iniciacao','recorder-soprano','trumpet-bb','clarinet-bb')),
   profile_id  text not null references public.chat_perfis(profile_id) on delete cascade,
   name        text not null check (char_length(name) between 1 and 40),
   text        text not null check (char_length(text) between 1 and 240),
@@ -97,7 +97,7 @@ declare
 begin
   if p_profile is null or char_length(p_profile) > 64 or char_length(coalesce(p_token, '')) < 20
      or p_name is null or char_length(btrim(p_name)) not between 1 and 40
-     or p_instrument not in ('recorder-soprano','trumpet-bb','clarinet-bb') then
+     or p_instrument not in ('iniciacao','recorder-soprano','trumpet-bb','clarinet-bb') then
     return 'invalido';
   end if;
   select * into cur from public.chat_perfis where profile_id = p_profile;

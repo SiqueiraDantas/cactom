@@ -1,25 +1,27 @@
 import {Fragment,useEffect,useLayoutEffect,useMemo,useRef,useState,type CSSProperties} from 'react';
-import {bandJourney,readBandJourney,bandExercises,bandLessonName,type BandInstrument} from '../lib/bandTrail';
+import {bandJourney,readBandJourney,bandExercises,bandLessonName,type TrailCourse} from '../lib/bandTrail';
+import {readClef,saveClef,INI_SECTIONS,type Clef} from '../lib/iniciacao';
 import type {StopStatus} from '../lib/recorderJourney';
 import {useProfileStorage} from './ProfileStorage';
 import {TomOfficial} from './CactomBrand';
 import {StopIcon,type JourneyOpen} from './RecorderJourney';
-import {TrumpetKeyChoice} from './BandLesson';
+import {TrumpetKeyChoice,ClefChoice} from './BandLesson';
 import './recorder-journey.css';
 
 const X=[50,27,50,73],TOP=104,STEP=120;
 const STATUS_TEXT:Record<StopStatus,string>={'disponivel':'disponível','em-andamento':'em andamento','concluida':'concluída','revisao':'revisão recomendada'};
-const NAME:Record<BandInstrument,string>={'trumpet-bb':'Trompete','clarinet-bb':'Clarinete em Si♭'};
+const NAME:Record<TrailCourse,string>={'trumpet-bb':'Trompete','clarinet-bb':'Clarinete em Si♭','iniciacao':'Iniciação musical'};
 const SECTIONS=['Primeiros Passos','Fundamentos','Intermediário','Autonomia Musical'];
 
 /** Trilha do trompete e do clarinete: o mesmo mapa da flauta (4 áreas por unidade, revisões e desafios de seção). */
-export function BandJourney({instrument,onLesson}:{instrument:BandInstrument;onLesson:(open:JourneyOpen)=>void}){
+export function BandJourney({instrument,onLesson}:{instrument:TrailCourse;onLesson:(open:JourneyOpen)=>void}){
  const storage=useProfileStorage(),journey=bandJourney(instrument),{engine,units}=journey;
  const [data]=useState(()=>readBandJourney(storage,instrument));const ledger=data.ledger;
  const current=useMemo(()=>engine.currentStop(ledger),[ledger,engine]);
  const reviews=useMemo(()=>engine.dueReviews(ledger),[ledger,engine]);
  const states=useMemo(()=>new Map(journey.stops.map(s=>[s.id,engine.stopState(s,ledger)])),[ledger,journey,engine]);
- const [open,setOpen]=useState<string|null>(null);
+ const [open,setOpen]=useState<string|null>(null),[clef,setClef]=useState<Clef|null>(()=>instrument==='iniciacao'?readClef(storage):null);
+ const sections=instrument==='iniciacao'?INI_SECTIONS:SECTIONS;
  const currentRef=useRef<HTMLButtonElement>(null),[farAway,setFarAway]=useState(false);
  const completed=[...states.values()].filter(s=>s.status==='concluida'||s.status==='revisao').length,curState=states.get(current.id)!;
  useLayoutEffect(()=>{const node=currentRef.current;if(!node)return;const top=node.getBoundingClientRect().top+window.scrollY-window.innerHeight*.45;if(current.index>0&&top>200)window.scrollTo({top,behavior:'auto'});},[]);
@@ -33,11 +35,12 @@ export function BandJourney({instrument,onLesson}:{instrument:BandInstrument;onL
    <dl className="rj-stats"><div><dt>Paradas</dt><dd>{completed}/{journey.stops.length}</dd></div><div><dt>XP de prática</dt><dd>{ledger.xp}</dd></div><div><dt>Revisões</dt><dd>{reviews.length}</dd></div></dl>
    {reviews.length>0&&<button type="button" className="rj-review-cta" onClick={()=>onLesson({stopId:reviews[0].id,review:true})}>Revisar agora · Unidade {reviews[0].unit}, {reviews[0].label}</button>}
    {instrument==='trumpet-bb'&&<details className="rj-tools"><summary>Afinação do trompete</summary><TrumpetKeyChoice/></details>}
+   {instrument==='iniciacao'&&clef&&<details className="rj-tools"><summary>Clave de leitura: {clef==='fa'?'Fá':'Sol'}</summary><ClefChoice value={clef} onChange={c=>{saveClef(storage,c);setClef(c);}}/></details>}
    {data.warning&&<p className="rj-warning" role="status">{data.warning}</p>}
   </section>
   <ol className="rj-path" aria-label={`Trilha do ${NAME[instrument].toLocaleLowerCase('pt-BR')}: 16 unidades, ${journey.stops.length} paradas`}>
    {units.map(unit=><Fragment key={unit.number}>
-    {(unit.number-1)%4===0&&<li className="rj-milestone bj-section" aria-label={`Seção ${unit.section}`}><b>Seção {unit.section} · {SECTIONS[unit.section-1]}</b><p>Unidades {unit.number} a {unit.number+3}, com desafio no fim.</p></li>}
+    {(unit.number-1)%4===0&&<li className="rj-milestone bj-section" aria-label={`Seção ${unit.section}`}><b>Seção {unit.section} · {sections[unit.section-1]}</b><p>Unidades {unit.number} a {unit.number+3}, com desafio no fim.</p></li>}
     <li className={`rj-unit rj-unit--s${unit.section}`} aria-labelledby={`bj-unit-${unit.number}`}>
      <header className="rj-unit-sign"><small>Unidade {unit.number}</small><h3 id={`bj-unit-${unit.number}`}>{unit.goal}</h3><p>{unit.title}</p></header>
      <div className="rj-stops" style={{'--rows':unit.stops.length} as CSSProperties}>
@@ -46,7 +49,7 @@ export function BandJourney({instrument,onLesson}:{instrument:BandInstrument;onL
         return pts.slice(1).map(([x,y],k)=>{const [px,py]=pts[k],mid=(py+y)/2,st=k>0?states.get(unit.stops[k-1].id)?.status:undefined;return <path key={k} className={st==='concluida'||st==='revisao'?'is-done':''} d={`M${px} ${py}C${px} ${mid} ${x} ${mid} ${x} ${y}`} vectorEffect="non-scaling-stroke"/>;});})()}
       </svg>
       {unit.stops.map((stop,i)=>{const s=states.get(stop.id)!,here=stop.id===current.id,expanded=open===stop.id,x=X[i%4];
-       const lesson=s.nextLesson??stop.lessonIds[0],count=bandExercises(instrument,lesson).length,name=bandLessonName(instrument,lesson);
+       const lesson=s.nextLesson??stop.lessonIds[0],count=bandExercises(instrument,lesson,clef??'sol').length,name=bandLessonName(instrument,lesson);
        return <div key={stop.id} className={`rj-stop is-${s.status} ${here?'is-current':''} ${stop.kind==='desafio'?'is-challenge':''}`} style={{'--x':`${x}%`,'--xn':x,'--row':i} as CSSProperties}>
         {here&&<span className="rj-here" aria-hidden="true">{s.status==='revisao'?'REVISAR':s.done?'CONTINUAR':'COMEÇAR'}</span>}
         {here&&<TomOfficial decorative expression="animado" className={`rj-tom ${x>50?'is-left':''}`}/>}

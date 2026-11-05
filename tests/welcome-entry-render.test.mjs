@@ -66,7 +66,7 @@ test('Começar agora: “Eu quero aprender…” com um cartão por curso dispon
   const t=ACCESS_COPY[locale],picked=[],props={locale,onPick:id=>picked.push(id),onBack:noop,onLocale:noop};
   const html=render(React.createElement(WorkshopOnboarding,{...props,workshopId:null}));
   assert.ok(html.includes(t.workshopsTitle));assert.doesNotMatch(html,/role="progressbar"|onb-continue|ct-tom|disabled=""/);
-  assert.equal((html.match(/class="wsp-card"/g)??[]).length,3);assert.equal((html.match(/class="instrument-tile"/g)??[]).length,3);
+  assert.equal((html.match(/class="wsp-card"/g)??[]).length,4);assert.equal((html.match(/class="instrument-tile"/g)??[]).length,4);
   for(const name of [t.recorder,t.trumpet,t.clarinet])assert.ok(html.includes(name));
   assert.ok(!html.includes(t.comingSoon));
   const chosen=render(React.createElement(WorkshopOnboarding,{...props,workshopId:'recorder-soprano'}));

@@ -1,3 +1,4 @@
+import {TREBLE_CLEF_PATH} from '../lib/trebleClef';
 /**
  * Ilustrações dos cursos no estilo “desenho plano com volume”: formas cheias, sem contorno,
  * um tom de sombra e um de brilho por material, leve inclinação e fundo redondo colorido.
@@ -9,7 +10,7 @@ const PAL={
  cream:{base:'#fff0cf',shade:'#f2d49b',light:'#ffffff',deep:'#9a6a3c'},
  ebony:{base:'#3d4350',shade:'#2a2e37',light:'#5d6574',deep:'#1d2027'},
 };
-const BG:Record<string,[string,string]>={'trumpet-bb':['#fff3d1','#ffe3a1'],'recorder-soprano':['#e6f7dc','#c9eeb4'],'conductor':['#e8f1ff','#c9dcff'],'clarinet-bb':['#ececff','#d6d5ff'],'alto-sax':['#fff0dc','#ffd9a8'],'trombone':['#ffefe6','#ffd2bb'],'flute':['#e3f6f7','#bfe9ec']};
+const BG:Record<string,[string,string]>={'trumpet-bb':['#fff3d1','#ffe3a1'],'recorder-soprano':['#e6f7dc','#c9eeb4'],'conductor':['#e8f1ff','#c9dcff'],'clarinet-bb':['#ececff','#d6d5ff'],'alto-sax':['#fff0dc','#ffd9a8'],'trombone':['#ffefe6','#ffd2bb'],'flute':['#e3f6f7','#bfe9ec'],'iniciacao':['#ffe6ef','#ffc7da']};
 
 function Sparkles({color}:{color:string}){
  return <g fill={color}>
@@ -121,6 +122,22 @@ function Flute(){const s=PAL.silver;
   <rect x="200" y="76" width="10" height="24" rx="3" fill={s.shade}/>
  </g>;
 }
+/** Iniciação musical: pauta com clave de Sol e duas colcheias, sem instrumento. */
+function Notes(){
+ return <g>
+  <rect x="44" y="56" width="152" height="70" rx="14" fill="#ffffff"/>
+  {[70,80,90,100,110].map(y=><rect key={y} x="56" y={y} width="128" height="2.4" rx="1.2" fill="#f3a3bf"/>)}
+  <path d={TREBLE_CLEF_PATH} transform="translate(60 100) scale(0.035)" fill="#c2185b"/>
+  <g fill="#c2185b">
+   <ellipse cx="118" cy="105" rx="8.5" ry="6" transform="rotate(-18 118 105)"/>
+   <ellipse cx="152" cy="95" rx="8.5" ry="6" transform="rotate(-18 152 95)"/>
+   <rect x="124" y="64" width="3.4" height="41" rx="1.5"/>
+   <rect x="158" y="54" width="3.4" height="41" rx="1.5"/>
+   <path d="M124 64 L161.4 54 V63 L124 73 Z"/>
+  </g>
+  <path d="M182 44l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ff8fb1"/>
+ </g>;
+}
 export function CourseArtwork({instrument}:{instrument:string}){
  const [bg,bg2]=BG[instrument]??BG['recorder-soprano'];
  return <svg className="course-artwork" viewBox="28 8 184 160" aria-hidden="true" focusable="false">
@@ -133,6 +150,7 @@ export function CourseArtwork({instrument}:{instrument:string}){
   {instrument==='alto-sax'&&<Sax/>}
   {instrument==='trombone'&&<Trombone/>}
   {instrument==='flute'&&<Flute/>}
+  {instrument==='iniciacao'&&<Notes/>}
   <Sparkles color={bg2}/>
  </svg>;
 }

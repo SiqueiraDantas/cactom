@@ -40,9 +40,9 @@ test('login, cadastro, idioma e oficina são traduzidos nos três idiomas',()=>{
   assert.equal((html.match(/<option /g)??[]).length,3);
  }
 });
-test('catálogo usa os três cursos liberados (regência bloqueada), sem selecionar por conta própria nem liberar os futuros',()=>{
+test('catálogo usa os quatro cursos liberados (regência bloqueada), sem selecionar por conta própria nem liberar os futuros',()=>{
  const html=renderToStaticMarkup(React.createElement(WorkshopGrid,{onSelect:noop}));
  const cards=html.match(/<button[^>]*class="instrument-card[^\"]*"[^>]*>/g)??[];
- assert.equal(cards.length,7);assert.equal(cards.filter(tag=>!tag.includes('disabled=')).length,3);assert.equal(cards.filter(tag=>tag.includes('aria-pressed="true"')).length,0);
+ assert.equal(cards.length,8);assert.equal(cards.filter(tag=>!tag.includes('disabled=')).length,4);assert.equal(cards.filter(tag=>tag.includes('aria-pressed="true"')).length,0);
  assert.match(html,/Em breve/);assert.doesNotMatch(html,/milhões|alunos|<img|<image/i);
 });

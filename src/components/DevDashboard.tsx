@@ -19,19 +19,19 @@ export function devAllowed(){
  const h=globalThis.location?.hostname??'';
  return h==='localhost'||h.endsWith('.local')||/^(127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1\]?$)/.test(h);
 }
-const INSTR:Record<string,string>={'recorder-soprano':'Flauta doce','trumpet-bb':'Trompete','clarinet-bb':'Clarinete'};
+const INSTR:Record<string,string>={'iniciacao':'Iniciação','recorder-soprano':'Flauta doce','trumpet-bb':'Trompete','clarinet-bb':'Clarinete'};
 const TYPE:Record<string,string>={app_open:'Abriu o app',login:'Entrou',signup:'Criou conta',demo:'Entrou como visitante',logout:'Saiu',course:'Escolheu curso',tab:'Abriu aba',lesson_start:'Começou lição',lesson_complete:'Concluiu lição',answer:'Respondeu',mic:'Microfone',score_import:'Enviou partitura',error:'Erro',restored:'Voltou ao app (já logado)'};
 const TAB:Record<string,string>={learn:'Aprender',scores:'Partituras',streak:'Rojão',achievements:'Conquistas',progress:'Progresso',community:'Comunidade'};
 const when=(iso:string|null)=>iso?new Date(iso).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'—';
 const ms=(n:number|null)=>n===null?'—':n>=1000?`${(n/1000).toFixed(1).replace('.',',')} s`:`${n} ms`;
 const LESSON_NAME=new Map(COURSE_TASKS.map(t=>[t.lesson,t.lessonName]));
 function lessonLabel(id:string){
- const band=/^(TPT|CLA)-/.exec(id);if(band){const i=band[1]==='TPT'?'trumpet-bb':'clarinet-bb';const m=/M(\d\d)-L(\d)/.exec(id);return `${INSTR[i]} · ${m?`Unidade ${Number(m[1])}, `:''}${bandLessonName(i,id)}`;}
+ const band=/^(TPT|CLA|INI)-/.exec(id);if(band){const i=band[1]==='TPT'?'trumpet-bb':band[1]==='INI'?'iniciacao':'clarinet-bb';const m=/M(\d\d)-L(\d)/.exec(id);return `${INSTR[i]} · ${m?`Unidade ${Number(m[1])}, `:''}${bandLessonName(i,id)}`;}
  const m=/^S\d-M(\d\d)-L0(\d)/.exec(id);return m?`Flauta · Unidade ${Number(m[1])}, ${LESSON_NAME.get(id)??`lição ${m[2]}`}`:id;
 }
 function users():DevUser[]{
  return listLocalProfiles().map(p=>{let streak=0;try{streak=streakSummary(readStreak(createProfileStorage(p.id))).currentStreak;}catch{/* nada */}
-  return {id:p.id,name:p.name,username:p.username,createdAt:p.createdAt,streak,instruments:['recorder-soprano','trumpet-bb','clarinet-bb'].map(id=>{const e=entryFor(p,id);return e?{id,xp:e.xp,lessons:e.lessons,accuracy:e.accuracy}:null;}).filter((x):x is DevUser['instruments'][number]=>!!x)};});
+  return {id:p.id,name:p.name,username:p.username,createdAt:p.createdAt,streak,instruments:['iniciacao','recorder-soprano','trumpet-bb','clarinet-bb'].map(id=>{const e=entryFor(p,id);return e?{id,xp:e.xp,lessons:e.lessons,accuracy:e.accuracy}:null;}).filter((x):x is DevUser['instruments'][number]=>!!x)};});
 }
 function describe(e:TelemetryEvent){
  const d=e.data??{};
@@ -62,7 +62,7 @@ function Bars<T extends {day:string}>({title,data,value,format=(n:number)=>Strin
   </svg></figure>;
 }
 async function serverUsers(events:TelemetryEvent[]):Promise<DevUser[]>{
- const ids=['recorder-soprano','trumpet-bb','clarinet-bb'],rows=await Promise.all(ids.map(id=>fetchRanking(id).then(r=>(r??[]).map(e=>({...e,instrument:id})))));
+ const ids=['iniciacao','recorder-soprano','trumpet-bb','clarinet-bb'],rows=await Promise.all(ids.map(id=>fetchRanking(id).then(r=>(r??[]).map(e=>({...e,instrument:id})))));
  const users=new Map<string,DevUser>(),username=new Map<string,string>();
  for(const e of events)if((e.type==='login'||e.type==='signup')&&e.profileId&&e.data?.username)username.set(e.profileId,String(e.data.username));
  for(const r of rows.flat()){const u=users.get(r.profileId)??{id:r.profileId,name:r.name,username:username.get(r.profileId)??'',createdAt:r.createdAt??'',streak:0,instruments:[]};
@@ -81,7 +81,7 @@ function DevLogin({onDone}:{onDone:(email:string)=>void}){
   <button type="submit" disabled={busy}>{busy?'Entrando…':'Entrar'}</button>
  </form>;
 }
-const ROOM:Record<string,string>={geral:'Geral','recorder-soprano':'Flauta','trumpet-bb':'Trompete','clarinet-bb':'Clarinete'};
+const ROOM:Record<string,string>={geral:'Geral',iniciacao:'Iniciação','recorder-soprano':'Flauta','trumpet-bb':'Trompete','clarinet-bb':'Clarinete'};
 /** Moderação da Comunidade online: denúncias primeiro, depois as mais novas. */
 function ModerationCard({tick}:{tick:number}){
  const [rows,setRows]=useState<ModRow[]|null>(null),[error,setError]=useState(''),[filter,setFilter]=useState<'denuncias'|'todas'>('denuncias'),[again,setAgain]=useState(0);

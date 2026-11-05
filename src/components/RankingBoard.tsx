@@ -5,7 +5,7 @@ import {TomOfficial} from './CactomBrand';
 import './ranking.css';
 
 const MODES:{id:RankMode;label:string}[]=[{id:'xp',label:'Pontos'},{id:'acertos',label:'Acertos'},{id:'rojao',label:'Rojão'}];
-const COURSE:Record<string,string>={'recorder-soprano':'da flauta doce','trumpet-bb':'do trompete','clarinet-bb':'do clarinete'};
+const COURSE:Record<string,string>={'iniciacao':'da iniciação musical','recorder-soprano':'da flauta doce','trumpet-bb':'do trompete','clarinet-bb':'do clarinete'};
 const valueOf=(e:RankEntry,mode:RankMode)=>mode==='xp'?`${e.xp} XP`:mode==='rojao'?`${e.streak} ${e.streak===1?'dia':'dias'}`:e.answered>=MIN_ANSWERS_FOR_ACCURACY&&e.accuracy!==null?`${e.accuracy}%`:'—';
 const detailOf=(e:RankEntry,mode:RankMode)=>mode==='acertos'?(e.answered>=MIN_ANSWERS_FOR_ACCURACY?`${e.correct} de ${e.answered} de primeira`:`faltam ${MIN_ANSWERS_FOR_ACCURACY-e.answered} respostas pra entrar`):`${e.lessons} ${e.lessons===1?'lição':'lições'} · ${e.accuracy??0}% de primeira`;
 

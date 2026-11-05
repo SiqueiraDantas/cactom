@@ -10,6 +10,7 @@
 export type CommunityChannel={id:string;name:string;instrument?:string;topic:string};
 export const COMMUNITY_CHANNELS:CommunityChannel[]=[
  {id:'geral',name:'Geral do Cactom',topic:'Papo sobre música e sobre o app.'},
+ {id:'iniciacao',name:'Iniciação musical',instrument:'iniciacao',topic:'Notas, ritmos, claves e muitas descobertas.'},
  {id:'recorder-soprano',name:'Flauta doce',instrument:'recorder-soprano',topic:'Dúvidas, dicas e conquistas da flauta.'},
  {id:'trumpet-bb',name:'Trompete',instrument:'trumpet-bb',topic:'Embocadura, pistos e primeiros sons.'},
  {id:'clarinet-bb',name:'Clarinete',instrument:'clarinet-bb',topic:'Palheta, dedilhados e respiração.'},

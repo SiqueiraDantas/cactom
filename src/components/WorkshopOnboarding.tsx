@@ -11,7 +11,7 @@ import './workshop-pick.css';
 
 type Props={locale:AccessLocale;workshopId:string|null;onPick:(id:string)=>void;onBack:()=>void;onLocale:(locale:AccessLocale)=>void;headingRef?:Ref<HTMLHeadingElement>};
 /** Ordem de exibição: o curso principal primeiro. Só cursos disponíveis aparecem. */
-const ORDER=['recorder-soprano','trumpet-bb','clarinet-bb','conductor'];
+const ORDER=['iniciacao','recorder-soprano','trumpet-bb','clarinet-bb','conductor'];
 /**
  * “Começar agora” no formato da escolha de idioma do Duolingo: “Eu quero aprender…” e um
  * cartão por curso disponível. Um toque escolhe o curso e segue direto para o cadastro.

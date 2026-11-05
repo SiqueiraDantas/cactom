@@ -12,7 +12,7 @@ import './community.css';
 const COLORS=['#1cb0f6','#ff9600','#a96ddb','#ff4b4b','#2bb5a0','#e85d9a','#6a7cff','#d4a000'];
 const colorOf=(id:string)=>{let h=0;for(const c of id)h=(h*31+c.charCodeAt(0))>>>0;return COLORS[h%COLORS.length];};
 const dayLabel=(iso:string)=>{const d=new Date(iso),today=new Date(),y=new Date(Date.now()-864e5);const same=(a:Date,b:Date)=>a.toDateString()===b.toDateString();return same(d,today)?'Hoje':same(d,y)?'Ontem':d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'});};
-const CLAN_TITLE:Record<string,string>={geral:'Geral do Cactom','recorder-soprano':'Turma da Flauta','trumpet-bb':'Turma do Trompete','clarinet-bb':'Turma do Clarinete'};
+const CLAN_TITLE:Record<string,string>={geral:'Geral do Cactom',iniciacao:'Turma da Iniciação','recorder-soprano':'Turma da Flauta','trumpet-bb':'Turma do Trompete','clarinet-bb':'Turma do Clarinete'};
 const time=(at:string)=>at?new Date(at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}):'';
 
 /** Selo do jogador (escudo com a inicial e a cor dele). */
@@ -94,7 +94,7 @@ export function CommunityHub({instrumentId,profile,storage}:{instrumentId:string
  },[ready,channel,profile?.id]);
  useEffect(()=>{const el=listRef.current;if(el)el.scrollTop=el.scrollHeight;},[messages,channel]);
  // XP de cada conta deste aparelho no instrumento da sala (na Geral, o maior entre os cursos)
- const xp=useMemo(()=>{const map=new Map<string,number>();const ids=room.id==='geral'?['recorder-soprano','trumpet-bb','clarinet-bb']:[room.id];
+ const xp=useMemo(()=>{const map=new Map<string,number>();const ids=room.id==='geral'?['iniciacao','recorder-soprano','trumpet-bb','clarinet-bb']:[room.id];
   for(const i of ids)for(const e of localRanking(i))map.set(e.profileId,Math.max(map.get(e.profileId)??0,e.xp));return map;},[room.id,messages.length]);
  const [sending,setSending]=useState(false);
  const send=async(text:string)=>{

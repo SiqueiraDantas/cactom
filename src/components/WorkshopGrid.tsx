@@ -6,8 +6,8 @@ import {LabIcon} from './LearningHome';
 import './workshop-selection.css';
 export function workshopText(item:InstrumentProfile,locale:AccessLocale){
  const t=ACCESS_COPY[locale];
- const names:Record<string,string>={'recorder-soprano':t.recorder,'trumpet-bb':t.trumpet,'clarinet-bb':t.clarinet,conductor:t.conducting,'alto-sax':t.sax,trombone:t.trombone,flute:t.flute};
- const descriptions:Record<string,string>={'recorder-soprano':t.recorderDescription,'trumpet-bb':t.trumpetDescription,'clarinet-bb':t.clarinetDescription,conductor:t.conductingDescription,'alto-sax':t.saxDescription,trombone:t.tromboneDescription,flute:t.fluteDescription};
+ const names:Record<string,string>={iniciacao:t.initiation,'recorder-soprano':t.recorder,'trumpet-bb':t.trumpet,'clarinet-bb':t.clarinet,conductor:t.conducting,'alto-sax':t.sax,trombone:t.trombone,flute:t.flute};
+ const descriptions:Record<string,string>={iniciacao:t.initiationDescription,'recorder-soprano':t.recorderDescription,'trumpet-bb':t.trumpetDescription,'clarinet-bb':t.clarinetDescription,conductor:t.conductingDescription,'alto-sax':t.saxDescription,trombone:t.tromboneDescription,flute:t.fluteDescription};
  return {name:names[item.id]??item.name,description:descriptions[item.id]??item.description};
 }
 export function WorkshopGrid({selectedId,onSelect,locale='pt-BR'}:{selectedId?:string|null;onSelect:(id:string)=>void;locale?:AccessLocale}){

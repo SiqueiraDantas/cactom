@@ -2,6 +2,7 @@ import {PLAN_MODULES,LESSON_NAMES,INSTRUMENT_WORD,poolUntil,lessonTasks,type Pla
 import type {CourseNote,CourseMeter} from './recorderFullCourse.ts';
 import type {KeyValueStorage} from './profileStorage.ts';
 import {overviewOf,type JourneyOverview} from './journeyOverview.ts';
+import {iniExercises,iniJourney,readIniJourney,completeIniLesson,iniOverview,iniLessonName,iniLessonTasks,iniName,type Clef} from './iniciacao.ts';
 import {STOP_KINDS,type Evidence,createJourneyEngine,normalizeJourney,readJourney,writeJourney,emptyJourney,lessonXp,type JourneyStop,type JourneyLedger,type LessonOutcome} from './recorderJourney.ts';
 
 /**
@@ -12,7 +13,12 @@ import {STOP_KINDS,type Evidence,createJourneyEngine,normalizeJourney,readJourne
  */
 export type BandInstrument='trumpet-bb'|'clarinet-bb';
 export const BAND_INSTRUMENTS:readonly BandInstrument[]=['trumpet-bb','clarinet-bb'];
-export const isBand=(id:string):id is BandInstrument=>(BAND_INSTRUMENTS as readonly string[]).includes(id);
+/** Cursos com a trilha de paradas deste arquivo: trompete, clarinete e a Iniciação Musical (sem instrumento). */
+export type TrailCourse=BandInstrument|'iniciacao';
+export const isWind=(id:string):id is BandInstrument=>(BAND_INSTRUMENTS as readonly string[]).includes(id);
+export const isBand=(id:string):id is TrailCourse=>isWind(id)||id==='iniciacao';
+/** Nome da nota no curso (a iniciação também usa a clave de Fá). */
+export const noteName=(i:TrailCourse,midi:number)=>i==='iniciacao'?iniName(midi):NOTE_NAME[midi]??iniName(midi);
 export const NOTE_NAME:Record<number,string>={55:'Sol grave',57:'Lá grave',60:'Dó',62:'Ré',64:'Mi',65:'Fá',66:'Fá♯',67:'Sol',69:'Lá',70:'Si♭',71:'Si',72:'Dó agudo',74:'Ré agudo'};
 
 /**
@@ -22,8 +28,9 @@ export const NOTE_NAME:Record<number,string>={55:'Sol grave',57:'Lá grave',60:'
  */
 const TRUMPET:Record<number,string[]>={60:[],62:['1','3'],64:['1','2'],65:['1'],66:['2'],67:[],69:['1','2'],70:['1'],71:['2'],72:[],74:['1']};
 const CLARINET:Record<number,string[]>={55:['T','1','2','3','4','5','6'],57:['T','1','2','3','4','5'],60:['T','1','2','3'],62:['T','1','2'],64:['T','1'],65:['T'],66:['1'],67:[],69:['A'],70:['A','R']};
-export function bandFingering(instrument:BandInstrument,midi:number):string[]|null{const t=(instrument==='trumpet-bb'?TRUMPET:CLARINET)[midi];return t?[...t]:null;}
-export function fingeringLabel(instrument:BandInstrument,keys:readonly string[]):string{
+export function bandFingering(instrument:TrailCourse,midi:number):string[]|null{if(instrument==='iniciacao')return null;const t=(instrument==='trumpet-bb'?TRUMPET:CLARINET)[midi];return t?[...t]:null;}
+export function fingeringLabel(instrument:TrailCourse,keys:readonly string[]):string{
+ if(instrument==='iniciacao')return '';
  if(instrument==='trumpet-bb')return keys.length?`Pisto${keys.length>1?'s':''} ${keys.join(' e ')}`:'Nenhum pisto (aberto)';
  if(!keys.length)return 'Tudo aberto';
  const parts:string[]=[];const lh:Record<string,string>={1:'indicador',2:'médio',3:'anelar'};
@@ -55,7 +62,7 @@ export type BandKind='meet'|'observe'|'fingering'|'build'|'listen'|'compare'|'re
 /** Uma tela da lição. `phase`: apoio (corpo, nota nova) · descoberta (P1) · aplicação em exemplo novo (P2), como na flauta. */
 export type BandExercise={id:string;taskId:string;phase:'apoio'|'descoberta'|'aplicacao';kind:BandKind;checklist?:string[];instruction:string;prompt:string;target?:number;
  options?:{label:string;keys?:string[];midi?:number}[];answer?:number;notes?:CourseNote[];alternative?:CourseNote[];meter?:CourseMeter;bpm?:number;duo?:boolean;
- /** sem o botão “Ouvir modelo” (tocar lendo / lembrando) */noModel?:boolean;/** montar dedilhado sem o desenho de apoio */hideModel?:boolean;score?:boolean;
+ /** sem o botão “Ouvir modelo” (tocar lendo / lembrando) */noModel?:boolean;/** montar dedilhado sem o desenho de apoio */hideModel?:boolean;score?:boolean;clef?:Clef;
  tapBeats?:number[];tapLength?:number;create?:{slots:number;choices:(number|null)[];rule:'fill-bar'|'match';target?:(number|null)[]};
  story?:{title:string;scene:string};hint:string;correct:string;incorrect:string;evidence:Evidence[]};
 function seeded(seed:string){let h=0;for(const c of seed)h=(h*31+c.charCodeAt(0))>>>0;return ()=>{h=(h*1103515245+12345)>>>0;return h/2**32;};}
@@ -82,7 +89,8 @@ function phraseFor(style:PlanStyle,pool:number[],focus:number[],rnd:()=>number,v
  return padTo(out,meter);
 }
 
-export function bandExercises(instrument:BandInstrument,lessonId:string):BandExercise[]{
+export function bandExercises(instrument:TrailCourse,lessonId:string,clef:Clef='sol'):BandExercise[]{
+ if(instrument==='iniciacao')return iniExercises(lessonId,clef);
  const challenge=CHALLENGE_IDS[instrument].get(lessonId);if(challenge)return challengeExercises(instrument,lessonId,challenge);
  const lessons=bandLessons(instrument),index=lessons.findIndex(l=>l.id===lessonId);if(index<0)return [];
  const lesson=lessons[index],m=bandModule(lesson.unit),L=lesson.index,pool=lesson.notes,rnd=seeded(instrument+lessonId),out:BandExercise[]=[];
@@ -223,11 +231,12 @@ function buildJourney(i:BandInstrument){
  return {stops,units,engine,normalize:(v:unknown)=>normalizeJourney(v,id=>lessonIds.has(id),id=>stopIds.has(id))};
 }
 const JOURNEYS={'trumpet-bb':buildJourney('trumpet-bb'),'clarinet-bb':buildJourney('clarinet-bb')};
-export const bandJourney=(i:BandInstrument)=>JOURNEYS[i];
+export const bandJourney=(i:TrailCourse)=>i==='iniciacao'?iniJourney():JOURNEYS[i];
 export const bandJourneyKey=(i:BandInstrument)=>`cactom-trilha-${i}-v2`;
 /** Nome da lição dentro da parada (Descobrir, Discriminar…) ou “Desafio da seção”. */
-export function bandLessonName(i:BandInstrument,lessonId:string){return CHALLENGE_IDS[i].has(lessonId)?'Desafio da seção':bandLessons(i).find(l=>l.id===lessonId)?.title??'';}
-export function bandLessonTasks(i:BandInstrument,lessonId:string):string[]{
+export function bandLessonName(i:TrailCourse,lessonId:string){if(i==='iniciacao')return iniLessonName(lessonId);return CHALLENGE_IDS[i].has(lessonId)?'Desafio da seção':bandLessons(i).find(l=>l.id===lessonId)?.title??'';}
+export function bandLessonTasks(i:TrailCourse,lessonId:string):string[]{
+ if(i==='iniciacao')return iniLessonTasks(lessonId);
  const u=CHALLENGE_IDS[i].get(lessonId);if(u)return ['Escutar e reconhecer notas.','Ler a partitura e montar dedilhados.','Bater ritmos, fazer ditado e tocar.'];
  return [...(bandLessons(i).find(l=>l.id===lessonId)?.tasks??[])];
 }
@@ -240,7 +249,8 @@ export function readBand(storage:Pick<KeyValueStorage,'getItem'>,i:BandInstrumen
  return {version:1,lessons:{},xp:0};
 }
 /** Lê a trilha nova; na primeira vez, traz as lições já feitas no registro antigo (nada é apagado). */
-export function readBandJourney(storage:Pick<KeyValueStorage,'getItem'>,i:BandInstrument):{ledger:JourneyLedger;warning:string;safeToWrite:boolean}{
+export function readBandJourney(storage:Pick<KeyValueStorage,'getItem'>,i:TrailCourse):{ledger:JourneyLedger;warning:string;safeToWrite:boolean}{
+ if(i==='iniciacao')return readIniJourney(storage);
  const j=JOURNEYS[i];let raw:string|null=null;try{raw=storage.getItem(bandJourneyKey(i));}catch{/* sem armazenamento */}
  if(raw)return readJourney(storage,bandJourneyKey(i),j.normalize);
  const old=readBand(storage,i),ledger=emptyJourney();
@@ -249,13 +259,15 @@ export function readBandJourney(storage:Pick<KeyValueStorage,'getItem'>,i:BandIn
  if(last){const stop=j.stops.find(s=>s.lessonIds.includes(last[0]));if(stop)ledger.lastStop=stop.id;}
  return {ledger,warning:'',safeToWrite:true};
 }
-export function completeBandLesson(storage:Pick<KeyValueStorage,'getItem'|'setItem'>,i:BandInstrument,outcome:LessonOutcome){
+export function completeBandLesson(storage:Pick<KeyValueStorage,'getItem'|'setItem'>,i:TrailCourse,outcome:LessonOutcome){
+ if(i==='iniciacao')return completeIniLesson(storage,outcome);
  const fresh=readBandJourney(storage,i),updated=JOURNEYS[i].engine.completeLesson(fresh.ledger,outcome);
  let warning=fresh.warning;if(fresh.safeToWrite&&!writeJourney(storage,updated,bandJourneyKey(i)))warning='Teu avanço ficou nesta sessão, mas este navegador não deixou salvar.';
  return {ledger:updated,xp:lessonXp(outcome),warning};
 }
 /** Mesmo formato do resumo da flauta, para Rojão, Conquistas e Progresso. */
-export function bandOverview(storage:Pick<KeyValueStorage,'getItem'>,i:BandInstrument):JourneyOverview{
+export function bandOverview(storage:Pick<KeyValueStorage,'getItem'>,i:TrailCourse):JourneyOverview{
+ if(i==='iniciacao')return iniOverview(storage);
  const j=JOURNEYS[i];return overviewOf(readBandJourney(storage,i).ledger,j.engine,j.units);
 }
 
@@ -278,4 +290,4 @@ export const TRUMPET_KEY='cactom-trompete-afinacao';
 export type TrumpetKey='sib'|'do';
 export function readTrumpetKey():TrumpetKey{try{return globalThis.localStorage?.getItem(TRUMPET_KEY)==='do'?'do':'sib';}catch{return 'sib';}}
 export function saveTrumpetKey(k:TrumpetKey){try{globalThis.localStorage?.setItem(TRUMPET_KEY,k);}catch{/* sem armazenamento */}}
-export function soundingOffset(i:BandInstrument,k:TrumpetKey=readTrumpetKey()){return i==='trumpet-bb'&&k==='do'?0:-2;}
+export function soundingOffset(i:TrailCourse,k:TrumpetKey=readTrumpetKey()){if(i==='iniciacao')return 0;return i==='trumpet-bb'&&k==='do'?0:-2;}

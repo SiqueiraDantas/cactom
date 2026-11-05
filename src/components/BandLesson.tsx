@@ -1,6 +1,8 @@
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {track} from '../lib/devEvents';
-import {bandExercises,bandJourney,readBandJourney,completeBandLesson,bandLessonName,bandLessonTasks,bandFingering,fingeringLabel,NOTE_NAME,readTrumpetKey,saveTrumpetKey,soundingOffset,type BandExercise,type BandInstrument,type TrumpetKey} from '../lib/bandTrail';
+import {bandExercises,bandJourney,readBandJourney,completeBandLesson,bandLessonName,bandLessonTasks,bandFingering,fingeringLabel,noteName,readTrumpetKey,saveTrumpetKey,soundingOffset,type BandExercise,type BandInstrument,type TrailCourse,type TrumpetKey} from '../lib/bandTrail';
+import {readClef,saveClef,CLEF_UNIT,type Clef} from '../lib/iniciacao';
+import {TREBLE_CLEF_PATH,BASS_CLEF_PATH} from '../lib/trebleClef';
 import {evaluateCourse,barBeats,pulseBeats,type CourseNote} from '../lib/recorderFullCourse';
 import {RecorderCourseAudio} from '../lib/recorderCourseAudio';
 import {LessonSound} from '../lib/lessonSound';
@@ -21,27 +23,30 @@ type Verdict={ok:boolean;neutral?:boolean;skipped?:boolean;message:string};
 type Pending={ready:boolean;check:()=>Verdict};
 type Item={ex:BandExercise;retry:boolean};
 type Result={correctFirst:boolean;recovered:boolean;evidence:Evidence[];skipped?:boolean;needsReview:boolean};
-const voiceOf=(i:BandInstrument)=>i==='clarinet-bb'?'clarinete' as const:readTrumpetKey()==='do'?'trompete-do' as const:'trompete' as const;
-const NAME_OF={'trumpet-bb':'trompete','clarinet-bb':'clarinete'} as const;
+const voiceOf=(i:TrailCourse)=>i==='iniciacao'?'teclado' as const:i==='clarinet-bb'?'clarinete' as const:readTrumpetKey()==='do'?'trompete-do' as const:'trompete' as const;
+const NAME_OF={'trumpet-bb':'trompete','clarinet-bb':'clarinete','iniciacao':'iniciação musical'} as const;
 
 /** Revisão de uma parada: primeiro o que ficou pendente, depois outras telas da parada (até 6). */
-export function reviewBandExercises(instrument:BandInstrument,stopId:string,needed:readonly string[]):BandExercise[]{
+export function reviewBandExercises(instrument:TrailCourse,stopId:string,needed:readonly string[],clef:Clef='sol'):BandExercise[]{
  const stop=bandJourney(instrument).engine.stop(stopId);if(!stop)return [];
- const pool=stop.lessonIds.flatMap(l=>bandExercises(instrument,l)).filter(e=>e.phase!=='apoio');
+ const pool=stop.lessonIds.flatMap(l=>bandExercises(instrument,l,clef)).filter(e=>e.phase!=='apoio');
  const missed=pool.filter(e=>needed.includes(e.id)),auto=pool.filter(e=>!missed.includes(e)&&e.kind!=='observe');
  const spread=auto.filter((_,k)=>k%2===0).concat(auto.filter((_,k)=>k%2===1));
  return [...missed,...spread].slice(0,6);
 }
 
 /** Lição do trompete/clarinete no mesmo formato da flauta: apresentação, história, telas com erro que volta no fim, conclusão com revisão espaçada. */
-export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{instrument:BandInstrument;stopId:string;lessonId?:string;review?:boolean;onExit:()=>void}){
+export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{instrument:TrailCourse;stopId:string;lessonId?:string;review?:boolean;onExit:()=>void}){
  const storage=useProfileStorage();
  const journey=bandJourney(instrument),stop=journey.engine.stop(stopId)??journey.stops.find(s=>s.lessonIds.includes(lessonId??''))!;
  const lesson=lessonId??stop.lessonIds[0];
  const [loaded]=useState(()=>readBandJourney(storage,instrument));
- const exercises=useMemo(()=>review?reviewBandExercises(instrument,stop.id,loaded.ledger.reviewNeeded):bandExercises(instrument,lesson),[instrument,lesson,review,stop.id,loaded]);
+ const ini=instrument==='iniciacao',needsClef=ini&&stop.unit>=CLEF_UNIT;
+ const [clef,setClef]=useState<Clef|null>(()=>ini?readClef(storage):null);
+ const exercises=useMemo(()=>review?reviewBandExercises(instrument,stop.id,loaded.ledger.reviewNeeded,clef??'sol'):bandExercises(instrument,lesson,clef??'sol'),[instrument,lesson,review,stop.id,loaded,clef]);
  const [stage,setStage]=useState<'intro'|'story'|'activity'|'done'>('intro');
  const [queue,setQueue]=useState<Item[]>(()=>exercises.map(ex=>({ex,retry:false})));
+ useEffect(()=>{if(stage==='intro')setQueue(exercises.map(ex=>({ex,retry:false})));},[exercises]);
  const [pos,setPos]=useState(0),[verdict,setVerdict]=useState<Verdict|null>(null),[pending,setPending]=useState<Pending|null>(null);
  const [results,setResults]=useState<Record<string,Result>>({}),[saved,setSaved]=useState<{xp:number;nextReview?:string;warning:string}|null>(null),[silent,setSilent]=useState(false);
  const sound=useRef(new LessonSound());useEffect(()=>()=>sound.current.stop(),[]);
@@ -74,8 +79,8 @@ export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{ins
  if(stage==='intro'){const fresh=exercises.filter(e=>e.kind==='meet').map(e=>e.target!);
   return <div className="rl rl--intro" data-environment="introducao">{header}<main className="rl-main">
   <div className="rl-intro-hero"><TomOfficial decorative expression="animado" className="rl-intro-tom"/><div className="rl-bubble"><span className="rl-eyebrow">{NAME_OF[instrument].toLocaleUpperCase('pt-BR')} · Unidade {stop.unit} · {stop.label}{review||lessonName===stop.label?'':` · ${lessonName}`}</span><h1 ref={headingRef} tabIndex={-1}>{review?'Hora de revisar':stop.unitGoal}</h1><p>{review?'Bora retomar o que pediu mais atenção nesta parada, visse?':stop.kind==='desafio'?'Chegou a hora de mostrar tudo que tu aprendeu nesta seção. Sem pressa, visse?':`Bora! Nesta lição tu vai ${tasks[0]?.charAt(0).toLocaleLowerCase('pt-BR')}${tasks[0]?.slice(1)}`}</p></div></div>
-  <section className="rl-card"><h2>O que tu vai praticar</h2><ul className="rl-goals">{tasks.slice(0,3).map(t=><li key={t}>{t}</li>)}</ul>{instrument==='trumpet-bb'&&<TrumpetKeyChoice/>}{fresh.length>0&&<p className="rl-meta">Nota{fresh.length>1?'s':''} nova{fresh.length>1?'s':''}: {fresh.map(n=>NOTE_NAME[n]).join(', ')}</p>}<p className="rl-meta">{exercises.length} telas · cerca de {Math.max(2,Math.round(exercises.length*.8))} min</p></section>
- </main><footer className="rl-footer"><button type="button" className="rl-btn rl-btn--ghost" onClick={onExit}>Agora não</button><button type="button" className="rl-btn" onClick={()=>{track('lesson_start',{lesson:lesson,stop:stopId,instrument:instrument,review,screens:queue.length});setStage(queue[0]?.ex.kind==='story'?'story':'activity')}} disabled={!exercises.length}>Começar</button></footer></div>;}
+  <section className="rl-card"><h2>O que tu vai praticar</h2><ul className="rl-goals">{tasks.slice(0,3).map(t=><li key={t}>{t}</li>)}</ul>{instrument==='trumpet-bb'&&<TrumpetKeyChoice/>}{needsClef&&<ClefChoice value={clef} onChange={c=>{saveClef(storage,c);setClef(c);}}/>}{fresh.length>0&&<p className="rl-meta">Nota{fresh.length>1?'s':''} nova{fresh.length>1?'s':''}: {fresh.map(n=>noteName(instrument,n)).join(', ')}</p>}<p className="rl-meta">{exercises.length} telas · cerca de {Math.max(2,Math.round(exercises.length*.8))} min</p></section>
+ </main><footer className="rl-footer"><button type="button" className="rl-btn rl-btn--ghost" onClick={onExit}>Agora não</button><button type="button" className="rl-btn" onClick={()=>{track('lesson_start',{lesson:lesson,stop:stopId,instrument:instrument,review,screens:queue.length});setStage(queue[0]?.ex.kind==='story'?'story':'activity')}} disabled={!exercises.length||(needsClef&&!clef)}>{needsClef&&!clef?'Escolha a clave':'Começar'}</button></footer></div>;}
  if(stage==='story'&&item?.ex.story)return <div className="rl rl--story" data-environment="historia">{header}<main className="rl-main"><section className="rl-story"><span className="rl-eyebrow">História do ensaio</span><h1 ref={headingRef} tabIndex={-1}>{item.ex.story.title}</h1><div className="rl-story-scene"><TomOfficial decorative expression="pensativo" className="rl-story-tom"/><div className="rl-bubble rl-story-bubble"><p className="rl-story-text">{item.ex.story.scene}</p></div></div></section></main><footer className="rl-footer"><button type="button" className="rl-btn" onClick={()=>setStage('activity')}>Resolver</button></footer></div>;
  if(stage==='done'){
   const list=Object.entries(results).filter(([id])=>!/-(B|N)\d+-P1$/.test(id)),first=list.filter(([,r])=>r.correctFirst).length,recovered=list.filter(([,r])=>r.recovered).length,needs=list.filter(([,r])=>!r.correctFirst);
@@ -109,7 +114,7 @@ export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{ins
  </div>;
 }
 
-function Body({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instrument:BandInstrument;locked:boolean;setPending:(p:Pending|null)=>void;silent:boolean}){
+function Body({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void;silent:boolean}){
  if(ex.kind==='build')return <BuildBody ex={ex} instrument={instrument} locked={locked} setPending={setPending}/>;
  if(ex.kind==='tap')return <TapBody ex={ex} instrument={instrument} locked={locked} setPending={setPending} silent={silent}/>;
  if(ex.kind==='create')return <CreateBody ex={ex} instrument={instrument} locked={locked} setPending={setPending}/>;
@@ -122,7 +127,8 @@ function Body({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instrume
 /** Desenho do dedilhado: trompete (3 pistos) ou clarinete (polegar + 3 furos da mão esquerda). */
 /** Desenho do dedilhado no estilo das tabelas de referência: trompete (Tonestro, pisto roxo = apertado)
  * e clarinete (tabela Yamaha: ● fechado/apertado, ○ aberto; chave de registro, polegar, chaves do Lá e do Sol♯, mãos esquerda e direita). */
-export function BandFingering({instrument,keys,small=false}:{instrument:BandInstrument;keys:readonly string[];small?:boolean}){
+export function BandFingering({instrument,keys,small=false}:{instrument:TrailCourse;keys:readonly string[];small?:boolean}){
+ if(instrument==='iniciacao')return null;
  if(instrument==='trumpet-bb')return <svg className={`band-fing band-fing--tpt${small?' is-small':''}`} viewBox="0 0 220 120" role="img" aria-label={fingeringLabel(instrument,keys)}>
   <rect x="4" y="66" width="22" height="12" rx="4" fill="#8A8F98"/><rect x="24" y="68" width="40" height="8" rx="4" fill="#F2B530"/>
   <path d="M60 60 H150 Q182 58 214 26 V118 Q182 86 150 84 H60 Z" fill="#FFC83D" stroke="#D99A16" strokeWidth="2"/>
@@ -149,11 +155,12 @@ export function BandFingering({instrument,keys,small=false}:{instrument:BandInst
    <text x="104" y="108" fontSize="9" fill="#888" transform="rotate(90 104 108)">mão esquerda</text><text x="104" y="218" fontSize="9" fill="#888" transform="rotate(90 104 218)">mão direita</text></g>}
  </svg>;
 }
-function BandFingerings({instrument,midis}:{instrument:BandInstrument;midis:readonly number[]}){
+function BandFingerings({instrument,midis}:{instrument:TrailCourse;midis:readonly number[]}){
+ if(instrument==='iniciacao')return null;
  const list=[...new Set(midis)].filter(m=>bandFingering(instrument,m));
- return <div className="rl-fings" aria-label="Como fazer cada nota">{list.map(m=><figure key={m} className="rl-fing"><BandFingering instrument={instrument} keys={bandFingering(instrument,m)!} small/><figcaption><b>{NOTE_NAME[m]}</b><small>{fingeringLabel(instrument,bandFingering(instrument,m)!)}</small></figcaption></figure>)}</div>;
+ return <div className="rl-fings" aria-label="Como fazer cada nota">{list.map(m=><figure key={m} className="rl-fing"><BandFingering instrument={instrument} keys={bandFingering(instrument,m)!} small/><figcaption><b>{noteName(instrument,m)}</b><small>{fingeringLabel(instrument,bandFingering(instrument,m)!)}</small></figcaption></figure>)}</div>;
 }
-function useModel(instrument:BandInstrument){
+function useModel(instrument:TrailCourse){
  const audio=useRef(new RecorderCourseAudio()),[playing,setPlaying]=useState(false),[heard,setHeard]=useState(false);
  useEffect(()=>()=>audio.current.stop(),[]);
  const play=async(notes:CourseNote[],countIn=false,bpm=72,extra:{duo?:boolean;meter?:'4/4'|'3/4'|'2/4'|'6/8'}={})=>{if(playing){audio.current.stop();setPlaying(false);return;}setPlaying(true);try{const low=Math.min(...notes.flatMap(n=>n.midi===null?[]:[n.midi]));if(await audio.current.play(notes,extra.meter??'4/4',bpm,{countIn,voice:voiceOf(instrument),...(extra.duo?{duo:true,duoMidi:low-5,sustained:true}:{})}))setHeard(true);}catch{/* sem áudio */}setPlaying(false);};
@@ -161,19 +168,19 @@ function useModel(instrument:BandInstrument){
 }
 function SpeakerIcon(){return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>;}
 
-function MeetBody({ex,instrument,setPending}:{ex:BandExercise;instrument:BandInstrument;setPending:(p:Pending|null)=>void}){
- const midi=ex.target!,keys=bandFingering(instrument,midi)!,model=useModel(instrument);
- useEffect(()=>{setPending({ready:true,check:()=>({ok:true,neutral:!model.heard,message:model.heard?ex.correct:`${ex.correct} Quando puder, toque em “Ouvir o ${NOTE_NAME[midi]}”.`})});},[model.heard]);
+function MeetBody({ex,instrument,setPending}:{ex:BandExercise;instrument:TrailCourse;setPending:(p:Pending|null)=>void}){
+ const midi=ex.target!,keys=bandFingering(instrument,midi),model=useModel(instrument);
+ useEffect(()=>{setPending({ready:true,check:()=>({ok:true,neutral:!model.heard,message:model.heard?ex.correct:`${ex.correct} Quando puder, toque em “Ouvir o ${noteName(instrument,midi)}”.`})});},[model.heard]);
  return <section className="rl-stimulus rl-meet">
   <div className="rl-meet-grid">
-   <div className="rl-meet-score"><RecorderCourseScore notes={[{midi,beats:4}]} meter="4/4" single instrument={NAME_OF[instrument]}/><p className="rl-meta">Na pauta, o {NOTE_NAME[midi]} fica aqui.</p></div>
-   <BandFingering instrument={instrument} keys={keys}/>
+   <div className="rl-meet-score"><RecorderCourseScore notes={[{midi,beats:4}]} meter="4/4" single instrument={NAME_OF[instrument]} clef={ex.clef}/><p className="rl-meta">Na pauta, o {noteName(instrument,midi)} fica aqui.</p></div>
+   {keys&&<BandFingering instrument={instrument} keys={keys}/>}
   </div>
-  <p className="rl-meet-holes"><b>{NOTE_NAME[midi]}</b> = {fingeringLabel(instrument,keys).toLocaleLowerCase('pt-BR')}.</p>
-  <button type="button" className="rl-listen" onClick={()=>void model.play([{midi,beats:3}])}><SpeakerIcon/>{model.playing?'Parar':`Ouvir o ${NOTE_NAME[midi]}`}</button>
+  {keys?<p className="rl-meet-holes"><b>{noteName(instrument,midi)}</b> = {fingeringLabel(instrument,keys).toLocaleLowerCase('pt-BR')}.</p>:<p className="rl-meet-holes"><b>{noteName(instrument,midi)}</b></p>}
+  <button type="button" className="rl-listen" onClick={()=>void model.play([{midi,beats:3}])}><SpeakerIcon/>{model.playing?'Parar':`Ouvir o ${noteName(instrument,midi)}`}</button>
  </section>;
 }
-function ChoiceBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:BandInstrument;locked:boolean;setPending:(p:Pending|null)=>void}){
+function ChoiceBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void}){
  const [choice,setChoice]=useState<number|null>(null),model=useModel(instrument),modelB=useModel(instrument),needsAudio=ex.kind==='listen',compare=ex.kind==='compare';
  const [heardA,setHeardA]=useState(false),[heardB,setHeardB]=useState(false);
  useEffect(()=>{if(model.heard)setHeardA(true);},[model.heard]);useEffect(()=>{if(modelB.heard)setHeardB(true);},[modelB.heard]);
@@ -181,7 +188,7 @@ function ChoiceBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrumen
  useEffect(()=>{setPending({ready:choice!==null&&audioReady,check:()=>{const ok=choice===ex.answer;return {ok,message:ok?ex.correct:ex.incorrect};}});},[choice,audioReady]);
  return <section className="rl-stimulus">
   {ex.kind==='story'&&ex.story&&<div className="rl-story-scene band-story"><TomOfficial decorative expression="pensativo" className="rl-story-tom"/><div className="rl-bubble rl-story-bubble"><b>{ex.story.title}</b><p className="rl-story-text">{ex.story.scene}</p></div></div>}
-  {ex.kind==='read'&&<div className="rl-meet-score band-read"><RecorderCourseScore notes={ex.notes!} meter={ex.meter??'4/4'} single={ex.notes!.length===1} hideLabels instrument={NAME_OF[instrument]}/></div>}
+  {ex.kind==='read'&&<div className="rl-meet-score band-read"><RecorderCourseScore notes={ex.notes!} meter={ex.meter??'4/4'} single={ex.notes!.length===1} hideLabels instrument={NAME_OF[instrument]} clef={ex.clef}/></div>}
   {needsAudio&&<div className="rl-audio"><button type="button" className="rl-listen" onClick={()=>void model.play(ex.notes!,false,ex.bpm??72,{meter:ex.meter})}><SpeakerIcon/>{model.playing?'Parar':'Ouvir'}</button>{!model.heard&&<small>Ouça antes de responder.</small>}</div>}
   {compare&&<div className="rl-audio"><div className="rl-listen-row"><button type="button" className="rl-listen" onClick={()=>void model.play(ex.notes!)}><SpeakerIcon/>{model.playing?'Parar':'Modelo A'}</button><button type="button" className="rl-listen rl-listen--b" onClick={()=>void modelB.play(ex.alternative!)}><SpeakerIcon/>{modelB.playing?'Parar':'Modelo B'}</button></div>{!(heardA&&heardB)&&<small>Ouça os dois modelos para responder.</small>}</div>}
   <div className={`band-options ${ex.kind==='fingering'?'band-options--fing':''}`} role="radiogroup" aria-label={ex.instruction}>{ex.options!.map((o,i)=>{
@@ -189,7 +196,7 @@ function ChoiceBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrumen
    return <button key={i} type="button" role="radio" aria-checked={choice===i} disabled={locked} className={`rl-option band-option ${choice===i?'is-selected':''} ${state}`} onClick={()=>setChoice(i)}>{o.keys&&<BandFingering instrument={instrument} keys={o.keys} small/>}<span>{o.label}</span></button>;})}</div>
  </section>;
 }
-function PerformBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:BandInstrument;locked:boolean;setPending:(p:Pending|null)=>void}){
+function PerformBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void}){
  const notes=ex.notes!,meter=ex.meter??'4/4',bpm=ex.bpm??60;
  const [mode,setMode]=useState<'idle'|'opening'|'running'|'measured'|'declared'>('idle'),[results,setResults]=useState<boolean[]>([]),[active,setActive]=useState(-1),[status,setStatus]=useState(''),[error,setError]=useState('');
  const model=useModel(instrument),samples=useRef<ScoreSample[]>([]),timer=useRef<ReturnType<typeof setInterval>|null>(null),token=useRef(0),beeper=useRef<AudioContext|null>(null);
@@ -210,13 +217,13 @@ function PerformBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrume
   const startAt=performance.now()+startLessonMetronome(beeper,{countIn:Math.round(barBeats(meter)/pulseBeats(meter)),playing:Math.ceil(length/(quarter*pulseBeats(meter))),pulseMs:quarter*pulseBeats(meter),perBar:Math.round(barBeats(meter)/pulseBeats(meter))})+prep;setMode('running');
   timer.current=setInterval(()=>{const el=performance.now()-startAt;
    if(el<0){setStatus(`Prepare · ${Math.floor((el+prep)/(quarter*pulseBeats(meter)))+1}`);return;}
-   let at=0,idx=-1;notes.forEach((x,i)=>{if(el/quarter>=at&&el/quarter<at+x.beats)idx=i;at+=x.beats;});setActive(idx);setStatus(idx>=0?(notes[idx].midi===null?'Silêncio':`Toque ${NOTE_NAME[notes[idx].midi!]}`):'Conferindo…');
+   let at=0,idx=-1;notes.forEach((x,i)=>{if(el/quarter>=at&&el/quarter<at+x.beats)idx=i;at+=x.beats;});setActive(idx);setStatus(idx>=0?(notes[idx].midi===null?'Silêncio':`Toque ${noteName(instrument,notes[idx].midi!)}`):'Conferindo…');
    if(el>=length+360){const v=evaluateCourse(notes,meter,samples.current,bpm,startAt,soundingOffset(instrument)).map(x=>x.passed);stop();setResults(v);setMode('measured');setStatus('');}
   },50);
  };
  const busy=mode==='opening'||mode==='running';
  return <section className="rl-stimulus rl-perform">
-  <RecorderCourseScore notes={notes} meter={meter} active={active} results={results} instrument={NAME_OF[instrument]}/>
+  <RecorderCourseScore notes={notes} meter={meter} active={active} results={results} instrument={NAME_OF[instrument]} clef={ex.clef}/>
   <p className="rl-meta">{meter} · {bpm} BPM</p>
   <BandFingerings instrument={instrument} midis={notes.flatMap(n=>n.midi===null?[]:[n.midi])}/>
   {status&&<p className="rl-status" role="status">{status}</p>}
@@ -234,26 +241,26 @@ function PerformBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrume
 const KEY_LABEL:Record<BandInstrument,[string,string][]>={
  'trumpet-bb':[['1','Pisto 1'],['2','Pisto 2'],['3','Pisto 3']],
  'clarinet-bb':[['R','Chave de registro'],['T','Polegar (atrás)'],['A','Chave do Lá'],['1','Esquerda: indicador'],['2','Esquerda: médio'],['3','Esquerda: anelar'],['4','Direita: indicador'],['5','Direita: médio'],['6','Direita: anelar']]};
-function BuildBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:BandInstrument;locked:boolean;setPending:(p:Pending|null)=>void}){
+function BuildBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void}){
  const midi=ex.target!,expected=bandFingering(instrument,midi)!,[keys,setKeys]=useState<string[]>([]),[touched,setTouched]=useState(false);
  useEffect(()=>{setPending({ready:touched||expected.length===0,check:()=>{const ok=keys.length===expected.length&&expected.every(k=>keys.includes(k));return {ok,message:ok?ex.correct:ex.incorrect};}});},[keys,touched]);
  const toggle=(k:string)=>{setTouched(true);setKeys(o=>o.includes(k)?o.filter(x=>x!==k):[...o,k]);};
  return <section className="rl-stimulus band-build">
   <div className="rl-meet-grid">
-   <div className="rl-meet-score"><RecorderCourseScore notes={[{midi,beats:4}]} meter="4/4" single instrument={NAME_OF[instrument]}/><p className="rl-meta">{ex.hideModel?'Que nota é essa? Monte ela.':`Esta é o ${NOTE_NAME[midi]}.`}</p></div>
+   <div className="rl-meet-score"><RecorderCourseScore notes={[{midi,beats:4}]} meter="4/4" single instrument={NAME_OF[instrument]} clef={ex.clef}/><p className="rl-meta">{ex.hideModel?'Que nota é essa? Monte ela.':`Esta é o ${noteName(instrument,midi)}.`}</p></div>
    <BandFingering instrument={instrument} keys={keys}/>
   </div>
   <div className={`band-keys band-keys--${instrument==='trumpet-bb'?'tpt':'cla'}`} role="group" aria-label="Pistos, furos e chaves">
-   {KEY_LABEL[instrument].map(([k,label])=><button key={k} type="button" aria-pressed={keys.includes(k)} disabled={locked} className={keys.includes(k)?'is-on':''} onClick={()=>toggle(k)}>{label}</button>)}
+   {KEY_LABEL[instrument as BandInstrument].map(([k,label])=><button key={k} type="button" aria-pressed={keys.includes(k)} disabled={locked} className={keys.includes(k)?'is-on':''} onClick={()=>toggle(k)}>{label}</button>)}
   </div>
   {expected.length===0&&!touched&&<p className="rl-meta">Dica: tem nota que se faz sem apertar nada.</p>}
  </section>;
 }
 /** Bater o ritmo: contagem, depois um toque em cada nota (ou em cada pulso). */
-function TapBody({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instrument:BandInstrument;locked:boolean;setPending:(p:Pending|null)=>void;silent:boolean}){
+function TapBody({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void;silent:boolean}){
  const meter=ex.meter??'4/4',bpm=ex.bpm??60,quarter=60000/(bpm*pulseBeats(meter)),count=barBeats(meter)/pulseBeats(meter);
  const [state,setState]=useState<'idle'|'count'|'tap'|'done'>('idle'),[beat,setBeat]=useState(0),[taps,setTaps]=useState<number[]>([]);
- const start=useRef(0),timer=useRef<ReturnType<typeof setInterval>|null>(null),sound=useRef(new LessonSound()),tapsRef=useRef<number[]>([]);
+ const start=useRef(0),timer=useRef<ReturnType<typeof setInterval>|null>(null),sound=useRef(new LessonSound()),tapsRef=useRef<number[]>([]),echo=useModel(instrument);
  const stopAll=useCallback(()=>{if(timer.current)clearInterval(timer.current);timer.current=null;sound.current.stop();},[]);
  useEffect(()=>stopAll,[stopAll]);
  const verdict=useMemo(()=>scoreTaps(ex.tapBeats!,taps,quarter),[taps,quarter,ex.tapBeats]);
@@ -268,7 +275,8 @@ function TapBody({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instr
  const tap=()=>{if(state!=='tap'&&state!=='count')return;const at=(performance.now()-start.current)/quarter;if(at<-.5)return;tapsRef.current.push(at);setTaps([...tapsRef.current]);};
  useEffect(()=>{if(state!=='tap'&&state!=='count')return;const key=(e:KeyboardEvent)=>{if(e.code==='Space'||e.key==='Enter'){e.preventDefault();tap();}};window.addEventListener('keydown',key);return ()=>window.removeEventListener('keydown',key);},[state]);
  return <section className="rl-stimulus rl-tap">
-  {ex.score&&ex.notes&&<RecorderCourseScore notes={ex.notes} meter={meter} instrument={NAME_OF[instrument]}/>}
+  {ex.score&&ex.notes&&<RecorderCourseScore notes={ex.notes} meter={meter} instrument={NAME_OF[instrument]} clef={ex.clef}/>}
+  {!ex.score&&ex.notes&&<div className="rl-audio"><button type="button" className="rl-listen" disabled={state==='count'||state==='tap'} onClick={()=>void echo.play(ex.notes!,false,bpm,{meter})}><SpeakerIcon/>{echo.playing?'Parar':'Ouvir o ritmo'}</button></div>}
   <div className="rl-beats" aria-hidden="true">{Array.from({length:count},(_,i)=><span key={i} className={(state==='count'||state==='tap')&&beat===i+1?'on':''}>{i+1}</span>)}</div>
   <p className="rl-meta" aria-live="polite">{state==='idle'?`Contagem de ${count} e depois toque.`:state==='count'?'Prepare… conte junto.':state==='tap'?'Agora!':`${taps.filter(t=>t>=-.5).length} toques registrados.`}</p>
   {state==='idle'||state==='done'?<button type="button" className="rl-btn rl-btn--secondary" disabled={locked} onClick={begin}>{state==='done'?'Tentar de novo':'Começar contagem'}</button>
@@ -276,17 +284,17 @@ function TapBody({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instr
  </section>;
 }
 /** Criar um compasso (pelo menos duas notas) ou ditado (montar o que ouviu). */
-function CreateBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:BandInstrument;locked:boolean;setPending:(p:Pending|null)=>void}){
+function CreateBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void}){
  const c=ex.create!,dictation=c.rule==='match',[values,setValues]=useState<(number|null|undefined)[]>(()=>Array(c.slots).fill(undefined)),model=useModel(instrument),mine=useModel(instrument);
  const filled=values.every(v=>v!==undefined),ready=filled&&(!dictation||model.heard);
  useEffect(()=>{setPending({ready,check:()=>{const ok=dictation?values.every((v,i)=>v===c.target![i]):values.filter(v=>v!==null&&v!==undefined).length>=2;return {ok,message:ok?ex.correct:ex.incorrect};}});},[values,ready]);
  const cycle=(i:number)=>setValues(old=>{const next=[...old];const k=c.choices.indexOf(next[i] as number|null);next[i]=c.choices[(k+1)%c.choices.length];return next;});
- const label=(v:number|null|undefined)=>v===undefined?'?':v===null?'pausa':NOTE_NAME[v];
+ const label=(v:number|null|undefined)=>v===undefined?'?':v===null?'pausa':noteName(instrument,v);
  return <section className="rl-stimulus rl-create">
   {dictation&&<div className="rl-audio"><button type="button" className="rl-listen" onClick={()=>void model.play(ex.notes!,false,ex.bpm??60,{meter:ex.meter})}><SpeakerIcon/>{model.playing?'Parar':'Ouvir'}</button>{!model.heard&&<small>Ouça antes de montar. Pode ouvir quantas vezes quiser.</small>}</div>}
   <div className="rl-slots">{values.map((v,i)=><button type="button" key={i} disabled={locked} className={`rl-slot ${v===undefined?'is-empty':v===null?'is-rest':''}`} onClick={()=>cycle(i)} aria-label={`Tempo ${i+1}: ${label(v)}. Toque para trocar.`}><small>{i+1}</small><b>{label(v)}</b></button>)}</div>
   <p className="rl-meta">Toque em cada tempo para escolher: {c.choices.map(x=>label(x)).join(' → ')}.</p>
-  {filled&&<RecorderCourseScore notes={values.map(v=>({midi:v??null,beats:1}))} meter={ex.meter??'4/4'} instrument={NAME_OF[instrument]}/>}
+  {filled&&<RecorderCourseScore notes={values.map(v=>({midi:v??null,beats:1}))} meter={ex.meter??'4/4'} instrument={NAME_OF[instrument]} clef={ex.clef}/>}
   <BandFingerings instrument={instrument} midis={c.choices.flatMap(x=>x===null?[]:[x])}/>
   {!dictation&&<button type="button" className="rl-btn rl-btn--secondary" disabled={!filled} onClick={()=>void mine.play(values.map(v=>({midi:v??null,beats:1})),true,66,{meter:ex.meter})}><SpeakerIcon/>{mine.playing?'Parar':'Ouvir minha criação'}</button>}
  </section>;
@@ -307,4 +315,17 @@ export function TrumpetKeyChoice(){
  return <div className="band-key" role="radiogroup" aria-label="Afinação do teu trompete"><span>Teu trompete é em:</span>
   {(['sib','do'] as const).map(v=><button key={v} type="button" role="radio" aria-checked={k===v} className={k===v?'is-on':''} onClick={()=>pick(v)}>{v==='sib'?'Si bemol':'Dó'}</button>)}
   <small>{k==='sib'?'O mais comum. Soa um tom abaixo do que está escrito.':'Soa igual ao que está escrito.'} Os pistos são os mesmos.</small></div>;
+}
+
+/** Iniciação: a partir da unidade 9 a pessoa escolhe em que clave vai ler (pode trocar depois). */
+export function ClefChoice({value,onChange}:{value:Clef|null;onChange:(c:Clef)=>void}){
+ const opts:[Clef,string,string][]=[['sol','Clave de Sol','Para sons médios e agudos: flauta, trompete, clarinete, violino, voz.'],['fa','Clave de Fá','Para sons graves: trombone, tuba, fagote, violoncelo, mão esquerda do piano.']];
+ return <fieldset className="ini-clef"><legend>{value?'Tua clave de leitura':'Escolha em que clave tu quer ler'}</legend>
+  <div className="ini-clef-grid">{opts.map(([c,title,desc])=><button key={c} type="button" aria-pressed={value===c} className={value===c?'is-on':''} onClick={()=>onChange(c)}>
+   <svg viewBox="0 0 120 70" aria-hidden="true">{[15,25,35,45,55].map(y=><line key={y} x1="4" x2="116" y1={y} y2={y} stroke="currentColor" strokeWidth="1.3" opacity=".45"/>)}
+    {c==='sol'?<path d={TREBLE_CLEF_PATH} transform="translate(14 45) scale(0.03)" fill="currentColor"/>:<path d={BASS_CLEF_PATH} transform="translate(14 25) scale(0.03)" fill="currentColor"/>}
+    <ellipse cx="80" cy={c==='sol'?45:25} rx="7" ry="5" transform={`rotate(-16 80 ${c==='sol'?45:25})`} fill="currentColor"/></svg>
+   <b>{title}</b><small>{desc}</small><em>{c==='sol'?'O Sol mora na 2ª linha':'O Fá mora na 4ª linha'}</em></button>)}</div>
+  <p className="rl-meta">Dá pra trocar depois, no mapa da trilha. Teu progresso continua.</p>
+ </fieldset>;
 }

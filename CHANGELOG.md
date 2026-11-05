@@ -1,3 +1,15 @@
+## 05/11/2026 — Curso de Iniciação Musical
+
+- Novo curso **Iniciação musical**, para quem ainda não tem instrumento: tudo se responde tocando na tela (escolher, bater o ritmo no botão, montar o compasso). Plano completo em `docs/PLANO-INICIACAO.md`.
+- 16 unidades em 4 seções (O som · Notas e figuras · Leitura na tua clave · Autonomia musical), 4 áreas por unidade, 5 lições com 3 atividades e desafio no fim de cada seção, igual aos outros cursos (XP, revisão espaçada, rojão).
+- Conteúdo: pulso, agudo/grave, longo/curto, forte/piano, crescendo, andamento, nomes das notas, pauta, figuras e pausas, compassos 4/4 e 3/4, colcheias, ponto de aumento, sinais de dinâmica, ditado e criação.
+- **Escolha da clave na unidade 9**: Sol ou Fá (dá pra trocar no mapa da trilha). A pauta agora desenha a clave de Fá.
+- Sons de exemplo com volume (forte/piano) e timbre neutro de teclado.
+- Aparece no seletor de cursos, no ranking, na Comunidade (Turma da Iniciação) e no painel do desenvolvedor. Sem aba de Partituras nesse curso por enquanto.
+- Correção: no "Bata o ritmo da partitura" a pauta não aparecia (trompete e clarinete também).
+- **Banco:** rode `supabase/cactom-iniciacao.sql` no SQL Editor para o ranking e o chat aceitarem o curso novo.
+- Backup em `_backup-20261105-0119-iniciacao/`.
+
 ## 04/11/2026 — Comunidade online (Supabase)
 
 - As turmas agora conversam de verdade entre aparelhos: rode `supabase/cactom-comunidade.sql` no SQL Editor (depois do `cactom-banco.sql`).

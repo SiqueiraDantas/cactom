@@ -6,7 +6,7 @@ import type {KeyValueStorage} from './profileStorage';
 export const RECORDER_FULL_KEY='cactom-recorder-course-260-v1';
 export const RECORDER_PLAN=plan;
 export type CourseMode='listen'|'choice'|'fingering'|'perform'|'tap'|'compose'|'annotate'|'reflect'|'ensemble';
-export type CourseNote={midi:number|null;beats:number;tie?:boolean};
+export type CourseNote={midi:number|null;beats:number;tie?:boolean;/** volume relativo (1 = normal): dinâmica forte/piano */vol?:number};
 export type CourseMeter='2/4'|'3/4'|'4/4'|'6/8';
 export type CourseMaterial={mode:CourseMode;notes:CourseNote[];alternative:CourseNote[];pool:number[];meter:CourseMeter;guide:string;reflection:string;question?:string;options?:string[];answer?:number;gate?:number;slur?:boolean;guided?:boolean};
 export type CourseTask={id:string;task:string;module:number;section:number;lesson:string;lessonName:string;moduleTitle:string;assessment:boolean;material:CourseMaterial};

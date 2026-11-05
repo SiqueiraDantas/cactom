@@ -51,7 +51,7 @@ export function devStats(events:readonly TelemetryEvent[],users:readonly DevUser
  const byEx=new Map<string,{exercise:string;instruction:string;kind:string;lesson:string;n:number;wrong:number}>();
  for(const e of answers){if(e.data?.retry)continue;const id=String(e.data?.exercise??'');if(!id)continue;const r=byEx.get(id)??{exercise:id,instruction:String(e.data?.instruction??''),kind:String(e.data?.kind??''),lesson:String(e.data?.lesson??''),n:0,wrong:0};r.n++;if(!e.data?.ok)r.wrong++;byEx.set(id,r);}
  const hardest=[...byEx.values()].filter(r=>r.n>=3&&r.wrong>0).map(r=>({...r,errorRate:Math.round(r.wrong/r.n*100)})).sort((a,b)=>b.errorRate-a.errorRate||b.n-a.n).slice(0,10);
- const instrumentIds=['recorder-soprano','trumpet-bb','clarinet-bb'];
+ const instrumentIds=['iniciacao','recorder-soprano','trumpet-bb','clarinet-bb'];
  const instruments=instrumentIds.map(id=>({id,choices:events.filter(e=>e.type==='course'&&e.data?.instrument===id).length,lessons:completes.filter(e=>(e.data?.instrument??e.instrument)===id).length,people:new Set(events.filter(e=>e.instrument===id).map(who)).size}));
  const tabs=Object.entries(events.filter(e=>e.type==='tab').reduce<Record<string,number>>((m,e)=>{const t=String(e.data?.tab??'');m[t]=(m[t]??0)+1;return m;},{})).sort((a,b)=>b[1]-a[1]);
  const micEvents=events.filter(e=>e.type==='mic');
