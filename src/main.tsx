@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './fonts.css';
 import App from './App';
+import { UpdateScreen } from './components/UpdateScreen';
 import { startTelemetry, setTelemetrySink } from './lib/devEvents';
 import { queueEvent, startCloudSync } from './lib/cloud';
 import { startPwa } from './lib/pwa';
@@ -17,5 +18,6 @@ import './remaster.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
+    <UpdateScreen />
   </React.StrictMode>,
 );

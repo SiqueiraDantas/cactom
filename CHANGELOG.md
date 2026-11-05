@@ -1,3 +1,12 @@
+## 05/11/2026 — Tela de atualização e ícone novo
+
+- Ícone novo do app e da aba do site: a carinha do Tom (sobrancelhas, olhos, boca e a flor) em fundo verde, no estilo de app infantil. Gerado em vetor a partir do Tom do app (`public/branding/cactom-icone.svg`), com versões comuns, "maskable" (Android), 180 px (iPhone) e favicon.
+- Service worker passou para `cactom-v2`, o que limpa o cache antigo e dispara a tela de atualização.
+
+- Quando sai uma versão nova com o app aberto, aparece uma tela cheia com o Tom, a lista do que mudou e o botão "Atualizar agora". "Depois" deixa a criança terminar a lição; a versão nova entra na próxima vez que abrir.
+- O que aparece na lista vem de `public/novidades.json`. A cada versão, edite esse arquivo (data em `versao` e os itens) antes do commit.
+- O app procura versão nova a cada 30 minutos e sempre que volta para a tela.
+
 ## 05/11/2026 — Cactom instalável (PWA)
 
 - O Cactom agora pode ser instalado como app: `public/manifest.webmanifest` (nome, cores, ícones comuns e "maskable" para Android) e `public/sw.js` (service worker).

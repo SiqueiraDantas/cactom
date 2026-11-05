@@ -5,7 +5,7 @@
  * - No iPhone não existe esse pedido: mostramos como adicionar pela tela de Compartilhar.
  */
 type InstallPrompt=Event&{prompt:()=>Promise<void>;userChoice:Promise<{outcome:'accepted'|'dismissed'}>};
-let deferred:InstallPrompt|null=null;
+let deferred:InstallPrompt|null=null,updateReady=false;
 const listeners=new Set<()=>void>();
 const notify=()=>listeners.forEach(f=>f());
 
@@ -14,11 +14,22 @@ export function startPwa(env:{PROD?:boolean}={}){
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e as InstallPrompt;notify();});
  window.addEventListener('appinstalled',()=>{deferred=null;notify();});
  if(env.PROD&&'serviceWorker' in navigator){
-  window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js',{scope:'/'}).catch(()=>{/* sem service worker: o app segue normal */});});
+  let hadController=!!navigator.serviceWorker.controller;
+  // versão nova publicada: o service worker novo assume e avisamos para recarregar
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController){updateReady=true;notify();}hadController=true;});
+  window.addEventListener('load',()=>{
+   navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
+    const check=()=>{reg.update().catch(()=>{});};
+    setInterval(check,30*60*1000);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check();});
+   }).catch(()=>{/* sem service worker: o app segue normal */});
+  });
  }
 }
 export function onInstallChange(f:()=>void){listeners.add(f);return ()=>{listeners.delete(f);};}
 export const canPrompt=()=>!!deferred;
+/** Uma versão nova do app já foi baixada e espera só recarregar. */
+export const updateAvailable=()=>updateReady;
 export async function promptInstall():Promise<boolean>{
  if(!deferred)return false;const d=deferred;deferred=null;notify();
  try{await d.prompt();return (await d.userChoice).outcome==='accepted';}catch{return false;}

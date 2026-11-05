@@ -1,0 +1,20 @@
+.upd{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:radial-gradient(80% 60% at 50% 25%,#eaf7e1 0%,#fffefa 70%);font-family:Nunito,'Segoe UI',system-ui,sans-serif;color:#2f3b37;animation:upd-in .35s ease-out}
+.upd-card{width:min(100%,460px);display:grid;justify-items:center;gap:14px;text-align:center}
+.upd-badge{padding:4px 12px;border-radius:999px;background:#ffc53d;color:#5b3c00;font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.upd-tom{width:min(46vw,190px);aspect-ratio:1;animation:upd-bounce 1.6s ease-in-out infinite}.upd-tom>*{width:100%;height:100%}
+.upd h1{margin:0;font-size:clamp(28px,7vw,36px);line-height:1.1;font-weight:1000;color:#0c3a3c;text-wrap:balance}
+.upd-list{list-style:none;margin:4px 0 6px;padding:0;width:100%;display:grid;gap:10px;text-align:left}
+.upd-list li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:#fff;border:2px solid #e5ece7;border-bottom-width:4px}
+.upd-list li span{flex:none;font-size:22px;line-height:1.2}
+.upd-list li p{margin:0;font-weight:700;line-height:1.4;font-size:16px}
+.upd-go{width:100%;min-height:54px;border:0;border-radius:16px;background:#58cc02;box-shadow:0 4px 0 #46a302;color:#fff;font:1000 17px Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.upd-go:active{transform:translateY(3px);box-shadow:0 1px 0 #46a302}
+.upd-go:disabled{cursor:default;opacity:.9}
+.upd-later{border:0;background:none;color:#5f716b;font:800 15px Nunito,sans-serif;text-decoration:underline;cursor:pointer;padding:6px}
+.upd-go:focus-visible,.upd-later:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.upd small{color:#5f716b;font-weight:700}
+.upd-spin{width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,.45);border-top-color:#fff;animation:upd-rot .8s linear infinite}
+@keyframes upd-in{from{opacity:0}to{opacity:1}}
+@keyframes upd-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes upd-rot{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.upd,.upd-tom,.upd-spin{animation:none}}
