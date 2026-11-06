@@ -6,7 +6,11 @@ export const RECORDER_HOLES=[0,1,2,3,4,5,6,7] as const;
 export const HOLE_FINGERS=['Polegar esquerdo · atrás','Indicador esquerdo','Médio esquerdo','Anelar esquerdo','Indicador direito','Médio direito','Anelar direito','Mínimo direito'] as const;
 // Traditional soprano notation: written C4 sounds C5. Hole 0 is the rear thumb.
 // Fá♯ e Si♭ (sistema barroco): posições de forquilha da tabela padrão da soprano.
-const positions:Record<number,readonly number[]>={60:[0,1,2,3,4,5,6,7],62:[0,1,2,3,4,5,6],64:[0,1,2,3,4,5],65:[0,1,2,3,4,6,7],66:[0,1,2,3,5,6],67:[0,1,2,3],69:[0,1,2],70:[0,1,3,4],71:[0,1],72:[0,2],74:[2]};
+const positions:Record<number,readonly number[]>={60:[0,1,2,3,4,5,6,7],62:[0,1,2,3,4,5,6],64:[0,1,2,3,4,5],65:[0,1,2,3,4,6,7],66:[0,1,2,3,5,6],67:[0,1,2,3],69:[0,1,2],70:[0,1,3,4],71:[0,1],72:[0,2],73:[1,2],74:[2],75:[1,2,3,4,5,6],
+ // 2º registro (tabela barroca): polegar meio aberto (furo 0 entreaberto), indicado em HALF_THUMB
+ 76:[0,1,2,3,4,5],77:[0,1,2,3,4,6],78:[0,1,2,3,5],79:[0,1,2,3],81:[0,1,2]};
+/** Notas do 2º registro: o polegar deixa o furo de trás meio aberto (uma frestinha). */
+export const HALF_THUMB=new Set([76,77,78,79,81]);
 /** Notas cujo dedilhado no sistema germânico varia por fabricante: o app mostra o barroco e pede para conferir. */
 export const CHECK_GERMAN=new Set([70]);
 export function recorderNote(midi:number,system:RecorderSystem='baroque'):PracticeNote{

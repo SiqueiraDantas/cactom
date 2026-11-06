@@ -3,6 +3,13 @@
 ## Restauração em 02/11/2026
 Esta pasta foi montada pelo Claude porque a pasta antiga se perdeu: o código (`src`, `public`, `tests`, `scripts`, `package.json`) é a versão mais nova que existia na pasta antiga, já com as mudanças de 01–02/11. Os documentos da raiz e `docs/` vieram da pasta CACTOM que estava na Mesa, que é de uma versão mais antiga, então podem estar desatualizados em relação ao código (por exemplo, a trilha de 64 paradas da flauta). O modelo `public/mediapipe/hand_landmarker.task` e as bibliotecas instaladas também vieram dessa pasta.
 
+## Trilha da flauta e do trompete — Formação de 400 unidades (06/11/2026)
+**Prevalece sobre as seções antigas sobre trilhas da flauta/trompete.** O responsável pediu excluir as trilhas antigas (eram só para testes) e subir as dos livros “Do primeiro som à autonomia musical” (flauta e trompete).
+- Dados: `src/data/formacao-flauta-v2.json` e `formacao-trompete-v2.json` (extraídos do Anexo A; não editar à mão sem conferir o livro). Motor: `src/lib/formacao.ts` (paradas, 5 microlições por unidade, telas por tipo, notas por módulo). Despacho em `bandTrail.ts` (`isFormation`), tela em `BandJourney.tsx`/`BandLesson.tsx`.
+- IDs: parada `FLA-U037`/`TPT-U037`, microlição `…-L1`…`-L5`. Chaves `cactom-formacao-flauta-v2` e `cactom-formacao-trompete-v2`.
+- Removidos: RecorderJourney/RecorderLesson/RecorderFullCourse/RecorderModuleOne/RecorderDiscipline e o plano `recorder-discipline-v1.json`. `recorderFullCourse.ts` ficou só com figuras/compasso/correção pelo microfone; `recorderJourney.ts` só com o motor comum.
+- Pendências: revisão docente dos dois planos, dedilhados do 2º registro da flauta e notas acima do Ré agudo no trompete, teste com instrumento real.
+
 ## Entrada estilo Duolingo — decisões do responsável (01–02/11/2026)
 - Fluxo: “Eu quero aprender…” → Tom carregando 1,5 s → “Oi! Eu sou o Tom!” → `OnboardingJourney` → tela geral como visitante com cartão “Crie seu perfil”.
 - **Exceção autorizada pelo responsável em 02/11/2026:** a mini atividade de partitura da jornada mostra corações e XP como no Duolingo. Vale só para essa atividade (aquecimento, não grava XP, não mexe na trilha nem na ofensiva). A regra geral continua no resto do app.

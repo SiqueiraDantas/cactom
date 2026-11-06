@@ -31,7 +31,8 @@ test('Fá respeita sistema barroco ou germânico sem mudar a frequência',()=>{
   assert.equal(targetFrequencyFor(recorderNote(65,'baroque')),targetFrequencyFor(recorderNote(65,'german')));
   const german=recorderLessons('german').flatMap(l=>l.steps).find(s=>s.note.writtenMidi===65);assert.deepEqual(german.note.holes,[0,1,2,3,4]);
 });
-test('notas fora da extensão inicial ou acidentes não são simulados como outra posição',()=>{for(const n of [59,61,73,75,NaN])assert.throws(()=>recorderNote(n));});
+test('notas fora da tabela não são simuladas como outra posição; 2º registro com polegar meio aberto',async()=>{for(const n of [59,61,80,82,NaN])assert.throws(()=>recorderNote(n));
+ const {HALF_THUMB}=await import('../src/lib/recorder.ts');assert.deepEqual(recorderNote(76).holes,[0,1,2,3,4,5]);assert.ok(HALF_THUMB.has(76)&&HALF_THUMB.has(81)&&!HALF_THUMB.has(74));assert.deepEqual(recorderNote(73).holes,[1,2]);});
 test('treze aulas próprias têm IDs únicos e nenhum check em comum com trompete',()=>{
   const lessons=recorderLessons();assert.equal(lessons.length,13);
   const ids=lessons.flatMap(l=>[l.id,...l.steps.map(s=>s.id)]);assert.equal(new Set(ids).size,ids.length);

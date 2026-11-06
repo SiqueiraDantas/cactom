@@ -20,14 +20,13 @@ test('comunidade local guarda por sala e esconde mensagem só para quem pediu',(
  t.hide(m.id);assert.deepEqual(t.hidden(),[m.id]);assert.equal(t.online,false);
 });
 test('trilha alimenta as outras abas: lição concluída conta XP, parada e progresso',async()=>{
- const {journeyOverview}=await import('../src/lib/journeyOverview.ts');
- const J=await import('../src/lib/recorderJourney.ts');
- const store=memory(),before=journeyOverview(store);
- assert.equal(before.xp,0);assert.equal(before.lessonsDone,0);assert.equal(before.stopsTotal,64);
- const stop=J.JOURNEY_STOPS[0];let ledger=J.emptyJourney();
- for(const lessonId of stop.lessonIds)ledger=J.completeLesson(ledger,{lessonId,stopId:stop.id,review:false,presentations:[{id:lessonId+'-A01-P1',correctFirst:true,recovered:false,evidence:['leitura']}],at:new Date('2026-11-02T12:00:00Z')});
- J.writeJourney(store,ledger);
- const after=journeyOverview(store);
+ const {formationOverview,formationJourney}=await import('../src/lib/formacao.ts');
+ const {bandExercises,completeBandLesson}=await import('../src/lib/bandTrail.ts');
+ const store=memory(),before=formationOverview(store,'recorder-soprano');
+ assert.equal(before.xp,0);assert.equal(before.lessonsDone,0);assert.equal(before.stopsTotal,400);
+ const stop=formationJourney('recorder-soprano').stops[0];
+ for(const lessonId of stop.lessonIds)completeBandLesson(store,'recorder-soprano',{lessonId,stopId:stop.id,review:false,presentations:bandExercises('recorder-soprano',lessonId).map(e=>({id:e.id,correctFirst:true,recovered:false,evidence:e.evidence})),at:new Date('2026-11-02T12:00:00Z')});
+ const after=formationOverview(store,'recorder-soprano');
  assert.equal(after.lessonsDone,stop.lessonIds.length);assert.equal(after.stopsDone,1);assert.ok(after.xp>0);assert.ok(after.percent>0);
  assert.notEqual(after.current.id,stop.id);
 });

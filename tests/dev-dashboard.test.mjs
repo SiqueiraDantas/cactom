@@ -22,9 +22,9 @@ test('registro de eventos: guarda com perfil e curso, corta textos longos e mant
 
 test('ranking: lê o progresso de cada conta no instrumento e ordena por pontos, acertos e rojão',()=>{
  const s=mem(),at='2026-11-04T12:00:00Z';
- const ledger=(n,xp,correct)=>JSON.stringify({version:1,lessons:Object.fromEntries(['TPT-M01-L1','TPT-M01-L2','TPT-M01-L3'].slice(0,n).map(id=>[id,{at,xp:Math.round(xp/n),total:6,correctFirst:correct,recovered:0,review:false}])),stops:{},presentations:{},xp,reviewDays:[1,3,7,14],reviewNeeded:[]});
- s.setItem(`mis-user:${A}:cactom-trilha-trumpet-bb-v2`,ledger(2,30,6));
- s.setItem(`mis-user:${B}:cactom-trilha-trumpet-bb-v2`,ledger(3,40,3));
+ const ledger=(n,xp,correct)=>JSON.stringify({version:1,lessons:Object.fromEntries(['TPT-U001-L1','TPT-U001-L2','TPT-U001-L3'].slice(0,n).map(id=>[id,{at,xp:Math.round(xp/n),total:6,correctFirst:correct,recovered:0,review:false}])),stops:{},presentations:{},xp,reviewDays:[1,3,7,14],reviewNeeded:[]});
+ s.setItem(`mis-user:${A}:cactom-formacao-trompete-v2`,ledger(2,30,6));
+ s.setItem(`mis-user:${B}:cactom-formacao-trompete-v2`,ledger(3,40,3));
  const a=entryFor({id:A,name:'Ana Clara'},'trumpet-bb',s),b=entryFor({id:B,name:'Bruno'},'trumpet-bb',s);
  assert.equal(a.name,'Ana');assert.equal(a.lessons,2);assert.equal(a.accuracy,100);assert.equal(b.accuracy,50);
  assert.deepEqual(sortRanking([a,b],'xp').map(e=>e.name),['Bruno','Ana']);

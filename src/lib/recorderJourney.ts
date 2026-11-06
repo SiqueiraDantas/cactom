@@ -1,12 +1,9 @@
-import plan from '../data/recorder-discipline-v1.json' with {type:'json'};
 import type {KeyValueStorage} from './profileStorage';
 
 /**
- * Trilha da flauta em 64 paradas: cada unidade (módulo do plano) tem quatro paradas.
- * Descoberta = lições 1–2 · Prática = 3 · Criação = 4 · Missão/revisão = 5.
- * Os IDs antigos (S#-M##-L##-A##) continuam sendo a fonte do progresso; esta camada apenas os agrupa.
+ * Motor comum das trilhas em paradas (flauta, trompete, clarinete e iniciação): status de cada parada,
+ * onde continuar, revisões espaçadas (D+1, +3, +7, +14), o que errou volta na revisão e XP.
  */
-export const JOURNEY_KEY='cactom-recorder-journey-v1';
 /** `desafio`: desafio de seção do trompete e do clarinete (a flauta usa o desafio com o professor). */
 export type StopKind='descoberta'|'pratica'|'criacao'|'missao'|'desafio';
 export const STOP_KINDS:readonly {kind:StopKind;label:string;lessons:number[]}[]=[
@@ -16,32 +13,7 @@ export const STOP_KINDS:readonly {kind:StopKind;label:string;lessons:number[]}[]
  {kind:'missao',label:'Missão e revisão',lessons:[5]},
 ];
 /** Objetivos de unidade apresentados ao aluno (analise-e-estrutura-cactom.md, seção 5). */
-export const UNIT_GOALS=['Faça sua flauta falar','Converse com duas notas','Toque e saiba esperar','Toque sua primeira música','Descubra sons mais graves','Encontre o ritmo da música','Dê forma à sua frase','Toque com outra pessoa','Explore novos registros','Descubra novos caminhos','Brinque com o ritmo','Resolva um ensaio','Escolha como interpretar','Crie uma nova versão','Monte seu arranjo','Prepare sua apresentação'] as const;
-
 export type JourneyStop={id:string;index:number;unit:number;section:number;kind:StopKind;label:string;lessonIds:string[];taskIds:string[];unitTitle:string;unitGoal:string;mission:string};
-export type JourneyUnit={number:number;id:string;section:number;level:string;sectionTitle:string;title:string;goal:string;stops:JourneyStop[]};
-export const JOURNEY_UNITS:JourneyUnit[]=[];
-export const JOURNEY_STOPS:JourneyStop[]=[];
-for(const section of plan.sections)for(const module of section.modules){
- const unit:JourneyUnit={number:module.number,id:module.id,section:section.number,level:section.level,sectionTitle:section.title,title:module.title,goal:UNIT_GOALS[module.number-1],stops:[]};
- for(const shape of STOP_KINDS){
-  const lessons=module.microLessons.filter(l=>shape.lessons.includes(l.number));
-  const stop:JourneyStop={id:`U${String(module.number).padStart(2,'0')}-${shape.kind}`,index:JOURNEY_STOPS.length,unit:module.number,section:section.number,kind:shape.kind,label:shape.label,lessonIds:lessons.map(l=>l.id),taskIds:lessons.flatMap(l=>l.activities.map(a=>a.id)),unitTitle:module.title,unitGoal:UNIT_GOALS[module.number-1],mission:''};
-  unit.stops.push(stop);JOURNEY_STOPS.push(stop);
- }
- JOURNEY_UNITS.push(unit);
-}
-export const SECTION_MILESTONES=plan.sections.map(s=>({id:s.id,number:s.number,level:s.level,title:s.title,afterUnit:s.number*4,assessments:s.assessments.map(a=>({id:a.id,title:a.title,task:a.task}))}));
-const BY_LESSON=new Map<string,JourneyStop>(),BY_TASK=new Map<string,JourneyStop>();
-for(const stop of JOURNEY_STOPS){for(const l of stop.lessonIds)BY_LESSON.set(l,stop);for(const t of stop.taskIds)BY_TASK.set(t,stop);}
-/** Mapeia um ID antigo (atividade, microlição, módulo, lição do Módulo 1) para a parada nova. */
-export function stopForLegacyId(id:string):JourneyStop|undefined{
- if(BY_TASK.has(id))return BY_TASK.get(id);
- if(BY_LESSON.has(id))return BY_LESSON.get(id);
- const module=/^S\d-M(\d\d)$/.exec(id);if(module)return JOURNEY_STOPS.find(s=>s.unit===Number(module[1]));
- const stop=JOURNEY_STOPS.find(s=>s.id===id);return stop;
-}
-export function journeyStop(id:string){return JOURNEY_STOPS.find(s=>s.id===id);}
 
 /* ---------- Registro da jornada ---------- */
 export type Evidence='escuta'|'leitura'|'tentativa-fisica'|'avaliacao-docente'|'medicao-automatica'|'pratica-declarada'|'criacao'|'reflexao';
@@ -61,8 +33,8 @@ export function normalizeReviewDays(days:unknown):number[]{
  for(let i=1;i<clean.length;i++)if(clean[i]<=clean[i-1])return [...DEFAULT_REVIEW_DAYS];
  return clean;
 }
-/** `isLesson`/`isStop`: IDs aceitos (a flauta por padrão; trompete e clarinete passam os deles). */
-export function normalizeJourney(value:unknown,isLesson:(id:string)=>boolean=id=>BY_LESSON.has(id),isStop:(id:string)=>boolean=id=>!!journeyStop(id)):JourneyLedger|null{
+/** `isLesson`/`isStop`: IDs aceitos pela trilha de cada curso. */
+export function normalizeJourney(value:unknown,isLesson:(id:string)=>boolean,isStop:(id:string)=>boolean):JourneyLedger|null{
  if(!value||typeof value!=='object'||Array.isArray(value))return null;const raw=value as Partial<JourneyLedger>;
  if(raw.version!==1)return null;const ledger=emptyJourney();
  ledger.reviewDays=normalizeReviewDays(raw.reviewDays);
@@ -74,12 +46,12 @@ export function normalizeJourney(value:unknown,isLesson:(id:string)=>boolean=id=
  if(Array.isArray(raw.reviewNeeded))ledger.reviewNeeded=raw.reviewNeeded.filter(id=>typeof id==='string'&&/-P\d$/.test(id)).slice(0,200);
  return ledger;
 }
-export function readJourney(storage:Pick<KeyValueStorage,'getItem'>,key=JOURNEY_KEY,normalize:(v:unknown)=>JourneyLedger|null=v=>normalizeJourney(v)):{ledger:JourneyLedger;warning:string;safeToWrite:boolean}{
+export function readJourney(storage:Pick<KeyValueStorage,'getItem'>,key:string,normalize:(v:unknown)=>JourneyLedger|null):{ledger:JourneyLedger;warning:string;safeToWrite:boolean}{
  const fail=()=>({ledger:emptyJourney(),warning:'Não foi possível ler o registro da trilha. Nada foi apagado; novos avanços ficam só nesta sessão.',safeToWrite:false});
  try{const raw=storage.getItem(key);if(!raw)return {ledger:emptyJourney(),warning:'',safeToWrite:true};if(raw.length>900000)return fail();const ledger=normalize(JSON.parse(raw));return ledger?{ledger,warning:'',safeToWrite:true}:fail();}
  catch{return fail();}
 }
-export function writeJourney(storage:Pick<KeyValueStorage,'setItem'>,ledger:JourneyLedger,key=JOURNEY_KEY):boolean{try{storage.setItem(key,JSON.stringify(ledger));return true;}catch{return false;}}
+export function writeJourney(storage:Pick<KeyValueStorage,'setItem'>,ledger:JourneyLedger,key:string):boolean{try{storage.setItem(key,JSON.stringify(ledger));return true;}catch{return false;}}
 
 /* ---------- Estado das paradas ---------- */
 export type LegacyResponse={report?:string}|object;
@@ -156,8 +128,6 @@ export function createJourneyEngine(stops:readonly JourneyStop[]){
  }
  return {stops,stop:(id:string)=>byId.get(id),lessonDone,stopState,currentStop,dueReviews,completeLesson};
 }
-const FLUTE=createJourneyEngine(JOURNEY_STOPS);
-export const lessonDone=FLUTE.lessonDone,stopState=FLUTE.stopState,currentStop=FLUTE.currentStop,dueReviews=FLUTE.dueReviews,completeLesson=FLUTE.completeLesson;
 /** Contagem de evidências por tipo, sempre separadas. */
 export function evidenceSummary(ledger:JourneyLedger){
  const counts=Object.fromEntries(Object.keys(EVIDENCE_LABEL).map(k=>[k,0])) as Record<Evidence,number>;

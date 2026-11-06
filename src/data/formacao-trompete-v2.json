@@ -1,0 +1,5187 @@
+{
+ "id": "trumpet-formation-v2",
+ "version": "2.0",
+ "date": "2026-11-06",
+ "title": "Formação em trompete — do primeiro som à autonomia musical",
+ "instrument": "trumpet-bb",
+ "reference": "Trompete em Si bemol (provisório)",
+ "source": "Do primeiro som à autonomia musical — proposta para avaliação docente (nov/2026)",
+ "status": "rascunho-a-revisar",
+ "microLessons": [
+  {
+   "number": 1,
+   "id": "retomar",
+   "name": "Retomar e ouvir",
+   "goal": "Recuperar um pré-requisito e ouvir o alvo da unidade."
+  },
+  {
+   "number": 2,
+   "id": "descobrir",
+   "name": "Descobrir",
+   "goal": "Observar uma demonstração e entender a ação que produz o resultado."
+  },
+  {
+   "number": 3,
+   "id": "praticar",
+   "name": "Praticar",
+   "goal": "Fazer tentativas curtas, com orientação e descanso entre elas."
+  },
+  {
+   "number": 4,
+   "id": "aplicar",
+   "name": "Aplicar",
+   "goal": "Usar a habilidade em uma frase, em uma música ou em uma situação real."
+  },
+  {
+   "number": 5,
+   "id": "demonstrar",
+   "name": "Demonstrar",
+   "goal": "Registrar uma execução e combinar quando retomar."
+  }
+ ],
+ "types": {
+  "cuidado": {
+   "label": "Cuidado",
+   "pratica": "Demonstrar o procedimento por etapas, nomeando cada ação, e conferir com o professor e com o manual do fabricante.",
+   "evidencia": "Procedimento realizado sem lembretes, com cuidado com as peças e sem forçar encaixes."
+  },
+  "sem-emissao": {
+   "label": "Sem emissão",
+   "pratica": "Realizar a ação sem tocar (respiração, dedos nos pistões, canto, leitura ou estudo mental), alternando com pausas.",
+   "evidencia": "Ação observada sem tensão desnecessária e descrita pelo aluno com palavras próprias."
+  },
+  "emissao": {
+   "label": "Emissão",
+   "pratica": "Fazer tentativas curtas e espaçadas, ajustar um ponto por vez, descansar entre elas e aplicar em motivo musical na região confortável.",
+   "evidencia": "Alvo realizado sem modelo simultâneo em duas tentativas, com som reconhecível e sem aumento de pressão; ajuda e descanso registrados."
+  },
+  "escuta": {
+   "label": "Escuta",
+   "pratica": "Ouvir ou observar dois exemplos, apontar a diferença relevante e, quando pertinente, cantar ou tocar a diferença.",
+   "evidencia": "Resposta oral, gestual ou tocada que sustente a observação."
+  },
+  "leitura": {
+   "label": "Leitura",
+   "pratica": "Ler o ritmo, ensaiar a digitação sem tocar e então executar um trecho escrito para trompete em si bemol.",
+   "evidencia": "Trecho equivalente, ainda não decorado, lido com continuidade; grau de ajuda registrado."
+  },
+  "conjunto": {
+   "label": "Conjunto",
+   "pratica": "Preparar a própria parte e tocar com parceiro, professor ou faixa na altura real correta, ouvindo entradas e pulso.",
+   "evidencia": "Execução compartilhada com entrada, continuidade e ajuste ao outro compatíveis com a etapa."
+  },
+  "criacao": {
+   "label": "Criação",
+   "pratica": "Criar uma ideia curta com as notas disponíveis, experimentar no instrumento e revisar uma escolha depois de ouvir.",
+   "evidencia": "Criação gravada ou escrita, tocável na extensão já estável do aluno."
+  },
+  "registro": {
+   "label": "Registro",
+   "pratica": "Elaborar um registro ligado a uma tarefa real (plano, diário, ficha ou proposta) e discutir uma decisão com o professor.",
+   "evidencia": "Registro verificável, com justificativa e próximo passo."
+  },
+  "demonstracao": {
+   "label": "Demonstração",
+   "pratica": "Preparar um exemplo representativo, gravar uma tentativa integral com pausas previstas e revisar um ponto antes de reapresentar.",
+   "evidencia": "Execução ou produto integral do objetivo, com autoavaliação e rubrica da etapa."
+  }
+ },
+ "levels": [
+  {
+   "id": "iniciacao",
+   "title": "Iniciação",
+   "minutesPerMicroLesson": 6,
+   "modules": [
+    {
+     "id": "M01",
+     "number": 1,
+     "title": "Conhecer, cuidar e preparar o instrumento",
+     "sequences": [
+      {
+       "id": "M01-S01",
+       "number": 1,
+       "title": "Conhecer o trompete",
+       "units": [
+        {
+         "code": "U001",
+         "number": 1,
+         "objective": "Identificar as partes do trompete",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "entrada"
+         ]
+        },
+        {
+         "code": "U002",
+         "number": 2,
+         "objective": "Reconhecer bocal, tubo de entrada e campana",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U001"
+         ]
+        },
+        {
+         "code": "U003",
+         "number": 3,
+         "objective": "Localizar os três pistões e as bombas",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U002"
+         ]
+        },
+        {
+         "code": "U004",
+         "number": 4,
+         "objective": "Ouvir o som do trompete em contextos diferentes",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U003"
+         ]
+        },
+        {
+         "code": "U005",
+         "number": 5,
+         "objective": "Abrir, retirar e devolver o instrumento ao estojo",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U004"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M01-S02",
+       "number": 2,
+       "title": "Montar e segurar",
+       "units": [
+        {
+         "code": "U006",
+         "number": 6,
+         "objective": "Encaixar o bocal sem forçar",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U005",
+          "U001"
+         ]
+        },
+        {
+         "code": "U007",
+         "number": 7,
+         "objective": "Apoiar o trompete conforme a orientação do professor",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U006",
+          "U002"
+         ]
+        },
+        {
+         "code": "U008",
+         "number": 8,
+         "objective": "Pousar os dedos nos pistões sem apertar",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U007",
+          "U003"
+         ]
+        },
+        {
+         "code": "U009",
+         "number": 9,
+         "objective": "Acionar cada pistão sem tocar",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U008",
+          "U004"
+         ]
+        },
+        {
+         "code": "U010",
+         "number": 10,
+         "objective": "Descansar o instrumento com segurança entre tentativas",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U009",
+          "U005"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M01-S03",
+       "number": 3,
+       "title": "Cuidar e guardar",
+       "units": [
+        {
+         "code": "U011",
+         "number": 11,
+         "objective": "Usar a chave de água depois de tocar",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U010",
+          "U006"
+         ]
+        },
+        {
+         "code": "U012",
+         "number": 12,
+         "objective": "Retirar o bocal e guardar as peças",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U011",
+          "U007"
+         ]
+        },
+        {
+         "code": "U013",
+         "number": 13,
+         "objective": "Reconhecer sinais de que algo precisa de manutenção",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U012",
+          "U008"
+         ]
+        },
+        {
+         "code": "U014",
+         "number": 14,
+         "objective": "Preparar o espaço e o tempo de prática",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U013",
+          "U009"
+         ]
+        },
+        {
+         "code": "U015",
+         "number": 15,
+         "objective": "Demonstrar preparação, uso e guarda do instrumento",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U014",
+          "U010"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M02",
+     "number": 2,
+     "title": "Respiração, embocadura e primeiro som",
+     "sequences": [
+      {
+       "id": "M02-S01",
+       "number": 1,
+       "title": "Corpo e ar",
+       "units": [
+        {
+         "code": "U016",
+         "number": 16,
+         "objective": "Encontrar uma postura confortável sentado e em pé",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U015",
+          "U006"
+         ]
+        },
+        {
+         "code": "U017",
+         "number": 17,
+         "objective": "Inspirar sem elevar os ombros",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U016",
+          "U007"
+         ]
+        },
+        {
+         "code": "U018",
+         "number": 18,
+         "objective": "Soltar o ar de forma contínua e tranquila",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U017",
+          "U008"
+         ]
+        },
+        {
+         "code": "U019",
+         "number": 19,
+         "objective": "Perceber tensão desnecessária no rosto e no pescoço",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U018",
+          "U009"
+         ]
+        },
+        {
+         "code": "U020",
+         "number": 20,
+         "objective": "Alternar respiração e descanso em ciclos curtos",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U019",
+          "U010"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M02-S02",
+       "number": 2,
+       "title": "Vibração e bocal",
+       "units": [
+        {
+         "code": "U021",
+         "number": 21,
+         "objective": "Observar a vibração dos lábios em uma demonstração",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U020",
+          "U016"
+         ]
+        },
+        {
+         "code": "U022",
+         "number": 22,
+         "objective": "Explorar um som no bocal com orientação do professor",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U021",
+          "U017"
+         ]
+        },
+        {
+         "code": "U023",
+         "number": 23,
+         "objective": "Iniciar e terminar um som no bocal por intenção",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U022",
+          "U018"
+         ]
+        },
+        {
+         "code": "U024",
+         "number": 24,
+         "objective": "Comparar som com e sem pressão excessiva",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U023",
+          "U019"
+         ]
+        },
+        {
+         "code": "U025",
+         "number": 25,
+         "objective": "Repetir sons curtos no bocal com pausas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U024",
+          "U020"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M02-S03",
+       "number": 3,
+       "title": "Primeiro som no trompete",
+       "units": [
+        {
+         "code": "U026",
+         "number": 26,
+         "objective": "Passar do bocal ao instrumento com o mesmo cuidado",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U025",
+          "U021"
+         ]
+        },
+        {
+         "code": "U027",
+         "number": 27,
+         "objective": "Produzir um som curto e reconhecível",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U026",
+          "U022"
+         ]
+        },
+        {
+         "code": "U028",
+         "number": 28,
+         "objective": "Iniciar o som com a língua de forma leve",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U027",
+          "U023"
+         ]
+        },
+        {
+         "code": "U029",
+         "number": 29,
+         "objective": "Terminar o som sem cortar nem empurrar",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U028",
+          "U024"
+         ]
+        },
+        {
+         "code": "U030",
+         "number": 30,
+         "objective": "Demonstrar sons curtos com início e final intencionais",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U029",
+          "U025"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M03",
+     "number": 3,
+     "title": "Pulso, escuta e primeiras notas",
+     "sequences": [
+      {
+       "id": "M03-S01",
+       "number": 1,
+       "title": "Pulso e som",
+       "units": [
+        {
+         "code": "U031",
+         "number": 31,
+         "objective": "Bater e caminhar sobre uma pulsação",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U030",
+          "U026"
+         ]
+        },
+        {
+         "code": "U032",
+         "number": 32,
+         "objective": "Tocar um som a cada pulsação indicada",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U031",
+          "U027"
+         ]
+        },
+        {
+         "code": "U033",
+         "number": 33,
+         "objective": "Alternar som e silêncio no pulso",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U032",
+          "U028"
+         ]
+        },
+        {
+         "code": "U034",
+         "number": 34,
+         "objective": "Imitar um eco rítmico de quatro pulsos",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U033",
+          "U029"
+         ]
+        },
+        {
+         "code": "U035",
+         "number": 35,
+         "objective": "Responder sem antecipar a própria entrada",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U034",
+          "U030"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M03-S02",
+       "number": 2,
+       "title": "Primeira altura estável",
+       "units": [
+        {
+         "code": "U036",
+         "number": 36,
+         "objective": "Repetir a altura escolhida pelo professor",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U035",
+          "U026"
+         ]
+        },
+        {
+         "code": "U037",
+         "number": 37,
+         "objective": "Reconhecer se o som chegou à altura pretendida",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U036",
+          "U027"
+         ]
+        },
+        {
+         "code": "U038",
+         "number": 38,
+         "objective": "Cantar e depois tocar a mesma altura",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U037",
+          "U028"
+         ]
+        },
+        {
+         "code": "U039",
+         "number": 39,
+         "objective": "Sustentar um som curto com qualidade estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U038",
+          "U029"
+         ]
+        },
+        {
+         "code": "U040",
+         "number": 40,
+         "objective": "Recuperar a altura depois de uma pausa",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U039",
+          "U030"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M03-S03",
+       "number": 3,
+       "title": "Duas notas em diálogo",
+       "units": [
+        {
+         "code": "U041",
+         "number": 41,
+         "objective": "Ensaiar a mudança de pistões sem tocar",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U040",
+          "U036"
+         ]
+        },
+        {
+         "code": "U042",
+         "number": 42,
+         "objective": "Tocar a segunda altura separadamente",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U041",
+          "U037"
+         ]
+        },
+        {
+         "code": "U043",
+         "number": 43,
+         "objective": "Alternar duas alturas acessíveis em diálogo",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U042",
+          "U038"
+         ]
+        },
+        {
+         "code": "U044",
+         "number": 44,
+         "objective": "Fazer pergunta e resposta com duas alturas",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U043",
+          "U039"
+         ]
+        },
+        {
+         "code": "U045",
+         "number": 45,
+         "objective": "Tocar uma frase de duas ou três alturas",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U044",
+          "U040"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M04",
+     "number": 4,
+     "title": "Primeiras melodias e notação",
+     "sequences": [
+      {
+       "id": "M04-S01",
+       "number": 1,
+       "title": "Símbolos e som",
+       "units": [
+        {
+         "code": "U046",
+         "number": 46,
+         "objective": "Associar figuras de som longo e curto ao que já foi tocado",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U045",
+          "U031"
+         ]
+        },
+        {
+         "code": "U047",
+         "number": 47,
+         "objective": "Ler pulsos e pausas em uma linha rítmica",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U046",
+          "U032"
+         ]
+        },
+        {
+         "code": "U048",
+         "number": 48,
+         "objective": "Localizar na pauta as notas já tocadas",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U047",
+          "U033"
+         ]
+        },
+        {
+         "code": "U049",
+         "number": 49,
+         "objective": "Ler uma frase de duas alturas",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U048",
+          "U034"
+         ]
+        },
+        {
+         "code": "U050",
+         "number": 50,
+         "objective": "Reconhecer de ouvido uma frase lida",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U049",
+          "U035"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M04-S02",
+       "number": 2,
+       "title": "Primeiras melodias",
+       "units": [
+        {
+         "code": "U051",
+         "number": 51,
+         "objective": "Acrescentar uma terceira altura acessível",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U050",
+          "U041"
+         ]
+        },
+        {
+         "code": "U052",
+         "number": 52,
+         "objective": "Tocar uma melodia de três notas com pausas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U051",
+          "U042"
+         ]
+        },
+        {
+         "code": "U053",
+         "number": 53,
+         "objective": "Respirar no lugar combinado da frase",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U052",
+          "U043"
+         ]
+        },
+        {
+         "code": "U054",
+         "number": 54,
+         "objective": "Criar uma resposta de dois compassos",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U053",
+          "U044"
+         ]
+        },
+        {
+         "code": "U055",
+         "number": 55,
+         "objective": "Apresentar uma primeira melodia curta",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U054",
+          "U045"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M04-S03",
+       "number": 3,
+       "title": "Tocar junto",
+       "units": [
+        {
+         "code": "U056",
+         "number": 56,
+         "objective": "Entrar depois de uma introdução gravada",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U055",
+          "U031"
+         ]
+        },
+        {
+         "code": "U057",
+         "number": 57,
+         "objective": "Tocar sobre um acompanhamento simples na altura real correta",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U056",
+          "U032"
+         ]
+        },
+        {
+         "code": "U058",
+         "number": 58,
+         "objective": "Alternar frases com um colega ou com o professor",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U057",
+          "U033"
+         ]
+        },
+        {
+         "code": "U059",
+         "number": 59,
+         "objective": "Planejar uma sessão curta com tentativas e pausas",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U058",
+          "U034"
+         ]
+        },
+        {
+         "code": "U060",
+         "number": 60,
+         "objective": "Concluir a iniciação com duas melodias curtas",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U059",
+          "U035"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "basico",
+   "title": "Básico",
+   "minutesPerMicroLesson": 8,
+   "modules": [
+    {
+     "id": "M05",
+     "number": 5,
+     "title": "Emissão, ataques e finais",
+     "sequences": [
+      {
+       "id": "M05-S01",
+       "number": 1,
+       "title": "Som sustentado breve",
+       "units": [
+        {
+         "code": "U061",
+         "number": 61,
+         "objective": "Sustentar um som pelo tempo combinado",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U060",
+          "U026"
+         ]
+        },
+        {
+         "code": "U062",
+         "number": 62,
+         "objective": "Manter a qualidade do som do início ao fim",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U061",
+          "U027"
+         ]
+        },
+        {
+         "code": "U063",
+         "number": 63,
+         "objective": "Interromper a tentativa quando a qualidade cai",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U062",
+          "U028"
+         ]
+        },
+        {
+         "code": "U064",
+         "number": 64,
+         "objective": "Comparar dois sons longos próprios gravados",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U063",
+          "U029"
+         ]
+        },
+        {
+         "code": "U065",
+         "number": 65,
+         "objective": "Aplicar sons sustentados em uma melodia lenta",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U064",
+          "U030"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M05-S02",
+       "number": 2,
+       "title": "Ataques",
+       "units": [
+        {
+         "code": "U066",
+         "number": 66,
+         "objective": "Iniciar sons com a língua em pulsos regulares",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U065",
+          "U026"
+         ]
+        },
+        {
+         "code": "U067",
+         "number": 67,
+         "objective": "Diferenciar ataque leve e ataque marcado",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U066",
+          "U027"
+         ]
+        },
+        {
+         "code": "U068",
+         "number": 68,
+         "objective": "Tocar notas repetidas com ataques iguais",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U067",
+          "U028"
+         ]
+        },
+        {
+         "code": "U069",
+         "number": 69,
+         "objective": "Ler sinais simples de articulação",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U068",
+          "U029"
+         ]
+        },
+        {
+         "code": "U070",
+         "number": 70,
+         "objective": "Aplicar ataques claros em uma frase",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U069",
+          "U030"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M05-S03",
+       "number": 3,
+       "title": "Finais e respiração",
+       "units": [
+        {
+         "code": "U071",
+         "number": 71,
+         "objective": "Terminar o som junto com o fim do ar",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U070",
+          "U016"
+         ]
+        },
+        {
+         "code": "U072",
+         "number": 72,
+         "objective": "Respirar entre frases sem perder o pulso",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U071",
+          "U017"
+         ]
+        },
+        {
+         "code": "U073",
+         "number": 73,
+         "objective": "Marcar respirações em uma partitura",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U072",
+          "U018"
+         ]
+        },
+        {
+         "code": "U074",
+         "number": 74,
+         "objective": "Planejar a respiração de uma melodia de oito compassos",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U073",
+          "U019"
+         ]
+        },
+        {
+         "code": "U075",
+         "number": 75,
+         "objective": "Tocar uma frase com respirações planejadas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U074",
+          "U020"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M05-S04",
+       "number": 4,
+       "title": "Ligado e destacado",
+       "units": [
+        {
+         "code": "U076",
+         "number": 76,
+         "objective": "Ligar duas notas sem nova articulação",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U075",
+          "U066"
+         ]
+        },
+        {
+         "code": "U077",
+         "number": 77,
+         "objective": "Alternar notas ligadas e destacadas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U076",
+          "U067"
+         ]
+        },
+        {
+         "code": "U078",
+         "number": 78,
+         "objective": "Reconhecer de ouvido ligado e destacado",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U077",
+          "U068"
+         ]
+        },
+        {
+         "code": "U079",
+         "number": 79,
+         "objective": "Criar uma frase com ligado e destacado",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U078",
+          "U069"
+         ]
+        },
+        {
+         "code": "U080",
+         "number": 80,
+         "objective": "Tocar um dueto curto com articulações combinadas",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U079",
+          "U070"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M05-S05",
+       "number": 5,
+       "title": "Som consistente em frase",
+       "units": [
+        {
+         "code": "U081",
+         "number": 81,
+         "objective": "Manter o som estável ao mudar de nota",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U080",
+          "U061"
+         ]
+        },
+        {
+         "code": "U082",
+         "number": 82,
+         "objective": "Ouvir e corrigir uma nota que soou diferente",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U081",
+          "U062"
+         ]
+        },
+        {
+         "code": "U083",
+         "number": 83,
+         "objective": "Tocar uma frase em dinâmica confortável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U082",
+          "U063"
+         ]
+        },
+        {
+         "code": "U084",
+         "number": 84,
+         "objective": "Registrar o tempo tocado e as pausas da semana",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U083",
+          "U064"
+         ]
+        },
+        {
+         "code": "U085",
+         "number": 85,
+         "objective": "Demonstrar frase com ataques claros e som consistente",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U084",
+          "U065"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M06",
+     "number": 6,
+     "title": "Pistões e leitura elementar",
+     "sequences": [
+      {
+       "id": "M06-S01",
+       "number": 1,
+       "title": "Combinações dos pistões",
+       "units": [
+        {
+         "code": "U086",
+         "number": 86,
+         "objective": "Conhecer a tabela de digitação adotada",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U085",
+          "U006"
+         ]
+        },
+        {
+         "code": "U087",
+         "number": 87,
+         "objective": "Acionar combinações de dois pistões sem tocar",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U086",
+          "U007"
+         ]
+        },
+        {
+         "code": "U088",
+         "number": 88,
+         "objective": "Coordenar o pistão com o início do som",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U087",
+          "U008"
+         ]
+        },
+        {
+         "code": "U089",
+         "number": 89,
+         "objective": "Mudar de combinação sem interromper o ar",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U088",
+          "U009"
+         ]
+        },
+        {
+         "code": "U090",
+         "number": 90,
+         "objective": "Tocar uma sequência de notas por graus conjuntos",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U089",
+          "U010"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M06-S02",
+       "number": 2,
+       "title": "Uma posição, mais de uma nota",
+       "units": [
+        {
+         "code": "U091",
+         "number": 91,
+         "objective": "Ouvir notas diferentes com a mesma digitação",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U090",
+          "U036"
+         ]
+        },
+        {
+         "code": "U092",
+         "number": 92,
+         "objective": "Reconhecer o parcial pretendido antes de tocar",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U091",
+          "U037"
+         ]
+        },
+        {
+         "code": "U093",
+         "number": 93,
+         "objective": "Cantar a nota antes de tocá-la",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U092",
+          "U038"
+         ]
+        },
+        {
+         "code": "U094",
+         "number": 94,
+         "objective": "Corrigir uma nota que saiu em outro parcial",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U093",
+          "U039"
+         ]
+        },
+        {
+         "code": "U095",
+         "number": 95,
+         "objective": "Explicar por que a digitação não basta para obter a nota",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U094",
+          "U040"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M06-S03",
+       "number": 3,
+       "title": "Pauta e durações",
+       "units": [
+        {
+         "code": "U096",
+         "number": 96,
+         "objective": "Ler semínimas, mínimas e pausas",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U095",
+          "U046"
+         ]
+        },
+        {
+         "code": "U097",
+         "number": 97,
+         "objective": "Ler colcheias em pares",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U096",
+          "U047"
+         ]
+        },
+        {
+         "code": "U098",
+         "number": 98,
+         "objective": "Contar e tocar em compasso de quatro tempos",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U097",
+          "U048"
+         ]
+        },
+        {
+         "code": "U099",
+         "number": 99,
+         "objective": "Ler em compasso de três tempos",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U098",
+          "U049"
+         ]
+        },
+        {
+         "code": "U100",
+         "number": 100,
+         "objective": "Tocar uma linha rítmica com uma nota",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U099",
+          "U050"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M06-S04",
+       "number": 4,
+       "title": "Ler e tocar",
+       "units": [
+        {
+         "code": "U101",
+         "number": 101,
+         "objective": "Ensaiar a digitação de um trecho sem tocar",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U100",
+          "U086"
+         ]
+        },
+        {
+         "code": "U102",
+         "number": 102,
+         "objective": "Ler uma melodia de cinco notas",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U101",
+          "U087"
+         ]
+        },
+        {
+         "code": "U103",
+         "number": 103,
+         "objective": "Manter a continuidade apesar de um erro",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U102",
+          "U088"
+         ]
+        },
+        {
+         "code": "U104",
+         "number": 104,
+         "objective": "Ler um trecho novo com apoio do professor",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U103",
+          "U089"
+         ]
+        },
+        {
+         "code": "U105",
+         "number": 105,
+         "objective": "Tocar com um colega um trecho lido",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U104",
+          "U090"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M06-S05",
+       "number": 5,
+       "title": "Leitura com continuidade",
+       "units": [
+        {
+         "code": "U106",
+         "number": 106,
+         "objective": "Escolher um andamento que permita ler sem parar",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U105",
+          "U101"
+         ]
+        },
+        {
+         "code": "U107",
+         "number": 107,
+         "objective": "Identificar no trecho onde a digitação muda",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U106",
+          "U102"
+         ]
+        },
+        {
+         "code": "U108",
+         "number": 108,
+         "objective": "Ler um trecho com ligado e destacado",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U107",
+          "U103"
+         ]
+        },
+        {
+         "code": "U109",
+         "number": 109,
+         "objective": "Gravar e ouvir uma leitura",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U108",
+          "U104"
+         ]
+        },
+        {
+         "code": "U110",
+         "number": 110,
+         "objective": "Ler trecho acessível com digitação coordenada e continuidade",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U109",
+          "U105"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M07",
+     "number": 7,
+     "title": "Escalas e extensão inicial",
+     "sequences": [
+      {
+       "id": "M07-S01",
+       "number": 1,
+       "title": "Segmentos de dó maior",
+       "units": [
+        {
+         "code": "U111",
+         "number": 111,
+         "objective": "Tocar os primeiros graus de dó maior escrito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U110",
+          "U086"
+         ]
+        },
+        {
+         "code": "U112",
+         "number": 112,
+         "objective": "Descer o mesmo segmento com som estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U111",
+          "U087"
+         ]
+        },
+        {
+         "code": "U113",
+         "number": 113,
+         "objective": "Tocar o segmento em padrões rítmicos",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U112",
+          "U088"
+         ]
+        },
+        {
+         "code": "U114",
+         "number": 114,
+         "objective": "Reconhecer de ouvido a nota de repouso",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U113",
+          "U089"
+         ]
+        },
+        {
+         "code": "U115",
+         "number": 115,
+         "objective": "Aplicar o segmento em uma melodia",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U114",
+          "U090"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M07-S02",
+       "number": 2,
+       "title": "Sol e fá maiores",
+       "units": [
+        {
+         "code": "U116",
+         "number": 116,
+         "objective": "Localizar fá sustenido escrito na tabela e na pauta",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U115",
+          "U101"
+         ]
+        },
+        {
+         "code": "U117",
+         "number": 117,
+         "objective": "Tocar um segmento de sol maior escrito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U116",
+          "U102"
+         ]
+        },
+        {
+         "code": "U118",
+         "number": 118,
+         "objective": "Localizar si bemol escrito e tocar um segmento de fá maior",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U117",
+          "U103"
+         ]
+        },
+        {
+         "code": "U119",
+         "number": 119,
+         "objective": "Comparar as três tonalidades de ouvido",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U118",
+          "U104"
+         ]
+        },
+        {
+         "code": "U120",
+         "number": 120,
+         "objective": "Ler uma melodia em sol ou fá maior escrito",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U119",
+          "U105"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M07-S03",
+       "number": 3,
+       "title": "Arpejos iniciais",
+       "units": [
+        {
+         "code": "U121",
+         "number": 121,
+         "objective": "Ouvir e cantar o arpejo maior",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U120",
+          "U091"
+         ]
+        },
+        {
+         "code": "U122",
+         "number": 122,
+         "objective": "Tocar o arpejo de dó maior escrito na região disponível",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U121",
+          "U092"
+         ]
+        },
+        {
+         "code": "U123",
+         "number": 123,
+         "objective": "Ligar notas do arpejo com ar contínuo",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U122",
+          "U093"
+         ]
+        },
+        {
+         "code": "U124",
+         "number": 124,
+         "objective": "Usar um arpejo para acompanhar um colega",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U123",
+          "U094"
+         ]
+        },
+        {
+         "code": "U125",
+         "number": 125,
+         "objective": "Criar uma melodia a partir de um arpejo",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U124",
+          "U095"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M07-S04",
+       "number": 4,
+       "title": "Ampliar a extensão",
+       "units": [
+        {
+         "code": "U126",
+         "number": 126,
+         "objective": "Acrescentar uma nota acima da região estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U125",
+          "U061"
+         ]
+        },
+        {
+         "code": "U127",
+         "number": 127,
+         "objective": "Acrescentar uma nota abaixo da região estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U126",
+          "U062"
+         ]
+        },
+        {
+         "code": "U128",
+         "number": 128,
+         "objective": "Voltar à região confortável depois de uma nota nova",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U127",
+          "U063"
+         ]
+        },
+        {
+         "code": "U129",
+         "number": 129,
+         "objective": "Avaliar se a emissão está estável antes de ampliar",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U128",
+          "U064"
+         ]
+        },
+        {
+         "code": "U130",
+         "number": 130,
+         "objective": "Registrar a extensão já disponível",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U129",
+          "U065"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M07-S05",
+       "number": 5,
+       "title": "Escala em contexto",
+       "units": [
+        {
+         "code": "U131",
+         "number": 131,
+         "objective": "Tocar a oitava completa quando a emissão permitir",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U130",
+          "U111"
+         ]
+        },
+        {
+         "code": "U132",
+         "number": 132,
+         "objective": "Tocar a escala com articulações diferentes",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U131",
+          "U112"
+         ]
+        },
+        {
+         "code": "U133",
+         "number": 133,
+         "objective": "Identificar trechos de escala em uma peça",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U132",
+          "U113"
+         ]
+        },
+        {
+         "code": "U134",
+         "number": 134,
+         "objective": "Tocar em dueto uma melodia com escala e arpejo",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U133",
+          "U114"
+         ]
+        },
+        {
+         "code": "U135",
+         "number": 135,
+         "objective": "Aplicar padrões escalares em melodias da extensão disponível",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U134",
+          "U115"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M08",
+     "number": 8,
+     "title": "Repertório, dueto e estudo básico",
+     "sequences": [
+      {
+       "id": "M08-S01",
+       "number": 1,
+       "title": "Fraseado inicial",
+       "units": [
+        {
+         "code": "U136",
+         "number": 136,
+         "objective": "Identificar começo, meio e fim de uma frase",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U135",
+          "U071"
+         ]
+        },
+        {
+         "code": "U137",
+         "number": 137,
+         "objective": "Conduzir a frase até a nota de chegada",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U136",
+          "U072"
+         ]
+        },
+        {
+         "code": "U138",
+         "number": 138,
+         "objective": "Usar dinâmica para diferenciar duas frases",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U137",
+          "U073"
+         ]
+        },
+        {
+         "code": "U139",
+         "number": 139,
+         "objective": "Comparar duas versões da mesma frase",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U138",
+          "U074"
+         ]
+        },
+        {
+         "code": "U140",
+         "number": 140,
+         "objective": "Tocar uma peça curta com frases definidas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U139",
+          "U075"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M08-S02",
+       "number": 2,
+       "title": "Escrito e som real",
+       "units": [
+        {
+         "code": "U141",
+         "number": 141,
+         "objective": "Ouvir a diferença entre nota escrita e som real",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U140",
+          "U036"
+         ]
+        },
+        {
+         "code": "U142",
+         "number": 142,
+         "objective": "Comparar o próprio som com um piano ou afinador",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U141",
+          "U037"
+         ]
+        },
+        {
+         "code": "U143",
+         "number": 143,
+         "objective": "Escolher um acompanhamento na altura real correta",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U142",
+          "U038"
+         ]
+        },
+        {
+         "code": "U144",
+         "number": 144,
+         "objective": "Tocar em uníssono com um instrumento em dó",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U143",
+          "U039"
+         ]
+        },
+        {
+         "code": "U145",
+         "number": 145,
+         "objective": "Explicar por que o trompete em si bemol soa um tom abaixo do escrito",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U144",
+          "U040"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M08-S03",
+       "number": 3,
+       "title": "Criação com poucas notas",
+       "units": [
+        {
+         "code": "U146",
+         "number": 146,
+         "objective": "Improvisar com três notas sobre um pulso",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U145",
+          "U051"
+         ]
+        },
+        {
+         "code": "U147",
+         "number": 147,
+         "objective": "Criar uma pergunta e resposta escrita",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U146",
+          "U052"
+         ]
+        },
+        {
+         "code": "U148",
+         "number": 148,
+         "objective": "Variar o ritmo de uma melodia conhecida",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U147",
+          "U053"
+         ]
+        },
+        {
+         "code": "U149",
+         "number": 149,
+         "objective": "Escrever uma pequena melodia com as notas disponíveis",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U148",
+          "U054"
+         ]
+        },
+        {
+         "code": "U150",
+         "number": 150,
+         "objective": "Tocar a própria composição para o grupo",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U149",
+          "U055"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M08-S04",
+       "number": 4,
+       "title": "Dueto",
+       "units": [
+        {
+         "code": "U151",
+         "number": 151,
+         "objective": "Preparar sozinho a própria parte de um dueto",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U150",
+          "U056"
+         ]
+        },
+        {
+         "code": "U152",
+         "number": 152,
+         "objective": "Manter a própria parte enquanto o outro toca",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U151",
+          "U057"
+         ]
+        },
+        {
+         "code": "U153",
+         "number": 153,
+         "objective": "Entrar depois de pausas contando os tempos",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U152",
+          "U058"
+         ]
+        },
+        {
+         "code": "U154",
+         "number": 154,
+         "objective": "Equilibrar o volume com o parceiro",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U153",
+          "U059"
+         ]
+        },
+        {
+         "code": "U155",
+         "number": 155,
+         "objective": "Tocar um dueto simples completo",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U154",
+          "U060"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M08-S05",
+       "number": 5,
+       "title": "Rotina e estudo",
+       "units": [
+        {
+         "code": "U156",
+         "number": 156,
+         "objective": "Montar uma rotina curta com aquecimento, peça e descanso",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U155",
+          "U056"
+         ]
+        },
+        {
+         "code": "U157",
+         "number": 157,
+         "objective": "Escolher um trecho difícil e estudá-lo devagar",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U156",
+          "U057"
+         ]
+        },
+        {
+         "code": "U158",
+         "number": 158,
+         "objective": "Incluir estudo sem emissão na rotina",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U157",
+          "U058"
+         ]
+        },
+        {
+         "code": "U159",
+         "number": 159,
+         "objective": "Retomar uma habilidade antiga antes de ouvir o modelo",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U158",
+          "U059"
+         ]
+        },
+        {
+         "code": "U160",
+         "number": 160,
+         "objective": "Apresentar duas peças simples, dueto e registro de estudo",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U159",
+          "U060"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intermediario",
+   "title": "Intermediário",
+   "minutesPerMicroLesson": 10,
+   "modules": [
+    {
+     "id": "M09",
+     "number": 9,
+     "title": "Flexibilidade e conexão de registros",
+     "sequences": [
+      {
+       "id": "M09-S01",
+       "number": 1,
+       "title": "Parciais próximos",
+       "units": [
+        {
+         "code": "U161",
+         "number": 161,
+         "objective": "Ouvir a série de notas de uma mesma digitação",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U160",
+          "U091"
+         ]
+        },
+        {
+         "code": "U162",
+         "number": 162,
+         "objective": "Ligar dois parciais próximos sem mudar o pistão",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U161",
+          "U092"
+         ]
+        },
+        {
+         "code": "U163",
+         "number": 163,
+         "objective": "Ligar parciais descendo antes de subir",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U162",
+          "U093"
+         ]
+        },
+        {
+         "code": "U164",
+         "number": 164,
+         "objective": "Manter o ar contínuo na mudança de parcial",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U163",
+          "U094"
+         ]
+        },
+        {
+         "code": "U165",
+         "number": 165,
+         "objective": "Repetir a ligadura em outra digitação",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U164",
+          "U095"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M09-S02",
+       "number": 2,
+       "title": "Flexibilidade sem pressão",
+       "units": [
+        {
+         "code": "U166",
+         "number": 166,
+         "objective": "Comparar a ligadura com e sem apertar o bocal",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U165",
+          "U061"
+         ]
+        },
+        {
+         "code": "U167",
+         "number": 167,
+         "objective": "Fazer pausas entre séries de ligaduras",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U166",
+          "U062"
+         ]
+        },
+        {
+         "code": "U168",
+         "number": 168,
+         "objective": "Ligar três parciais na região confortável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U167",
+          "U063"
+         ]
+        },
+        {
+         "code": "U169",
+         "number": 169,
+         "objective": "Ajustar o andamento da ligadura à qualidade do som",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U168",
+          "U064"
+         ]
+        },
+        {
+         "code": "U170",
+         "number": 170,
+         "objective": "Registrar sinais de cansaço e tempo de recuperação",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U169",
+          "U065"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M09-S03",
+       "number": 3,
+       "title": "Intervalos",
+       "units": [
+        {
+         "code": "U171",
+         "number": 171,
+         "objective": "Cantar e tocar terças",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U170",
+          "U121"
+         ]
+        },
+        {
+         "code": "U172",
+         "number": 172,
+         "objective": "Tocar quartas e quintas ligadas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U171",
+          "U122"
+         ]
+        },
+        {
+         "code": "U173",
+         "number": 173,
+         "objective": "Reconhecer intervalos de ouvido",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U172",
+          "U123"
+         ]
+        },
+        {
+         "code": "U174",
+         "number": 174,
+         "objective": "Ler intervalos em um estudo curto",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U173",
+          "U124"
+         ]
+        },
+        {
+         "code": "U175",
+         "number": 175,
+         "objective": "Criar um motivo com saltos",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U174",
+          "U125"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M09-S04",
+       "number": 4,
+       "title": "Região grave",
+       "units": [
+        {
+         "code": "U176",
+         "number": 176,
+         "objective": "Explorar notas graves com som cheio",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U175",
+          "U126"
+         ]
+        },
+        {
+         "code": "U177",
+         "number": 177,
+         "objective": "Descer à região grave sem perder o centro do som",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U176",
+          "U127"
+         ]
+        },
+        {
+         "code": "U178",
+         "number": 178,
+         "objective": "Ligar notas graves e médias",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U177",
+          "U128"
+         ]
+        },
+        {
+         "code": "U179",
+         "number": 179,
+         "objective": "Ler um trecho na região grave",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U178",
+          "U129"
+         ]
+        },
+        {
+         "code": "U180",
+         "number": 180,
+         "objective": "Tocar a linha grave de um dueto",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U179",
+          "U130"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M09-S05",
+       "number": 5,
+       "title": "Região aguda acessível",
+       "units": [
+        {
+         "code": "U181",
+         "number": 181,
+         "objective": "Acrescentar uma nota aguda depois de emissão estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U180",
+          "U126"
+         ]
+        },
+        {
+         "code": "U182",
+         "number": 182,
+         "objective": "Chegar ao agudo por ligadura antes de atacá-lo diretamente",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U181",
+          "U127"
+         ]
+        },
+        {
+         "code": "U183",
+         "number": 183,
+         "objective": "Atacar com leveza uma nota aguda acessível",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U182",
+          "U128"
+         ]
+        },
+        {
+         "code": "U184",
+         "number": 184,
+         "objective": "Voltar ao médio depois do agudo sem tensão",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U183",
+          "U129"
+         ]
+        },
+        {
+         "code": "U185",
+         "number": 185,
+         "objective": "Revisar com o professor a extensão disponível",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U184",
+          "U130"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M09-S06",
+       "number": 6,
+       "title": "Estudo com registros",
+       "units": [
+        {
+         "code": "U186",
+         "number": 186,
+         "objective": "Ler um estudo que conecta registros",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U185",
+          "U106"
+         ]
+        },
+        {
+         "code": "U187",
+         "number": 187,
+         "objective": "Isolar a passagem entre registros mais difícil",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U186",
+          "U107"
+         ]
+        },
+        {
+         "code": "U188",
+         "number": 188,
+         "objective": "Planejar descanso dentro do estudo",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U187",
+          "U108"
+         ]
+        },
+        {
+         "code": "U189",
+         "number": 189,
+         "objective": "Gravar e avaliar a conexão entre registros",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U188",
+          "U109"
+         ]
+        },
+        {
+         "code": "U190",
+         "number": 190,
+         "objective": "Conectar notas e registros em estudo musical curto",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U189",
+          "U110"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M10",
+     "number": 10,
+     "title": "Ritmos e tonalidades em expansão",
+     "sequences": [
+      {
+       "id": "M10-S01",
+       "number": 1,
+       "title": "Pontuados",
+       "units": [
+        {
+         "code": "U191",
+         "number": 191,
+         "objective": "Sentir no corpo a semínima pontuada",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U190",
+          "U096"
+         ]
+        },
+        {
+         "code": "U192",
+         "number": 192,
+         "objective": "Ler e tocar semínima pontuada com colcheia",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U191",
+          "U097"
+         ]
+        },
+        {
+         "code": "U193",
+         "number": 193,
+         "objective": "Ler colcheia pontuada com semicolcheia",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U192",
+          "U098"
+         ]
+        },
+        {
+         "code": "U194",
+         "number": 194,
+         "objective": "Comparar ritmos pontuados de ouvido",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U193",
+          "U099"
+         ]
+        },
+        {
+         "code": "U195",
+         "number": 195,
+         "objective": "Aplicar pontuados em uma marcha",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U194",
+          "U100"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M10-S02",
+       "number": 2,
+       "title": "Síncopes",
+       "units": [
+        {
+         "code": "U196",
+         "number": 196,
+         "objective": "Bater e cantar uma síncope sobre o pulso",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U195",
+          "U191"
+         ]
+        },
+        {
+         "code": "U197",
+         "number": 197,
+         "objective": "Tocar síncopes em uma nota",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U196",
+          "U192"
+         ]
+        },
+        {
+         "code": "U198",
+         "number": 198,
+         "objective": "Ler síncopes em uma melodia",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U197",
+          "U193"
+         ]
+        },
+        {
+         "code": "U199",
+         "number": 199,
+         "objective": "Reconhecer síncopes em música brasileira",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U198",
+          "U194"
+         ]
+        },
+        {
+         "code": "U200",
+         "number": 200,
+         "objective": "Tocar síncopes com acompanhamento",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U199",
+          "U195"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M10-S03",
+       "number": 3,
+       "title": "Compasso composto",
+       "units": [
+        {
+         "code": "U201",
+         "number": 201,
+         "objective": "Sentir o pulso dividido em três",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U200",
+          "U096"
+         ]
+        },
+        {
+         "code": "U202",
+         "number": 202,
+         "objective": "Ler em seis por oito",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U201",
+          "U097"
+         ]
+        },
+        {
+         "code": "U203",
+         "number": 203,
+         "objective": "Tocar uma melodia em seis por oito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U202",
+          "U098"
+         ]
+        },
+        {
+         "code": "U204",
+         "number": 204,
+         "objective": "Diferenciar de ouvido compasso simples e composto",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U203",
+          "U099"
+         ]
+        },
+        {
+         "code": "U205",
+         "number": 205,
+         "objective": "Criar um ritmo em compasso composto",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U204",
+          "U100"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M10-S04",
+       "number": 4,
+       "title": "Ré e si bemol maiores escritos",
+       "units": [
+        {
+         "code": "U206",
+         "number": 206,
+         "objective": "Localizar as alterações de ré maior escrito",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U205",
+          "U116"
+         ]
+        },
+        {
+         "code": "U207",
+         "number": 207,
+         "objective": "Tocar segmento e escala de ré maior escrito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U206",
+          "U117"
+         ]
+        },
+        {
+         "code": "U208",
+         "number": 208,
+         "objective": "Localizar as alterações de si bemol maior escrito",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U207",
+          "U118"
+         ]
+        },
+        {
+         "code": "U209",
+         "number": 209,
+         "objective": "Tocar segmento e escala de si bemol maior escrito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U208",
+          "U119"
+         ]
+        },
+        {
+         "code": "U210",
+         "number": 210,
+         "objective": "Ler uma melodia em cada tonalidade",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U209",
+          "U120"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M10-S05",
+       "number": 5,
+       "title": "Menores iniciais",
+       "units": [
+        {
+         "code": "U211",
+         "number": 211,
+         "objective": "Ouvir a diferença entre maior e menor",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U210",
+          "U206"
+         ]
+        },
+        {
+         "code": "U212",
+         "number": 212,
+         "objective": "Tocar um segmento de lá menor escrito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U211",
+          "U207"
+         ]
+        },
+        {
+         "code": "U213",
+         "number": 213,
+         "objective": "Tocar um segmento de ré menor escrito",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U212",
+          "U208"
+         ]
+        },
+        {
+         "code": "U214",
+         "number": 214,
+         "objective": "Tocar uma melodia em tonalidade menor",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U213",
+          "U209"
+         ]
+        },
+        {
+         "code": "U215",
+         "number": 215,
+         "objective": "Criar em menor uma variação de uma melodia maior",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U214",
+          "U210"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M10-S06",
+       "number": 6,
+       "title": "Leitura nova",
+       "units": [
+        {
+         "code": "U216",
+         "number": 216,
+         "objective": "Examinar um trecho novo antes de tocar",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U215",
+          "U106"
+         ]
+        },
+        {
+         "code": "U217",
+         "number": 217,
+         "objective": "Ensaiar ritmo e digitação sem emissão",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U216",
+          "U107"
+         ]
+        },
+        {
+         "code": "U218",
+         "number": 218,
+         "objective": "Ler um trecho novo com um colega",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U217",
+          "U108"
+         ]
+        },
+        {
+         "code": "U219",
+         "number": 219,
+         "objective": "Ler sem aumentar ao mesmo tempo extensão e dificuldade rítmica",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U218",
+          "U109"
+         ]
+        },
+        {
+         "code": "U220",
+         "number": 220,
+         "objective": "Ler e tocar trecho novo com elementos já estudados",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U219",
+          "U110"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M11",
+     "number": 11,
+     "title": "Afinação e interpretação",
+     "sequences": [
+      {
+       "id": "M11-S01",
+       "number": 1,
+       "title": "Referência auditiva",
+       "units": [
+        {
+         "code": "U221",
+         "number": 221,
+         "objective": "Tocar junto com uma nota de referência",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U220",
+          "U141"
+         ]
+        },
+        {
+         "code": "U222",
+         "number": 222,
+         "objective": "Perceber batimentos entre duas notas",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U221",
+          "U142"
+         ]
+        },
+        {
+         "code": "U223",
+         "number": 223,
+         "objective": "Dizer se a nota está acima ou abaixo da referência",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U222",
+          "U143"
+         ]
+        },
+        {
+         "code": "U224",
+         "number": 224,
+         "objective": "Usar o afinador para conferir o som real",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U223",
+          "U144"
+         ]
+        },
+        {
+         "code": "U225",
+         "number": 225,
+         "objective": "Comparar a própria percepção com o afinador",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U224",
+          "U145"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M11-S02",
+       "number": 2,
+       "title": "Bombas de afinação",
+       "units": [
+        {
+         "code": "U226",
+         "number": 226,
+         "objective": "Ajustar a bomba geral de afinação",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U225",
+          "U221"
+         ]
+        },
+        {
+         "code": "U227",
+         "number": 227,
+         "objective": "Conhecer as bombas do primeiro e do terceiro pistões",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U226",
+          "U222"
+         ]
+        },
+        {
+         "code": "U228",
+         "number": 228,
+         "objective": "Ajustar notas que tendem a desafinar",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U227",
+          "U223"
+         ]
+        },
+        {
+         "code": "U229",
+         "number": 229,
+         "objective": "Afinar o instrumento antes de tocar em grupo",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U228",
+          "U224"
+         ]
+        },
+        {
+         "code": "U230",
+         "number": 230,
+         "objective": "Registrar as notas que pedem atenção na afinação",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U229",
+          "U225"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M11-S03",
+       "number": 3,
+       "title": "Nuances",
+       "units": [
+        {
+         "code": "U231",
+         "number": 231,
+         "objective": "Tocar piano e forte com som estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U230",
+          "U081"
+         ]
+        },
+        {
+         "code": "U232",
+         "number": 232,
+         "objective": "Fazer crescendo e diminuendo em nota longa",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U231",
+          "U082"
+         ]
+        },
+        {
+         "code": "U233",
+         "number": 233,
+         "objective": "Manter a afinação ao mudar de dinâmica",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U232",
+          "U083"
+         ]
+        },
+        {
+         "code": "U234",
+         "number": 234,
+         "objective": "Ler indicações de dinâmica em uma peça",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U233",
+          "U084"
+         ]
+        },
+        {
+         "code": "U235",
+         "number": 235,
+         "objective": "Aplicar dinâmicas em uma frase",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U234",
+          "U085"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M11-S04",
+       "number": 4,
+       "title": "Articulações",
+       "units": [
+        {
+         "code": "U236",
+         "number": 236,
+         "objective": "Tocar staccato leve",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U235",
+          "U076"
+         ]
+        },
+        {
+         "code": "U237",
+         "number": 237,
+         "objective": "Tocar acentos sem forçar o som",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U236",
+          "U077"
+         ]
+        },
+        {
+         "code": "U238",
+         "number": 238,
+         "objective": "Tocar tenuto e legato de língua",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U237",
+          "U078"
+         ]
+        },
+        {
+         "code": "U239",
+         "number": 239,
+         "objective": "Reconhecer articulações em uma gravação",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U238",
+          "U079"
+         ]
+        },
+        {
+         "code": "U240",
+         "number": 240,
+         "objective": "Escolher articulações para uma melodia sem indicação",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U239",
+          "U080"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M11-S05",
+       "number": 5,
+       "title": "Fraseado",
+       "units": [
+        {
+         "code": "U241",
+         "number": 241,
+         "objective": "Encontrar o ponto culminante de uma frase",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U240",
+          "U136"
+         ]
+        },
+        {
+         "code": "U242",
+         "number": 242,
+         "objective": "Planejar respiração e dinâmica de uma peça",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U241",
+          "U137"
+         ]
+        },
+        {
+         "code": "U243",
+         "number": 243,
+         "objective": "Tocar a mesma frase com dois caracteres",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U242",
+          "U138"
+         ]
+        },
+        {
+         "code": "U244",
+         "number": 244,
+         "objective": "Ouvir duas interpretações e descrever as escolhas",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U243",
+          "U139"
+         ]
+        },
+        {
+         "code": "U245",
+         "number": 245,
+         "objective": "Tocar uma peça com fraseado próprio",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U244",
+          "U140"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M11-S06",
+       "number": 6,
+       "title": "Revisar a interpretação",
+       "units": [
+        {
+         "code": "U246",
+         "number": 246,
+         "objective": "Gravar uma peça inteira",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U245",
+          "U156"
+         ]
+        },
+        {
+         "code": "U247",
+         "number": 247,
+         "objective": "Listar três pontos a melhorar na gravação",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U246",
+          "U157"
+         ]
+        },
+        {
+         "code": "U248",
+         "number": 248,
+         "objective": "Trabalhar um ponto por vez",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U247",
+          "U158"
+         ]
+        },
+        {
+         "code": "U249",
+         "number": 249,
+         "objective": "Tocar com acompanhamento ajustando a afinação",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U248",
+          "U159"
+         ]
+        },
+        {
+         "code": "U250",
+         "number": 250,
+         "objective": "Revisar a própria interpretação e ajustar-se ao acompanhamento",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U249",
+          "U160"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M12",
+     "number": 12,
+     "title": "Conjunto, criação e autonomia",
+     "sequences": [
+      {
+       "id": "M12-S01",
+       "number": 1,
+       "title": "Entradas após pausas",
+       "units": [
+        {
+         "code": "U251",
+         "number": 251,
+         "objective": "Contar compassos de espera",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U250",
+          "U151"
+         ]
+        },
+        {
+         "code": "U252",
+         "number": 252,
+         "objective": "Entrar com segurança depois de uma pausa longa",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U251",
+          "U152"
+         ]
+        },
+        {
+         "code": "U253",
+         "number": 253,
+         "objective": "Preparar ar e postura antes da entrada",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U252",
+          "U153"
+         ]
+        },
+        {
+         "code": "U254",
+         "number": 254,
+         "objective": "Seguir o gesto de um regente ou colega",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U253",
+          "U154"
+         ]
+        },
+        {
+         "code": "U255",
+         "number": 255,
+         "objective": "Tocar em conjunto uma peça com várias entradas",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U254",
+          "U155"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M12-S02",
+       "number": 2,
+       "title": "Equilíbrio",
+       "units": [
+        {
+         "code": "U256",
+         "number": 256,
+         "objective": "Ouvir o grupo enquanto toca",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U255",
+          "U151"
+         ]
+        },
+        {
+         "code": "U257",
+         "number": 257,
+         "objective": "Diferenciar melodia e acompanhamento no conjunto",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U256",
+          "U152"
+         ]
+        },
+        {
+         "code": "U258",
+         "number": 258,
+         "objective": "Ajustar o volume à própria função",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U257",
+          "U153"
+         ]
+        },
+        {
+         "code": "U259",
+         "number": 259,
+         "objective": "Afinar com outros instrumentos",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U258",
+          "U154"
+         ]
+        },
+        {
+         "code": "U260",
+         "number": 260,
+         "objective": "Tocar em trio ou quarteto",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U259",
+          "U155"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M12-S03",
+       "number": 3,
+       "title": "Improvisação",
+       "units": [
+        {
+         "code": "U261",
+         "number": 261,
+         "objective": "Improvisar sobre uma nota pedal",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U260",
+          "U146"
+         ]
+        },
+        {
+         "code": "U262",
+         "number": 262,
+         "objective": "Improvisar com uma escala sobre um acompanhamento",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U261",
+          "U147"
+         ]
+        },
+        {
+         "code": "U263",
+         "number": 263,
+         "objective": "Responder a um motivo improvisado",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U262",
+          "U148"
+         ]
+        },
+        {
+         "code": "U264",
+         "number": 264,
+         "objective": "Usar pausas na improvisação",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U263",
+          "U149"
+         ]
+        },
+        {
+         "code": "U265",
+         "number": 265,
+         "objective": "Improvisar uma forma curta com início e fim",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U264",
+          "U150"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M12-S04",
+       "number": 4,
+       "title": "Composição",
+       "units": [
+        {
+         "code": "U266",
+         "number": 266,
+         "objective": "Escolher uma forma em duas partes",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U265",
+          "U146"
+         ]
+        },
+        {
+         "code": "U267",
+         "number": 267,
+         "objective": "Escrever uma melodia para trompete na extensão disponível",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U266",
+          "U147"
+         ]
+        },
+        {
+         "code": "U268",
+         "number": 268,
+         "objective": "Escrever uma segunda voz simples",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U267",
+          "U148"
+         ]
+        },
+        {
+         "code": "U269",
+         "number": 269,
+         "objective": "Revisar a escrita para que seja tocável",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U268",
+          "U149"
+         ]
+        },
+        {
+         "code": "U270",
+         "number": 270,
+         "objective": "Apresentar uma composição curta",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U269",
+          "U150"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M12-S05",
+       "number": 5,
+       "title": "Tempo de emissão e descanso",
+       "units": [
+        {
+         "code": "U271",
+         "number": 271,
+         "objective": "Medir o tempo efetivamente tocado em uma sessão",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U270",
+          "U166"
+         ]
+        },
+        {
+         "code": "U272",
+         "number": 272,
+         "objective": "Distribuir pausas ao longo do estudo",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U271",
+          "U167"
+         ]
+        },
+        {
+         "code": "U273",
+         "number": 273,
+         "objective": "Incluir no plano escuta e leitura sem emissão",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U272",
+          "U168"
+         ]
+        },
+        {
+         "code": "U274",
+         "number": 274,
+         "objective": "Fazer estudo mental de uma peça",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U273",
+          "U169"
+         ]
+        },
+        {
+         "code": "U275",
+         "number": 275,
+         "objective": "Ajustar o plano depois de uma semana",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U274",
+          "U170"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M12-S06",
+       "number": 6,
+       "title": "Projeto intermediário",
+       "units": [
+        {
+         "code": "U276",
+         "number": 276,
+         "objective": "Escolher com o professor o repertório do projeto",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U275",
+          "U156"
+         ]
+        },
+        {
+         "code": "U277",
+         "number": 277,
+         "objective": "Ensaiar a peça de conjunto do projeto",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U276",
+          "U157"
+         ]
+        },
+        {
+         "code": "U278",
+         "number": 278,
+         "objective": "Preparar a criação para apresentação",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U277",
+          "U158"
+         ]
+        },
+        {
+         "code": "U279",
+         "number": 279,
+         "objective": "Revisar o plano de estudo do projeto",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U278",
+          "U159"
+         ]
+        },
+        {
+         "code": "U280",
+         "number": 280,
+         "objective": "Apresentar repertório de conjunto, criação e plano de estudo",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U279",
+          "U160"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "avancado",
+   "title": "Avançado",
+   "minutesPerMicroLesson": 12,
+   "modules": [
+    {
+     "id": "M13",
+     "number": 13,
+     "title": "Técnica integrada e eficiência",
+     "sequences": [
+      {
+       "id": "M13-S01",
+       "number": 1,
+       "title": "Cromatismo",
+       "units": [
+        {
+         "code": "U281",
+         "number": 281,
+         "objective": "Tocar a escala cromática em segmentos",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U280",
+          "U086"
+         ]
+        },
+        {
+         "code": "U282",
+         "number": 282,
+         "objective": "Coordenar os pistões em passagens cromáticas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U281",
+          "U087"
+         ]
+        },
+        {
+         "code": "U283",
+         "number": 283,
+         "objective": "Ler alterações cromáticas em um estudo",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U282",
+          "U088"
+         ]
+        },
+        {
+         "code": "U284",
+         "number": 284,
+         "objective": "Usar digitações alternativas indicadas pelo professor",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U283",
+          "U089"
+         ]
+        },
+        {
+         "code": "U285",
+         "number": 285,
+         "objective": "Aplicar cromatismo em trecho de repertório",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U284",
+          "U090"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M13-S02",
+       "number": 2,
+       "title": "Escalas e arpejos",
+       "units": [
+        {
+         "code": "U286",
+         "number": 286,
+         "objective": "Tocar escalas maiores em mais tonalidades",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U285",
+          "U131"
+         ]
+        },
+        {
+         "code": "U287",
+         "number": 287,
+         "objective": "Tocar escalas menores harmônicas e melódicas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U286",
+          "U132"
+         ]
+        },
+        {
+         "code": "U288",
+         "number": 288,
+         "objective": "Tocar arpejos maiores e menores ligados",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U287",
+          "U133"
+         ]
+        },
+        {
+         "code": "U289",
+         "number": 289,
+         "objective": "Variar ritmo e articulação nas escalas",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U288",
+          "U134"
+         ]
+        },
+        {
+         "code": "U290",
+         "number": 290,
+         "objective": "Planejar um ciclo de escalas para o mês",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U289",
+          "U135"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M13-S03",
+       "number": 3,
+       "title": "Coordenação rápida",
+       "units": [
+        {
+         "code": "U291",
+         "number": 291,
+         "objective": "Aumentar o andamento sem perder a coordenação",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U290",
+          "U101"
+         ]
+        },
+        {
+         "code": "U292",
+         "number": 292,
+         "objective": "Isolar a mudança de pistões mais difícil",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U291",
+          "U102"
+         ]
+        },
+        {
+         "code": "U293",
+         "number": 293,
+         "objective": "Agrupar notas em blocos ao estudar",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U292",
+          "U103"
+         ]
+        },
+        {
+         "code": "U294",
+         "number": 294,
+         "objective": "Ouvir se dedos e língua estão juntos",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U293",
+          "U104"
+         ]
+        },
+        {
+         "code": "U295",
+         "number": 295,
+         "objective": "Tocar uma passagem rápida com som estável",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U294",
+          "U105"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M13-S04",
+       "number": 4,
+       "title": "Articulação múltipla",
+       "units": [
+        {
+         "code": "U296",
+         "number": 296,
+         "objective": "Ouvir articulação dupla e tripla em repertório",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U295",
+          "U066"
+         ]
+        },
+        {
+         "code": "U297",
+         "number": 297,
+         "objective": "Falar as sílabas da articulação dupla sem tocar",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U296",
+          "U067"
+         ]
+        },
+        {
+         "code": "U298",
+         "number": 298,
+         "objective": "Tocar articulação dupla devagar em uma nota",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U297",
+          "U068"
+         ]
+        },
+        {
+         "code": "U299",
+         "number": 299,
+         "objective": "Tocar articulação tripla devagar em uma nota",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U298",
+          "U069"
+         ]
+        },
+        {
+         "code": "U300",
+         "number": 300,
+         "objective": "Aplicar articulação múltipla onde a música pede",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U299",
+          "U070"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M13-S05",
+       "number": 5,
+       "title": "Eficiência e descanso",
+       "units": [
+        {
+         "code": "U301",
+         "number": 301,
+         "objective": "Distribuir o esforço ao longo de uma peça",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U300",
+          "U271"
+         ]
+        },
+        {
+         "code": "U302",
+         "number": 302,
+         "objective": "Identificar pontos de descanso no repertório",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U301",
+          "U272"
+         ]
+        },
+        {
+         "code": "U303",
+         "number": 303,
+         "objective": "Reduzir tensão desnecessária em trechos difíceis",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U302",
+          "U273"
+         ]
+        },
+        {
+         "code": "U304",
+         "number": 304,
+         "objective": "Recuperar a qualidade depois de uma pausa curta",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U303",
+          "U274"
+         ]
+        },
+        {
+         "code": "U305",
+         "number": 305,
+         "objective": "Ajustar o estudo quando há sinais de fadiga",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U304",
+          "U275"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M13-S06",
+       "number": 6,
+       "title": "Técnica no repertório",
+       "units": [
+        {
+         "code": "U306",
+         "number": 306,
+         "objective": "Escolher um estudo técnico representativo",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U305",
+          "U186"
+         ]
+        },
+        {
+         "code": "U307",
+         "number": 307,
+         "objective": "Preparar o estudo por seções",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U306",
+          "U187"
+         ]
+        },
+        {
+         "code": "U308",
+         "number": 308,
+         "objective": "Ligar o estudo a um trecho de repertório",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U307",
+          "U188"
+         ]
+        },
+        {
+         "code": "U309",
+         "number": 309,
+         "objective": "Gravar estudo e trecho e comparar",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U308",
+          "U189"
+         ]
+        },
+        {
+         "code": "U310",
+         "number": 310,
+         "objective": "Aplicar recursos técnicos em estudo e trecho de repertório",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U309",
+          "U190"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M14",
+     "number": 14,
+     "title": "Estilos e recursos expressivos",
+     "sequences": [
+      {
+       "id": "M14-S01",
+       "number": 1,
+       "title": "Linguagem de concerto",
+       "units": [
+        {
+         "code": "U311",
+         "number": 311,
+         "objective": "Ouvir obras de concerto para trompete",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U310",
+          "U241"
+         ]
+        },
+        {
+         "code": "U312",
+         "number": 312,
+         "objective": "Tocar um movimento lento com som cantado",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U311",
+          "U242"
+         ]
+        },
+        {
+         "code": "U313",
+         "number": 313,
+         "objective": "Tocar um movimento rápido com articulação clara",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U312",
+          "U243"
+         ]
+        },
+        {
+         "code": "U314",
+         "number": 314,
+         "objective": "Ler indicações de caráter e andamento",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U313",
+          "U244"
+         ]
+        },
+        {
+         "code": "U315",
+         "number": 315,
+         "objective": "Justificar escolhas de interpretação em uma obra de concerto",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U314",
+          "U245"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M14-S02",
+       "number": 2,
+       "title": "Repertório brasileiro",
+       "units": [
+        {
+         "code": "U316",
+         "number": 316,
+         "objective": "Ouvir gêneros brasileiros com trompete",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U315",
+          "U196"
+         ]
+        },
+        {
+         "code": "U317",
+         "number": 317,
+         "objective": "Tocar uma melodia brasileira adaptada ao nível",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U316",
+          "U197"
+         ]
+        },
+        {
+         "code": "U318",
+         "number": 318,
+         "objective": "Tocar síncopes com o balanço do gênero",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U317",
+          "U198"
+         ]
+        },
+        {
+         "code": "U319",
+         "number": 319,
+         "objective": "Tocar com acompanhamento de base brasileira",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U318",
+          "U199"
+         ]
+        },
+        {
+         "code": "U320",
+         "number": 320,
+         "objective": "Pesquisar autoria e origem de uma peça",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U319",
+          "U200"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M14-S03",
+       "number": 3,
+       "title": "Jazz introdutório",
+       "units": [
+        {
+         "code": "U321",
+         "number": 321,
+         "objective": "Ouvir o fraseado de trompetistas de jazz",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U320",
+          "U261"
+         ]
+        },
+        {
+         "code": "U322",
+         "number": 322,
+         "objective": "Tocar colcheias com balanço",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U321",
+          "U262"
+         ]
+        },
+        {
+         "code": "U323",
+         "number": 323,
+         "objective": "Tocar uma melodia de blues",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U322",
+          "U263"
+         ]
+        },
+        {
+         "code": "U324",
+         "number": 324,
+         "objective": "Improvisar com a escala de blues",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U323",
+          "U264"
+         ]
+        },
+        {
+         "code": "U325",
+         "number": 325,
+         "objective": "Tocar com uma base de jazz",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U324",
+          "U265"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M14-S04",
+       "number": 4,
+       "title": "Surdinas",
+       "units": [
+        {
+         "code": "U326",
+         "number": 326,
+         "objective": "Conhecer os tipos de surdina",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U325",
+          "U226"
+         ]
+        },
+        {
+         "code": "U327",
+         "number": 327,
+         "objective": "Instalar e retirar a surdina com segurança",
+         "type": "cuidado",
+         "checkpoint": false,
+         "review": [
+          "U326",
+          "U227"
+         ]
+        },
+        {
+         "code": "U328",
+         "number": 328,
+         "objective": "Ouvir a mudança de timbre com surdina",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U327",
+          "U228"
+         ]
+        },
+        {
+         "code": "U329",
+         "number": 329,
+         "objective": "Conferir a afinação com surdina",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U328",
+          "U229"
+         ]
+        },
+        {
+         "code": "U330",
+         "number": 330,
+         "objective": "Usar surdina em um trecho de repertório",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U329",
+          "U230"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M14-S05",
+       "number": 5,
+       "title": "Recursos expressivos",
+       "units": [
+        {
+         "code": "U331",
+         "number": 331,
+         "objective": "Usar vibrato quando o estilo pedir",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U330",
+          "U231"
+         ]
+        },
+        {
+         "code": "U332",
+         "number": 332,
+         "objective": "Variar timbre e cor do som",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U331",
+          "U232"
+         ]
+        },
+        {
+         "code": "U333",
+         "number": 333,
+         "objective": "Tocar nuances extremas sem perder o controle",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U332",
+          "U233"
+         ]
+        },
+        {
+         "code": "U334",
+         "number": 334,
+         "objective": "Comparar recursos expressivos em dois estilos",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U333",
+          "U234"
+         ]
+        },
+        {
+         "code": "U335",
+         "number": 335,
+         "objective": "Criar uma interpretação com recursos escolhidos",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U334",
+          "U235"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M14-S06",
+       "number": 6,
+       "title": "Programa contrastante",
+       "units": [
+        {
+         "code": "U336",
+         "number": 336,
+         "objective": "Montar um programa com estilos diferentes",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U335",
+          "U276"
+         ]
+        },
+        {
+         "code": "U337",
+         "number": 337,
+         "objective": "Preparar as transições entre as peças",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U336",
+          "U277"
+         ]
+        },
+        {
+         "code": "U338",
+         "number": 338,
+         "objective": "Ensaiar o programa com acompanhamento",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U337",
+          "U278"
+         ]
+        },
+        {
+         "code": "U339",
+         "number": 339,
+         "objective": "Escrever notas de programa sobre as escolhas",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U338",
+          "U279"
+         ]
+        },
+        {
+         "code": "U340",
+         "number": 340,
+         "objective": "Interpretar peças contrastantes e justificar escolhas estilísticas",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U339",
+          "U280"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M15",
+     "number": 15,
+     "title": "Leitura, transposição e colaboração",
+     "sequences": [
+      {
+       "id": "M15-S01",
+       "number": 1,
+       "title": "Primeira vista",
+       "units": [
+        {
+         "code": "U341",
+         "number": 341,
+         "objective": "Examinar tonalidade, compasso e ritmo antes de ler",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U340",
+          "U216"
+         ]
+        },
+        {
+         "code": "U342",
+         "number": 342,
+         "objective": "Ler à primeira vista sem parar",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U341",
+          "U217"
+         ]
+        },
+        {
+         "code": "U343",
+         "number": 343,
+         "objective": "Ler à primeira vista em conjunto",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U342",
+          "U218"
+         ]
+        },
+        {
+         "code": "U344",
+         "number": 344,
+         "objective": "Identificar padrões conhecidos em leitura nova",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U343",
+          "U219"
+         ]
+        },
+        {
+         "code": "U345",
+         "number": 345,
+         "objective": "Ler trecho abaixo do nível do repertório preparado",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U344",
+          "U220"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M15-S02",
+       "number": 2,
+       "title": "Escrita e som real",
+       "units": [
+        {
+         "code": "U346",
+         "number": 346,
+         "objective": "Escrever o som real de uma melodia para trompete em si bemol",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U345",
+          "U141"
+         ]
+        },
+        {
+         "code": "U347",
+         "number": 347,
+         "objective": "Ler uma parte em dó com orientação",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U346",
+          "U142"
+         ]
+        },
+        {
+         "code": "U348",
+         "number": 348,
+         "objective": "Tocar com um instrumento em dó a partir de partes diferentes",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U347",
+          "U143"
+         ]
+        },
+        {
+         "code": "U349",
+         "number": 349,
+         "objective": "Conferir no afinador o som real de uma frase",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U348",
+          "U144"
+         ]
+        },
+        {
+         "code": "U350",
+         "number": 350,
+         "objective": "Explicar a um colega a relação entre escrita e som real",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U349",
+          "U145"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M15-S03",
+       "number": 3,
+       "title": "Transposição gradual",
+       "units": [
+        {
+         "code": "U351",
+         "number": 351,
+         "objective": "Transpor por escrito uma melodia simples um tom acima",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U350",
+          "U346"
+         ]
+        },
+        {
+         "code": "U352",
+         "number": 352,
+         "objective": "Transpor de ouvido uma melodia conhecida",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U351",
+          "U347"
+         ]
+        },
+        {
+         "code": "U353",
+         "number": 353,
+         "objective": "Transpor um trecho curto à primeira vista com apoio",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U352",
+          "U348"
+         ]
+        },
+        {
+         "code": "U354",
+         "number": 354,
+         "objective": "Comparar a transposição com a parte escrita",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U353",
+          "U349"
+         ]
+        },
+        {
+         "code": "U355",
+         "number": 355,
+         "objective": "Tocar em conjunto a partir de uma parte transposta",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U354",
+          "U350"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M15-S04",
+       "number": 4,
+       "title": "Ensaio",
+       "units": [
+        {
+         "code": "U356",
+         "number": 356,
+         "objective": "Preparar uma parte nova antes do ensaio",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U355",
+          "U251"
+         ]
+        },
+        {
+         "code": "U357",
+         "number": 357,
+         "objective": "Marcar na parte as decisões do ensaio",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U356",
+          "U252"
+         ]
+        },
+        {
+         "code": "U358",
+         "number": 358,
+         "objective": "Propor uma solução para um problema do grupo",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U357",
+          "U253"
+         ]
+        },
+        {
+         "code": "U359",
+         "number": 359,
+         "objective": "Negociar uma decisão musical com o grupo",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U358",
+          "U254"
+         ]
+        },
+        {
+         "code": "U360",
+         "number": 360,
+         "objective": "Avaliar o ensaio e planejar o próximo",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U359",
+          "U255"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M15-S05",
+       "number": 5,
+       "title": "Música de câmara",
+       "units": [
+        {
+         "code": "U361",
+         "number": 361,
+         "objective": "Ensaiar em grupo de metais ou de câmara",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U360",
+          "U256"
+         ]
+        },
+        {
+         "code": "U362",
+         "number": 362,
+         "objective": "Conduzir uma entrada com gesto",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U361",
+          "U257"
+         ]
+        },
+        {
+         "code": "U363",
+         "number": 363,
+         "objective": "Equilibrar timbre com outros instrumentos de metal",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U362",
+          "U258"
+         ]
+        },
+        {
+         "code": "U364",
+         "number": 364,
+         "objective": "Ajustar a afinação em acordes do grupo",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U363",
+          "U259"
+         ]
+        },
+        {
+         "code": "U365",
+         "number": 365,
+         "objective": "Fazer um arranjo para duas ou três vozes",
+         "type": "criacao",
+         "checkpoint": false,
+         "review": [
+          "U364",
+          "U260"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M15-S06",
+       "number": 6,
+       "title": "Autonomia diante do novo",
+       "units": [
+        {
+         "code": "U366",
+         "number": 366,
+         "objective": "Escolher uma obra nova com o professor",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U365",
+          "U271"
+         ]
+        },
+        {
+         "code": "U367",
+         "number": 367,
+         "objective": "Planejar o estudo sem roteiro pronto",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U366",
+          "U272"
+         ]
+        },
+        {
+         "code": "U368",
+         "number": 368,
+         "objective": "Buscar gravações e edições confiáveis",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U367",
+          "U273"
+         ]
+        },
+        {
+         "code": "U369",
+         "number": 369,
+         "objective": "Pedir orientação com perguntas específicas",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U368",
+          "U274"
+         ]
+        },
+        {
+         "code": "U370",
+         "number": 370,
+         "objective": "Preparar uma parte nova e colaborar com autonomia em conjunto",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U369",
+          "U275"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "M16",
+     "number": 16,
+     "title": "Projeto final e continuidade",
+     "sequences": [
+      {
+       "id": "M16-S01",
+       "number": 1,
+       "title": "Curadoria",
+       "units": [
+        {
+         "code": "U371",
+         "number": 371,
+         "objective": "Definir os critérios do programa final",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U370",
+          "U336"
+         ]
+        },
+        {
+         "code": "U372",
+         "number": 372,
+         "objective": "Selecionar três obras contrastantes",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U371",
+          "U337"
+         ]
+        },
+        {
+         "code": "U373",
+         "number": 373,
+         "objective": "Conferir extensão, carga de execução e duração do programa",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U372",
+          "U338"
+         ]
+        },
+        {
+         "code": "U374",
+         "number": 374,
+         "objective": "Escolher o estudo técnico do projeto",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U373",
+          "U339"
+         ]
+        },
+        {
+         "code": "U375",
+         "number": 375,
+         "objective": "Apresentar ao professor a proposta de programa",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U374",
+          "U340"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M16-S02",
+       "number": 2,
+       "title": "Estudo dirigido pelo aluno",
+       "units": [
+        {
+         "code": "U376",
+         "number": 376,
+         "objective": "Montar o cronograma de preparação",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U375",
+          "U366"
+         ]
+        },
+        {
+         "code": "U377",
+         "number": 377,
+         "objective": "Estudar a primeira obra por seções",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U376",
+          "U367"
+         ]
+        },
+        {
+         "code": "U378",
+         "number": 378,
+         "objective": "Estudar a segunda obra por seções",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U377",
+          "U368"
+         ]
+        },
+        {
+         "code": "U379",
+         "number": 379,
+         "objective": "Estudar a terceira obra por seções",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U378",
+          "U369"
+         ]
+        },
+        {
+         "code": "U380",
+         "number": 380,
+         "objective": "Avaliar o progresso e ajustar o cronograma",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U379",
+          "U370"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M16-S03",
+       "number": 3,
+       "title": "Ensaios",
+       "units": [
+        {
+         "code": "U381",
+         "number": 381,
+         "objective": "Ensaiar com acompanhamento",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U380",
+          "U356"
+         ]
+        },
+        {
+         "code": "U382",
+         "number": 382,
+         "objective": "Ensaiar a peça de conjunto",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U381",
+          "U357"
+         ]
+        },
+        {
+         "code": "U383",
+         "number": 383,
+         "objective": "Fazer um ensaio geral com pausas previstas",
+         "type": "conjunto",
+         "checkpoint": false,
+         "review": [
+          "U382",
+          "U358"
+         ]
+        },
+        {
+         "code": "U384",
+         "number": 384,
+         "objective": "Gravar o ensaio e ouvir",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U383",
+          "U359"
+         ]
+        },
+        {
+         "code": "U385",
+         "number": 385,
+         "objective": "Corrigir os pontos levantados no ensaio",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U384",
+          "U360"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M16-S04",
+       "number": 4,
+       "title": "Leitura e técnica finais",
+       "units": [
+        {
+         "code": "U386",
+         "number": 386,
+         "objective": "Ler um trecho novo em situação de avaliação",
+         "type": "leitura",
+         "checkpoint": false,
+         "review": [
+          "U385",
+          "U341"
+         ]
+        },
+        {
+         "code": "U387",
+         "number": 387,
+         "objective": "Tocar o estudo técnico integral",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U386",
+          "U342"
+         ]
+        },
+        {
+         "code": "U388",
+         "number": 388,
+         "objective": "Revisar escalas e arpejos do programa",
+         "type": "emissao",
+         "checkpoint": false,
+         "review": [
+          "U387",
+          "U343"
+         ]
+        },
+        {
+         "code": "U389",
+         "number": 389,
+         "objective": "Preparar-se para tocar diante de público",
+         "type": "sem-emissao",
+         "checkpoint": false,
+         "review": [
+          "U388",
+          "U344"
+         ]
+        },
+        {
+         "code": "U390",
+         "number": 390,
+         "objective": "Fazer uma apresentação-teste",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U389",
+          "U345"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M16-S05",
+       "number": 5,
+       "title": "Apresentação",
+       "units": [
+        {
+         "code": "U391",
+         "number": 391,
+         "objective": "Apresentar a primeira obra do programa",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U390",
+          "U336"
+         ]
+        },
+        {
+         "code": "U392",
+         "number": 392,
+         "objective": "Apresentar a segunda obra do programa",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U391",
+          "U337"
+         ]
+        },
+        {
+         "code": "U393",
+         "number": 393,
+         "objective": "Apresentar a terceira obra do programa",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U392",
+          "U338"
+         ]
+        },
+        {
+         "code": "U394",
+         "number": 394,
+         "objective": "Tocar a peça de conjunto ou com acompanhamento",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U393",
+          "U339"
+         ]
+        },
+        {
+         "code": "U395",
+         "number": 395,
+         "objective": "Realizar a leitura nova da avaliação final",
+         "type": "demonstracao",
+         "checkpoint": false,
+         "review": [
+          "U394",
+          "U340"
+         ]
+        }
+       ]
+      },
+      {
+       "id": "M16-S06",
+       "number": 6,
+       "title": "Portfólio e continuidade",
+       "units": [
+        {
+         "code": "U396",
+         "number": 396,
+         "objective": "Organizar o portfólio do percurso",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U395",
+          "U276"
+         ]
+        },
+        {
+         "code": "U397",
+         "number": 397,
+         "objective": "Comentar gravações do início e do fim",
+         "type": "escuta",
+         "checkpoint": false,
+         "review": [
+          "U396",
+          "U277"
+         ]
+        },
+        {
+         "code": "U398",
+         "number": 398,
+         "objective": "Conversar sobre as decisões do processo",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U397",
+          "U278"
+         ]
+        },
+        {
+         "code": "U399",
+         "number": 399,
+         "objective": "Planejar os próximos passos de estudo",
+         "type": "registro",
+         "checkpoint": false,
+         "review": [
+          "U398",
+          "U279"
+         ]
+        },
+        {
+         "code": "U400",
+         "number": 400,
+         "objective": "Apresentar programa, leitura, estudo técnico e processo de preparação",
+         "type": "demonstracao",
+         "checkpoint": true,
+         "review": [
+          "U399",
+          "U280"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "note": "Níveis, módulos e faixas de códigos vêm do plano do trompete; sequências e unidades são rascunho do livro e ainda não foram revisadas por professores de trompete. Notas escritas para trompete em si bemol (soam um tom abaixo)."
+}

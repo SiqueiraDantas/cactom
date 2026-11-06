@@ -5,7 +5,6 @@ import {listLocalProfiles} from '../lib/localAuth';
 import {entryFor} from '../lib/ranking';
 import {createProfileStorage} from '../lib/profileStorage';
 import {readStreak,streakSummary} from '../lib/streak';
-import {COURSE_TASKS} from '../lib/recorderFullCourse';
 import {bandLessonName,isBand} from '../lib/bandTrail';
 import {CactomWordmark} from './CactomBrand';
 import {blockProfile,deleteMessage,fetchModeration,setHidden,type ModRow} from '../lib/communityCloud';
@@ -24,10 +23,10 @@ const TYPE:Record<string,string>={app_open:'Abriu o app',login:'Entrou',signup:'
 const TAB:Record<string,string>={learn:'Aprender',scores:'Partituras',streak:'Rojão',achievements:'Conquistas',progress:'Progresso',community:'Comunidade'};
 const when=(iso:string|null)=>iso?new Date(iso).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'—';
 const ms=(n:number|null)=>n===null?'—':n>=1000?`${(n/1000).toFixed(1).replace('.',',')} s`:`${n} ms`;
-const LESSON_NAME=new Map(COURSE_TASKS.map(t=>[t.lesson,t.lessonName]));
 function lessonLabel(id:string){
- const band=/^(TPT|CLA|INI)-/.exec(id);if(band){const i=band[1]==='TPT'?'trumpet-bb':band[1]==='INI'?'iniciacao':'clarinet-bb';const m=/M(\d\d)-L(\d)/.exec(id);return `${INSTR[i]} · ${m?`Unidade ${Number(m[1])}, `:''}${bandLessonName(i,id)}`;}
- const m=/^S\d-M(\d\d)-L0(\d)/.exec(id);return m?`Flauta · Unidade ${Number(m[1])}, ${LESSON_NAME.get(id)??`lição ${m[2]}`}`:id;
+ const f=/^(FLA|TPT)-(U\d{3})-L(\d)/.exec(id);if(f){const i=f[1]==='FLA'?'recorder-soprano':'trumpet-bb';return `${INSTR[i]} · ${f[2]}, ${bandLessonName(i,id)}`;}
+ const band=/^(CLA|INI)-/.exec(id);if(band){const i=band[1]==='INI'?'iniciacao':'clarinet-bb';const m=/M(\d\d)-L(\d)/.exec(id);return `${INSTR[i]} · ${m?`Unidade ${Number(m[1])}, `:''}${bandLessonName(i,id)}`;}
+ return id;
 }
 function users():DevUser[]{
  return listLocalProfiles().map(p=>{let streak=0;try{streak=streakSummary(readStreak(createProfileStorage(p.id))).currentStreak;}catch{/* nada */}

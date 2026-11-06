@@ -4,7 +4,7 @@ import {bandLessons,bandExercises,bandFingering,bandOverview,completeBandLesson,
 import {evaluateCourse,courseScoreEvents} from '../src/lib/recorderFullCourse.ts';
 
 const mem=()=>{const m=new Map();return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)};};
-for(const inst of ['trumpet-bb','clarinet-bb'])test(`${inst}: toda nota é ensinada (tela Nota nova) antes de ser cobrada; exemplos na própria tela; nada de professor`,()=>{
+for(const inst of ['clarinet-bb'])test(`${inst}: toda nota é ensinada (tela Nota nova) antes de ser cobrada; exemplos na própria tela; nada de professor`,()=>{
  const seen=new Set();
  for(const l of bandJourney(inst).stops.flatMap(s=>s.lessonIds).map(id=>({id}))){
   const ex=bandExercises(inst,l.id),meets=new Set(ex.filter(e=>e.kind==='meet').map(e=>e.target));
@@ -24,7 +24,7 @@ for(const inst of ['trumpet-bb','clarinet-bb'])test(`${inst}: toda nota é ensin
  }
  assert.ok(seen.has(66)&&seen.has(70),'Fá♯ e Si♭ ensinados');
 });
-for(const inst of ['trumpet-bb','clarinet-bb'])test(`${inst}: plano igual ao da flauta — 4 seções, 16 módulos, 5 lições por módulo, 3 atividades por lição`,async()=>{
+for(const inst of ['clarinet-bb'])test(`${inst}: plano igual ao da flauta — 4 seções, 16 módulos, 5 lições por módulo, 3 atividades por lição`,async()=>{
  const {bandTrail}=await import('../src/lib/bandTrail.ts');
  const units=bandTrail(inst);assert.equal(units.length,16);assert.deepEqual([...new Set(units.map(u=>u.section))],[1,2,3,4]);
  for(const u of units){assert.equal(u.lessons.length,5);assert.deepEqual(u.lessons.map(l=>l.title),['Descobrir','Discriminar','Executar','Ler e criar','Aplicar e recuperar']);for(const l of u.lessons){assert.equal(l.tasks.length,3);assert.ok(bandExercises(inst,l.id).length>=3,l.id);}}
@@ -35,7 +35,7 @@ test('dedilhados vêm dos cursos existentes: trompete Ré = pistos 1 e 3; clarin
  assert.deepEqual(bandFingering('clarinet-bb',64),['T','1']);assert.deepEqual(bandFingering('clarinet-bb',67),[]);
  assert.deepEqual(bandFingering('trumpet-bb',66),['2']);assert.deepEqual(bandFingering('trumpet-bb',70),['1']);assert.deepEqual(bandFingering('clarinet-bb',66),['1']);assert.deepEqual(bandFingering('clarinet-bb',70),['A','R']);
 });
-for(const inst of ['trumpet-bb','clarinet-bb'])test(`${inst}: mesmo molde da flauta — 4 áreas por unidade, 3 atividades × 2 apresentações (descoberta e exemplo novo) e desafio por seção`,()=>{
+for(const inst of ['clarinet-bb'])test(`${inst}: mesmo molde da flauta — 4 áreas por unidade, 3 atividades × 2 apresentações (descoberta e exemplo novo) e desafio por seção`,()=>{
  const j=bandJourney(inst);assert.equal(j.units.length,16);assert.equal(j.stops.length,68);
  for(const u of j.units){assert.deepEqual(u.stops.slice(0,4).map(s=>s.kind),['descoberta','pratica','criacao','missao']);assert.equal(u.stops[0].lessonIds.length,2,'Descoberta tem duas lições');
   assert.equal(u.stops.length,[4,8,12,16].includes(u.number)?5:4);if(u.stops[4])assert.equal(u.stops[4].kind,'desafio');}
@@ -56,12 +56,12 @@ test('trilha do trompete/clarinete alimenta Rojão, Progresso e Conquistas, com 
  assert.ok(r.ledger.stops['CLA-U01-descoberta'].nextReview,'parada concluída agenda revisão D+1');assert.ok(r.ledger.reviewNeeded.includes(miss[3].id),'o que errou volta na revisão');
  o=bandOverview(s,'clarinet-bb');assert.equal(o.stopsDone,1);assert.equal(o.reviews.length,1);assert.equal(o.current.id,'CLA-U01-pratica');
  assert.equal(bandOverview(s,'trumpet-bb').lessonsDone,0);assert.ok(s.getItem(bandJourneyKey('clarinet-bb')));
- assert.equal(readBand({getItem:()=>'{quebrado'},'trumpet-bb').xp,0);
+ assert.equal(readBand({getItem:()=>'{quebrado'},'clarinet-bb').xp,0);
 });
-test('quem já tinha começado não perde nada: lições do registro antigo entram na trilha nova',()=>{
- const s=mem();s.setItem(bandKey('trumpet-bb'),JSON.stringify({version:1,lessons:{'TPT-M01-L1':{at:'2026-11-01T10:00:00Z',xp:13,total:5,correctFirst:3},'TPT-M01-L2':{at:'2026-11-02T10:00:00Z',xp:12,total:5,correctFirst:2}},xp:25}));
- const {ledger}=readBandJourney(s,'trumpet-bb');assert.equal(ledger.xp,25);assert.ok(ledger.lessons['TPT-M01-L1']&&ledger.lessons['TPT-M01-L2']);
- const o=bandOverview(s,'trumpet-bb');assert.equal(o.stopsDone,1);assert.equal(o.current.id,'TPT-U01-pratica');assert.ok(s.getItem(bandKey('trumpet-bb')),'registro antigo continua lá');
+test('clarinete: quem já tinha começado não perde nada — lições do registro antigo entram na trilha nova',()=>{
+ const s=mem();s.setItem(bandKey('clarinet-bb'),JSON.stringify({version:1,lessons:{'CLA-M01-L1':{at:'2026-11-01T10:00:00Z',xp:13,total:5,correctFirst:3},'CLA-M01-L2':{at:'2026-11-02T10:00:00Z',xp:12,total:5,correctFirst:2}},xp:25}));
+ const {ledger}=readBandJourney(s,'clarinet-bb');assert.equal(ledger.xp,25);assert.ok(ledger.lessons['CLA-M01-L1']&&ledger.lessons['CLA-M01-L2']);
+ const o=bandOverview(s,'clarinet-bb');assert.equal(o.stopsDone,1);assert.equal(o.current.id,'CLA-U01-pratica');assert.ok(s.getItem(bandKey('clarinet-bb')),'registro antigo continua lá');
 });
 test('regência bloqueada: não aparece como curso disponível',async()=>{
  const {availableInstrument,INSTRUMENTS}=await import('../src/lib/instruments.ts');
@@ -81,5 +81,5 @@ test('digitações conferidas com as tabelas: trompete (Tonestro, Si♭ e Dó ig
  for(const [m,v] of Object.entries(C))assert.deepEqual(bandFingering('clarinet-bb',Number(m)),v,'clarinete '+m);
  const {soundingOffset}=await import('../src/lib/bandTrail.ts');assert.equal(soundingOffset('trumpet-bb','sib'),-2);assert.equal(soundingOffset('trumpet-bb','do'),0);assert.equal(soundingOffset('clarinet-bb','do'),-2);
  const first=bandExercises('clarinet-bb','CLA-M01-L1');assert.equal(first[0].kind,'observe');assert.match(first[0].instruction,/Sente/);
- assert.ok(bandExercises('trumpet-bb','TPT-M01-L2').some(e=>e.kind==='observe'&&/embocadura/i.test(e.instruction)));
+ const f=await import('../src/lib/formacao.ts');for(const [i,word] of [['trumpet-bb',/embocadura/i],['recorder-soprano',/boca na flauta/i]]){const u=f.formationUnits(i).find(x=>f.formationPool(i,x).length&&['tecnica','emissao','leitura','conjunto','demonstracao','criacao'].includes(x.type));assert.ok(bandExercises(i,`${u.stopId}-L2`).some(e=>e.kind==='observe'&&word.test(e.instruction)),i);}
 });

@@ -13,3 +13,7 @@
 .learning-main .learn-virtual{padding:8px 14px;border-bottom-width:3px;max-width:520px}
 .learning-main .learn-virtual-art{display:none}
 .learning-main .learn-virtual small{display:none}
+/* Formação (400 unidades): título de cada sequência dentro do módulo */
+.bj-seq{position:relative;z-index:3;margin:18px auto 0;width:fit-content;max-width:100%;background:#fff;border:2px solid #E5E5E5;border-bottom-width:4px;border-radius:14px;padding:6px 14px;font-weight:900;font-size:14px;color:var(--ct-ink,#3c3c3c);text-align:center}
+.bj-seq small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8b86}
+.rj-pop .bj-pop-goal{font-weight:800;color:var(--ct-ink,#3c3c3c)}

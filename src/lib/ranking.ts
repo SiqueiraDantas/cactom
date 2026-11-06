@@ -1,6 +1,6 @@
 import {listLocalProfiles,type LocalProfile} from './localAuth.ts';
 import {createProfileStorage,type KeyValueStorage} from './profileStorage.ts';
-import {readJourney,type JourneyLedger} from './recorderJourney.ts';
+import type {JourneyLedger} from './recorderJourney.ts';
 import {readBandJourney,isBand} from './bandTrail.ts';
 import {readStreak,streakSummary} from './streak.ts';
 
@@ -22,7 +22,7 @@ function summarize(ledger:JourneyLedger){
 }
 export function entryFor(profile:Pick<LocalProfile,'id'|'name'>,instrumentId:string,backing?:KeyValueStorage):RankEntry|null{
  let store;try{store=createProfileStorage(profile.id,backing);}catch{return null;}
- const ledger=instrumentId==='recorder-soprano'?readJourney(store).ledger:isBand(instrumentId)?readBandJourney(store,instrumentId).ledger:null;
+ const ledger=isBand(instrumentId)?readBandJourney(store,instrumentId).ledger:null;
  if(!ledger)return null;
  const s=summarize(ledger);let chosen=false;try{chosen=store.getItem('mis-music-lab-instrument')===instrumentId;}catch{/* nada */}
  if(!s.lessons&&!chosen)return null;

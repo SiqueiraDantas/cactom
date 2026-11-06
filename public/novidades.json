@@ -1,10 +1,11 @@
 {
-  "versao": "2026.11.05",
+  "versao": "2026.11.06",
   "titulo": "Tem novidade no Cactom!",
   "itens": [
-    { "icone": "🎼", "texto": "Partituras de cara nova: tua estante de músicas, com filtro e cartão pra trazer tua partitura." },
-    { "icone": "🔥", "texto": "Seu Rojão mostra a semana e quantos dias faltam pra próxima insígnia." },
-    { "icone": "🏅", "texto": "Progresso virou um álbum: cada unidade concluída vira uma figurinha." },
-    { "icone": "🌵", "texto": "A trilha ganhou detalhes do sertão e botões novos." }
+    { "icone": "🌵", "texto": "Trilha nova na flauta doce e no trompete: do primeiro som à autonomia musical, em 400 unidades." },
+    { "icone": "🧭", "texto": "4 níveis (Iniciação, Básico, Intermediário e Avançado), 16 módulos e um checkpoint no fim de cada módulo." },
+    { "icone": "🎯", "texto": "Cada unidade tem 5 passos: retomar e ouvir, descobrir, praticar, aplicar e demonstrar." },
+    { "icone": "🎶", "texto": "Notas agudas: 2º registro da flauta (polegar meio aberto) e região aguda do trompete." },
+    { "icone": "🔁", "texto": "A trilha de testes antiga saiu. O progresso começa do zero na trilha nova." }
   ]
 }

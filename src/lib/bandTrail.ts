@@ -3,6 +3,8 @@ import type {CourseNote,CourseMeter} from './recorderFullCourse.ts';
 import type {KeyValueStorage} from './profileStorage.ts';
 import {overviewOf,type JourneyOverview} from './journeyOverview.ts';
 import {iniExercises,iniJourney,readIniJourney,completeIniLesson,iniOverview,iniLessonName,iniLessonTasks,iniName,type Clef} from './iniciacao.ts';
+import {isFormation,formationExercises,formationJourney,readFormation,completeFormationLesson,formationOverview,formationLessonName,formationLessonTasks} from './formacao.ts';
+import {recorderNote,HALF_THUMB} from './recorder.ts';
 import {STOP_KINDS,type Evidence,createJourneyEngine,normalizeJourney,readJourney,writeJourney,emptyJourney,lessonXp,type JourneyStop,type JourneyLedger,type LessonOutcome} from './recorderJourney.ts';
 
 /**
@@ -14,23 +16,27 @@ import {STOP_KINDS,type Evidence,createJourneyEngine,normalizeJourney,readJourne
 export type BandInstrument='trumpet-bb'|'clarinet-bb';
 export const BAND_INSTRUMENTS:readonly BandInstrument[]=['trumpet-bb','clarinet-bb'];
 /** Cursos com a trilha de paradas deste arquivo: trompete, clarinete e a Iniciação Musical (sem instrumento). */
-export type TrailCourse=BandInstrument|'iniciacao';
+/** Instrumentos de sopro com dedilhado desenhado: trompete, clarinete e flauta doce soprano. */
+export type Wind=BandInstrument|'recorder-soprano';
+export type TrailCourse=Wind|'iniciacao';
 export const isWind=(id:string):id is BandInstrument=>(BAND_INSTRUMENTS as readonly string[]).includes(id);
-export const isBand=(id:string):id is TrailCourse=>isWind(id)||id==='iniciacao';
+export const isBand=(id:string):id is TrailCourse=>isWind(id)||id==='iniciacao'||id==='recorder-soprano';
 /** Nome da nota no curso (a iniciação também usa a clave de Fá). */
 export const noteName=(i:TrailCourse,midi:number)=>i==='iniciacao'?iniName(midi):NOTE_NAME[midi]??iniName(midi);
-export const NOTE_NAME:Record<number,string>={55:'Sol grave',57:'Lá grave',60:'Dó',62:'Ré',64:'Mi',65:'Fá',66:'Fá♯',67:'Sol',69:'Lá',70:'Si♭',71:'Si',72:'Dó agudo',74:'Ré agudo'};
+export const NOTE_NAME:Record<number,string>={55:'Sol grave',57:'Lá grave',60:'Dó',62:'Ré',64:'Mi',65:'Fá',66:'Fá♯',67:'Sol',69:'Lá',70:'Si♭',71:'Si',72:'Dó agudo',73:'Dó♯ agudo',74:'Ré agudo',75:'Mi♭ agudo',76:'Mi agudo',77:'Fá agudo',78:'Fá♯ agudo',79:'Sol agudo',81:'Lá agudo'};
 
 /**
  * Dedilhados (nota escrita). Trompete: pistos apertados. Clarinete: T = polegar esquerdo (furo de trás),
  * R = chave de registro (polegar), A = chave do Lá, 1–3 = dedos da mão esquerda, 4–6 = dedos da mão direita.
  * Do Dó ao Sol vêm de curriculum.ts / clarinet.ts; as demais são posições padrão de iniciante.
  */
-const TRUMPET:Record<number,string[]>={60:[],62:['1','3'],64:['1','2'],65:['1'],66:['2'],67:[],69:['1','2'],70:['1'],71:['2'],72:[],74:['1']};
+const TRUMPET:Record<number,string[]>={60:[],62:['1','3'],64:['1','2'],65:['1'],66:['2'],67:[],69:['1','2'],70:['1'],71:['2'],72:[],74:['1'],76:['1','2'],77:['1'],78:['2'],79:[],81:['1','2']};
 const CLARINET:Record<number,string[]>={55:['T','1','2','3','4','5','6'],57:['T','1','2','3','4','5'],60:['T','1','2','3'],62:['T','1','2'],64:['T','1'],65:['T'],66:['1'],67:[],69:['A'],70:['A','R']};
-export function bandFingering(instrument:TrailCourse,midi:number):string[]|null{if(instrument==='iniciacao')return null;const t=(instrument==='trumpet-bb'?TRUMPET:CLARINET)[midi];return t?[...t]:null;}
+export function bandFingering(instrument:TrailCourse,midi:number):string[]|null{if(instrument==='iniciacao')return null;
+ if(instrument==='recorder-soprano'){try{return recorderNote(midi).holes!.map(h=>h===0&&HALF_THUMB.has(midi)?'Ø':String(h));}catch{return null;}}const t=(instrument==='trumpet-bb'?TRUMPET:CLARINET)[midi];return t?[...t]:null;}
 export function fingeringLabel(instrument:TrailCourse,keys:readonly string[]):string{
  if(instrument==='iniciacao')return '';
+ if(instrument==='recorder-soprano'){const half=keys.includes('Ø'),rest=keys.filter(k=>k!=='Ø');const base=rest.length?`Furo${rest.length>1?'s':''} ${rest.join(' · ')} fechado${rest.length>1?'s':''}`:'';return half?`Polegar meio aberto${base?` e ${base.charAt(0).toLocaleLowerCase('pt-BR')+base.slice(1)}`:''}`:base||'Todos os furos abertos';}
  if(instrument==='trumpet-bb')return keys.length?`Pisto${keys.length>1?'s':''} ${keys.join(' e ')}`:'Nenhum pisto (aberto)';
  if(!keys.length)return 'Tudo aberto';
  const parts:string[]=[];const lh:Record<string,string>={1:'indicador',2:'médio',3:'anelar'};
@@ -52,7 +58,8 @@ function buildTrail(i:BandInstrument):BandUnit[]{
   tasks:lessonTasks(i,m,L,name),notes:poolUntil(i,m.number),newNotes:L===0?m.newNotes[i]:[],
  }))}));
 }
-const TRAILS:Record<BandInstrument,BandUnit[]>={'trumpet-bb':buildTrail('trumpet-bb'),'clarinet-bb':buildTrail('clarinet-bb')};
+/** Só o clarinete usa este plano de 16 módulos: trompete e flauta seguem a Formação de 400 unidades (formacao.ts). */
+const TRAILS={'clarinet-bb':buildTrail('clarinet-bb')} as Record<BandInstrument,BandUnit[]>;
 export const bandTrail=(i:BandInstrument)=>TRAILS[i];
 export const bandLessons=(i:BandInstrument)=>TRAILS[i].flatMap(u=>u.lessons);
 export const bandModule=(n:number)=>PLAN_MODULES.find(m=>m.number===n)!;
@@ -65,13 +72,14 @@ export type BandExercise={id:string;taskId:string;phase:'apoio'|'descoberta'|'ap
  /** sem o botão “Ouvir modelo” (tocar lendo / lembrando) */noModel?:boolean;/** montar dedilhado sem o desenho de apoio */hideModel?:boolean;score?:boolean;clef?:Clef;
  tapBeats?:number[];tapLength?:number;create?:{slots:number;choices:(number|null)[];rule:'fill-bar'|'match';target?:(number|null)[]};
  story?:{title:string;scene:string};hint:string;correct:string;incorrect:string;evidence:Evidence[]};
-function seeded(seed:string){let h=0;for(const c of seed)h=(h*31+c.charCodeAt(0))>>>0;return ()=>{h=(h*1103515245+12345)>>>0;return h/2**32;};}
-function shuffle<T>(list:T[],rnd:()=>number){const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-const verb=(i:BandInstrument)=>i==='trumpet-bb'?'aperte os pistos pintados':'feche os furos e chaves pintados';
+export function seeded(seed:string){let h=0;for(const c of seed)h=(h*31+c.charCodeAt(0))>>>0;return ()=>{h=(h*1103515245+12345)>>>0;return h/2**32;};}
+export function shuffle<T>(list:T[],rnd:()=>number){const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const verb=(i:Wind)=>i==='trumpet-bb'?'aperte os pistos pintados':i==='recorder-soprano'?'feche os furos pintados':'feche os furos e chaves pintados';
+const WORD_OF:Record<Wind,string>={'trumpet-bb':'trompete','clarinet-bb':'clarinete','recorder-soprano':'flauta'};
 const bar=(meter:CourseMeter)=>meter==='3/4'?3:4;
 function padTo(phrase:CourseNote[],meter:CourseMeter):CourseNote[]{const total=phrase.reduce((n,x)=>n+x.beats,0),b=bar(meter),rest=(b-total%b)%b;return rest?[...phrase,{midi:null,beats:rest}]:phrase;}
 /** Trecho para tocar, no estilo do módulo, só com notas que a criança já conhece. */
-function phraseFor(style:PlanStyle,pool:number[],focus:number[],rnd:()=>number,variant:number,meter:CourseMeter):CourseNote[]{
+export function phraseFor(style:PlanStyle,pool:number[],focus:number[],rnd:()=>number,variant:number,meter:CourseMeter):CourseNote[]{
  const pick=()=>pool[Math.floor(rnd()*pool.length)];
  const main=focus.length?focus:[pool[pool.length-1]];
  const near=(m:number)=>{const sorted=[...pool].sort((a,b)=>a-b),k=sorted.indexOf(m);return sorted[Math.max(0,Math.min(sorted.length-1,k+(rnd()<.5?-1:1)))]??m;};
@@ -91,6 +99,7 @@ function phraseFor(style:PlanStyle,pool:number[],focus:number[],rnd:()=>number,v
 
 export function bandExercises(instrument:TrailCourse,lessonId:string,clef:Clef='sol'):BandExercise[]{
  if(instrument==='iniciacao')return iniExercises(lessonId,clef);
+ if(isFormation(instrument))return formationExercises(instrument,lessonId);
  const challenge=CHALLENGE_IDS[instrument].get(lessonId);if(challenge)return challengeExercises(instrument,lessonId,challenge);
  const lessons=bandLessons(instrument),index=lessons.findIndex(l=>l.id===lessonId);if(index<0)return [];
  const lesson=lessons[index],m=bandModule(lesson.unit),L=lesson.index,pool=lesson.notes,rnd=seeded(instrument+lessonId),out:BandExercise[]=[];
@@ -140,26 +149,29 @@ export function bandExercises(instrument:TrailCourse,lessonId:string,clef:Clef='
 }
 
 type Seed=Omit<BandExercise,'id'|'taskId'|'phase'>;
+export type FormationSeed=Seed;
 const TROUBLE:{prompt:string;options:string[];answer:number;hint:string}[]=[
  {prompt:'Teu som saiu estourado, forte demais. Qual pista ajuda?',options:['Soprar com calma, ar firme e sem força','Soprar ainda mais forte','Apertar o instrumento com força'],answer:0,hint:'Som bonito vem de ar firme e calmo, não de força.'},
  {prompt:'Saiu uma nota diferente da partitura. O que conferir primeiro?',options:['O dedilhado, olhando o desenho embaixo da partitura','O volume do celular','A cor da partitura'],answer:0,hint:'Nota trocada quase sempre é dedilhado trocado.'},
  {prompt:'Tu se perdeu no tempo no meio do trecho. O que ajuda?',options:['Contar junto com os bipes do metrônomo','Tocar mais rápido pra alcançar','Parar de ouvir os bipes'],answer:0,hint:'Os bipes marcam o tempo do começo ao fim.'},
  {prompt:'O ar acabou antes do fim do trecho. O que planejar?',options:['Puxar o ar pela barriga antes de começar e respirar nas pausas','Tocar sem respirar','Soprar mais forte no começo'],answer:0,hint:'Ar planejado chega até o fim da frase.'},
 ];
-function makeKit(i:BandInstrument,pool:number[],rnd:()=>number,meter:CourseMeter){
- const word=INSTRUMENT_WORD[i].name;
+export function makeKit(i:Wind,pool:number[],rnd:()=>number,meter:CourseMeter,wide:number[]=poolUntil(i as BandInstrument,16)){
+ const word=WORD_OF[i];
  const others=(x:number,n:number)=>shuffle(pool.filter(p=>p!==x),rnd).slice(0,n);
  const opts=(x:number)=>{const list=[x,...others(x,2)];if(list.length<3)for(const extra of [67,65,64,62,60,69,71])if(!list.includes(extra)&&list.length<3)list.push(extra);return shuffle(list,rnd);};
  const lab=(midi:number)=>fingeringLabel(i,bandFingering(i,midi)!).toLocaleLowerCase('pt-BR');
  const kit={
   meet:(midi:number):Seed=>({kind:'meet',target:midi,instruction:`Nota nova: ${name(midi)}`,prompt:`Veja como fazer o ${name(midi)}: ${verb(i)}, sopre com calma e escute o som.`,hint:fingeringLabel(i,bandFingering(i,midi)!),correct:`Agora tu já sabe fazer o ${name(midi)}!`,incorrect:'',evidence:['leitura']}),
-  partQuestion:():Seed=>i==='trumpet-bb'
+  partQuestion:():Seed=>i==='recorder-soprano'
+   ?{kind:'theory',instruction:'Conheça tua flauta',prompt:'Por onde o ar entra na flauta doce?',options:[{label:'Pelo bocal, a ponta que vai nos lábios'},{label:'Pelo furo de trás'},{label:'Pela ponta de baixo'}],answer:0,hint:'O bocal fica entre os lábios, sem morder.',correct:'Isso! O ar entra pelo bocal.',incorrect:'Ainda não. O ar entra pelo bocal, que fica entre os lábios.',evidence:['leitura']}
+   :i==='trumpet-bb'
    ?{kind:'theory',instruction:'Conheça teu trompete',prompt:'Em que parte do trompete a boca encosta?',options:[{label:'No bocal'},{label:'Na campana'},{label:'Nos pistos'}],answer:0,hint:'O bocal é a pecinha redonda onde os lábios vibram.',correct:'Isso! A boca encosta no bocal.',incorrect:'Ainda não. A boca encosta no bocal, onde os lábios vibram.',evidence:['leitura']}
    :{kind:'theory',instruction:'Conheça teu clarinete',prompt:'Em que parte do clarinete fica a palheta?',options:[{label:'Na boquilha'},{label:'Na campana'},{label:'Nas chaves'}],answer:0,hint:'A palheta fica presa na boquilha, a parte que vai na boca.',correct:'Isso! A palheta fica na boquilha.',incorrect:'Ainda não. A palheta fica na boquilha, que vai na boca.',evidence:['leitura']},
   postureQuestion:():Seed=>{const good='Na pontinha da cadeira, costas retas e ombros soltos',list=shuffle([good,'Encolhido, com os ombros levantados','Deitado no sofá'],rnd);return {kind:'theory',instruction:'Qual postura ajuda a tocar?',prompt:`Pra tocar ${word} sentado, como fica o corpo?`,options:list.map(label=>({label})),answer:list.indexOf(good),hint:'Costas retas e ombros soltos deixam o ar entrar fácil.',correct:'Isso! Corpo reto e solto, o ar entra fácil.',incorrect:'Ainda não. Sente na pontinha da cadeira, costas retas e ombros soltos.',evidence:['leitura']};},
-  build:(midi:number):Seed=>({kind:'build',target:midi,instruction:`Monte o ${name(midi)}`,prompt:i==='trumpet-bb'?`Toque nos pistos que tu aperta pra fazer o ${name(midi)}. Se for sem pisto nenhum, deixe todos soltos.`:`Toque nos furos e chaves que tu fecha pra fazer o ${name(midi)}.`,hint:`${name(midi)}: ${lab(midi)}.`,correct:`Isso! ${name(midi)} = ${lab(midi)}.`,incorrect:`Ainda não. ${name(midi)} = ${lab(midi)}.`,evidence:['leitura']}),
+  build:(midi:number):Seed=>({kind:'build',target:midi,instruction:`Monte o ${name(midi)}`,prompt:i==='trumpet-bb'?`Toque nos pistos que tu aperta pra fazer o ${name(midi)}. Se for sem pisto nenhum, deixe todos soltos.`:i==='recorder-soprano'?`Toque nos furos que tu tampa pra fazer o ${name(midi)}. O 0 é o furo de trás, do polegar.`:`Toque nos furos e chaves que tu fecha pra fazer o ${name(midi)}.`,hint:`${name(midi)}: ${lab(midi)}.`,correct:`Isso! ${name(midi)} = ${lab(midi)}.`,incorrect:`Ainda não. ${name(midi)} = ${lab(midi)}.`,evidence:['leitura']}),
   choose:(midi:number):Seed=>{const sig=bandFingering(i,midi)!.join(),distinct:number[]=[];
-   for(const o of shuffle(unique([...pool,...poolUntil(i,16)]).filter(x=>x!==midi),rnd)){const s=bandFingering(i,o)!.join();if(s!==sig&&!distinct.some(d=>bandFingering(i,d)!.join()===s))distinct.push(o);if(distinct.length===2)break;}
+   for(const o of shuffle(unique([...pool,...wide]).filter(x=>x!==midi),rnd)){const s=bandFingering(i,o)!.join();if(s!==sig&&!distinct.some(d=>bandFingering(i,d)!.join()===s))distinct.push(o);if(distinct.length===2)break;}
    const list=shuffle([midi,...distinct],rnd);
    return {kind:'fingering',target:midi,instruction:`Como se faz o ${name(midi)}?`,prompt:`Escolha o dedilhado do ${name(midi)}.`,options:list.map(o=>({label:fingeringLabel(i,bandFingering(i,o)!),keys:bandFingering(i,o)!})),answer:list.indexOf(midi),hint:`${name(midi)}: ${lab(midi)}.`,correct:`Isso! ${name(midi)} = ${lab(midi)}.`,incorrect:`Esse é de outra nota. ${name(midi)} = ${lab(midi)}.`,evidence:['leitura']};},
   listen:(target:number):Seed=>{const list=shuffle([target,...others(target,2)],rnd);return {kind:'listen',target,instruction:'Escute e descubra',prompt:'Toque em “Ouvir” e escolha qual nota tocou.',notes:[{midi:target,beats:2}],meter:'4/4',bpm:72,options:list.map(x=>({label:name(x),midi:x})),answer:list.indexOf(target),hint:'Compare: as notas mais graves soam mais “grossas”. Ouça quantas vezes quiser.',correct:`Isso! Tocou o ${name(target)}.`,incorrect:`Tocou o ${name(target)}. Ouça de novo e compare.`,evidence:['escuta']};},
@@ -183,7 +195,7 @@ function makeKit(i:BandInstrument,pool:number[],rnd:()=>number,meter:CourseMeter
   rhythm:(notes:CourseNote[],bpm:number):Seed=>{const beats:number[]=[];let at=0;for(const n of notes){if(n.midi!==null)beats.push(at);at+=n.beats;}
    return {kind:'tap',instruction:'Bata o ritmo do trecho',prompt:'Antes de tocar, sinta o ritmo: depois da contagem, toque o botão em cada nota da partitura. Nas pausas, não toque.',notes,meter,bpm,score:true,tapBeats:beats,tapLength:at,hint:'Leia a partitura: cada nota é um toque; a pausa é silêncio.',correct:'Ritmo certinho!',incorrect:'Confira as notas e as pausas da partitura e tente de novo.',evidence:['medicao-automatica']};},
   perform:(notes:CourseNote[],bpm:number):Seed=>({kind:'perform',instruction:'Toque o trecho',prompt:'Ouça o exemplo, espere os 4 bipes e toque junto com a partitura.',notes,meter,bpm,hint:'Pouco ar e calma: o som não precisa ser forte. Confira o dedilhado de cada nota embaixo da partitura.',correct:'Tocou certinho!',incorrect:'Confira as notas em vermelho e tente de novo, mais devagar.',evidence:['tentativa-fisica']}),
-  create:(m:CourseMeter):Seed=>{const slots=m==='3/4'?3:4,choices=[...pool.slice(-3),null];return {kind:'create',instruction:'Crie teu compasso',prompt:`Monte um compasso de ${m} com as notas que tu já sabe. Use pelo menos duas notas.`,meter:m,create:{slots,choices,rule:'fill-bar'},hint:'Toque em cada tempo pra escolher uma nota ou uma pausa. Pelo menos dois tempos com nota.',correct:'Compasso criado! Ouça como ficou e toque no teu instrumento.',incorrect:'Coloque nota em pelo menos dois tempos.',evidence:['criacao']};},
+  create:(m:CourseMeter):Seed=>{const slots=m==='3/4'?3:4,choices=[...pool.slice(-3),null];return {kind:'create',instruction:'Crie teu compasso',prompt:`Monte um compasso de ${m} com as notas que tu já sabe. Ponha som em pelo menos dois tempos.`,meter:m,create:{slots,choices,rule:'fill-bar'},hint:'Toque em cada tempo pra escolher uma nota ou uma pausa. Pelo menos dois tempos com nota.',correct:'Compasso criado! Ouça como ficou e toque no teu instrumento.',incorrect:'Coloque nota em pelo menos dois tempos.',evidence:['criacao']};},
   dictation:(m:CourseMeter):Seed=>{const slots=m==='3/4'?3:4,choices=[...pool.slice(-3),null];const notes=pool.slice(-3);const target=Array.from({length:slots},(_,k)=>k===slots-1&&slots===4&&rnd()<.5?null:notes[Math.floor(rnd()*notes.length)]);if(target.filter(x=>x!==null).length<2)target[0]=notes[0];
    return {kind:'create',instruction:'Ditado: ouça e monte',prompt:'Toque em “Ouvir” e monte, tempo por tempo, o que tu ouviu.',meter:m,bpm:60,notes:target.map(x=>({midi:x,beats:1})),create:{slots,choices,rule:'match',target},hint:`A resposta: ${target.map(x=>x===null?'pausa':name(x)).join(' · ')}.`,correct:'Ouvido afiado! Montou igualzinho.',incorrect:'Ainda não ficou igual. Ouça de novo, um tempo de cada vez.',evidence:['escuta']};},
  };
@@ -192,7 +204,7 @@ function makeKit(i:BandInstrument,pool:number[],rnd:()=>number,meter:CourseMeter
 
 /* ---------- Desafio da seção: depois das unidades 4, 8, 12 e 16 ---------- */
 export const CHALLENGE_UNITS=[4,8,12,16] as const;
-const CHALLENGE_IDS:Record<BandInstrument,Map<string,number>>={'trumpet-bb':new Map(CHALLENGE_UNITS.map((u,k)=>[`TPT-S${k+1}-DESAFIO`,u])),'clarinet-bb':new Map(CHALLENGE_UNITS.map((u,k)=>[`CLA-S${k+1}-DESAFIO`,u]))};
+const CHALLENGE_IDS:Record<BandInstrument,Map<string,number>>={'trumpet-bb':new Map(),'clarinet-bb':new Map(CHALLENGE_UNITS.map((u,k)=>[`CLA-S${k+1}-DESAFIO`,u]))};
 export const challengeId=(i:BandInstrument,section:number)=>`${PREFIX[i]}-S${section}-DESAFIO`;
 function challengeExercises(i:BandInstrument,lessonId:string,unit:number):BandExercise[]{
  const pool=poolUntil(i,unit),m=bandModule(unit),rnd=seeded(i+lessonId),kit=makeKit(i,pool,rnd,m.meter),out:BandExercise[]=[];
@@ -230,13 +242,14 @@ function buildJourney(i:BandInstrument){
  const engine=createJourneyEngine(stops),lessonIds=new Set(stops.flatMap(s=>s.lessonIds)),stopIds=new Set(stops.map(s=>s.id));
  return {stops,units,engine,normalize:(v:unknown)=>normalizeJourney(v,id=>lessonIds.has(id),id=>stopIds.has(id))};
 }
-const JOURNEYS={'trumpet-bb':buildJourney('trumpet-bb'),'clarinet-bb':buildJourney('clarinet-bb')};
-export const bandJourney=(i:TrailCourse)=>i==='iniciacao'?iniJourney():JOURNEYS[i];
+const JOURNEYS={'clarinet-bb':buildJourney('clarinet-bb')} as Record<BandInstrument,ReturnType<typeof buildJourney>>;
+export const bandJourney=(i:TrailCourse)=>i==='iniciacao'?iniJourney():isFormation(i)?formationJourney(i):JOURNEYS[i];
 export const bandJourneyKey=(i:BandInstrument)=>`cactom-trilha-${i}-v2`;
 /** Nome da lição dentro da parada (Descobrir, Discriminar…) ou “Desafio da seção”. */
-export function bandLessonName(i:TrailCourse,lessonId:string){if(i==='iniciacao')return iniLessonName(lessonId);return CHALLENGE_IDS[i].has(lessonId)?'Desafio da seção':bandLessons(i).find(l=>l.id===lessonId)?.title??'';}
+export function bandLessonName(i:TrailCourse,lessonId:string){if(i==='iniciacao')return iniLessonName(lessonId);if(isFormation(i))return formationLessonName(i,lessonId);return CHALLENGE_IDS[i].has(lessonId)?'Desafio da seção':bandLessons(i).find(l=>l.id===lessonId)?.title??'';}
 export function bandLessonTasks(i:TrailCourse,lessonId:string):string[]{
  if(i==='iniciacao')return iniLessonTasks(lessonId);
+ if(isFormation(i))return formationLessonTasks(i,lessonId);
  const u=CHALLENGE_IDS[i].get(lessonId);if(u)return ['Escutar e reconhecer notas.','Ler a partitura e montar dedilhados.','Bater ritmos, fazer ditado e tocar.'];
  return [...(bandLessons(i).find(l=>l.id===lessonId)?.tasks??[])];
 }
@@ -251,6 +264,7 @@ export function readBand(storage:Pick<KeyValueStorage,'getItem'>,i:BandInstrumen
 /** Lê a trilha nova; na primeira vez, traz as lições já feitas no registro antigo (nada é apagado). */
 export function readBandJourney(storage:Pick<KeyValueStorage,'getItem'>,i:TrailCourse):{ledger:JourneyLedger;warning:string;safeToWrite:boolean}{
  if(i==='iniciacao')return readIniJourney(storage);
+ if(isFormation(i))return readFormation(storage,i);
  const j=JOURNEYS[i];let raw:string|null=null;try{raw=storage.getItem(bandJourneyKey(i));}catch{/* sem armazenamento */}
  if(raw)return readJourney(storage,bandJourneyKey(i),j.normalize);
  const old=readBand(storage,i),ledger=emptyJourney();
@@ -261,6 +275,7 @@ export function readBandJourney(storage:Pick<KeyValueStorage,'getItem'>,i:TrailC
 }
 export function completeBandLesson(storage:Pick<KeyValueStorage,'getItem'|'setItem'>,i:TrailCourse,outcome:LessonOutcome){
  if(i==='iniciacao')return completeIniLesson(storage,outcome);
+ if(isFormation(i))return completeFormationLesson(storage,i,outcome);
  const fresh=readBandJourney(storage,i),updated=JOURNEYS[i].engine.completeLesson(fresh.ledger,outcome);
  let warning=fresh.warning;if(fresh.safeToWrite&&!writeJourney(storage,updated,bandJourneyKey(i)))warning='Teu avanço ficou nesta sessão, mas este navegador não deixou salvar.';
  return {ledger:updated,xp:lessonXp(outcome),warning};
@@ -268,6 +283,7 @@ export function completeBandLesson(storage:Pick<KeyValueStorage,'getItem'|'setIt
 /** Mesmo formato do resumo da flauta, para Rojão, Conquistas e Progresso. */
 export function bandOverview(storage:Pick<KeyValueStorage,'getItem'>,i:TrailCourse):JourneyOverview{
  if(i==='iniciacao')return iniOverview(storage);
+ if(isFormation(i))return formationOverview(storage,i);
  const j=JOURNEYS[i];return overviewOf(readBandJourney(storage,i).ledger,j.engine,j.units);
 }
 
@@ -275,12 +291,17 @@ export function bandOverview(storage:Pick<KeyValueStorage,'getItem'>,i:TrailCour
 type BodyStep={title:string;prompt:string;items:string[];done:string};
 const POSTURA:BodyStep={title:'Sente do jeito certo',prompt:'Antes de tocar, arrume o corpo. Confira cada item:',items:['Sentado na pontinha da cadeira, com as costas retas','Pés inteiros no chão, um pouco afastados','Ombros soltos, sem levantar','Cabeça reta: o instrumento vem até a boca, não a boca até ele'],done:'Corpo pronto pra tocar!'};
 const RESPIRA:BodyStep={title:'Respire como músico',prompt:'O ar é o combustível do som. Faça junto:',items:['Puxe o ar pela boca enchendo a barriga, não os ombros','Solte o ar devagar, como quem sopra uma vela sem apagar','Puxe contando até 4 e solte contando até 8'],done:'Arretado! Esse ar vai virar som.'};
-const BOCA:Record<BandInstrument,BodyStep>={
+const BOCA:Record<Wind,BodyStep>={
+ 'recorder-soprano':{title:'A boca na flauta',prompt:'O som da flauta nasce no bocal, com pouco ar. Experimente:',items:['Lábios encostam de leve no bocal, sem morder','Os dentes não tocam a flauta','Sopre como quem diz “tu”, bem devagarinho','Ar morno e calmo: se o som apitar, sopre menos'],done:'Boca no lugar: agora é só soprar de leve!'},
  'trumpet-bb':{title:'A boca no trompete (embocadura)',prompt:'O som do trompete nasce nos lábios. Experimente:',items:['Lábios juntinhos, como quem diz “mmm”','Faça um zumbido com os lábios, ainda sem o bocal','Encoste o bocal no meio dos lábios, sem apertar','Faça o mesmo zumbido dentro do bocal'],done:'Zumbido no bocal: é assim que o trompete fala!'},
  'clarinet-bb':{title:'A boca no clarinete (embocadura)',prompt:'O som do clarinete nasce na palheta. Experimente:',items:['Lábio de baixo cobrindo um pouquinho os dentes de baixo','Palheta apoiada no lábio de baixo','Dentes de cima apoiados em cima da boquilha','Cantos da boca firmes, como quem diz “u”'],done:'Boca no lugar: agora a palheta pode vibrar!'}};
-const MAOS:Record<BandInstrument,BodyStep>={
+const MAOS:Record<Wind,BodyStep>={
+ 'recorder-soprano':{title:'As mãos na flauta',prompt:'Segure assim, sem força:',items:['Mão esquerda em cima, com o polegar no furo de trás','Mão direita embaixo, com o polegar apoiando a flauta por trás','Tampe os furos com a polpa do dedo, não com a ponta','Os dedos que não tocam ficam pertinho dos furos'],done:'Mãos prontas!'},
  'trumpet-bb':{title:'As mãos no trompete',prompt:'Segure assim, sem força:',items:['Mão esquerda segura o trompete pela parte dos pistos','Dedos indicador, médio e anelar da mão direita em cima dos pistos 1, 2 e 3','Dedos curvadinhos, apertando com a pontinha','Polegar direito por baixo, entre o 1º e o 2º pisto'],done:'Mãos prontas!'},
  'clarinet-bb':{title:'As mãos no clarinete',prompt:'Segure assim, sem força:',items:['Mão esquerda em cima, com o polegar no furo de trás','Mão direita embaixo, com o polegar no apoio','Dedos curvadinhos, tampando os furos com a polpa do dedo','Os dedos que não tocam ficam pertinho dos furos'],done:'Mãos prontas!'}};
+/** Postura, respiração, boca e mãos: telas de apoio antes do primeiro som com o instrumento. */
+export function bodySteps(i:Wind):BodyStep[]{return [POSTURA,RESPIRA,BOCA[i],MAOS[i]];}
+export type {BodyStep};
 function body(i:BandInstrument,module:number,L:number):BodyStep[]{
  if(module!==1)return module===2&&L===0?[RESPIRA]:[];
  return [[POSTURA,RESPIRA],[BOCA[i]],[MAOS[i]],[],[]][L] as BodyStep[];
@@ -290,4 +311,4 @@ export const TRUMPET_KEY='cactom-trompete-afinacao';
 export type TrumpetKey='sib'|'do';
 export function readTrumpetKey():TrumpetKey{try{return globalThis.localStorage?.getItem(TRUMPET_KEY)==='do'?'do':'sib';}catch{return 'sib';}}
 export function saveTrumpetKey(k:TrumpetKey){try{globalThis.localStorage?.setItem(TRUMPET_KEY,k);}catch{/* sem armazenamento */}}
-export function soundingOffset(i:TrailCourse,k:TrumpetKey=readTrumpetKey()){if(i==='iniciacao')return 0;return i==='trumpet-bb'&&k==='do'?0:-2;}
+export function soundingOffset(i:TrailCourse,k:TrumpetKey=readTrumpetKey()){if(i==='iniciacao')return 0;if(i==='recorder-soprano')return 12;return i==='trumpet-bb'&&k==='do'?0:-2;}

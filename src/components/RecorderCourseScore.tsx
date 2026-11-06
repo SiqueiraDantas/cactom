@@ -14,7 +14,9 @@ export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],o
  const items=notes.map((n,index)=>{const at=offset;offset+=n.beats;return {n,index,at,measure:Math.floor((at+1e-6)/bar)};});
  /** Colcheias seguidas dentro do mesmo tempo (ou do mesmo grupo de 3 no 6/8) ficam ligadas por barra. */
  const pulse=meter==='6/8'?1.5:1,xOf=(at:number,measure:number)=>122+(measure%2)*260+(at%bar)/bar*235;
- const yOf=(midi:number)=>102-([0,0,1,1,2,3,3,4,4,5,5,6][midi%12]+7*(Math.floor(midi/12)-5)+shift)*6;
+ /** Bemóis (Si♭, Mi♭) ficam na posição da nota de cima; sustenidos, na de baixo. */
+ const FLATS=new Set([63,70,75]),SHARPS=new Set([61,66,73,78]);
+ const yOf=(raw:number)=>{const midi=FLATS.has(raw)?raw+1:raw;return 102-([0,0,1,1,2,3,3,4,4,5,5,6][midi%12]+7*(Math.floor(midi/12)-5)+shift)*6;};
  /** Haste para baixo a partir da 3ª linha (Si) pra cima; grupo com barra segue a média das notas. */
  const MIDDLE=66;
  const beams:{indexes:number[];y:number;x1:number;x2:number;row:number;down:boolean}[]=[];const beamOf=new Map<number,number>();
@@ -45,6 +47,7 @@ export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],o
     return <g key={index} color={color} onClick={onMark?()=>onMark(index):undefined} role={onMark?'button':undefined} tabIndex={onMark?0:undefined} onKeyDown={onMark?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onMark(index);}}:undefined} aria-label={`${label}, duração escrita ${n.beats===.5?'colcheia':n.beats===1?'semínima':n.beats===1.5?'semínima pontuada':n.beats===2?'mínima':n.beats===3?'mínima pontuada':'semibreve'}${marks.includes(index)?', marcado':''}`}>
      {(active===index||marks.includes(index))&&<rect x={x-17} y="27" width="35" height="89" rx="8" fill={marks.includes(index)?'#e5f2e3':'#fff0c9'}/>}
      {n.midi===null?<Rest x={x} beats={n.beats}/>:<>
+      {[30,18,6].filter(l=>l>=y-0.5).map(l=><line key={'a'+l} x1={x-14} x2={x+14} y1={l} y2={l} stroke="currentColor" strokeWidth="1.5"/>)}
       {[102,114,126].filter(l=>l<=y+0.5).map(l=><line key={l} x1={x-14} x2={x+14} y1={l} y2={l} stroke="currentColor" strokeWidth="1.5"/>)}
       <ellipse cx={x} cy={y} rx={whole?10:8} ry="5.2" transform={`rotate(-16 ${x} ${y})`} fill={open?'white':'currentColor'} stroke="currentColor" strokeWidth="1.8"/>
       {!whole&&(()=>{const beam=beamOf.has(index)?beams[beamOf.get(index)!]:null,down=beam?beam.down:y<=MIDDLE,sx=down?x-7:x+7,end=beam?(down?beam.y+5.5:beam.y):down?y+33:y-33;return <>
@@ -52,7 +55,7 @@ export function RecorderCourseScore({notes,meter,active=-1,marks=[],results=[],o
        {n.beats===.5&&!beam&&<path d={down?`M${sx} ${end}q17 -9 3 -20q8 12 -3 14`:`M${sx} ${end}q17 9 3 20q8-12-3-14`} fill="currentColor"/>}
       </>;})()}
       {n.beats===1.5||n.beats===3?<circle cx={x+15} cy={y-2} r="2" fill="currentColor"/>:null}
-      {clef==='sol'&&[66,70].includes(n.midi)&&<text x={x-21} y={y+5} fontSize="21" fill="currentColor">{n.midi===66?'♯':'♭'}</text>}
+      {clef==='sol'&&(SHARPS.has(n.midi)||FLATS.has(n.midi))&&<text x={x-21} y={y+5} fontSize="21" fill="currentColor">{SHARPS.has(n.midi)?'♯':'♭'}</text>}
      </>}
      {n.midi===null&&(n.beats===1.5||n.beats===3)&&<circle cx={x+13} cy={60} r="2.2" fill="currentColor"/>}
      {n.tie&&<path d={`M${x} ${y+10}q${235*n.beats/bar/2} 13 ${235*n.beats/bar} 0`} fill="none" stroke="currentColor" strokeWidth="1.7"/>}

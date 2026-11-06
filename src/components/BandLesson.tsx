@@ -2,6 +2,7 @@ import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {track} from '../lib/devEvents';
 import {bandExercises,bandJourney,readBandJourney,completeBandLesson,bandLessonName,bandLessonTasks,bandFingering,fingeringLabel,noteName,readTrumpetKey,saveTrumpetKey,soundingOffset,type BandExercise,type BandInstrument,type TrailCourse,type TrumpetKey} from '../lib/bandTrail';
 import {readClef,saveClef,CLEF_UNIT,type Clef} from '../lib/iniciacao';
+import {isFormation} from '../lib/formacao';
 import {TREBLE_CLEF_PATH,BASS_CLEF_PATH} from '../lib/trebleClef';
 import {evaluateCourse,barBeats,pulseBeats,type CourseNote} from '../lib/recorderFullCourse';
 import {RecorderCourseAudio} from '../lib/recorderCourseAudio';
@@ -10,7 +11,7 @@ import {MicrophonePitchMonitor} from '../lib/audio';
 import {ModuleOneMedia} from '../lib/recorderModuleOneMedia';
 import {markPracticeDay} from '../lib/practiceDay';
 import type {Evidence,LessonOutcome} from '../lib/recorderJourney';
-import {scoreTaps} from '../lib/recorderExercises';
+import {scoreTaps} from '../lib/tapScore';
 import type {ScoreSample} from '../lib/scoreAssessment';
 import {useProfileStorage} from './ProfileStorage';
 import {RecorderCourseScore} from './RecorderCourseScore';
@@ -23,8 +24,8 @@ type Verdict={ok:boolean;neutral?:boolean;skipped?:boolean;message:string};
 type Pending={ready:boolean;check:()=>Verdict};
 type Item={ex:BandExercise;retry:boolean};
 type Result={correctFirst:boolean;recovered:boolean;evidence:Evidence[];skipped?:boolean;needsReview:boolean};
-const voiceOf=(i:TrailCourse)=>i==='iniciacao'?'teclado' as const:i==='clarinet-bb'?'clarinete' as const:readTrumpetKey()==='do'?'trompete-do' as const:'trompete' as const;
-const NAME_OF={'trumpet-bb':'trompete','clarinet-bb':'clarinete','iniciacao':'iniciação musical'} as const;
+const voiceOf=(i:TrailCourse)=>i==='iniciacao'?'teclado' as const:i==='recorder-soprano'?'flauta' as const:i==='clarinet-bb'?'clarinete' as const:readTrumpetKey()==='do'?'trompete-do' as const:'trompete' as const;
+const NAME_OF={'trumpet-bb':'trompete','clarinet-bb':'clarinete','iniciacao':'iniciação musical','recorder-soprano':'flauta doce soprano'} as const;
 
 /** Revisão de uma parada: primeiro o que ficou pendente, depois outras telas da parada (até 6). */
 export function reviewBandExercises(instrument:TrailCourse,stopId:string,needed:readonly string[],clef:Clef='sol'):BandExercise[]{
@@ -41,7 +42,7 @@ export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{ins
  const journey=bandJourney(instrument),stop=journey.engine.stop(stopId)??journey.stops.find(s=>s.lessonIds.includes(lessonId??''))!;
  const lesson=lessonId??stop.lessonIds[0];
  const [loaded]=useState(()=>readBandJourney(storage,instrument));
- const ini=instrument==='iniciacao',needsClef=ini&&stop.unit>=CLEF_UNIT;
+ const ini=instrument==='iniciacao',needsClef=ini&&stop.unit>=CLEF_UNIT,formation=isFormation(instrument);
  const [clef,setClef]=useState<Clef|null>(()=>ini?readClef(storage):null);
  const exercises=useMemo(()=>review?reviewBandExercises(instrument,stop.id,loaded.ledger.reviewNeeded,clef??'sol'):bandExercises(instrument,lesson,clef??'sol'),[instrument,lesson,review,stop.id,loaded,clef]);
  const [stage,setStage]=useState<'intro'|'story'|'activity'|'done'>('intro');
@@ -78,7 +79,7 @@ export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{ins
  </header>;
  if(stage==='intro'){const fresh=exercises.filter(e=>e.kind==='meet').map(e=>e.target!);
   return <div className="rl rl--intro" data-environment="introducao">{header}<main className="rl-main">
-  <div className="rl-intro-hero"><TomOfficial decorative expression="animado" className="rl-intro-tom"/><div className="rl-bubble"><span className="rl-eyebrow">{NAME_OF[instrument].toLocaleUpperCase('pt-BR')} · Unidade {stop.unit} · {stop.label}{review||lessonName===stop.label?'':` · ${lessonName}`}</span><h1 ref={headingRef} tabIndex={-1}>{review?'Hora de revisar':stop.unitGoal}</h1><p>{review?'Bora retomar o que pediu mais atenção nesta parada, visse?':stop.kind==='desafio'?'Chegou a hora de mostrar tudo que tu aprendeu nesta seção. Sem pressa, visse?':`Bora! Nesta lição tu vai ${tasks[0]?.charAt(0).toLocaleLowerCase('pt-BR')}${tasks[0]?.slice(1)}`}</p></div></div>
+  <div className="rl-intro-hero"><TomOfficial decorative expression="animado" className="rl-intro-tom"/><div className="rl-bubble"><span className="rl-eyebrow">{NAME_OF[instrument].toLocaleUpperCase('pt-BR')} · {formation?`Módulo ${stop.unit} · ${stop.label}`:`Unidade ${stop.unit} · ${stop.label}`}{review||lessonName===stop.label?'':` · ${lessonName}`}</span><h1 ref={headingRef} tabIndex={-1}>{review?'Hora de revisar':stop.unitGoal}</h1><p>{review?'Bora retomar o que pediu mais atenção nesta parada, visse?':stop.kind==='desafio'&&!formation?'Chegou a hora de mostrar tudo que tu aprendeu nesta seção. Sem pressa, visse?':`Bora! Nesta lição tu vai ${tasks[0]?.charAt(0).toLocaleLowerCase('pt-BR')}${tasks[0]?.slice(1)}`}</p></div></div>
   <section className="rl-card"><h2>O que tu vai praticar</h2><ul className="rl-goals">{tasks.slice(0,3).map(t=><li key={t}>{t}</li>)}</ul>{instrument==='trumpet-bb'&&<TrumpetKeyChoice/>}{needsClef&&<ClefChoice value={clef} onChange={c=>{saveClef(storage,c);setClef(c);}}/>}{fresh.length>0&&<p className="rl-meta">Nota{fresh.length>1?'s':''} nova{fresh.length>1?'s':''}: {fresh.map(n=>noteName(instrument,n)).join(', ')}</p>}<p className="rl-meta">{exercises.length} telas · cerca de {Math.max(2,Math.round(exercises.length*.8))} min</p></section>
  </main><footer className="rl-footer"><button type="button" className="rl-btn rl-btn--ghost" onClick={onExit}>Agora não</button><button type="button" className="rl-btn" onClick={()=>{track('lesson_start',{lesson:lesson,stop:stopId,instrument:instrument,review,screens:queue.length});setStage(queue[0]?.ex.kind==='story'?'story':'activity')}} disabled={!exercises.length||(needsClef&&!clef)}>{needsClef&&!clef?'Escolha a clave':'Começar'}</button></footer></div>;}
  if(stage==='story'&&item?.ex.story)return <div className="rl rl--story" data-environment="historia">{header}<main className="rl-main"><section className="rl-story"><span className="rl-eyebrow">História do ensaio</span><h1 ref={headingRef} tabIndex={-1}>{item.ex.story.title}</h1><div className="rl-story-scene"><TomOfficial decorative expression="pensativo" className="rl-story-tom"/><div className="rl-bubble rl-story-bubble"><p className="rl-story-text">{item.ex.story.scene}</p></div></div></section></main><footer className="rl-footer"><button type="button" className="rl-btn" onClick={()=>setStage('activity')}>Resolver</button></footer></div>;
@@ -87,7 +88,7 @@ export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{ins
   const byId=new Map(exercises.map(e=>[e.id,e]));
   return <div className="rl rl--done" data-environment="conclusao">{header}<main className="rl-main"><section className="rl-done">
    <TomOfficial decorative expression="comemorando" className="rl-done-tom"/>
-   <h1 ref={headingRef} tabIndex={-1}>{review?'Revisão feita, arretado!':stop.kind==='desafio'?'Desafio vencido, arretado!':'Lição concluída, arretado!'}</h1>
+   <h1 ref={headingRef} tabIndex={-1}>{review?'Revisão feita, arretado!':stop.kind==='desafio'?(formation?'Checkpoint feito, arretado!':'Desafio vencido, arretado!'):formation?'Microlição concluída, arretado!':'Lição concluída, arretado!'}</h1>
    <div className="rl-stats"><div><b>+{saved?.xp??0}</b><span>XP de prática</span></div><div><b>{first}/{list.length}</b><span>de primeira</span></div><div><b>{recovered}</b><span>recuperadas</span></div></div>
    <section className="rl-card"><h2>Habilidades praticadas</h2><ul className="rl-goals">{tasks.slice(0,3).map(t=><li key={t}>{t}</li>)}</ul></section>
    <section className="rl-card"><h2>{needs.length?'Pra revisar':'Revisão'}</h2>{needs.length?<ul className="rl-goals rl-goals--review">{needs.map(([id,r])=><li key={id}>{byId.get(id)?.instruction}{r.recovered?' · recuperada, volta na revisão':r.skipped?' · ficou pra depois':''}</li>)}</ul>:<p>Nada pendente desta lição.</p>}{saved?.nextReview&&<p className="rl-meta">Próxima revisão desta parada: {new Date(saved.nextReview).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})}</p>}</section>
@@ -99,7 +100,7 @@ export function BandLesson({instrument,stopId,lessonId,review=false,onExit}:{ins
  return <div className={`rl rl--activity ${verdict?'has-feedback':''}`} data-environment="atividade" data-kind={ex.kind} data-exercise={ex.id}>{header}
   <main className="rl-main">
    {retry&&<p className="rl-retry-label">Corrija o erro de antes</p>}
-   {ex.phase==='aplicacao'&&!retry&&stop.kind!=='desafio'&&!review&&<p className="rl-retry-label band-phase">Exemplo novo</p>}
+   {ex.phase==='aplicacao'&&!retry&&stop.kind!=='desafio'&&!review&&!formation&&<p className="rl-retry-label band-phase">Exemplo novo</p>}
    <h1 className="rl-instruction" ref={headingRef} tabIndex={-1}>{ex.instruction}</h1>
    <p className="rl-prompt">{ex.prompt}</p>
    <Body key={ex.id+(retry?'-r':'')} ex={ex} instrument={instrument} locked={!!verdict} setPending={setPending} silent={silent}/>
@@ -129,6 +130,16 @@ function Body({ex,instrument,locked,setPending,silent}:{ex:BandExercise;instrume
  * e clarinete (tabela Yamaha: ● fechado/apertado, ○ aberto; chave de registro, polegar, chaves do Lá e do Sol♯, mãos esquerda e direita). */
 export function BandFingering({instrument,keys,small=false}:{instrument:TrailCourse;keys:readonly string[];small?:boolean}){
  if(instrument==='iniciacao')return null;
+ if(instrument==='recorder-soprano'){const on=(k:string)=>keys.includes(k),front=[1,2,3,4,5,6,7];
+  return <svg className={`band-fing band-fing--rec${small?' is-small':''}`} viewBox="0 0 120 300" role="img" aria-label={fingeringLabel(instrument,keys)}>
+   <path d="M50 8h20l3 34q8 10 5 26l-4 16v196q0 10 6 14H40q6-4 6-14V84l-4-16q-3-16 5-26z" fill="#F6EEDB" stroke="#A8935F" strokeWidth="2.5"/>
+   <rect x="54" y="40" width="12" height="9" rx="2" fill="#4a4034"/>
+   <circle cx="22" cy="92" r="8" fill={on('0')?'#111':'#fff'} stroke="#111" strokeWidth="2"/>
+   {on('Ø')&&<path d="M22 84a8 8 0 0 0 0 16z" fill="#111"/>}
+   {front.map((k,n)=>{const cy=96+n*26+(n>=3?14:0),r=k>=6?6.5:8;return <circle key={k} cx="60" cy={cy} r={r} fill={on(String(k))?'#111':'#fff'} stroke="#111" strokeWidth="2"/>;})}
+   {!small&&<g fontSize="11" fontWeight="800" fill="#4B4B4B"><text x="22" y="78" textAnchor="middle">atrás</text><text x="22" y="114" textAnchor="middle">0</text>{front.map((k,n)=><text key={k} x="80" y={100+n*26+(n>=3?14:0)}>{k}</text>)}
+    <text x="104" y="124" fontSize="9" fill="#888" transform="rotate(90 104 124)">mão esquerda</text><text x="104" y="214" fontSize="9" fill="#888" transform="rotate(90 104 214)">mão direita</text></g>}
+  </svg>;}
  if(instrument==='trumpet-bb')return <svg className={`band-fing band-fing--tpt${small?' is-small':''}`} viewBox="0 0 220 120" role="img" aria-label={fingeringLabel(instrument,keys)}>
   <rect x="4" y="66" width="22" height="12" rx="4" fill="#8A8F98"/><rect x="24" y="68" width="40" height="8" rx="4" fill="#F2B530"/>
   <path d="M60 60 H150 Q182 58 214 26 V118 Q182 86 150 84 H60 Z" fill="#FFC83D" stroke="#D99A16" strokeWidth="2"/>
@@ -238,7 +249,8 @@ function PerformBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrume
 }
 
 /** Montar o dedilhado: a criança aperta os pistos (trompete) ou fecha furos e chaves (clarinete) no desenho. */
-const KEY_LABEL:Record<BandInstrument,[string,string][]>={
+const KEY_LABEL:Record<BandInstrument|'recorder-soprano',[string,string][]>={
+ 'recorder-soprano':[['0','Polegar (atrás)'],['Ø','Polegar meio aberto'],['1','Esquerda: indicador'],['2','Esquerda: médio'],['3','Esquerda: anelar'],['4','Direita: indicador'],['5','Direita: médio'],['6','Direita: anelar'],['7','Direita: mínimo']],
  'trumpet-bb':[['1','Pisto 1'],['2','Pisto 2'],['3','Pisto 3']],
  'clarinet-bb':[['R','Chave de registro'],['T','Polegar (atrás)'],['A','Chave do Lá'],['1','Esquerda: indicador'],['2','Esquerda: médio'],['3','Esquerda: anelar'],['4','Direita: indicador'],['5','Direita: médio'],['6','Direita: anelar']]};
 function BuildBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument:TrailCourse;locked:boolean;setPending:(p:Pending|null)=>void}){
@@ -251,7 +263,7 @@ function BuildBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrument
    <BandFingering instrument={instrument} keys={keys}/>
   </div>
   <div className={`band-keys band-keys--${instrument==='trumpet-bb'?'tpt':'cla'}`} role="group" aria-label="Pistos, furos e chaves">
-   {KEY_LABEL[instrument as BandInstrument].map(([k,label])=><button key={k} type="button" aria-pressed={keys.includes(k)} disabled={locked} className={keys.includes(k)?'is-on':''} onClick={()=>toggle(k)}>{label}</button>)}
+   {KEY_LABEL[instrument as BandInstrument|'recorder-soprano'].map(([k,label])=><button key={k} type="button" aria-pressed={keys.includes(k)} disabled={locked} className={keys.includes(k)?'is-on':''} onClick={()=>toggle(k)}>{label}</button>)}
   </div>
   {expected.length===0&&!touched&&<p className="rl-meta">Dica: tem nota que se faz sem apertar nada.</p>}
  </section>;

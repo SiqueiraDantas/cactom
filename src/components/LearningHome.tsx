@@ -27,15 +27,10 @@ import { entryFor } from '../lib/ranking';
 import { ProgressHub } from './ProgressHub';
 import { JourneyProgressHub } from './JourneyProgressHub';
 import { CommunityHub } from './CommunityHub';
-import { journeyOverview } from '../lib/journeyOverview';
 import { bandOverview, isBand } from '../lib/bandTrail';
 import { BandJourney } from './BandJourney';
 import { useProfileStorage } from './ProfileStorage';
-import {RecorderJourney,type JourneyOpen} from './RecorderJourney';
-import { RecorderDiagnosticPath } from './RecorderDiagnosticPath';
-import { RecorderModuleOnePath } from './RecorderModuleOnePath';
-import type { ModuleOneLessonId } from '../lib/recorderModuleOne';
-import type { DiagnosticId } from '../lib/recorderDiagnostic';
+import type {JourneyOpen} from './StopIcon';
 import { learningPathLayout } from '../lib/learningPath';
 import type { AccessSession } from './LoginScreen';
 import type { RecorderSystem } from '../lib/recorder';
@@ -64,10 +59,7 @@ export function Mandacaru({small=false,instrument='trumpet-bb'}:{small?:boolean;
 }
 
 type Props = {
-  onCurriculum?:(id:string)=>void;
   onJourneyLesson?:(open:JourneyOpen)=>void;
-  onModuleOne?:(id:ModuleOneLessonId)=>void;
-  onDiagnostic?:(id:DiagnosticId|'summary')=>void;
   initialTab?:'learn'|'scores'|'streak'|'achievements'|'progress'|'community';
   /** Abre a tela de tocar partitura (da aba Partituras). */
   onOpenScore?:(start:ScoreStart)=>void;
@@ -79,7 +71,7 @@ type Props = {
 };
 const navItems = [{id:'learn',label:'Aprender',icon:'path'},{id:'scores',label:'Partituras',icon:'book'},{id:'streak',label:'Seu Rojão',icon:'sun'},{id:'achievements',label:'Conquistas',icon:'star'},{id:'progress',label:'Meu progresso',icon:'chart'},{id:'community',label:'Comunidade',icon:'chat'}] as const;
 
-export function LearningHome({passed,seenValves,results,onLesson,onVirtual,onScores,onInstrument,instrument,learningSupport,history,course,recorderSystem,onRecorderSystem,access,onSignOut,initialTab='learn',onOpenScore,onDiagnostic,onModuleOne,onCurriculum,onJourneyLesson}:Props) {
+export function LearningHome({passed,seenValves,results,onLesson,onVirtual,onScores,onInstrument,instrument,learningSupport,history,course,access,onSignOut,initialTab='learn',onOpenScore,onJourneyLesson}:Props) {
   const {lessons,units}=course;const recorder=instrument.id==='recorder-soprano';
   const [tab,setTab]=useState<NonNullable<Props['initialTab']>>(initialTab);
   const [help,setHelp]=useState(false);
@@ -97,7 +89,7 @@ export function LearningHome({passed,seenValves,results,onLesson,onVirtual,onSco
   const band=isBand(instrument.id)?instrument.id:null;
   // ranking no servidor: manda a linha desta conta (primeiro nome e números) quando o progresso muda
   useEffect(()=>{const p=access.profile;if(!p||!cloudEnabled())return;const e=entryFor(p,instrument.id);if(e)void pushRanking(e,instrument.id,storage);},[access.profile?.id,instrument.id,streak.totalDays]);
-  const trail=useMemo(()=>!onJourneyLesson?null:recorder?journeyOverview(storage):band?bandOverview(storage,band):null,[recorder,band,onJourneyLesson,storage,streak.totalDays]);
+  const trail=useMemo(()=>!onJourneyLesson?null:band?bandOverview(storage,band):null,[band,onJourneyLesson,storage,streak.totalDays]);
   const openTrail=()=>{if(trail&&onJourneyLesson)onJourneyLesson(trail.open);else onLesson(next.id);};
   const completed=lessons.filter(l=>lessonCompleted(l,passed[l.id]??[],seenValves));
   const next=lessons.find(l=>!lessonCompleted(l,passed[l.id]??[],seenValves))??lessons[0];
@@ -165,8 +157,7 @@ export function LearningHome({passed,seenValves,results,onLesson,onVirtual,onSco
           {instrument.id!=='clarinet-bb'&&instrument.id!=='iniciacao'&&<button type="button" className="learn-virtual" onClick={onVirtual}><span className="learn-virtual-art" aria-hidden="true"><CourseArtwork instrument={instrument.id}/></span><span><b>Tá sem {recorder?'a flauta':'o trompete'} aí?</b><small>{recorder?'Toca nos furos da tela e escuta cada nota.':'Aperta os pistos da tela e escuta os sons.'}</small></span><LabIcon name="arrow" size={20}/></button>}
           <section className="course-path course-path-continuous" aria-label="Trilha de aulas em sequência">
             <div className="journey-all-units">
-              {recorder&&onCurriculum?<RecorderJourney onTask={onCurriculum} onLesson={open=>onJourneyLesson?.(open)} system={recorderSystem} onSystem={onRecorderSystem}/>:<>{recorder&&onDiagnostic&&<RecorderDiagnosticPath onOpen={onDiagnostic}/>}{recorder&&onModuleOne&&<RecorderModuleOnePath onOpen={onModuleOne}/>}</>}
-              {bandUnits?<>{bandUnits}{band==='trumpet-bb'&&<details className="full-course-legacy"><summary>Treinos anteriores · {lessons.length} aulas extras</summary>{legacyUnits}</details>}</>:recorder&&onCurriculum?<details className="full-course-legacy"><summary>Treinos anteriores · 13 aulas extras</summary>{legacyUnits}</details>:legacyUnits}
+              {bandUnits??legacyUnits}
             </div>
           </section>
         </>:tab==='streak'?<StreakScreen summary={streak} saved={streakSaved} instrument={instrument.id} onPractice={openTrail}/>:tab==='scores'?<ScoreTab instrument={instrument} onOpen={start=>onOpenScore?onOpenScore(start):onScores()}/>:tab==='achievements'?<AchievementsHub badges={badges} instrumentId={instrument.id} ranking={<RankingBoard instrumentId={instrument.id} profileId={access.profile?.id??null}/>} onPractice={openTrail} onRojão={()=>{setTab('streak');window.scrollTo({top:0,behavior:'instant'});}}/>:tab==='community'?<CommunityHub instrumentId={instrument.id} profile={access.profile?{id:access.profile.id,name:access.profile.name}:null} storage={access.profile?storage:undefined}/>:trail&&onJourneyLesson?<JourneyProgressHub overview={trail} onOpen={onJourneyLesson}/>:<ProgressHub lessons={lessons} units={units} completed={completed} next={next} percent={percent} noteCount={notes.length} passed={passed} seen={seenValves} discoveryTotal={course.discoveryIds.length} discoveryName={course.discoveryName} history={history} onLesson={onLesson}/>}

@@ -76,7 +76,7 @@ export class MicrophonePitchMonitor {
         return;
       }
       const [frequency, clarity] = this.detector.findPitch(this.buffer, this.context.sampleRate);
-      const inRange = frequency >= 160 && frequency <= 1400;
+      const inRange = frequency >= 160 && frequency <= 2000;
       onSignal?.({rms,clarity,frequency:inRange&&Number.isFinite(frequency)?frequency:null,status:inRange&&Number.isFinite(frequency)&&clarity>=.85?'pitched':'unpitched'});
       if (!inRange || !Number.isFinite(frequency) || clarity < 0.85) {
         onSample(null);

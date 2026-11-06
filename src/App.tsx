@@ -32,19 +32,9 @@ import { recommendPractice, reinforcementLesson, type DifficultyReason } from '.
 import { ScoreLab, type ScoreStart } from './components/ScoreLab';
 import { courseFor, progressStorageKey, isDiscovery } from './lib/courses';
 import { RecorderDiscovery, RecorderDiagram, RecorderTouchLab } from './components/RecorderExperience';
-import { RecorderDiscipline } from './components/RecorderDiscipline';
-import {RecorderFullCourse} from './components/RecorderFullCourse';
-import {RecorderLesson} from './components/RecorderLesson';
 import {BandLesson} from './components/BandLesson';
 import {isBand} from './lib/bandTrail';
-import type {JourneyOpen} from './components/RecorderJourney';
-import {readCourse as readFullCourse} from './lib/recorderFullCourse';
-import {readModuleOne as readModuleOneLedger} from './lib/recorderModuleOne';
-import {readDiagnostic as readDiagnosticLedger} from './lib/recorderDiagnostic';
-import {COURSE_IDS,courseTask} from './lib/recorderFullCourse';
-import { RecorderModuleOne } from './components/RecorderModuleOne';
-import type { ModuleOneLessonId } from './lib/recorderModuleOne';
-import type { DiagnosticId } from './lib/recorderDiagnostic';
+import type {JourneyOpen} from './components/StopIcon';
 import type { RecorderSystem } from './lib/recorder';
 import { ReferenceTone } from './lib/referenceTone';
 import { markPracticeDay } from './lib/practiceDay';
@@ -182,10 +172,7 @@ export function InstrumentCourse({instrument,onChooseInstrument,access,onSignOut
   const courseLessons=course.lessons;
   const [saved,setSaved]=useState<Saved>(()=>initialSaved(instrument.id,storage));
   const [home,setHome]=useState(true);
-  const [recorderFullStart,setRecorderFullStart]=useState<string|null>(null);
   const [journeyLesson,setJourneyLesson]=useState<JourneyOpen|null>(null);
-  const [recorderModuleOneStart,setRecorderModuleOneStart]=useState<ModuleOneLessonId|null>(null);
-  const [recorderDiagnosticStart,setRecorderDiagnosticStart]=useState<DiagnosticId|'summary'|null>(null);
   const meteredControls=useRef<MeteredControls|null>(null);
   const [meteredState,setMeteredState]=useState<MeteredControlState>({preparing:false,running:false,review:false});
   const [scoreMode,setScoreMode]=useState(false),[scoreStart,setScoreStart]=useState<ScoreStart|null>(null),[homeTab,setHomeTab]=useState<'learn'|'scores'>('learn');
@@ -232,7 +219,7 @@ export function InstrumentCourse({instrument,onChooseInstrument,access,onSignOut
   const inStart=useRef(false);
   const mounted=useRef(true);
   const practiceVisible=useRef(false);
-  practiceVisible.current=!home&&!virtualMode&&!scoreMode&&!recorderDiagnosticStart&&!recorderModuleOneStart&&!recorderFullStart;
+  practiceVisible.current=!home&&!virtualMode&&!scoreMode;
   const delay=useRef<ReturnType<typeof setTimeout>|null>(null);
   lessonRef.current=selectedLesson; indexRef.current=index; savedRef.current=saved;
 
@@ -448,9 +435,9 @@ export function InstrumentCourse({instrument,onChooseInstrument,access,onSignOut
     const a=document.createElement('a');a.href=url;a.download=`music-lab-${lesson.id}-resultado.csv`;
     document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   };
-  const openLesson=(id:string)=>{setRecorderFullStart(null);setRecorderDiagnosticStart(null);setRecorderModuleOneStart(null);navigate(id);setVirtualMode(false);setScoreMode(false);setHome(false);window.scrollTo({top:0,behavior:'instant'});};
-  const openVirtual=()=>{setRecorderFullStart(null);setRecorderDiagnosticStart(null);setRecorderModuleOneStart(null);clearDelay();stopMetronome();void stop();resetReading();setVirtualMode(true);setScoreMode(false);setHome(false);window.scrollTo({top:0,behavior:'instant'});};
-  const backHome=()=>{setHomeTab('learn');setJourneyLesson(null);setRecorderFullStart(null);setRecorderDiagnosticStart(null);setRecorderModuleOneStart(null);clearDelay();stopMetronome();void stop();resetReading();setScoreMode(false);setHome(true);window.scrollTo({top:0,behavior:'instant'});};
+  const openLesson=(id:string)=>{navigate(id);setVirtualMode(false);setScoreMode(false);setHome(false);window.scrollTo({top:0,behavior:'instant'});};
+  const openVirtual=()=>{clearDelay();stopMetronome();void stop();resetReading();setVirtualMode(true);setScoreMode(false);setHome(false);window.scrollTo({top:0,behavior:'instant'});};
+  const backHome=()=>{setHomeTab('learn');setJourneyLesson(null);clearDelay();stopMetronome();void stop();resetReading();setScoreMode(false);setHome(true);window.scrollTo({top:0,behavior:'instant'});};
   const recommendation=recommendPractice(history,Date.now(),instrument.id);
   const openReinforcement=()=>{
     if(!recommendation)return;
@@ -459,30 +446,12 @@ export function InstrumentCourse({instrument,onChooseInstrument,access,onSignOut
     persist(previous=>({...previous,passed:{...previous.passed,[custom.id]:[]},attempts:Object.fromEntries(Object.entries(previous.attempts).filter(([id])=>!stepIds.has(id))),results:Object.fromEntries(Object.entries(previous.results).filter(([id])=>!stepIds.has(id)))}));
     openLesson(custom.id);
   };
-  const openScores=(start:ScoreStart|null=null)=>{setScoreStart(start);setRecorderFullStart(null);setRecorderDiagnosticStart(null);setRecorderModuleOneStart(null);clearDelay();stopMetronome();void stop();setVirtualMode(false);setScoreMode(true);setHome(false);window.scrollTo({top:0,behavior:'instant'});};
-  const openRecorderDiagnostic=(start:DiagnosticId|'summary')=>{setRecorderFullStart(null);setRecorderModuleOneStart(null);clearDelay();stopMetronome();void stop();resetReading();setVirtualMode(false);setScoreMode(false);setHome(false);setRecorderDiagnosticStart(start);window.scrollTo({top:0,behavior:'instant'});};
-  const openRecorderModuleOne=(start:ModuleOneLessonId)=>{setRecorderFullStart(null);clearDelay();stopMetronome();void stop();resetReading();setRecorderDiagnosticStart(null);setVirtualMode(false);setScoreMode(false);setHome(false);setRecorderModuleOneStart(start);window.scrollTo({top:0,behavior:'instant'});};
-  const openRecorderFull=(start:string)=>{
-    if(start==='summary'||/^D0[1-8]$/.test(start)){openRecorderDiagnostic(start as DiagnosticId|'summary');return;}
-    if(!COURSE_IDS.includes(start)||!courseTask(start))return;
-    clearDelay();stopMetronome();void stop();resetReading();setRecorderDiagnosticStart(null);setRecorderModuleOneStart(null);setVirtualMode(false);setScoreMode(false);setHome(false);setRecorderFullStart(start);window.scrollTo({top:0,behavior:'instant'});
-  };
-  const openJourneyLesson=(open:JourneyOpen)=>{clearDelay();stopMetronome();void stop();resetReading();setRecorderFullStart(null);setRecorderDiagnosticStart(null);setRecorderModuleOneStart(null);setVirtualMode(false);setScoreMode(false);setHome(false);setJourneyLesson(open);window.scrollTo({top:0,behavior:'instant'});};
+  const openScores=(start:ScoreStart|null=null)=>{setScoreStart(start);clearDelay();stopMetronome();void stop();setVirtualMode(false);setScoreMode(true);setHome(false);window.scrollTo({top:0,behavior:'instant'});};
+  const openJourneyLesson=(open:JourneyOpen)=>{clearDelay();stopMetronome();void stop();resetReading();setVirtualMode(false);setScoreMode(false);setHome(false);setJourneyLesson(open);window.scrollTo({top:0,behavior:'instant'});};
   const band=isBand(instrument.id)?instrument.id:null;
   if(band&&journeyLesson)return <BandLesson key={`${band}-${journeyLesson.stopId}-${journeyLesson.lessonId}-${journeyLesson.review}`} instrument={band} stopId={journeyLesson.stopId} lessonId={journeyLesson.lessonId} review={journeyLesson.review} onExit={backHome}/>;
-  if(recorder&&journeyLesson){
-    const legacy={...readDiagnosticLedger(storage).ledger.responses,...readModuleOneLedger(storage).ledger.responses,...readFullCourse(storage).ledger.responses};
-    return <RecorderLesson key={`${journeyLesson.stopId}-${journeyLesson.lessonId}-${journeyLesson.review}`} stopId={journeyLesson.stopId} lessonId={journeyLesson.lessonId} review={journeyLesson.review} system={recorderSystem} legacy={legacy} onExit={backHome} onSystem={value=>{try{storage.setItem('mis-music-lab-recorder-system',value);}catch{}extraLessons.current.clear();setRecorderSystem(value);}}/>;
-  }
-  if(recorder&&recorderFullStart){
-    const entry=courseTask(recorderFullStart);
-    if(entry?.module===1&&!entry.assessment)return <RecorderModuleOne key={recorderFullStart} startAt={entry.lesson as ModuleOneLessonId} startTask={recorderFullStart} onExit={backHome}/>;
-    return <RecorderFullCourse key={recorderFullStart} startAt={recorderFullStart} system={recorderSystem} onExit={backHome}/>;
-  }
-  if(recorder&&recorderModuleOneStart)return <RecorderModuleOne key={recorderModuleOneStart} startAt={recorderModuleOneStart} onExit={backHome}/>;
-  if(recorder&&recorderDiagnosticStart)return <RecorderDiscipline key={recorderDiagnosticStart} startAt={recorderDiagnosticStart} onExit={backHome}/>;
   if(scoreMode)return <ScoreLab key={scoreStart?.scoreId??scoreStart?.file?.name??'biblioteca'} start={scoreStart} instrument={instrument} recorderSystem={recorderSystem} onExit={()=>{setScoreStart(null);backHome();setHomeTab('scores');}} onAttempt={record}/>;
-  if(home)return <LearningHome key={homeTab} initialTab={homeTab} onOpenScore={start=>openScores(start)} onCurriculum={recorder?openRecorderFull:undefined} onJourneyLesson={recorder||band?openJourneyLesson:undefined} onModuleOne={recorder?openRecorderModuleOne:undefined} onDiagnostic={recorder?openRecorderDiagnostic:undefined} access={access} onSignOut={onSignOut} instrument={instrument} course={course} recorderSystem={recorderSystem} onRecorderSystem={value=>{try{storage.setItem('mis-music-lab-recorder-system',value);}catch{}extraLessons.current.clear();setRecorderSystem(value);setSelectedLesson(courseLessons[0].id);}} onInstrument={onChooseInstrument} onScores={()=>openScores()} history={history} learningSupport={recommendation?<section className="adaptive-card"><span className="adaptive-icon"><Symbol name="sparkle" size={27}/></span><div><span className="activity-eyebrow">UM REFORÇO DO SEU JEITO · {recommendation.level}</span><h2>{recommendation.title}</h2><p>{recommendation.description}</p><small>{recommendation.evidence}</small><button className="activity-secondary" type="button" onClick={openReinforcement}>Praticar este reforço <Symbol name="arrow" size={16}/></button></div></section>:null} passed={saved.passed} seenValves={saved.seenValves} results={saved.results} onLesson={openLesson} onVirtual={instrument.id==='clarinet-bb'?()=>openJourneyLesson({stopId:'CLA-M01-L1',lessonId:'CLA-M01-L1'}):openVirtual}/>;
+  if(home)return <LearningHome key={homeTab} initialTab={homeTab} onOpenScore={start=>openScores(start)} onJourneyLesson={band?openJourneyLesson:undefined} access={access} onSignOut={onSignOut} instrument={instrument} course={course} recorderSystem={recorderSystem} onRecorderSystem={value=>{try{storage.setItem('mis-music-lab-recorder-system',value);}catch{}extraLessons.current.clear();setRecorderSystem(value);setSelectedLesson(courseLessons[0].id);}} onInstrument={onChooseInstrument} onScores={()=>openScores()} history={history} learningSupport={recommendation?<section className="adaptive-card"><span className="adaptive-icon"><Symbol name="sparkle" size={27}/></span><div><span className="activity-eyebrow">UM REFORÇO DO SEU JEITO · {recommendation.level}</span><h2>{recommendation.title}</h2><p>{recommendation.description}</p><small>{recommendation.evidence}</small><button className="activity-secondary" type="button" onClick={openReinforcement}>Praticar este reforço <Symbol name="arrow" size={16}/></button></div></section>:null} passed={saved.passed} seenValves={saved.seenValves} results={saved.results} onLesson={openLesson} onVirtual={instrument.id==='clarinet-bb'?()=>openJourneyLesson({stopId:'CLA-M01-L1',lessonId:'CLA-M01-L1'}):openVirtual}/>;
   if(virtualMode&&recorder)return <RecorderTouchLab system={recorderSystem} onExit={backHome}/>;
   if(virtualMode)return <div className="site redesigned-practice virtual-session">
     <header className="virtual-session-header"><button className="back-to-trail" type="button" onClick={backHome}>← Voltar à trilha</button><span>PRÁTICA VIRTUAL <i>·</i> MADE IN SERTÃO</span><button className="session-text-button" type="button" onClick={()=>openLesson(selectedLesson)}>Usar meu trompete <Symbol name="arrow" size={17}/></button></header>

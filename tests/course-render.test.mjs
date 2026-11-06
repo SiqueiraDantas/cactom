@@ -60,21 +60,22 @@ test('após entrar ou pular, seleção oferece os quatro cursos liberados (regê
     assert.match(html,/Eu quero aprender…/);assert.match(html,/Flauta doce/);assert.match(html,/Trompete/);assert.doesNotMatch(html,/Regência/);assert.match(html,/Clarinete/);assert.equal((html.match(/<button[^>]*class="wsp-card[^"]*"[^>]*>/g)??[]).filter(tag=>!tag.includes('disabled=')).length,4);
   }
 });
-test('curso da flauta não importa as conquistas antigas do trompete',()=>{
+test('curso da flauta não importa as conquistas antigas do trompete e mostra a Formação de 400 unidades',()=>{
   storage=new Map([['mis-music-lab-v03',saved([1,2,3],{'primeiro-sol':['sol-inicial']})]]);
-  const html=course('recorder-soprano');assert.match(html,/Seu primeiro Si/);assert.equal(pathPercent(html),0);assert.doesNotMatch(html,/Sua trilha musical|Seu próximo som começa aqui|Digitação barroca/);assert.doesNotMatch(html,/Sem trompete/);assert.doesNotMatch(html,/Seu primeiro Sol/);assert.match(html,/Seu Rojão/);
+  const html=course('recorder-soprano');assert.match(html,/Flauta doce · Módulo 1 de 16/);assert.match(html,/Identificar as partes da flauta/);assert.match(html,/Nível 1 · Iniciação/);assert.match(html,/Sequência 1/);
+  assert.equal(pathPercent(html),0);assert.doesNotMatch(html,/Seu primeiro Sol|Seu primeiro Si|Treinos anteriores/);assert.match(html,/Seu Rojão/);
 });
-test('retomada da demo mantém os respectivos resultados dos dois cursos',()=>{
-  storage=new Map([['mis-music-lab-v03',saved([1,2,3],{})],['mis-music-lab-recorder-v1',saved([0,1,2,3,4,5,6,7],{'recorder-primeiro-si':['rec-si-inicial']})]]);
-  const recorder=course('recorder-soprano');assert.equal(pathPercent(recorder),0,'flauta: topo mostra a trilha nova');assert.match(recorder,/Um novo som: Lá/);
-  const trumpet=course('trumpet-bb');assert.equal(pathPercent(trumpet),0,'trompete: topo mostra a trilha nova');assert.match(trumpet,/Seu primeiro Sol/);assert.doesNotMatch(trumpet,/Seu primeiro Si/);
+test('trilha antiga saiu: registros de teste antigos não aparecem e cada curso abre a Formação dele',()=>{
+  storage=new Map([['mis-music-lab-v03',saved([1,2,3],{})],['mis-music-lab-recorder-v1',saved([0,1,2,3,4,5,6,7],{'recorder-primeiro-si':['rec-si-inicial']})],['cactom-recorder-journey-v1','{"version":1}'],['cactom-trilha-trumpet-bb-v2','{"version":1}']]);
+  const recorder=course('recorder-soprano');assert.equal(pathPercent(recorder),0);assert.doesNotMatch(recorder,/Um novo som: Lá|Treinos anteriores/);
+  const trumpet=course('trumpet-bb');assert.equal(pathPercent(trumpet),0);assert.match(trumpet,/Trompete · Módulo 1 de 16/);assert.match(trumpet,/Identificar as partes do trompete/);assert.doesNotMatch(trumpet,/Seu primeiro Sol|Treinos anteriores/);
 });
 test('contas locais não herdam progresso da demo nem de outra conta',()=>{
   storage=new Map([['mis-music-lab-v03',saved([1,2,3],{'primeiro-sol':['sol-inicial']})]]);
-  const band=n=>JSON.stringify({version:1,xp:10*n,lessons:Object.fromEntries(['TPT-M01-L1','TPT-M01-L2'].slice(0,n).map(id=>[id,{at:'2026-11-03T12:00:00.000Z',xp:10,total:3,correctFirst:3}]))});
-  storage.set('cactom-trilha-trumpet-bb-v1',band(2));
-  const a=createProfileStorage(profileA.id,backing);a.setItem('cactom-trilha-trumpet-bb-v1',band(1));
-  assert.equal(pathPercent(course('trumpet-bb',profileA)),1);assert.equal(pathPercent(course('trumpet-bb',profileB)),0);assert.equal(pathPercent(course('trumpet-bb')),2,'2 de 84 lições da trilha nova');
+  const ledger=stops=>JSON.stringify({version:1,xp:10*stops*5,stops:{},presentations:{},reviewDays:[1,3,7,14],reviewNeeded:[],lessons:Object.fromEntries(Array.from({length:stops},(_,k)=>[1,2,3,4,5].map(l=>[`TPT-U${String(k+1).padStart(3,'0')}-L${l}`,{at:'2026-11-03T12:00:00.000Z',xp:10,total:3,correctFirst:3,recovered:0,review:false}])).flat())});
+  storage.set('cactom-formacao-trompete-v2',ledger(8));
+  const a=createProfileStorage(profileA.id,backing);a.setItem('cactom-formacao-trompete-v2',ledger(4));
+  assert.equal(pathPercent(course('trumpet-bb',profileA)),1);assert.equal(pathPercent(course('trumpet-bb',profileB)),0);assert.equal(pathPercent(course('trumpet-bb')),2,'40 de 2.000 microlições');
 });
 test('tela de Seu Rojão mostra apenas calendário e marcos derivados das datas',()=>{
   const summary=streakSummary({version:1,days:['2026-10-19','2026-10-20','2026-10-21']},new Date('2026-10-21T15:00:00Z'));
@@ -89,7 +90,7 @@ test('oficina escolhida antes do cadastro entra no curso correto sem uma segunda
  storage=new Map([['mis-music-lab-instrument','trumpet-bb']]);
  const access={...demo,initialInstrumentId:'recorder-soprano'};
  const html=render(React.createElement(Provider,{profileId:null},React.createElement(CourseEntry,{access,onSignOut:noop})));
- assert.match(html,/Flauta doce/);assert.match(html,/Seu primeiro Si/);assert.doesNotMatch(html,/class="instrument-picker|class="wsp"/);
+ assert.match(html,/Flauta doce/);assert.match(html,/Identificar as partes da flauta/);assert.doesNotMatch(html,/class="instrument-picker|class="wsp"/);
  const invalid=render(React.createElement(Provider,{profileId:null},React.createElement(CourseEntry,{access:{...demo,initialInstrumentId:'alto-sax'},onSignOut:noop})));
  assert.match(invalid,/Eu quero aprender…/);
 });
