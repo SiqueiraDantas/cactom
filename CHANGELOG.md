@@ -1,3 +1,10 @@
+## 06/11/2026 — Praticar com a partitura, sem os cartões de pistos/furos
+
+- **Correção:** nas telas de tocar (Retomar, Praticar, Aplicar, Demonstrar) e no resultado da criação, a partitura não aparecia: no grid centralizado da atividade ela encolhia até largura zero. Agora ocupa a largura da atividade (`recorder-lesson.css`).
+- **Pedido do responsável:** saíram os cartões “nota + pistos/furos” embaixo da partitura (trompete, flauta, clarinete). Nesse ponto o aluno já conhece notas e dedilhados; ele lê a partitura. A tela “Nota nova” e “Monte o dedilhado” continuam ensinando cada nota nova com o desenho.
+- Textos ajustados: saiu “confira o dedilhado embaixo da partitura” das instruções.
+- 312/312 testes aprovados e `tsc` sem erros (cópia de trabalho no Linux). Conferência visual feita só da partitura renderizada com o CSS; falta conferir no celular.
+
 ## 06/11/2026 — Nova trilha da flauta doce e do trompete: 400 unidades
 
 - A trilha de testes da flauta (64 paradas) e a do trompete (68 paradas) saíram. No lugar entrou a **Formação “Do primeiro som à autonomia musical”**, tirada dos dois livros para avaliação docente (flauta: plano v2.0 de 05/11; trompete: rascunho de 06/11).

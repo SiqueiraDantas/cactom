@@ -324,12 +324,12 @@ function buildExercises(i:FormationCourse,lessonId:string):BandExercise[]{
    if(topic==='conjunto'){push(play(longer,bpm,'Toque junto com a outra voz',`${focusText} Ouça a outra voz e entre junto, sem correr.`,{duo:true}));push(play(tune(),bpm,'Outra parte, em dueto','Mantenha o pulso mesmo quando a outra voz mexe.',{duo:true}));}
    else if(topic==='criacao'){push(kit.create(simple));push(play(longer,bpm,'Uma frase mais longa no mesmo estilo','Toque e compare com a tua ideia.'));}
    else if(topic==='escuta'||topic==='afinacao'){push(kit.dictation(simple));push(play(main,bpm,'Toque o que tu ouviu','Ouça o exemplo e toque igual.'));}
-   else if(topic==='leitura'){push(readQ(longer));push(play(longer,bpm,'Leia e toque, sem ouvir antes','Leia a partitura, confira o dedilhado embaixo e toque.',{noModel:true}));}
+   else if(topic==='leitura'){push(readQ(longer));push(play(longer,bpm,'Leia e toque, sem ouvir antes','Leia a partitura e toque.',{noModel:true}));}
    else{push(play(longer,bpm,`Frase de ${Math.ceil(longer.reduce((n,x)=>n+x.beats,0)/barBeats(meter))} compassos`,`${focusText} Ouça e toque.`));push(u.level>=2?play(tune(tier.bars+1),bpm+6,'Um pouco mais rápido','Mesmo cuidado, andamento maior.',{noModel:u.level>=4}):play(longer,bpm,'Agora sem ouvir antes','Tu já ouviu esse trecho. Toque lembrando dele.',{noModel:true}));}
    if(u.level>=3&&pool.length>1&&topic!=='leitura')push(where(longer,rnd()<.5));
    break;}
   default:{
-   push(play(tune(),bpm,u.checkpoint?`Checkpoint · ${u.moduleTitle}`:'Demonstre sem modelo',`${focusText} Sem ouvir antes: leia, confira o dedilhado e toque do começo ao fim.`,{noModel:true,duo:topic==='conjunto'}),'aplicacao');
+   push(play(tune(),bpm,u.checkpoint?`Checkpoint · ${u.moduleTitle}`:'Demonstre sem modelo',`${focusText} Sem ouvir antes: leia a partitura e toque do começo ao fim.`,{noModel:true,duo:topic==='conjunto'}),'aplicacao');
    if(u.checkpoint||u.level>=3)push(play(tune(tier.bars+1),bpm,'Leitura à primeira vista','Trecho que tu nunca viu, sem exemplo.',{noModel:true}),'aplicacao');
    else push(readIn(target),'aplicacao');
    if(topic==='escuta')push(kit.dictation(simple),'aplicacao');else if(topic==='criacao')push(kit.create(simple),'aplicacao');

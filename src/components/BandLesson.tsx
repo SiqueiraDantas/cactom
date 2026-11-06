@@ -166,11 +166,6 @@ export function BandFingering({instrument,keys,small=false}:{instrument:TrailCou
    <text x="104" y="108" fontSize="9" fill="#888" transform="rotate(90 104 108)">mão esquerda</text><text x="104" y="218" fontSize="9" fill="#888" transform="rotate(90 104 218)">mão direita</text></g>}
  </svg>;
 }
-function BandFingerings({instrument,midis}:{instrument:TrailCourse;midis:readonly number[]}){
- if(instrument==='iniciacao')return null;
- const list=[...new Set(midis)].filter(m=>bandFingering(instrument,m));
- return <div className="rl-fings" aria-label="Como fazer cada nota">{list.map(m=><figure key={m} className="rl-fing"><BandFingering instrument={instrument} keys={bandFingering(instrument,m)!} small/><figcaption><b>{noteName(instrument,m)}</b><small>{fingeringLabel(instrument,bandFingering(instrument,m)!)}</small></figcaption></figure>)}</div>;
-}
 function useModel(instrument:TrailCourse){
  const audio=useRef(new RecorderCourseAudio()),[playing,setPlaying]=useState(false),[heard,setHeard]=useState(false);
  useEffect(()=>()=>audio.current.stop(),[]);
@@ -236,7 +231,6 @@ function PerformBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrume
  return <section className="rl-stimulus rl-perform">
   <RecorderCourseScore notes={notes} meter={meter} active={active} results={results} instrument={NAME_OF[instrument]} clef={ex.clef}/>
   <p className="rl-meta">{meter} · {bpm} BPM</p>
-  <BandFingerings instrument={instrument} midis={notes.flatMap(n=>n.midi===null?[]:[n.midi])}/>
   {status&&<p className="rl-status" role="status">{status}</p>}
   {error&&<p className="rl-warning" role="alert">{error}</p>}
   <div className="rl-perform-actions">
@@ -307,7 +301,6 @@ function CreateBody({ex,instrument,locked,setPending}:{ex:BandExercise;instrumen
   <div className="rl-slots">{values.map((v,i)=><button type="button" key={i} disabled={locked} className={`rl-slot ${v===undefined?'is-empty':v===null?'is-rest':''}`} onClick={()=>cycle(i)} aria-label={`Tempo ${i+1}: ${label(v)}. Toque para trocar.`}><small>{i+1}</small><b>{label(v)}</b></button>)}</div>
   <p className="rl-meta">Toque em cada tempo para escolher: {c.choices.map(x=>label(x)).join(' → ')}.</p>
   {filled&&<RecorderCourseScore notes={values.map(v=>({midi:v??null,beats:1}))} meter={ex.meter??'4/4'} instrument={NAME_OF[instrument]} clef={ex.clef}/>}
-  <BandFingerings instrument={instrument} midis={c.choices.flatMap(x=>x===null?[]:[x])}/>
   {!dictation&&<button type="button" className="rl-btn rl-btn--secondary" disabled={!filled} onClick={()=>void mine.play(values.map(v=>({midi:v??null,beats:1})),true,66,{meter:ex.meter})}><SpeakerIcon/>{mine.playing?'Parar':'Ouvir minha criação'}</button>}
  </section>;
 }

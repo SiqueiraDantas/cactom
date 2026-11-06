@@ -13,6 +13,8 @@
 .rl-retry-label{margin:0;color:#c76a00;font-weight:900;text-transform:uppercase;letter-spacing:.06em;font-size:13px}
 .rl-stimulus{display:grid;gap:14px;justify-items:center}
 .rl-stimulus>*{max-width:100%}
+/* partitura ocupa a largura da atividade (no grid centralizado ela encolhia até sumir) */
+.rl-stimulus>.recorder-course-score{width:100%;justify-self:stretch}.rl-stimulus>.recorder-course-score>svg{display:block;width:100%;height:auto;overflow:visible}
 .rl-audio{display:grid;gap:6px;justify-items:center}
 .rl-audio small{color:var(--ct-ink-soft,#6c7f79);font-weight:700}
 .rl-listen-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}

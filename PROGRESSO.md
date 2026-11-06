@@ -1,5 +1,9 @@
 # PROGRESSO — CACTOM
 
+## 06/11/2026 — Partitura nas telas de tocar
+
+Partitura voltou a aparecer nas telas de tocar (encolhia até largura zero); cartões de dedilhado embaixo dela removidos a pedido do responsável. 312/312 testes, tsc ok. Conferência no celular pendente. Ver CHANGELOG.
+
 ## 22/10/2026 — Etapa 02 implementada para conferência
 
 Continuidade após a 01 autorizada pelo responsável. Tom recebe repouso, piscar, flor suave, olhar limitado, reação à identificação, privacidade ao focar/mostrar senha, espera, sucesso real e apoio ao erro. Rig híbrido com textura oficial e pose derivada transparente criada com imagegen; cortes diretos dos braços foram rejeitados na inspeção. Original intacto.
